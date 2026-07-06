@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía del Curso · Creación de Personajes para Roblox con Blender</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#120826;
+  --bg-1:#1a0d3a;
+  --bg-2:#241452;
+  --card:rgba(48,27,98,.55);
+  --card-solid:#2a1857;
+  --stroke:rgba(146,99,255,.30);
+  --stroke-2:rgba(146,99,255,.55);
+
+  --violet:#a855f7;
+  --violet-bright:#c084fc;
+  --cyan:#25d3ee;
+  --teal:#2dd4bf;
+  --magenta:#ec4899;
+  --pink:#f472b6;
+  --gold:#fbbf24;
+  --green:#a3e635;
+
+  --text:#f4f0ff;
+  --text-dim:#c3b4e8;
+  --text-mute:#9784c2;
+
+  --shadow:0 18px 40px -18px rgba(0,0,0,.7);
+  --radius:18px;
+  --nav-w:270px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  color:var(--text);
+  line-height:1.6;
+  background:
+    radial-gradient(1200px 700px at 82% -8%, rgba(168,85,247,.22), transparent 60%),
+    radial-gradient(900px 600px at 0% 20%, rgba(37,211,238,.10), transparent 55%),
+    radial-gradient(1000px 800px at 100% 100%, rgba(236,72,153,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  background-attachment:fixed;
+  min-height:100vh;
+}
+::selection{background:var(--magenta);color:#fff}
+a{color:inherit;text-decoration:none}
+
+/* dotted decoration */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(168,85,247,.14) 1px, transparent 1.4px);
+  background-size:26px 26px;
+  mask:radial-gradient(1100px 700px at 85% 0%, #000 0%, transparent 70%);
+  opacity:.5;
+}
+
+/* ---------- LAYOUT ---------- */
+.layout{display:flex;position:relative;z-index:1}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{
+  width:var(--nav-w);flex:0 0 var(--nav-w);
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:26px 18px 40px;
+  border-right:1px solid var(--stroke);
+  background:linear-gradient(180deg, rgba(26,13,58,.92), rgba(18,8,38,.92));
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.brand .logo{
+  width:40px;height:40px;border-radius:11px;flex:0 0 40px;
+  display:grid;place-items:center;font-size:20px;
+  background:linear-gradient(135deg,var(--violet),var(--magenta));
+  box-shadow:0 6px 18px -6px var(--violet);
+}
+.brand b{font-weight:800;font-size:15px;line-height:1.15;letter-spacing:.3px}
+.brand span{display:block;font-size:11px;color:var(--text-mute);font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
+.nav-progress{
+  margin:16px 0 20px;padding:12px 13px;border-radius:12px;
+  background:var(--card);border:1px solid var(--stroke);font-size:12px;
+}
+.nav-progress .bar{height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}
+.nav-progress .bar i{display:block;height:100%;width:20%;border-radius:6px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--magenta))}
+.nav-progress .lbl{display:flex;justify-content:space-between;color:var(--text-dim);font-weight:600}
+.nav-progress small{color:var(--text-mute);display:block;margin-top:8px;line-height:1.4}
+
+.nav-group{margin-top:14px}
+.nav-group>.gt{font-size:10.5px;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-mute);font-weight:700;padding:0 10px;margin-bottom:6px}
+.nav a{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;color:var(--text-dim);
+  transition:.15s;position:relative;
+}
+.nav a .ic{width:18px;text-align:center;font-size:13px;opacity:.9}
+.nav a:hover{background:var(--card);color:var(--text)}
+.nav a.active{background:linear-gradient(90deg,rgba(168,85,247,.28),rgba(168,85,247,.05));color:#fff}
+.nav a.active::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:linear-gradient(var(--cyan),var(--magenta))}
+.nav a.sub{font-size:12.5px;padding-left:24px;color:var(--text-mute);font-weight:500}
+
+/* ---------- MAIN ---------- */
+.main{flex:1;min-width:0;padding:0 clamp(18px,4vw,60px) 100px}
+section{scroll-margin-top:20px}
+
+/* ---------- HERO ---------- */
+.hero{
+  padding:64px 0 40px;position:relative;
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--cyan);background:rgba(37,211,238,.10);border:1px solid rgba(37,211,238,.3);
+  padding:6px 14px;border-radius:100px;margin-bottom:22px;
+}
+.hero h1{
+  font-weight:800;line-height:1.02;letter-spacing:-1px;
+  font-size:clamp(34px,6vw,66px);text-transform:uppercase;
+}
+.hero h1 .g1{background:linear-gradient(120deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .g2{background:linear-gradient(120deg,var(--magenta),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{font-size:clamp(15px,2vw,19px);color:var(--text-dim);max-width:660px;margin-top:18px;font-weight:500}
+.stat-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.stat{
+  background:var(--card);border:1px solid var(--stroke);border-radius:14px;
+  padding:14px 18px;min-width:120px;box-shadow:var(--shadow);
+}
+.stat b{display:block;font-size:26px;font-weight:800;line-height:1}
+.stat span{font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text-mute);font-weight:600;margin-top:6px;display:block}
+.stat.c1 b{color:var(--cyan)} .stat.c2 b{color:var(--magenta)} .stat.c3 b{color:var(--gold)} .stat.c4 b{color:var(--violet-bright)}
+
+/* ---------- SECTION TITLES ---------- */
+.sec-head{display:flex;align-items:center;gap:14px;margin:56px 0 22px}
+.sec-head .num{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+  color:var(--bg-0);background:linear-gradient(135deg,var(--gold),var(--pink));
+  padding:5px 10px;border-radius:8px;
+}
+.sec-head h2{font-size:clamp(22px,3.4vw,32px);font-weight:800;text-transform:uppercase;letter-spacing:.5px;line-height:1.1}
+.sec-head .line{flex:1;height:1px;background:linear-gradient(90deg,var(--stroke-2),transparent)}
+.sec-intro{color:var(--text-dim);max-width:760px;margin:-6px 0 26px;font-weight:500}
+
+/* ---------- CARDS / PANELS ---------- */
+.panel{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+.icard{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:18px 20px;transition:.18s}
+.icard:hover{transform:translateY(-3px);border-color:var(--stroke-2)}
+.icard .badge{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:19px;margin-bottom:12px}
+.icard h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.icard p{font-size:13.5px;color:var(--text-dim)}
+.b-violet{background:rgba(168,85,247,.16);color:var(--violet-bright)}
+.b-cyan{background:rgba(37,211,238,.14);color:var(--cyan)}
+.b-magenta{background:rgba(236,72,153,.16);color:var(--pink)}
+.b-gold{background:rgba(251,191,36,.16);color:var(--gold)}
+.b-green{background:rgba(163,230,53,.15);color:var(--green)}
+
+/* objectives list */
+.obj{list-style:none;display:grid;gap:9px}
+.obj li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--text-dim)}
+.obj li::before{content:"✓";flex:0 0 20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:12px;font-weight:800;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg-0);margin-top:2px}
+
+/* ---------- PIPELINE ---------- */
+.pipe{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.pstep{
+  flex:1 1 130px;background:var(--card);border:1px solid var(--stroke);border-radius:12px;
+  padding:13px 14px;position:relative;min-width:130px;
+}
+.pstep .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:700}
+.pstep b{display:block;font-size:13.5px;margin-top:4px;font-weight:700}
+.pstep small{color:var(--text-mute);font-size:11.5px}
+
+/* ---------- MODULES OVERVIEW ---------- */
+.mod{border-radius:16px;padding:20px 22px;border:1px solid var(--stroke);position:relative;overflow:hidden;background:var(--card)}
+.mod::before{content:"";position:absolute;inset:0 auto 0 0;width:5px}
+.mod.m1::before{background:linear-gradient(var(--cyan),var(--teal))}
+.mod.m2::before{background:linear-gradient(var(--violet),var(--violet-bright))}
+.mod.m3::before{background:linear-gradient(var(--magenta),var(--pink))}
+.mod.m4::before{background:linear-gradient(var(--gold),#f59e0b)}
+.mod.m5::before{background:linear-gradient(var(--green),var(--teal))}
+.mod .tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-mute)}
+.mod h3{font-size:19px;font-weight:800;margin:4px 0 3px;text-transform:uppercase;letter-spacing:.4px}
+.mod .st{color:var(--text-dim);font-size:13.5px;font-weight:600;margin-bottom:12px}
+.mod ol{list-style:none;display:grid;gap:6px}
+.mod ol li{font-size:13px;color:var(--text-dim);display:flex;gap:9px}
+.mod ol li i{font-family:'JetBrains Mono',monospace;color:var(--violet-bright);font-style:normal;font-weight:700;flex:0 0 22px}
+.mod .status{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 11px;border-radius:100px}
+.status.done{background:rgba(163,230,53,.14);color:var(--green);border:1px solid rgba(163,230,53,.35)}
+.status.next{background:rgba(251,191,36,.12);color:var(--gold);border:1px solid rgba(251,191,36,.32)}
+
+/* ---------- CLASS STRUCTURE ---------- */
+.struct{counter-reset:s;display:grid;gap:10px}
+.struct .row{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--stroke);border-radius:12px;padding:14px 16px}
+.struct .row::before{
+  counter-increment:s;content:counter(s,decimal-leading-zero);
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--bg-0);
+  background:linear-gradient(135deg,var(--violet),var(--cyan));padding:5px 9px;border-radius:8px;flex:0 0 auto;
+}
+.struct .row b{font-weight:700}
+.struct .row span{color:var(--text-mute);font-weight:500}
+
+/* ---------- MISSION ---------- */
+.mission{
+  background:linear-gradient(180deg,rgba(42,24,87,.65),rgba(26,13,58,.5));
+  border:1px solid var(--stroke);border-radius:22px;padding:0;overflow:hidden;
+  box-shadow:var(--shadow);margin-bottom:26px;
+}
+.m-top{
+  display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
+  padding:22px 26px;border-bottom:1px solid var(--stroke);
+  background:linear-gradient(120deg,rgba(168,85,247,.16),rgba(37,211,238,.05));
+}
+.m-top .left{display:flex;align-items:center;gap:16px}
+.m-top .mnum{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,var(--magenta),var(--violet));
+  width:56px;height:56px;border-radius:14px;display:grid;place-items:center;line-height:1;text-align:center;
+  box-shadow:0 8px 20px -8px var(--magenta);flex:0 0 56px;
+}
+.m-top .mnum small{display:block;font-size:9px;letter-spacing:1px;opacity:.85;font-weight:600}
+.m-top h3{font-size:clamp(18px,2.6vw,24px);font-weight:800;line-height:1.12}
+.m-top .m-sub{color:var(--text-dim);font-size:13px;font-weight:600;margin-top:2px}
+.m-top .dur{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--gold);
+  background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);padding:8px 14px;border-radius:100px;white-space:nowrap}
+
+.m-body{padding:8px 26px 26px}
+
+/* block inside mission */
+.blk{padding:20px 0;border-bottom:1px dashed var(--stroke)}
+.blk:last-child{border-bottom:none}
+.blk-h{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.blk-h .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:16px;flex:0 0 32px}
+.blk-h h5{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+.blk p{color:var(--text-dim);font-size:14.3px;margin-bottom:8px}
+.blk p:last-child{margin-bottom:0}
+.blk strong{color:var(--text);font-weight:700}
+
+/* timeline / cronograma */
+.timeline{display:grid;gap:8px}
+.tl{display:flex;gap:12px;align-items:flex-start;font-size:13.6px}
+.tl .t{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:var(--cyan);
+  background:rgba(37,211,238,.1);border:1px solid rgba(37,211,238,.25);padding:3px 9px;border-radius:7px;flex:0 0 78px;text-align:center}
+.tl span{color:var(--text-dim);padding-top:2px}
+.tl b{color:var(--text)}
+
+/* mindset callout */
+.mindset{
+  background:linear-gradient(120deg,rgba(236,72,153,.14),rgba(168,85,247,.10));
+  border:1px solid rgba(236,72,153,.32);border-left:4px solid var(--magenta);
+  border-radius:14px;padding:16px 20px;
+}
+.mindset .q{font-size:17px;font-weight:700;color:#fff;font-style:italic;line-height:1.4}
+.mindset .who{font-size:12px;color:var(--pink);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+
+/* metaphor chips */
+.meta{display:grid;gap:10px}
+.meta .m{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--stroke);border-radius:11px;padding:11px 14px}
+.meta .m b{color:var(--cyan);font-weight:700;flex:0 0 130px;font-size:13.5px}
+.meta .m span{color:var(--text-dim);font-size:13.5px}
+.meta .m .arrow{color:var(--violet-bright);font-weight:800}
+
+/* hotkeys */
+.keys{display:grid;gap:9px}
+.key{display:flex;gap:13px;align-items:center;background:var(--card-solid);border:1px solid var(--stroke);border-radius:11px;padding:10px 14px;flex-wrap:wrap}
+.kbd{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+  background:linear-gradient(180deg,#3a2170,#281450);border:1px solid var(--stroke-2);
+  border-bottom-width:3px;padding:6px 11px;border-radius:8px;color:var(--gold);white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.key .kf{font-weight:700;font-size:13.5px;flex:0 0 auto}
+.key .kw{color:var(--text-mute);font-size:12.5px;font-style:italic;margin-left:auto}
+.keys.review .kbd{color:var(--text-mute);background:linear-gradient(180deg,#2a1a52,#1f1240)}
+
+/* steps práctica */
+.steps{counter-reset:st;display:grid;gap:11px}
+.step{background:var(--card);border:1px solid var(--stroke);border-radius:12px;padding:14px 16px 14px 52px;position:relative}
+.step::before{counter-increment:st;content:counter(st);position:absolute;left:14px;top:13px;
+  width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+  background:linear-gradient(135deg,var(--violet),var(--magenta));color:#fff}
+.step .do{font-weight:700;font-size:14px}
+.step .press{font-size:12.5px;color:var(--text-dim);margin-top:3px}
+.step .press code{font-family:'JetBrains Mono',monospace;background:rgba(37,211,238,.12);color:var(--cyan);padding:1px 7px;border-radius:5px;font-weight:700}
+.step .ok{font-size:12.5px;color:var(--green);margin-top:4px;display:flex;gap:6px;align-items:flex-start}
+.step .ok::before{content:"➜";flex:0 0 auto}
+.step .err{font-size:12.3px;color:var(--gold);margin-top:4px;display:flex;gap:6px}
+.step .err::before{content:"⚠";flex:0 0 auto}
+
+/* generic bullet list */
+.blist{list-style:none;display:grid;gap:8px}
+.blist li{display:flex;gap:10px;font-size:13.8px;color:var(--text-dim)}
+.blist li::before{content:"◆";color:var(--violet-bright);font-size:10px;margin-top:5px;flex:0 0 auto}
+.blist.err li::before{content:"✕";color:var(--magenta)}
+.blist.pro li::before{content:"★";color:var(--gold)}
+
+/* loot / mini project + challenge boxes */
+.loot{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.lbox{border-radius:13px;padding:16px 18px;border:1px solid var(--stroke)}
+.lbox .lh{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.lbox p{font-size:13.5px;color:var(--text-dim)}
+.lbox.mini{background:linear-gradient(140deg,rgba(163,230,53,.10),transparent);border-color:rgba(163,230,53,.3)}
+.lbox.mini .lh{color:var(--green)}
+.lbox.chal{background:linear-gradient(140deg,rgba(236,72,153,.12),transparent);border-color:rgba(236,72,153,.3)}
+.lbox.chal .lh{color:var(--pink)}
+.lbox.home{background:linear-gradient(140deg,rgba(37,211,238,.10),transparent);border-color:rgba(37,211,238,.3)}
+.lbox.home .lh{color:var(--cyan)}
+.lbox .time{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-mute);margin-top:8px;display:block}
+
+/* materials + eval */
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:100px;background:var(--card);border:1px solid var(--stroke);color:var(--text-dim)}
+.eval{list-style:none;display:grid;gap:8px}
+.eval li{display:flex;gap:10px;font-size:13.6px;color:var(--text-dim);align-items:flex-start}
+.eval li::before{content:"◎";color:var(--gold);flex:0 0 auto;margin-top:1px}
+
+/* remember banner (like reference image) */
+.remember{
+  margin-top:30px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  background:linear-gradient(120deg,rgba(168,85,247,.20),rgba(236,72,153,.14));
+  border:1px solid var(--stroke-2);border-radius:16px;padding:18px 24px;
+}
+.remember .ri{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;
+  background:linear-gradient(135deg,var(--gold),var(--pink));flex:0 0 44px}
+.remember b{color:var(--gold);text-transform:uppercase;letter-spacing:1px;font-size:14px;font-weight:800;margin-right:6px}
+.remember p{color:var(--text);font-weight:600;font-size:14.5px;margin:0}
+
+/* footer */
+.foot{margin-top:60px;padding-top:26px;border-top:1px solid var(--stroke);color:var(--text-mute);font-size:13px}
+.foot b{color:var(--text-dim)}
+
+/* mobile nav toggle */
+.menu-btn{display:none}
+
+@media(max-width:920px){
+  .sidebar{position:fixed;z-index:50;left:0;top:0;transform:translateX(-105%);transition:.25s;box-shadow:0 0 60px rgba(0,0,0,.6)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:flex;position:fixed;z-index:60;top:14px;left:14px;
+    width:46px;height:46px;border-radius:12px;border:1px solid var(--stroke-2);
+    background:linear-gradient(135deg,var(--violet),var(--magenta));color:#fff;
+    align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
+  .main{padding-top:20px}
+  .hero{padding-top:70px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+
+<div class="layout">
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Personajes 3D<br>para Roblox</b><span>Guía del curso · Blender 4.x</span></div>
+    </div>
+
+    <div class="nav-progress">
+      <div class="lbl"><span>Progreso de la guía</span><span>1 / 5</span></div>
+      <div class="bar"><i></i></div>
+      <small>Módulo 1 desarrollado ✓ · Módulos 2-5 en camino</small>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-group">
+        <div class="gt">El curso</div>
+        <a href="#inicio" class="active"><span class="ic">🏠</span>Inicio</a>
+        <a href="#objetivos"><span class="ic">🎯</span>Objetivos y público</a>
+        <a href="#pipeline"><span class="ic">🗺️</span>El camino (pipeline)</a>
+        <a href="#modulos"><span class="ic">🧩</span>Los 5 módulos</a>
+        <a href="#estructura"><span class="ic">📐</span>Estructura de clase</a>
+        <a href="#filosofia"><span class="ic">🎨</span>Filosofía</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">Módulo 1 · Fundamentos</div>
+        <a href="#c1" class="sub"><span class="ic">01</span>Primer vuelo en Blender</a>
+        <a href="#c2" class="sub"><span class="ic">02</span>Mover, rotar, escalar</a>
+        <a href="#c3" class="sub"><span class="ic">03</span>Dentro del objeto</a>
+        <a href="#c4" class="sub"><span class="ic">04</span>Diseña tu Mago</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="#hotkeys"><span class="ic">⌨️</span>Poderes (hotkeys)</a>
+        <a href="#practicas"><span class="ic">🏆</span>Buenas prácticas</a>
+        <a href="#evaluacion"><span class="ic">📊</span>Evaluación</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <span class="kicker">◆ Guía completa del instructor · Clases 1 a 1</span>
+      <h1>Crea tu <span class="g1">Mago</span><br>en <span class="g2">3D</span> para Roblox</h1>
+      <p class="sub">Un viaje de 20 misiones donde cada estudiante pasa de abrir Blender por primera vez a tener su propio personaje fantástico ¡caminando dentro de Roblox! Sin experiencia previa. Solo curiosidad y ganas de crear.</p>
+      <div class="stat-row">
+        <div class="stat c1"><b>10-14</b><span>Edad</span></div>
+        <div class="stat c2"><b>20</b><span>Clases</span></div>
+        <div class="stat c3"><b>5</b><span>Meses</span></div>
+        <div class="stat c4"><b>1:1</b><span>Personalizado</span></div>
+      </div>
+    </section>
+
+    <!-- OBJETIVOS -->
+    <section id="objetivos">
+      <div class="sec-head"><span class="num">01</span><h2>Objetivos y público</h2><span class="line"></span></div>
+      <p class="sec-intro">Al terminar el curso, el estudiante habrá recorrido un pipeline profesional completo, del primer clic hasta el personaje jugable.</p>
+      <div class="grid g2">
+        <div class="panel">
+          <h4 style="font-weight:800;margin-bottom:14px;font-size:16px;color:var(--cyan)">🏁 Al terminar sabrá…</h4>
+          <ul class="obj">
+            <li>Entender los fundamentos del modelado 3D y usar Blender 4.x desde cero.</li>
+            <li>Modelar un personaje humanoide estilizado en <strong>low poly</strong>.</li>
+            <li>Esculpir detalles <strong>high poly</strong> básicos.</li>
+            <li>Hacer <strong>UV Mapping</strong> y entender los materiales <strong>PBR</strong>.</li>
+            <li>Generar mapas con <strong>Bake</strong> (Normal, AO, Metallic, Roughness, Emissive).</li>
+            <li>Optimizar y exportar el modelo correctamente.</li>
+            <li>Importarlo en Roblox Studio con <strong>Auto Setup</strong> y obtener un personaje funcional.</li>
+          </ul>
+        </div>
+        <div class="grid" style="align-content:start">
+          <div class="icard"><div class="badge b-cyan">👤</div><h4>¿Para quién es?</h4><p>Principiantes absolutos de 10 a 14 años. Nunca han tocado Blender, pero <strong>ya conocen Roblox Studio</strong> y saben mover, rotar y escalar objetos ahí.</p></div>
+          <div class="icard"><div class="badge b-magenta">🧙</div><h4>Proyecto final</h4><p>Cada estudiante diseña su propio <strong>"Mago Fantástico"</strong>: humanoide estilizado, estilo low poly/cartoon, <strong>con varita</strong> (¡sin bastón!). Cada mago será único.</p></div>
+          <div class="icard"><div class="badge b-gold">⏱️</div><h4>Ritmo</h4><p>20 clases · 1 hora por semana · 5 meses. Clases 100% prácticas y uno a uno.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section id="pipeline">
+      <div class="sec-head"><span class="num">02</span><h2>El camino del curso</h2><span class="line"></span></div>
+      <p class="sec-intro">Este es el mapa del videojuego. Cada estudiante avanza por estas estaciones en orden, y cada una prepara la siguiente.</p>
+      <div class="pipe">
+        <div class="pstep"><div class="n">01</div><b>Fundamentos</b><small>Conocer Blender</small></div>
+        <div class="pstep"><div class="n">02</div><b>Navegación</b><small>Moverse en el 3D</small></div>
+        <div class="pstep"><div class="n">03</div><b>Low Poly</b><small>Modelar con bloques</small></div>
+        <div class="pstep"><div class="n">04</div><b>Organización</b><small>Trabajar limpio</small></div>
+        <div class="pstep"><div class="n">05</div><b>Concept Art</b><small>Diseñar el mago</small></div>
+        <div class="pstep"><div class="n">06</div><b>Modelado</b><small>Construir el cuerpo</small></div>
+        <div class="pstep"><div class="n">07</div><b>Sculpt</b><small>High poly básico</small></div>
+        <div class="pstep"><div class="n">08</div><b>Retopo</b><small>Si aplica</small></div>
+        <div class="pstep"><div class="n">09</div><b>UV Mapping</b><small>Abrir la caja</small></div>
+        <div class="pstep"><div class="n">10</div><b>Materiales</b><small>Dar color</small></div>
+        <div class="pstep"><div class="n">11</div><b>Bake PBR</b><small>Foto de detalles</small></div>
+        <div class="pstep"><div class="n">12</div><b>Optimizar</b><small>Respetar al jugador</small></div>
+        <div class="pstep"><div class="n">13</div><b>Exportar</b><small>Sacar el modelo</small></div>
+        <div class="pstep"><div class="n">14</div><b>Auto Setup</b><small>Entrar a Roblox</small></div>
+        <div class="pstep"><div class="n">15</div><b>¡Jugable!</b><small>Personaje vivo</small></div>
+      </div>
+    </section>
+
+    <!-- MODULOS -->
+    <section id="modulos">
+      <div class="sec-head"><span class="num">03</span><h2>Los 5 módulos</h2><span class="line"></span></div>
+      <p class="sec-intro">El curso se divide en 5 mundos. Aquí ves las 20 clases repartidas. El Módulo 1 ya está desarrollado a fondo más abajo.</p>
+      <div class="grid g2">
+        <div class="mod m1">
+          <div class="tag">MÓDULO 1</div><h3>Exploradores del Mundo 3D</h3><div class="st">Fundamentos de Blender</div>
+          <ol>
+            <li><i>01</i>Primer vuelo: interfaz y navegación 3D</li>
+            <li><i>02</i>Poderes de transformación + organización</li>
+            <li><i>03</i>Dentro del objeto: vértices, aristas y caras</li>
+            <li><i>04</i>Plano del héroe: Concept Art de tu Mago</li>
+          </ol>
+          <span class="status done">✓ Desarrollado</span>
+        </div>
+        <div class="mod m2">
+          <div class="tag">MÓDULO 2</div><h3>Construyendo Nuestro Personaje</h3><div class="st">Modelado Low Poly</div>
+          <ol>
+            <li><i>05</i>Bloqueo del cuerpo: torso y cabeza</li>
+            <li><i>06</i>Brazos, piernas y manos low poly</li>
+            <li><i>07</i>El sombrero y la túnica del mago</li>
+            <li><i>08</i>La varita mágica y detalles</li>
+            <li><i>09</i>Revisión de silueta y proporciones</li>
+          </ol>
+          <span class="status next">⏳ Próxima entrega</span>
+        </div>
+        <div class="mod m3">
+          <div class="tag">MÓDULO 3</div><h3>Esculpir los Detalles</h3><div class="st">High Poly básico</div>
+          <ol>
+            <li><i>10</i>Sculpt Mode: Inflate, Smooth, Grab</li>
+            <li><i>11</i>Volumen y pliegues: Clay y Crease</li>
+            <li><i>12</i>Detalles del rostro y acabado</li>
+          </ol>
+          <span class="status next">⏳ Próxima entrega</span>
+        </div>
+        <div class="mod m4">
+          <div class="tag">MÓDULO 4</div><h3>El Arte de las Texturas</h3><div class="st">UV, materiales y Bake</div>
+          <ol>
+            <li><i>13</i>UV Mapping: la caja de cartón abierta</li>
+            <li><i>14</i>Materiales PBR: Base Color</li>
+            <li><i>15</i>PBR a fondo: Metallic, Roughness, Normal</li>
+            <li><i>16</i>Bake I: Normal y Ambient Occlusion</li>
+            <li><i>17</i>Bake II: Metallic, Roughness, Emissive</li>
+          </ol>
+          <span class="status next">⏳ Próxima entrega</span>
+        </div>
+        <div class="mod m5">
+          <div class="tag">MÓDULO 5</div><h3>Del Taller al Videojuego</h3><div class="st">Optimización y Roblox</div>
+          <ol>
+            <li><i>18</i>Optimización: polígonos y estadísticas</li>
+            <li><i>19</i>Exportación correcta y escala</li>
+            <li><i>20</i>Roblox Auto Setup: ¡el Mago cobra vida!</li>
+          </ol>
+          <span class="status next">⏳ Próxima entrega</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESTRUCTURA -->
+    <section id="estructura">
+      <div class="sec-head"><span class="num">04</span><h2>Estructura de cada clase</h2><span class="line"></span></div>
+      <p class="sec-intro">Todas las clases siguen exactamente esta receta. Así el estudiante siempre sabe qué esperar y el instructor nunca improvisa.</p>
+      <div class="struct">
+        <div class="row"><div><b>Información general</b> <span>— número, título, duración, objetivos y cronograma minuto a minuto.</span></div></div>
+        <div class="row"><div><b>Mentalidad de Artista 3D</b> <span>— 5 min. Un concepto artístico con ejemplos cotidianos.</span></div></div>
+        <div class="row"><div><b>Teoría</b> <span>— conceptos técnicos explicados siempre con metáforas.</span></div></div>
+        <div class="row"><div><b>Hotkeys</b> <span>— pocas y nuevas: nombre, función y cuándo usarla + repaso.</span></div></div>
+        <div class="row"><div><b>Práctica guiada</b> <span>— paso a paso: qué hacer, qué botón, qué debería pasar y errores.</span></div></div>
+        <div class="row"><div><b>Mini proyecto</b> <span>— construir algo real, siempre ligado al proyecto final.</span></div></div>
+        <div class="row"><div><b>Errores comunes</b> <span>— por qué ocurren, cómo evitarlos y cómo arreglarlos.</span></div></div>
+        <div class="row"><div><b>Consejos profesionales</b> <span>— buenas prácticas del pipeline real.</span></div></div>
+        <div class="row"><div><b>Desafío de artista</b> <span>— reto creativo de máximo 10 minutos.</span></div></div>
+        <div class="row"><div><b>Ejercicio de práctica</b> <span>— tarea corta para hacer entre clases.</span></div></div>
+      </div>
+      <div class="remember">
+        <div class="ri">💡</div>
+        <p><b>Recuerda</b> Cada clase también incluye materiales necesarios y criterios de evaluación, para medir el progreso sin adivinar.</p>
+      </div>
+    </section>
+
+    <!-- FILOSOFIA -->
+    <section id="filosofia">
+      <div class="sec-head"><span class="num">05</span><h2>Filosofía de enseñanza</h2><span class="line"></span></div>
+      <p class="sec-intro">El curso enseña Blender, pero sobre todo enseña a <strong>pensar como artista 3D</strong>. No memorizar botones: entender el porqué.</p>
+      <div class="grid g3">
+        <div class="icard"><div class="badge b-cyan">🧱</div><h4>Formas simples</h4><p>Todo está hecho de cubos, esferas y cilindros. Como piezas de LEGO.</p></div>
+        <div class="icard"><div class="badge b-magenta">👤</div><h4>La silueta manda</h4><p>La forma general importa más que el detalle diminuto.</p></div>
+        <div class="icard"><div class="badge b-violet">✨</div><h4>Menos es más</h4><p>Menos polígonos puede significar mejor calidad y mejor juego.</p></div>
+        <div class="icard"><div class="badge b-gold">📸</div><h4>El Bake es una foto</h4><p>Guardar los detalles como si tomáramos una fotografía del relieve.</p></div>
+        <div class="icard"><div class="badge b-green">🎮</div><h4>Optimizar = respetar</h4><p>Un modelo ligero respeta la computadora del jugador.</p></div>
+        <div class="icard"><div class="badge b-cyan">🗣️</div><h4>Lenguaje sencillo</h4><p>Frases cortas, ejemplos cotidianos y muchas comparaciones. Nada de lenguaje universitario.</p></div>
+      </div>
+    </section>
+
+    <!-- =================== MÓDULO 1 =================== -->
+    <div class="sec-head" id="modulo1" style="margin-top:70px">
+      <span class="num" style="background:linear-gradient(135deg,var(--cyan),var(--teal))">M1</span>
+      <h2>Módulo 1 · Exploradores del Mundo 3D</h2><span class="line"></span>
+    </div>
+    <p class="sec-intro">Cuatro misiones para perder el miedo a Blender, aprender a moverse en el espacio 3D y diseñar el propio héroe. Todo listo para dar en clase.</p>
+
+    <!-- ============ CLASE 1 ============ -->
+    <article class="mission" id="c1">
+      <div class="m-top">
+        <div class="left">
+          <div class="mnum"><small>MISIÓN</small>01</div>
+          <div><h3>Primer vuelo en Blender</h3><div class="m-sub">Interfaz, espacio 3D y navegación</div></div>
+        </div>
+        <div class="dur">⏱ 60 min</div>
+      </div>
+      <div class="m-body">
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🎯</div><h5>Objetivos</h5></div>
+          <ul class="obj">
+            <li>Abrir Blender sin miedo y reconocer las partes principales de la pantalla.</li>
+            <li>Entender qué es el espacio 3D y los ejes <strong>X, Y, Z</strong>.</li>
+            <li>Navegar la vista: <strong>orbitar, hacer paneo y zoom</strong>.</li>
+            <li>Guardar su primer archivo con un nombre profesional.</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⏱️</div><h5>Cronograma minuto a minuto</h5></div>
+          <div class="timeline">
+            <div class="tl"><span class="t">0–5</span><span><b>Bienvenida</b> + Mentalidad de Artista 3D.</span></div>
+            <div class="tl"><span class="t">5–15</span><span><b>Teoría:</b> ¿qué es el 3D? Los ejes X, Y, Z.</span></div>
+            <div class="tl"><span class="t">15–20</span><span><b>Tour</b> de la pantalla de Blender.</span></div>
+            <div class="tl"><span class="t">20–42</span><span><b>Práctica guiada:</b> orbitar, paneo, zoom, enfocar.</span></div>
+            <div class="tl"><span class="t">42–52</span><span><b>Mini proyecto:</b> "El Museo del Cubo".</span></div>
+            <div class="tl"><span class="t">52–57</span><span><b>Desafío</b> de artista.</span></div>
+            <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> + explicar el ejercicio para casa.</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-magenta">🎨</div><h5>Mentalidad de Artista 3D</h5></div>
+          <div class="mindset">
+            <div class="q">"Todos los videojuegos que amas viven dentro de una caja invisible."</div>
+            <div class="who">Idea del día</div>
+          </div>
+          <p style="margin-top:12px">Cuéntale al estudiante: en Roblox, tu personaje camina dentro de un mundo que tiene ancho, alto y profundidad. Blender es el taller donde construimos las cosas que viven en esa caja. Hoy solo vamos a aprender a <strong>mirar</strong> dentro de la caja, como cuando giras un juguete en tus manos para verlo por todos lados.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-violet">📖</div><h5>Teoría</h5></div>
+          <p><strong>¿Qué es el 3D?</strong> Un dibujo en papel es 2D: solo ancho y alto. El 3D agrega una tercera dimensión: la <strong>profundidad</strong>. Por eso podemos girar alrededor de las cosas.</p>
+          <div class="meta">
+            <div class="m"><b>El espacio 3D</b><span class="arrow">→</span><span>una pecera: los peces se mueven a los lados, arriba-abajo y hacia el fondo.</span></div>
+            <div class="m"><b>Los ejes X/Y/Z</b><span class="arrow">→</span><span>el GPS del espacio. X (rojo) = izquierda/derecha · Y (verde) = adelante/atrás · Z (azul) = arriba/abajo.</span></div>
+          </div>
+          <p style="margin-top:12px"><strong>Ejemplo en videojuegos:</strong> cuando en Roblox mueves un bloque "hacia arriba", estás cambiando su <strong>Z</strong>. ¡Es el mismo idioma en Blender!</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⌨️</div><h5>Hotkeys nuevas</h5></div>
+          <div class="keys">
+            <div class="key"><span class="kbd">Rueda ratón (girar)</span><span class="kf">Zoom</span><span class="kw">para acercar o alejar la vista</span></div>
+            <div class="key"><span class="kbd">Rueda presionada + mover</span><span class="kf">Orbitar</span><span class="kw">para girar alrededor del objeto</span></div>
+            <div class="key"><span class="kbd">Shift + Rueda presionada</span><span class="kf">Paneo</span><span class="kw">para mover la vista de lado</span></div>
+            <div class="key"><span class="kbd">Numpad .</span><span class="kf">Enfocar selección</span><span class="kw">cuando te pierdas o quieras centrar algo</span></div>
+            <div class="key"><span class="kbd">Ctrl + S</span><span class="kf">Guardar</span><span class="kw">¡siempre, muchas veces!</span></div>
+          </div>
+          <p style="margin-top:10px;font-size:12.8px;color:var(--text-mute)">💻 En laptops sin teclado numérico: activa <em>Edit &gt; Preferences &gt; Input &gt; Emulate Numpad</em> o usa el menú <em>View &gt; Frame Selected</em>.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🕹️</div><h5>Práctica guiada</h5></div>
+          <div class="steps">
+            <div class="step"><div class="do">Abre Blender y cierra la ventana de bienvenida</div><div class="press">Haz clic fuera del recuadro central.</div><div class="ok">Verás un <strong>cubo</strong>, una cámara y una luz.</div></div>
+            <div class="step"><div class="do">Orbita alrededor del cubo</div><div class="press">Mantén presionada la <code>rueda del ratón</code> y mueve.</div><div class="ok">La vista gira como si caminaras alrededor del cubo.</div><div class="err">Si gira de golpe: mueve más despacio, sin soltar la rueda.</div></div>
+            <div class="step"><div class="do">Acerca y aleja</div><div class="press">Gira la <code>rueda del ratón</code>.</div><div class="ok">El cubo se ve más grande o más pequeño.</div></div>
+            <div class="step"><div class="do">Mueve la vista de lado (paneo)</div><div class="press"><code>Shift</code> + rueda presionada + mover.</div><div class="ok">Todo se desliza sin girar.</div></div>
+            <div class="step"><div class="do">Piérdete… y vuelve</div><div class="press">Aléjate mucho, luego pulsa <code>Numpad .</code></div><div class="ok">La cámara vuelve a enfocar el cubo. ¡Botón salvavidas!</div></div>
+            <div class="step"><div class="do">Guarda tu archivo</div><div class="press"><code>Ctrl + S</code> → nómbralo <code>mago_v001.blend</code></div><div class="ok">Ya tienes tu primer archivo profesional.</div><div class="err">No lo llames "sin título": los nombres claros salvan proyectos.</div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · El Museo del Cubo</h5></div>
+          <p>Coloca 3 cubos separados (aún sin modelar nada) y "visítalos" como en un museo: orbita y hazte cerca de cada uno como si fuera una obra de arte. El objetivo es <strong>solo navegar con confianza</strong>.</p>
+        </div>
+
+        <div class="blk">
+          <div class="loot">
+            <div class="lbox chal">
+              <div class="lh">🏅 Desafío de artista</div>
+              <p><strong>"El cubo escondido"</strong>: el profesor esconde un objeto muy lejos en la escena. El estudiante debe encontrarlo solo navegando.</p>
+              <span class="time">⏱ máx. 10 min</span>
+            </div>
+            <div class="lbox home">
+              <div class="lh">🏠 Para casa</div>
+              <p>Abrir Blender 3 veces esta semana y practicar orbitar, zoom y paneo durante 5 minutos cada vez. Sin miedo a tocar.</p>
+              <span class="time">📅 entre clases</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-magenta">⚠️</div><h5>Errores comunes</h5></div>
+              <ul class="blist err">
+                <li><strong>"Me perdí en el espacio".</strong> Ocurre al alejarse demasiado. Solución: <code>Numpad .</code> para volver a enfocar.</li>
+                <li><strong>Confundir zoom con acercarse.</strong> El zoom cambia la vista, no mueve el objeto. Tranquilo, el cubo no se movió.</li>
+                <li><strong>Laptop sin numpad.</strong> Activar "Emulate Numpad" o usar el menú View.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-gold">★</div><h5>Consejos profesionales</h5></div>
+              <ul class="blist pro">
+                <li>Pulsa <code>Ctrl + S</code> cada 10 minutos. Se vuelve un buen hábito para toda la vida.</li>
+                <li>Usa nombres con versión: <code>mago_v001</code>, <code>v002</code>… nunca pierdes trabajo.</li>
+                <li>Crea desde hoy una carpeta del proyecto: <code>01_blend</code>, <code>02_ref</code>, <code>03_export</code>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-cyan">🧰</div><h5>Materiales</h5></div>
+              <div class="chips">
+                <span class="chip">PC con Blender 4.x</span><span class="chip">Ratón con rueda (recomendado)</span><span class="chip">Carpeta del proyecto creada</span>
+              </div>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
+              <ul class="eval">
+                <li>¿Puede orbitar, hacer zoom y paneo sin ayuda?</li>
+                <li>¿Identifica los ejes X, Y, Z por su color?</li>
+                <li>¿Guardó su archivo con nombre correcto?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ============ CLASE 2 ============ -->
+    <article class="mission" id="c2">
+      <div class="m-top">
+        <div class="left">
+          <div class="mnum"><small>MISIÓN</small>02</div>
+          <div><h3>Poderes de transformación</h3><div class="m-sub">Mover, rotar, escalar + trabajar ordenado</div></div>
+        </div>
+        <div class="dur">⏱ 60 min</div>
+      </div>
+      <div class="m-body">
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🎯</div><h5>Objetivos</h5></div>
+          <ul class="obj">
+            <li>Usar las 3 súper-habilidades: <strong>Mover (G), Rotar (R), Escalar (S)</strong>.</li>
+            <li>Restringir movimientos a un eje (X, Y, Z).</li>
+            <li>Aprender organización profesional: <strong>renombrar</strong> objetos y usar <strong>colecciones</strong>.</li>
+            <li>Entender el versionado de archivos.</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⏱️</div><h5>Cronograma minuto a minuto</h5></div>
+          <div class="timeline">
+            <div class="tl"><span class="t">0–5</span><span><b>Mentalidad:</b> el artista ordenado.</span></div>
+            <div class="tl"><span class="t">5–13</span><span><b>Teoría:</b> las 3 transformaciones y los ejes.</span></div>
+            <div class="tl"><span class="t">13–20</span><span><b>Hotkeys</b> G / R / S + eje.</span></div>
+            <div class="tl"><span class="t">20–40</span><span><b>Práctica guiada</b> con el cubo.</span></div>
+            <div class="tl"><span class="t">40–52</span><span><b>Mini proyecto:</b> Robot de bloques.</span></div>
+            <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> robot en 5 piezas.</span></div>
+            <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> versión + ejercicio.</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-magenta">🎨</div><h5>Mentalidad de Artista 3D</h5></div>
+          <div class="mindset">
+            <div class="q">"Un artista ordenado trabaja el doble de rápido."</div>
+            <div class="who">Idea del día</div>
+          </div>
+          <p style="margin-top:12px">Igual que un cuarto ordenado te ayuda a encontrar tus cosas, una escena ordenada te ayuda a encontrar cada pieza de tu mago. Hoy aprendemos a mover cosas… y también a <strong>ponerles nombre</strong> para no perdernos después.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-violet">📖</div><h5>Teoría</h5></div>
+          <p>En 3D solo hay <strong>tres formas de cambiar un objeto</strong>. Son tus tres súper-poderes.</p>
+          <div class="meta">
+            <div class="m"><b>Mover (G)</b><span class="arrow">→</span><span>deslizar una ficha de LEGO por la mesa.</span></div>
+            <div class="m"><b>Rotar (R)</b><span class="arrow">→</span><span>girar el volante de un auto.</span></div>
+            <div class="m"><b>Escalar (S)</b><span class="arrow">→</span><span>inflar o desinflar un globo.</span></div>
+            <div class="m"><b>Bloquear un eje</b><span class="arrow">→</span><span>ponerle rieles a un tren: solo va por un camino.</span></div>
+          </div>
+          <p style="margin-top:12px"><strong>En videojuegos:</strong> colocar cada parte del personaje en su sitio es exactamente esto: mover, rotar y escalar bloques.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⌨️</div><h5>Hotkeys nuevas</h5></div>
+          <div class="keys">
+            <div class="key"><span class="kbd">G</span><span class="kf">Mover (Grab)</span><span class="kw">para reubicar un objeto</span></div>
+            <div class="key"><span class="kbd">R</span><span class="kf">Rotar</span><span class="kw">para girarlo</span></div>
+            <div class="key"><span class="kbd">S</span><span class="kf">Escalar</span><span class="kw">para cambiar su tamaño</span></div>
+            <div class="key"><span class="kbd">X / Y / Z</span><span class="kf">Bloquear eje</span><span class="kw">tras pulsar G, R o S</span></div>
+            <div class="key"><span class="kbd">Clic izq / Enter</span><span class="kf">Confirmar</span><span class="kw">para aceptar el cambio</span></div>
+            <div class="key"><span class="kbd">Esc / Clic der</span><span class="kf">Cancelar</span><span class="kw">para deshacer sobre la marcha</span></div>
+            <div class="key"><span class="kbd">F2</span><span class="kf">Renombrar</span><span class="kw">para poner nombre al objeto</span></div>
+          </div>
+          <div class="keys review" style="margin-top:12px">
+            <div class="key"><span class="kbd">Repaso</span><span class="kf">Ctrl+S · Orbitar · Zoom · Paneo · Numpad .</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🕹️</div><h5>Práctica guiada</h5></div>
+          <div class="steps">
+            <div class="step"><div class="do">Selecciona el cubo</div><div class="press">Clic izquierdo sobre él.</div><div class="ok">Aparece un borde naranja: está seleccionado.</div></div>
+            <div class="step"><div class="do">Muévelo solo en un eje</div><div class="press"><code>G</code> luego <code>X</code>, mueve el ratón, clic para confirmar.</div><div class="ok">El cubo se desliza solo a los lados.</div><div class="err">Si se mueve en diagonal: olvidaste pulsar X, Y o Z.</div></div>
+            <div class="step"><div class="do">Gíralo</div><div class="press"><code>R</code> luego <code>Z</code>, mueve, confirma.</div><div class="ok">El cubo rota como un trompo.</div></div>
+            <div class="step"><div class="do">Cambia su tamaño</div><div class="press"><code>S</code>, mueve, confirma.</div><div class="ok">Crece o encoge desde el centro.</div></div>
+            <div class="step"><div class="do">Renómbralo</div><div class="press"><code>F2</code> → escribe <code>Cuerpo</code></div><div class="ok">En el panel de la derecha aparece el nuevo nombre.</div></div>
+            <div class="step"><div class="do">Crea una colección</div><div class="press">En el Outliner, clic derecho → <em>New Collection</em> → nómbrala <code>Mago</code></div><div class="ok">Tu escena queda ordenada, como una carpeta.</div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · Robot de bloques</h5></div>
+          <p>Construir un robot sencillo usando varios cubos: cabeza, cuerpo, brazos y piernas. Solo con <strong>G, R y S</strong>. El objetivo secreto es aprender <strong>proporción</strong> (que la cabeza no sea más grande que el cuerpo). Es el primer paso hacia armar al mago con formas simples.</p>
+        </div>
+
+        <div class="blk">
+          <div class="loot">
+            <div class="lbox chal">
+              <div class="lh">🏅 Desafío de artista</div>
+              <p><strong>"Robot en 5 piezas"</strong>: hacer un robot que se reconozca usando solo 5 cubos. Obliga a pensar qué es lo esencial.</p>
+              <span class="time">⏱ máx. 10 min</span>
+            </div>
+            <div class="lbox home">
+              <div class="lh">🏠 Para casa</div>
+              <p>Construir un animal con bloques (perro, gato o dragón) usando G, R y S. Guardarlo como <code>animal_v001.blend</code>.</p>
+              <span class="time">📅 entre clases</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-magenta">⚠️</div><h5>Errores comunes</h5></div>
+              <ul class="blist err">
+                <li><strong>Mover sin querer la cámara en vez del objeto.</strong> Recuerda: primero selecciona (clic), luego pulsa G.</li>
+                <li><strong>Olvidar confirmar.</strong> Si el objeto "sigue pegado" al ratón, pulsa clic izquierdo o Enter.</li>
+                <li><strong>Escalar y que "todo se deforme".</strong> Escala igual en todos los lados; usa X/Y/Z solo si quieres estirar a propósito.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-gold">★</div><h5>Consejos profesionales</h5></div>
+              <ul class="blist pro">
+                <li>Ponle nombre a <strong>todo</strong>. "Cube.001" no dice nada; "Cabeza" sí.</li>
+                <li>Guarda una versión nueva antes de un cambio grande (<code>v002</code>, <code>v003</code>).</li>
+                <li>Agrupa piezas relacionadas en colecciones.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-cyan">🧰</div><h5>Materiales</h5></div>
+              <div class="chips"><span class="chip">Archivo de la clase 1</span><span class="chip">Blender 4.x</span><span class="chip">Ideas de robot/animal</span></div>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
+              <ul class="eval">
+                <li>¿Usa G, R y S y bloquea ejes sin ayuda?</li>
+                <li>¿Renombró sus objetos y creó una colección?</li>
+                <li>¿Su robot tiene proporciones razonables?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ============ CLASE 3 ============ -->
+    <article class="mission" id="c3">
+      <div class="m-top">
+        <div class="left">
+          <div class="mnum"><small>MISIÓN</small>03</div>
+          <div><h3>Dentro del objeto</h3><div class="m-sub">Vértices, aristas, caras y Modo Edición</div></div>
+        </div>
+        <div class="dur">⏱ 60 min</div>
+      </div>
+      <div class="m-body">
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🎯</div><h5>Objetivos</h5></div>
+          <ul class="obj">
+            <li>Entrar y salir del <strong>Modo Edición</strong> con Tab.</li>
+            <li>Reconocer y seleccionar <strong>vértices, aristas y caras</strong>.</li>
+            <li>Usar <strong>Extrude (E)</strong> para hacer crecer una forma.</li>
+            <li>Conocer el corte en bucle (<strong>Loop Cut</strong>) de forma suave.</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⏱️</div><h5>Cronograma minuto a minuto</h5></div>
+          <div class="timeline">
+            <div class="tl"><span class="t">0–5</span><span><b>Mentalidad:</b> menos piezas, más magia.</span></div>
+            <div class="tl"><span class="t">5–15</span><span><b>Teoría:</b> la malla (vértices, aristas, caras).</span></div>
+            <div class="tl"><span class="t">15–22</span><span><b>Hotkeys:</b> Tab, 1/2/3, E, Ctrl+R.</span></div>
+            <div class="tl"><span class="t">22–42</span><span><b>Práctica guiada:</b> extrude y loop cut.</span></div>
+            <div class="tl"><span class="t">42–52</span><span><b>Mini proyecto:</b> sombrero de mago.</span></div>
+            <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> sombrero más loco.</span></div>
+            <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> + ejercicio.</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-magenta">🎨</div><h5>Mentalidad de Artista 3D</h5></div>
+          <div class="mindset">
+            <div class="q">"Un buen modelo low poly es como un buen chiste: dice mucho con poco."</div>
+            <div class="who">Idea del día</div>
+          </div>
+          <p style="margin-top:12px">No necesitamos mil piezas para que algo se vea genial. Con pocas caras bien puestas se logra un personaje con estilo. Menos polígonos = un juego más rápido y feliz.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-violet">📖</div><h5>Teoría</h5></div>
+          <p>Cada objeto 3D es una <strong>malla</strong>, hecha de tres ingredientes:</p>
+          <div class="meta">
+            <div class="m"><b>Vértices</b><span class="arrow">→</span><span>los nudos de una red de pescar.</span></div>
+            <div class="m"><b>Aristas</b><span class="arrow">→</span><span>los hilos que unen los nudos.</span></div>
+            <div class="m"><b>Caras</b><span class="arrow">→</span><span>la tela que queda entre los hilos.</span></div>
+            <div class="m"><b>Polígonos</b><span class="arrow">→</span><span>las piezas de LEGO que forman todo.</span></div>
+            <div class="m"><b>Extrude</b><span class="arrow">→</span><span>estirar plastilina para sacar un brazo nuevo.</span></div>
+          </div>
+          <p style="margin-top:12px"><strong>En videojuegos:</strong> el "conteo de polígonos" es cuántas piezas de LEGO usó tu personaje. Menos piezas = corre mejor.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⌨️</div><h5>Hotkeys nuevas</h5></div>
+          <div class="keys">
+            <div class="key"><span class="kbd">Tab</span><span class="kf">Modo Edición / Objeto</span><span class="kw">para entrar o salir de la malla</span></div>
+            <div class="key"><span class="kbd">1 / 2 / 3</span><span class="kf">Vértices / Aristas / Caras</span><span class="kw">para elegir qué seleccionas</span></div>
+            <div class="key"><span class="kbd">E</span><span class="kf">Extrude</span><span class="kw">para estirar una cara y crear geometría</span></div>
+            <div class="key"><span class="kbd">A</span><span class="kf">Seleccionar todo</span><span class="kw">para elegir la malla completa</span></div>
+            <div class="key"><span class="kbd">Ctrl + R</span><span class="kf">Loop Cut</span><span class="kw">para añadir un anillo de cortes</span></div>
+          </div>
+          <div class="keys review" style="margin-top:12px">
+            <div class="key"><span class="kbd">Repaso</span><span class="kf">G / R / S · X/Y/Z · F2 · Ctrl+S</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🕹️</div><h5>Práctica guiada</h5></div>
+          <div class="steps">
+            <div class="step"><div class="do">Entra al Modo Edición</div><div class="press">Selecciona el cubo y pulsa <code>Tab</code>.</div><div class="ok">El cubo se llena de puntos: son los vértices.</div><div class="err">Si nada cambia: primero haz clic en el cubo para seleccionarlo.</div></div>
+            <div class="step"><div class="do">Cambia entre vértices, aristas y caras</div><div class="press">Pulsa <code>1</code>, luego <code>2</code>, luego <code>3</code>.</div><div class="ok">Ves cómo se resaltan puntos, líneas o superficies.</div></div>
+            <div class="step"><div class="do">Selecciona una cara</div><div class="press">Modo caras (<code>3</code>) + clic en una cara superior.</div><div class="ok">La cara se pone naranja.</div></div>
+            <div class="step"><div class="do">Estírala hacia arriba</div><div class="press"><code>E</code> luego <code>Z</code>, mueve, confirma.</div><div class="ok">Crece una torre desde el cubo. ¡Eso es extrude!</div><div class="err">Si aparece una cara "pegada" sin moverse, pulsaste E dos veces: pulsa Ctrl+Z.</div></div>
+            <div class="step"><div class="do">Añade un corte en bucle</div><div class="press"><code>Ctrl + R</code>, pasa el ratón por el objeto, clic para colocar, clic para fijar.</div><div class="ok">Aparece un anillo de aristas nuevas.</div></div>
+            <div class="step"><div class="do">Vuelve al Modo Objeto</div><div class="press"><code>Tab</code></div><div class="ok">Ves tu figura terminada, lista para mover.</div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · El sombrero de mago</h5></div>
+          <p>A partir de un cilindro, usar <strong>extrude</strong> y <strong>escalar</strong> para crear un sombrero puntiagudo con ala. ¡Es la <strong>primera pieza real del proyecto final</strong>! Guardarla en la colección <code>Mago</code>.</p>
+        </div>
+
+        <div class="blk">
+          <div class="loot">
+            <div class="lbox chal">
+              <div class="lh">🏅 Desafío de artista</div>
+              <p><strong>"El sombrero más loco"</strong>: deformar el sombrero con G y S para darle personalidad (torcido, gigante, aplastado). Que tenga carácter.</p>
+              <span class="time">⏱ máx. 10 min</span>
+            </div>
+            <div class="lbox home">
+              <div class="lh">🏠 Para casa</div>
+              <p>Hacer 3 sombreros diferentes usando extrude. Elegir el favorito para el mago.</p>
+              <span class="time">📅 entre clases</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-magenta">⚠️</div><h5>Errores comunes</h5></div>
+              <ul class="blist err">
+                <li><strong>Extrude doble.</strong> Pulsar E y luego Esc deja una cara duplicada encima. Solución: Ctrl+Z.</li>
+                <li><strong>Quedarse en Modo Edición.</strong> Si "no puedes mover el objeto entero", pulsa Tab para volver a Modo Objeto.</li>
+                <li><strong>Caras internas invisibles.</strong> Vienen de extrudes cancelados; borrarlas para mantener limpio.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-gold">★</div><h5>Consejos profesionales</h5></div>
+              <ul class="blist pro">
+                <li>Revisa el conteo de vértices en la barra de estadísticas: menos es mejor.</li>
+                <li>Empieza siempre con la forma simple y añade detalle solo si hace falta.</li>
+                <li>Guarda una versión antes de un extrude grande.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-cyan">🧰</div><h5>Materiales</h5></div>
+              <div class="chips"><span class="chip">Archivo del mago</span><span class="chip">Blender 4.x</span><span class="chip">Boceto del sombrero (opcional)</span></div>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
+              <ul class="eval">
+                <li>¿Entra y sale del Modo Edición con confianza?</li>
+                <li>¿Distingue vértices, aristas y caras?</li>
+                <li>¿Hizo un sombrero reconocible con extrude?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ============ CLASE 4 ============ -->
+    <article class="mission" id="c4">
+      <div class="m-top">
+        <div class="left">
+          <div class="mnum"><small>MISIÓN</small>04</div>
+          <div><h3>Plano del héroe</h3><div class="m-sub">Concept Art de tu Mago (papel y lápiz)</div></div>
+        </div>
+        <div class="dur">⏱ 60 min</div>
+      </div>
+      <div class="m-body">
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🎯</div><h5>Objetivos</h5></div>
+          <ul class="obj">
+            <li>Diseñar su propio <strong>Mago Fantástico</strong> en papel.</li>
+            <li>Pensar en <strong>formas simples</strong> y en la <strong>silueta</strong>.</li>
+            <li>Crear la <strong>ficha de referencia</strong> que se usará todo el curso.</li>
+            <li>Aprender a cargar una imagen de referencia en Blender (opcional).</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⏱️</div><h5>Cronograma minuto a minuto</h5></div>
+          <div class="timeline">
+            <div class="tl"><span class="t">0–5</span><span><b>Mentalidad:</b> la silueta manda.</span></div>
+            <div class="tl"><span class="t">5–13</span><span><b>Teoría:</b> concept art y formas simples.</span></div>
+            <div class="tl"><span class="t">13–20</span><span><b>Lluvia de ideas:</b> ¿qué tipo de mago?</span></div>
+            <div class="tl"><span class="t">20–45</span><span><b>Práctica:</b> dibujar frente y lado con bloques.</span></div>
+            <div class="tl"><span class="t">45–52</span><span><b>Mini proyecto:</b> ficha del personaje.</span></div>
+            <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> mago en 30 segundos.</span></div>
+            <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> foto en 02_ref + ejercicio.</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-magenta">🎨</div><h5>Mentalidad de Artista 3D</h5></div>
+          <div class="mindset">
+            <div class="q">"Si reconoces al personaje solo por su sombra, ya ganaste."</div>
+            <div class="who">Idea del día</div>
+          </div>
+          <p style="margin-top:12px">Los personajes más famosos se reconocen por su <strong>silueta</strong>: un sombrero puntiagudo, una capa larga, una varita. Antes de modelar, diseñamos esa silueta. El plano primero; la construcción después.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-violet">📖</div><h5>Teoría</h5></div>
+          <p>El <strong>concept art</strong> es el plano del arquitecto: se dibuja antes de construir para saber qué vamos a hacer.</p>
+          <div class="meta">
+            <div class="m"><b>Concept art</b><span class="arrow">→</span><span>el plano antes de construir la casa.</span></div>
+            <div class="m"><b>Formas simples</b><span class="arrow">→</span><span>dibujar con globos: círculos y rectángulos antes que detalles.</span></div>
+            <div class="m"><b>Referencia</b><span class="arrow">→</span><span>la foto que un pintor pega junto al lienzo para no perderse.</span></div>
+          </div>
+          <p style="margin-top:12px"><strong>En videojuegos:</strong> todo estudio de juegos dibuja el personaje en papel antes de tocar la computadora. Nosotros haremos lo mismo.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-gold">⌨️</div><h5>Hotkeys</h5></div>
+          <p>Esta es una clase de <strong>papel y lápiz</strong>: hoy descansamos las teclas. Si el estudiante quiere, se enseña una sola cosa en Blender:</p>
+          <div class="keys">
+            <div class="key"><span class="kbd">Add ▸ Image ▸ Reference</span><span class="kf">Cargar referencia</span><span class="kw">para poner el dibujo de fondo en Blender</span></div>
+          </div>
+          <div class="keys review" style="margin-top:12px">
+            <div class="key"><span class="kbd">Repaso general</span><span class="kf">Tab · 1/2/3 · E · G/R/S · Ctrl+R · Ctrl+S</span></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-cyan">🕹️</div><h5>Práctica guiada</h5></div>
+          <div class="steps">
+            <div class="step"><div class="do">Lluvia de ideas</div><div class="press">Responder: ¿es un mago de fuego, hielo, bosque, estrellas…?</div><div class="ok">Sale una idea clara para guiar el diseño.</div></div>
+            <div class="step"><div class="do">Dibuja la silueta con bloques</div><div class="press">Usa círculos y rectángulos: cabeza, cuerpo, sombrero, capa.</div><div class="ok">Una forma general reconocible, sin detalles todavía.</div></div>
+            <div class="step"><div class="do">Haz la vista de frente y la de lado</div><div class="press">Dos dibujos alineados a la misma altura.</div><div class="ok">Servirán como referencia para modelar en 3D.</div><div class="err">Si las dos vistas no coinciden de altura, cuesta modelar; alinéalas.</div></div>
+            <div class="step"><div class="do">Añade colores y la varita</div><div class="press">Colorear y dibujar la varita (¡no bastón!).</div><div class="ok">El mago ya tiene identidad propia.</div></div>
+            <div class="step"><div class="do">Marca las formas 3D</div><div class="press">Escribe junto a cada parte qué forma usarás: cubo, esfera, cilindro, cono.</div><div class="ok">Tienes un plan de modelado listo.</div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · Ficha del personaje</h5></div>
+          <p>Completar una hoja con: <strong>nombre del mago</strong>, dibujo de <strong>frente y lado</strong>, paleta de <strong>colores</strong>, y la <strong>lista de formas simples</strong> que se usarán. Esta ficha es el mapa del tesoro para todo el resto del curso.</p>
+        </div>
+
+        <div class="blk">
+          <div class="loot">
+            <div class="lbox chal">
+              <div class="lh">🏅 Desafío de artista</div>
+              <p><strong>"Mago en 30 segundos"</strong>: dibujar la silueta del mago en medio minuto. Obliga a quedarse solo con lo esencial.</p>
+              <span class="time">⏱ 30 seg</span>
+            </div>
+            <div class="lbox home">
+              <div class="lh">🏠 Para casa</div>
+              <p>Hacer 3 variaciones de la silueta del mago y elegir la favorita. Tomarle foto y guardarla en la carpeta <code>02_ref</code>.</p>
+              <span class="time">📅 entre clases</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-magenta">⚠️</div><h5>Errores comunes</h5></div>
+              <ul class="blist err">
+                <li><strong>Dibujar detalles antes que la silueta.</strong> Primero la forma general, después los adornos.</li>
+                <li><strong>Personaje sin personalidad.</strong> Preguntar: ¿qué lo hace único? Un color, un sombrero, un gesto.</li>
+                <li><strong>Olvidar la varita.</strong> El proyecto pide varita, no bastón. Anotarlo en la ficha.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-gold">★</div><h5>Consejos profesionales</h5></div>
+              <ul class="blist pro">
+                <li>Guarda una foto limpia del dibujo en <code>02_ref</code> con buen nombre.</li>
+                <li>Piensa siempre en formas simples: será fácil de modelar.</li>
+                <li>Deja espacio para cambiar de idea: el concept puede evolucionar.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="two">
+            <div>
+              <div class="blk-h"><div class="ic b-cyan">🧰</div><h5>Materiales</h5></div>
+              <div class="chips"><span class="chip">Papel y lápiz</span><span class="chip">Colores</span><span class="chip">Ficha imprimible del personaje</span><span class="chip">Cámara/teléfono para foto</span></div>
+            </div>
+            <div>
+              <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
+              <ul class="eval">
+                <li>¿Su mago tiene una silueta clara y reconocible?</li>
+                <li>¿Usó formas simples y definió varita y colores?</li>
+                <li>¿Tiene su ficha lista para empezar a modelar?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- HOTKEYS ACUMULADAS -->
+    <section id="hotkeys">
+      <div class="sec-head"><span class="num">⌨</span><h2>Poderes desbloqueados</h2><span class="line"></span></div>
+      <p class="sec-intro">Resumen acumulativo de hotkeys hasta el final del Módulo 1. Se irán sumando módulo a módulo.</p>
+      <div class="panel">
+        <div class="grid g2">
+          <div class="keys">
+            <div class="key"><span class="kbd">Ctrl + S</span><span class="kf">Guardar</span></div>
+            <div class="key"><span class="kbd">Rueda ratón</span><span class="kf">Zoom</span></div>
+            <div class="key"><span class="kbd">Rueda presionada</span><span class="kf">Orbitar</span></div>
+            <div class="key"><span class="kbd">Shift + Rueda</span><span class="kf">Paneo</span></div>
+            <div class="key"><span class="kbd">Numpad .</span><span class="kf">Enfocar selección</span></div>
+            <div class="key"><span class="kbd">G</span><span class="kf">Mover</span></div>
+            <div class="key"><span class="kbd">R</span><span class="kf">Rotar</span></div>
+          </div>
+          <div class="keys">
+            <div class="key"><span class="kbd">S</span><span class="kf">Escalar</span></div>
+            <div class="key"><span class="kbd">X / Y / Z</span><span class="kf">Bloquear eje</span></div>
+            <div class="key"><span class="kbd">F2</span><span class="kf">Renombrar</span></div>
+            <div class="key"><span class="kbd">Tab</span><span class="kf">Modo Edición / Objeto</span></div>
+            <div class="key"><span class="kbd">1 / 2 / 3</span><span class="kf">Vértices / Aristas / Caras</span></div>
+            <div class="key"><span class="kbd">E</span><span class="kf">Extrude</span></div>
+            <div class="key"><span class="kbd">Ctrl + R</span><span class="kf">Loop Cut</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUENAS PRACTICAS -->
+    <section id="practicas">
+      <div class="sec-head"><span class="num">🏆</span><h2>Buenas prácticas del curso</h2><span class="line"></span></div>
+      <p class="sec-intro">Hábitos que se enseñan y se refuerzan en todas las clases, para trabajar como un profesional desde el día uno.</p>
+      <div class="grid g3">
+        <div class="icard"><div class="badge b-cyan">📁</div><h4>Organización de carpetas</h4><p>Estructura clara: 01_blend, 02_ref, 03_export.</p></div>
+        <div class="icard"><div class="badge b-violet">💾</div><h4>Versionado</h4><p>Guardar v001, v002, v003… nunca se pierde trabajo.</p></div>
+        <div class="icard"><div class="badge b-magenta">🏷️</div><h4>Nombres profesionales</h4><p>Nombrar objetos: "Cabeza", "Sombrero", no "Cube.001".</p></div>
+        <div class="icard"><div class="badge b-green">⚡</div><h4>Optimización</h4><p>Vigilar el conteo de polígonos desde el principio.</p></div>
+        <div class="icard"><div class="badge b-gold">📏</div><h4>Escala correcta</h4><p>Trabajar al tamaño real para exportar bien a Roblox.</p></div>
+        <div class="icard"><div class="badge b-cyan">🧼</div><h4>Trabajar limpio</h4><p>Sin caras sueltas ni geometría basura. Guardar seguido.</p></div>
+      </div>
+    </section>
+
+    <!-- EVALUACION -->
+    <section id="evaluacion">
+      <div class="sec-head"><span class="num">📊</span><h2>Cómo medir el progreso</h2><span class="line"></span></div>
+      <p class="sec-intro">Cada clase trae sus criterios propios. Además, estos hitos generales muestran si el estudiante avanza al ritmo esperado.</p>
+      <div class="grid g2">
+        <div class="panel">
+          <h4 style="font-weight:800;margin-bottom:14px;color:var(--cyan)">✅ Al terminar el Módulo 1, el estudiante…</h4>
+          <ul class="eval">
+            <li>Navega el espacio 3D con confianza (orbitar, zoom, paneo).</li>
+            <li>Mueve, rota y escala objetos y bloquea ejes sin ayuda.</li>
+            <li>Entra al Modo Edición y usa extrude para crear formas.</li>
+            <li>Trabaja ordenado: nombra objetos, usa colecciones y guarda versiones.</li>
+            <li>Tiene el concept art de su propio Mago listo para modelar.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4 style="font-weight:800;margin-bottom:14px;color:var(--gold)">📐 Escala de logro sugerida</h4>
+          <ul class="blist pro">
+            <li><strong>Explorador:</strong> necesita ayuda constante pero completa las tareas.</li>
+            <li><strong>Aprendiz:</strong> logra las tareas con pocas indicaciones.</li>
+            <li><strong>Artista 3D:</strong> trabaja solo y aporta ideas creativas propias.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><b>Guía del curso · Creación de Personajes para Roblox con Blender 4.x.</b> Módulo 1 desarrollado a fondo. Los Módulos 2 a 5 se entregarán con el mismo formato, clase por clase.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+// Mobile menu
+const sidebar=document.getElementById('sidebar');
+const menuBtn=document.getElementById('menuBtn');
+menuBtn.addEventListener('click',()=>sidebar.classList.toggle('open'));
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')));
+
+// Scroll spy
+const links=[...document.querySelectorAll('.nav a[href^="#"]')];
+const map=new Map();
+links.forEach(l=>{const el=document.querySelector(l.getAttribute('href'));if(el)map.set(el,l);});
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'));
+      const l=map.get(e.target);
+      if(l)l.classList.add('active');
+    }
+  });
+},{rootMargin:'-15% 0px -70% 0px',threshold:0});
+map.forEach((l,el)=>obs.observe(el));
+</script>
+</body>
+</html>

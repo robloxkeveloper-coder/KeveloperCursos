@@ -347,6 +347,24 @@ section{scroll-margin-top:20px}
   .main{padding-top:20px}
   .hero{padding-top:70px}
 }
+
+/* ---- Arreglos de legibilidad en móvil (que el texto respire y no se corte) ---- */
+@media(max-width:600px){
+  body{overflow-x:hidden}
+  .main{padding-left:16px;padding-right:16px;padding-bottom:80px}
+  /* los items de listas son grid/flex: sin min-width:0 no se encogen y el texto se sale */
+  .obj li,.blist li,.eval li,.mod ol li,.tl,.tl span,.meta .m,.meta .m span,
+  .step,.step .press,.blk p,.key,.chips,.icard p{min-width:0;overflow-wrap:anywhere}
+  .meta .m{flex-wrap:wrap;gap:4px 10px}
+  .meta .m b{flex:0 0 auto}
+  .key{flex-wrap:wrap}
+  .key .kw{margin-left:0}
+  .m-top{padding:18px 16px}
+  .m-body{padding:6px 16px 22px}
+  .panel{padding:18px 16px}
+  .hero h1{line-height:1.08}
+  .blk p,.obj li,.blist li,.eval li{line-height:1.6}
+}
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto !important;transition:none !important}
 }
@@ -360,7 +378,7 @@ section{scroll-margin-top:20px}
   <!-- ========== SIDEBAR ========== -->
   <aside class="sidebar" id="sidebar">
     <div class="brand">
-      <div class="logo">🧙</div>
+      <div class="logo">🎮</div>
       <div><b>Personajes 3D<br>para Roblox</b><span>Guía del curso · Blender 4.x</span></div>
     </div>
 
@@ -387,7 +405,7 @@ section{scroll-margin-top:20px}
         <a href="#c1" class="sub"><span class="ic">01</span>Primer vuelo en Blender</a>
         <a href="#c2" class="sub"><span class="ic">02</span>Mover, rotar, escalar</a>
         <a href="#c3" class="sub"><span class="ic">03</span>Dentro del objeto</a>
-        <a href="#c4" class="sub"><span class="ic">04</span>Diseña tu Mago</a>
+        <a href="#c4" class="sub"><span class="ic">04</span>Diseña tu Personaje</a>
       </div>
       <div class="nav-group">
         <div class="gt">Referencia</div>
@@ -404,7 +422,7 @@ section{scroll-margin-top:20px}
     <!-- HERO -->
     <section id="inicio" class="hero">
       <span class="kicker">◆ Guía completa del instructor · Clases 1 a 1</span>
-      <h1>Crea tu <span class="g1">Mago</span><br>en <span class="g2">3D</span> para Roblox</h1>
+      <h1>Crea tu <span class="g1">Personaje</span><br>en <span class="g2">3D</span> para Roblox</h1>
       <p class="sub">Un viaje de 20 misiones donde cada estudiante pasa de abrir Blender por primera vez a tener su propio personaje fantástico ¡caminando dentro de Roblox! Sin experiencia previa. Solo curiosidad y ganas de crear.</p>
       <div class="stat-row">
         <div class="stat c1"><b>10-14</b><span>Edad</span></div>
@@ -433,7 +451,7 @@ section{scroll-margin-top:20px}
         </div>
         <div class="grid" style="align-content:start">
           <div class="icard"><div class="badge b-cyan">👤</div><h4>¿Para quién es?</h4><p>Principiantes absolutos de 10 a 14 años. Nunca han tocado Blender, pero <strong>ya conocen Roblox Studio</strong> y saben mover, rotar y escalar objetos ahí.</p></div>
-          <div class="icard"><div class="badge b-magenta">🧙</div><h4>Proyecto final</h4><p>Cada estudiante diseña su propio <strong>"Mago Fantástico"</strong>: humanoide estilizado, estilo low poly/cartoon, <strong>con varita</strong> (¡sin bastón!). Cada mago será único.</p></div>
+          <div class="icard"><div class="badge b-magenta">🦸</div><h4>Proyecto final</h4><p>Cada estudiante diseña su propio <strong>"Personaje 3D"</strong>: humanoide estilizado, estilo low poly/cartoon, <strong>con su bastón</strong> y accesorios. Cada personaje será único.</p></div>
           <div class="icard"><div class="badge b-gold">⏱️</div><h4>Ritmo</h4><p>20 clases · 1 hora por semana · 5 meses. Clases 100% prácticas y uno a uno.</p></div>
         </div>
       </div>
@@ -448,7 +466,7 @@ section{scroll-margin-top:20px}
         <div class="pstep"><div class="n">02</div><b>Navegación</b><small>Moverse en el 3D</small></div>
         <div class="pstep"><div class="n">03</div><b>Low Poly</b><small>Modelar con bloques</small></div>
         <div class="pstep"><div class="n">04</div><b>Organización</b><small>Trabajar limpio</small></div>
-        <div class="pstep"><div class="n">05</div><b>Concept Art</b><small>Diseñar el mago</small></div>
+        <div class="pstep"><div class="n">05</div><b>Concept Art</b><small>Diseñar el personaje</small></div>
         <div class="pstep"><div class="n">06</div><b>Modelado</b><small>Construir el cuerpo</small></div>
         <div class="pstep"><div class="n">07</div><b>Sculpt</b><small>High poly básico</small></div>
         <div class="pstep"><div class="n">08</div><b>Retopo</b><small>Si aplica</small></div>
@@ -473,7 +491,7 @@ section{scroll-margin-top:20px}
             <li><i>01</i>Primer vuelo: interfaz y navegación 3D</li>
             <li><i>02</i>Poderes de transformación + organización</li>
             <li><i>03</i>Dentro del objeto: vértices, aristas y caras</li>
-            <li><i>04</i>Plano del héroe: Concept Art de tu Mago</li>
+            <li><i>04</i>Plano del héroe: Concept Art de tu Personaje</li>
           </ol>
           <span class="status done">✓ Desarrollado</span>
         </div>
@@ -482,8 +500,8 @@ section{scroll-margin-top:20px}
           <ol>
             <li><i>05</i>Bloqueo del cuerpo: torso y cabeza</li>
             <li><i>06</i>Brazos, piernas y manos low poly</li>
-            <li><i>07</i>El sombrero y la túnica del mago</li>
-            <li><i>08</i>La varita mágica y detalles</li>
+            <li><i>07</i>Vestimenta y armadura</li>
+            <li><i>08</i>Accesorios y Bastón</li>
             <li><i>09</i>Revisión de silueta y proporciones</li>
           </ol>
           <span class="status next">⏳ Próxima entrega</span>
@@ -513,7 +531,7 @@ section{scroll-margin-top:20px}
           <ol>
             <li><i>18</i>Optimización: polígonos y estadísticas</li>
             <li><i>19</i>Exportación correcta y escala</li>
-            <li><i>20</i>Roblox Auto Setup: ¡el Mago cobra vida!</li>
+            <li><i>20</i>Roblox Auto Setup: ¡el Personaje cobra vida!</li>
           </ol>
           <span class="status next">⏳ Próxima entrega</span>
         </div>
@@ -636,7 +654,7 @@ section{scroll-margin-top:20px}
             <div class="step"><div class="do">Acerca y aleja</div><div class="press">Gira la <code>rueda del ratón</code>.</div><div class="ok">El cubo se ve más grande o más pequeño.</div></div>
             <div class="step"><div class="do">Mueve la vista de lado (paneo)</div><div class="press"><code>Shift</code> + rueda presionada + mover.</div><div class="ok">Todo se desliza sin girar.</div></div>
             <div class="step"><div class="do">Piérdete… y vuelve</div><div class="press">Aléjate mucho, luego pulsa <code>Numpad .</code></div><div class="ok">La cámara vuelve a enfocar el cubo. ¡Botón salvavidas!</div></div>
-            <div class="step"><div class="do">Guarda tu archivo</div><div class="press"><code>Ctrl + S</code> → nómbralo <code>mago_v001.blend</code></div><div class="ok">Ya tienes tu primer archivo profesional.</div><div class="err">No lo llames "sin título": los nombres claros salvan proyectos.</div></div>
+            <div class="step"><div class="do">Guarda tu archivo</div><div class="press"><code>Ctrl + S</code> → nómbralo <code>personaje_v001.blend</code></div><div class="ok">Ya tienes tu primer archivo profesional.</div><div class="err">No lo llames "sin título": los nombres claros salvan proyectos.</div></div>
           </div>
         </div>
 
@@ -674,7 +692,7 @@ section{scroll-margin-top:20px}
               <div class="blk-h"><div class="ic b-gold">★</div><h5>Consejos profesionales</h5></div>
               <ul class="blist pro">
                 <li>Pulsa <code>Ctrl + S</code> cada 10 minutos. Se vuelve un buen hábito para toda la vida.</li>
-                <li>Usa nombres con versión: <code>mago_v001</code>, <code>v002</code>… nunca pierdes trabajo.</li>
+                <li>Usa nombres con versión: <code>personaje_v001</code>, <code>v002</code>… nunca pierdes trabajo.</li>
                 <li>Crea desde hoy una carpeta del proyecto: <code>01_blend</code>, <code>02_ref</code>, <code>03_export</code>.</li>
               </ul>
             </div>
@@ -743,7 +761,7 @@ section{scroll-margin-top:20px}
             <div class="q">"Un artista ordenado trabaja el doble de rápido."</div>
             <div class="who">Idea del día</div>
           </div>
-          <p style="margin-top:12px">Igual que un cuarto ordenado te ayuda a encontrar tus cosas, una escena ordenada te ayuda a encontrar cada pieza de tu mago. Hoy aprendemos a mover cosas… y también a <strong>ponerles nombre</strong> para no perdernos después.</p>
+          <p style="margin-top:12px">Igual que un cuarto ordenado te ayuda a encontrar tus cosas, una escena ordenada te ayuda a encontrar cada pieza de tu personaje. Hoy aprendemos a mover cosas… y también a <strong>ponerles nombre</strong> para no perdernos después.</p>
         </div>
 
         <div class="blk">
@@ -782,13 +800,13 @@ section{scroll-margin-top:20px}
             <div class="step"><div class="do">Gíralo</div><div class="press"><code>R</code> luego <code>Z</code>, mueve, confirma.</div><div class="ok">El cubo rota como un trompo.</div></div>
             <div class="step"><div class="do">Cambia su tamaño</div><div class="press"><code>S</code>, mueve, confirma.</div><div class="ok">Crece o encoge desde el centro.</div></div>
             <div class="step"><div class="do">Renómbralo</div><div class="press"><code>F2</code> → escribe <code>Cuerpo</code></div><div class="ok">En el panel de la derecha aparece el nuevo nombre.</div></div>
-            <div class="step"><div class="do">Crea una colección</div><div class="press">En el Outliner, clic derecho → <em>New Collection</em> → nómbrala <code>Mago</code></div><div class="ok">Tu escena queda ordenada, como una carpeta.</div></div>
+            <div class="step"><div class="do">Crea una colección</div><div class="press">En el Outliner, clic derecho → <em>New Collection</em> → nómbrala <code>Personaje</code></div><div class="ok">Tu escena queda ordenada, como una carpeta.</div></div>
           </div>
         </div>
 
         <div class="blk">
           <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · Robot de bloques</h5></div>
-          <p>Construir un robot sencillo usando varios cubos: cabeza, cuerpo, brazos y piernas. Solo con <strong>G, R y S</strong>. El objetivo secreto es aprender <strong>proporción</strong> (que la cabeza no sea más grande que el cuerpo). Es el primer paso hacia armar al mago con formas simples.</p>
+          <p>Construir un robot sencillo usando varios cubos: cabeza, cuerpo, brazos y piernas. Solo con <strong>G, R y S</strong>. El objetivo secreto es aprender <strong>proporción</strong> (que la cabeza no sea más grande que el cuerpo). Es el primer paso hacia armar al personaje con formas simples.</p>
         </div>
 
         <div class="blk">
@@ -875,7 +893,7 @@ section{scroll-margin-top:20px}
             <div class="tl"><span class="t">5–15</span><span><b>Teoría:</b> la malla (vértices, aristas, caras).</span></div>
             <div class="tl"><span class="t">15–22</span><span><b>Hotkeys:</b> Tab, 1/2/3, E, Ctrl+R.</span></div>
             <div class="tl"><span class="t">22–42</span><span><b>Práctica guiada:</b> extrude y loop cut.</span></div>
-            <div class="tl"><span class="t">42–52</span><span><b>Mini proyecto:</b> sombrero de mago.</span></div>
+            <div class="tl"><span class="t">42–52</span><span><b>Mini proyecto:</b> el sombrero del personaje.</span></div>
             <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> sombrero más loco.</span></div>
             <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> + ejercicio.</span></div>
           </div>
@@ -930,8 +948,8 @@ section{scroll-margin-top:20px}
         </div>
 
         <div class="blk">
-          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · El sombrero de mago</h5></div>
-          <p>A partir de un cilindro, usar <strong>extrude</strong> y <strong>escalar</strong> para crear un sombrero puntiagudo con ala. ¡Es la <strong>primera pieza real del proyecto final</strong>! Guardarla en la colección <code>Mago</code>.</p>
+          <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · El sombrero del personaje</h5></div>
+          <p>A partir de un cilindro, usar <strong>extrude</strong> y <strong>escalar</strong> para crear un sombrero puntiagudo con ala. ¡Es la <strong>primera pieza real del proyecto final</strong>! Guardarla en la colección <code>Personaje</code>.</p>
         </div>
 
         <div class="blk">
@@ -943,7 +961,7 @@ section{scroll-margin-top:20px}
             </div>
             <div class="lbox home">
               <div class="lh">🏠 Para casa</div>
-              <p>Hacer 3 sombreros diferentes usando extrude. Elegir el favorito para el mago.</p>
+              <p>Hacer 3 sombreros diferentes usando extrude. Elegir el favorito para el personaje.</p>
               <span class="time">📅 entre clases</span>
             </div>
           </div>
@@ -974,7 +992,7 @@ section{scroll-margin-top:20px}
           <div class="two">
             <div>
               <div class="blk-h"><div class="ic b-cyan">🧰</div><h5>Materiales</h5></div>
-              <div class="chips"><span class="chip">Archivo del mago</span><span class="chip">Blender 4.x</span><span class="chip">Boceto del sombrero (opcional)</span></div>
+              <div class="chips"><span class="chip">Archivo del personaje</span><span class="chip">Blender 4.x</span><span class="chip">Boceto del sombrero (opcional)</span></div>
             </div>
             <div>
               <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
@@ -995,7 +1013,7 @@ section{scroll-margin-top:20px}
       <div class="m-top">
         <div class="left">
           <div class="mnum"><small>MISIÓN</small>04</div>
-          <div><h3>Plano del héroe</h3><div class="m-sub">Concept Art de tu Mago (papel y lápiz)</div></div>
+          <div><h3>Plano del héroe</h3><div class="m-sub">Concept Art de tu Personaje (papel y lápiz)</div></div>
         </div>
         <div class="dur">⏱ 60 min</div>
       </div>
@@ -1004,7 +1022,7 @@ section{scroll-margin-top:20px}
         <div class="blk">
           <div class="blk-h"><div class="ic b-cyan">🎯</div><h5>Objetivos</h5></div>
           <ul class="obj">
-            <li>Diseñar su propio <strong>Mago Fantástico</strong> en papel.</li>
+            <li>Diseñar su propio <strong>Personaje Fantástico</strong> en papel.</li>
             <li>Pensar en <strong>formas simples</strong> y en la <strong>silueta</strong>.</li>
             <li>Crear la <strong>ficha de referencia</strong> que se usará todo el curso.</li>
             <li>Aprender a cargar una imagen de referencia en Blender (opcional).</li>
@@ -1016,10 +1034,10 @@ section{scroll-margin-top:20px}
           <div class="timeline">
             <div class="tl"><span class="t">0–5</span><span><b>Mentalidad:</b> la silueta manda.</span></div>
             <div class="tl"><span class="t">5–13</span><span><b>Teoría:</b> concept art y formas simples.</span></div>
-            <div class="tl"><span class="t">13–20</span><span><b>Lluvia de ideas:</b> ¿qué tipo de mago?</span></div>
+            <div class="tl"><span class="t">13–20</span><span><b>Lluvia de ideas:</b> ¿qué tipo de personaje?</span></div>
             <div class="tl"><span class="t">20–45</span><span><b>Práctica:</b> dibujar frente y lado con bloques.</span></div>
             <div class="tl"><span class="t">45–52</span><span><b>Mini proyecto:</b> ficha del personaje.</span></div>
-            <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> mago en 30 segundos.</span></div>
+            <div class="tl"><span class="t">52–57</span><span><b>Desafío:</b> personaje en 30 segundos.</span></div>
             <div class="tl"><span class="t">57–60</span><span><b>Guardar</b> foto en 02_ref + ejercicio.</span></div>
           </div>
         </div>
@@ -1030,7 +1048,7 @@ section{scroll-margin-top:20px}
             <div class="q">"Si reconoces al personaje solo por su sombra, ya ganaste."</div>
             <div class="who">Idea del día</div>
           </div>
-          <p style="margin-top:12px">Los personajes más famosos se reconocen por su <strong>silueta</strong>: un sombrero puntiagudo, una capa larga, una varita. Antes de modelar, diseñamos esa silueta. El plano primero; la construcción después.</p>
+          <p style="margin-top:12px">Los personajes más famosos se reconocen por su <strong>silueta</strong>: un sombrero puntiagudo, una capa larga, un bastón. Antes de modelar, diseñamos esa silueta. El plano primero; la construcción después.</p>
         </div>
 
         <div class="blk">
@@ -1058,29 +1076,29 @@ section{scroll-margin-top:20px}
         <div class="blk">
           <div class="blk-h"><div class="ic b-cyan">🕹️</div><h5>Práctica guiada</h5></div>
           <div class="steps">
-            <div class="step"><div class="do">Lluvia de ideas</div><div class="press">Responder: ¿es un mago de fuego, hielo, bosque, estrellas…?</div><div class="ok">Sale una idea clara para guiar el diseño.</div></div>
+            <div class="step"><div class="do">Lluvia de ideas</div><div class="press">Responder: ¿es un personaje de fuego, hielo, bosque, estrellas…?</div><div class="ok">Sale una idea clara para guiar el diseño.</div></div>
             <div class="step"><div class="do">Dibuja la silueta con bloques</div><div class="press">Usa círculos y rectángulos: cabeza, cuerpo, sombrero, capa.</div><div class="ok">Una forma general reconocible, sin detalles todavía.</div></div>
             <div class="step"><div class="do">Haz la vista de frente y la de lado</div><div class="press">Dos dibujos alineados a la misma altura.</div><div class="ok">Servirán como referencia para modelar en 3D.</div><div class="err">Si las dos vistas no coinciden de altura, cuesta modelar; alinéalas.</div></div>
-            <div class="step"><div class="do">Añade colores y la varita</div><div class="press">Colorear y dibujar la varita (¡no bastón!).</div><div class="ok">El mago ya tiene identidad propia.</div></div>
+            <div class="step"><div class="do">Añade colores y su bastón</div><div class="press">Colorear y dibujar su bastón y accesorios.</div><div class="ok">El personaje ya tiene identidad propia.</div></div>
             <div class="step"><div class="do">Marca las formas 3D</div><div class="press">Escribe junto a cada parte qué forma usarás: cubo, esfera, cilindro, cono.</div><div class="ok">Tienes un plan de modelado listo.</div></div>
           </div>
         </div>
 
         <div class="blk">
           <div class="blk-h"><div class="ic b-green">🎁</div><h5>Mini proyecto · Ficha del personaje</h5></div>
-          <p>Completar una hoja con: <strong>nombre del mago</strong>, dibujo de <strong>frente y lado</strong>, paleta de <strong>colores</strong>, y la <strong>lista de formas simples</strong> que se usarán. Esta ficha es el mapa del tesoro para todo el resto del curso.</p>
+          <p>Completar una hoja con: <strong>nombre del personaje</strong>, dibujo de <strong>frente y lado</strong>, paleta de <strong>colores</strong>, y la <strong>lista de formas simples</strong> que se usarán. Esta ficha es el mapa del tesoro para todo el resto del curso.</p>
         </div>
 
         <div class="blk">
           <div class="loot">
             <div class="lbox chal">
               <div class="lh">🏅 Desafío de artista</div>
-              <p><strong>"Mago en 30 segundos"</strong>: dibujar la silueta del mago en medio minuto. Obliga a quedarse solo con lo esencial.</p>
+              <p><strong>"Personaje en 30 segundos"</strong>: dibujar la silueta del personaje en medio minuto. Obliga a quedarse solo con lo esencial.</p>
               <span class="time">⏱ 30 seg</span>
             </div>
             <div class="lbox home">
               <div class="lh">🏠 Para casa</div>
-              <p>Hacer 3 variaciones de la silueta del mago y elegir la favorita. Tomarle foto y guardarla en la carpeta <code>02_ref</code>.</p>
+              <p>Hacer 3 variaciones de la silueta del personaje y elegir la favorita. Tomarle foto y guardarla en la carpeta <code>02_ref</code>.</p>
               <span class="time">📅 entre clases</span>
             </div>
           </div>
@@ -1093,7 +1111,7 @@ section{scroll-margin-top:20px}
               <ul class="blist err">
                 <li><strong>Dibujar detalles antes que la silueta.</strong> Primero la forma general, después los adornos.</li>
                 <li><strong>Personaje sin personalidad.</strong> Preguntar: ¿qué lo hace único? Un color, un sombrero, un gesto.</li>
-                <li><strong>Olvidar la varita.</strong> El proyecto pide varita, no bastón. Anotarlo en la ficha.</li>
+                <li><strong>Olvidar el bastón.</strong> El proyecto pide bastón y accesorios. Anotarlo en la ficha.</li>
               </ul>
             </div>
             <div>
@@ -1116,8 +1134,8 @@ section{scroll-margin-top:20px}
             <div>
               <div class="blk-h"><div class="ic b-green">📊</div><h5>Criterios de evaluación</h5></div>
               <ul class="eval">
-                <li>¿Su mago tiene una silueta clara y reconocible?</li>
-                <li>¿Usó formas simples y definió varita y colores?</li>
+                <li>¿Su personaje tiene una silueta clara y reconocible?</li>
+                <li>¿Usó formas simples y definió bastón y colores?</li>
                 <li>¿Tiene su ficha lista para empezar a modelar?</li>
               </ul>
             </div>
@@ -1181,7 +1199,7 @@ section{scroll-margin-top:20px}
             <li>Mueve, rota y escala objetos y bloquea ejes sin ayuda.</li>
             <li>Entra al Modo Edición y usa extrude para crear formas.</li>
             <li>Trabaja ordenado: nombra objetos, usa colecciones y guarda versiones.</li>
-            <li>Tiene el concept art de su propio Mago listo para modelar.</li>
+            <li>Tiene el concept art de su propio Personaje listo para modelar.</li>
           </ul>
         </div>
         <div class="panel">

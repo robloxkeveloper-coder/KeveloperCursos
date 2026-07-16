@@ -295,6 +295,31 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .lightbox.open{display:grid}
 .lightbox img{max-width:min(92vw,720px);max-height:88vh;width:auto;height:auto;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 
+/* ---------- INSTRUCTOR A CARGO ---------- */
+.instructor-wrap{margin-top:26px}
+.instructor{
+  display:flex;flex-direction:column;gap:22px;align-items:center;text-align:center;
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:30px 22px;box-shadow:var(--shadow);
+}
+.instructor .photo{
+  width:136px;height:136px;flex:0 0 136px;border-radius:50%;overflow:hidden;
+  border:4px solid #fff;box-shadow:0 10px 28px -8px rgba(88,101,242,.4);
+  background:linear-gradient(150deg,var(--blurple),#6a76f5);display:grid;place-items:center;
+}
+.instructor .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.instructor .photo .initials{font-size:52px;font-weight:800;color:#fff;letter-spacing:1px;font-family:'Noto Sans',sans-serif}
+.instructor .bio{max-width:580px}
+.instructor .bio p{font-size:15.5px;color:var(--body-c);line-height:1.7}
+.instructor .bio p b{color:var(--ink)}
+.btn.linkedin{background:#0a66c2;color:#fff;box-shadow:0 8px 20px -10px #0a66c2;margin-top:18px}
+.btn.linkedin:hover{background:#004182;transform:translateY(-2px)}
+.btn.linkedin svg{width:20px;height:20px;flex:0 0 20px}
+@media (min-width:768px){
+  .instructor{flex-direction:row;text-align:left;gap:34px;padding:36px 40px}
+  .instructor .photo{width:156px;height:156px;flex:0 0 156px}
+}
+
 /* =========================================================================
    TABLET — 768px y superior
    ========================================================================= */
@@ -360,6 +385,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <a href="#beneficios" class="lnk">Beneficios</a>
       <a href="#portfolio" class="lnk">Cómo se crea</a>
       <a href="#como" class="lnk">Cómo funciona</a>
+      <a href="#instructor" class="lnk">Instructor</a>
       <a href="#faq" class="lnk">Preguntas</a>
       <a href="#" class="btn wa sm js-wa">
         <svg class="wa-ico" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C4.4 9.5 9.6 4.6 16 4.6c6.3 0 11.4 5.1 11.4 11.4S22.3 24.8 16 24.8zm6.3-8.5c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3 2.9 1.2 3.5 1 4.1.9.6-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.3z"/></svg>
@@ -614,6 +640,32 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   </div>
 </section>
 -->
+
+<!-- ============ INSTRUCTOR A CARGO ============ -->
+<section id="instructor" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-tag">Quién enseña</div>
+      <h2 class="sec-h">El <span class="hl">instructor</span> a cargo</h2>
+    </div>
+    <div class="instructor-wrap reveal">
+      <div class="instructor">
+        <div class="photo">
+          <img src="assets/instructor.jpg" alt="Kev, instructor del curso"
+               onerror="this.style.display='none';this.parentNode.querySelector('.initials').style.display='grid'">
+          <span class="initials" style="display:none">K</span>
+        </div>
+        <div class="bio">
+          <p><b>Soy Kev</b>, ingeniero multimedia, <b>desarrollador de videojuegos</b>, con <b>seis años</b> de trayectoria, sumando además más de <b>dos años</b> como <b>tutor en Kodland Academy</b>. He acompañado a niños y jóvenes en el mundo de la programación y la creación 3D.</p>
+          <a href="https://www.linkedin.com/in/liquitkev3d/" class="btn linkedin" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            Ver mi perfil de LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ FAQ ============ -->
 <section id="faq">

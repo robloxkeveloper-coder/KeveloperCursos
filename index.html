@@ -7,227 +7,221 @@
 <meta name="description" content="Clases 1:1 donde tu hijo aprende a crear personajes 3D profesionales con Blender y llevarlos a Roblox. Sin experiencia previa. 20 clases, 5 meses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <style>
 /* =========================================================================
    MOBILE-FIRST. Estilos base = teléfono. Los @media (min-width:…) escalan
    a tablet (768px) y escritorio (1024px). No hay reglas max-width.
+   Tema: claro estilo centro de ayuda de Discord (blurple + tarjetas blancas).
    ========================================================================= */
 :root{
-  --bg-0:#120826; --bg-1:#1a0d3a; --bg-2:#241452;
-  --card:rgba(48,27,98,.55); --card-solid:#2a1857;
-  --stroke:rgba(146,99,255,.30); --stroke-2:rgba(146,99,255,.55);
-  --violet:#a855f7; --violet-bright:#c084fc; --cyan:#25d3ee; --teal:#2dd4bf;
-  --magenta:#ec4899; --pink:#f472b6; --gold:#fbbf24; --green:#a3e635;
+  --bg:#ffffff; --bg-soft:#f6f6f6;
+  --card:#ffffff; --card-soft:#f9f9fa;
+  --blurple:#5865F2; --blurple-dark:#4752C4; --blurple-soft:#eef0fe;
+  --ink:#23272a; --body-c:#4e5058; --mute:#80848e;
+  --border:#e3e5e8; --border-strong:#d4d7dc;
+  --gold:#f0b232; --green:#248046; --pink:#d84a8a; --cyan:#0e7490;
   --wa:#25d366; --wa-dark:#128c7e;
-  --text:#f4f0ff; --text-dim:#c3b4e8; --text-mute:#9784c2;
-  --shadow:0 18px 40px -18px rgba(0,0,0,.7);
-  --radius:18px; --nav-h:60px;
+  --text:#23272a; --text-dim:#4e5058; --text-mute:#80848e;
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+  --radius:16px; --nav-h:60px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  font-family:'Poppins',system-ui,sans-serif;color:var(--text);line-height:1.65;
-  font-size:16px;
-  background:
-    radial-gradient(1200px 700px at 82% -8%, rgba(168,85,247,.22), transparent 60%),
-    radial-gradient(900px 600px at 0% 20%, rgba(37,211,238,.10), transparent 55%),
-    radial-gradient(1000px 800px at 100% 100%, rgba(236,72,153,.12), transparent 60%),
-    linear-gradient(180deg, var(--bg-1), var(--bg-0));
-  background-attachment:fixed;min-height:100vh;overflow-x:hidden;
+  font-family:'Noto Sans',system-ui,sans-serif;color:var(--body-c);line-height:1.65;
+  font-size:16px;background:var(--bg);min-height:100vh;overflow-x:hidden;
 }
-::selection{background:var(--magenta);color:#fff}
+::selection{background:var(--blurple);color:#fff}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:radial-gradient(rgba(168,85,247,.14) 1px, transparent 1.4px);
-  background-size:26px 26px;
-  mask:radial-gradient(1100px 700px at 85% 0%, #000 0%, transparent 70%);opacity:.5;
-}
+h1,h2,h3,h4{color:var(--ink)}
 .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 18px;position:relative;z-index:1}
 
 /* ---------- NAV (base: móvil) ---------- */
 .nav{
   position:fixed;top:0;left:0;right:0;min-height:var(--nav-h);z-index:40;
-  display:flex;align-items:center;transition:.28s;border-bottom:1px solid transparent;
+  display:flex;align-items:center;transition:.28s;
+  background:#fff;border-bottom:1px solid var(--border);
 }
-.nav.scrolled{background:rgba(18,8,38,.86);backdrop-filter:blur(12px);border-bottom-color:var(--stroke)}
+.nav.scrolled{box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .brand .logo{
   width:36px;height:36px;border-radius:10px;flex:0 0 36px;display:grid;place-items:center;font-size:18px;
-  background:linear-gradient(135deg,var(--violet),var(--magenta));box-shadow:0 6px 18px -6px var(--violet);
+  background:var(--blurple);box-shadow:0 4px 12px -4px var(--blurple);
 }
-.brand b{font-weight:800;font-size:13.5px;line-height:1.1;letter-spacing:.2px}
-.brand span{display:block;font-size:9.5px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:1.2px}
+.brand b{font-weight:800;font-size:13.5px;line-height:1.1;letter-spacing:.2px;color:var(--ink)}
+.brand span{display:block;font-size:9.5px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:1.2px}
 .nav-links{display:flex;align-items:center;gap:8px}
 .nav-links a.lnk{display:none}   /* enlaces de texto ocultos en móvil */
 
 /* ---------- BOTONES ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;
-  padding:13px 20px;border-radius:100px;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s;
+  padding:13px 20px;border-radius:12px;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s;
   font-family:inherit;line-height:1.15;text-align:center;min-height:44px;
 }
-.btn.wa{background:linear-gradient(135deg,var(--wa),var(--wa-dark));color:#fff;box-shadow:0 12px 28px -10px var(--wa)}
-.btn.wa:hover{transform:translateY(-2px);box-shadow:0 16px 34px -10px var(--wa)}
+.btn.wa{background:var(--wa);color:#fff;box-shadow:0 8px 20px -8px var(--wa)}
+.btn.wa:hover{background:var(--wa-dark);transform:translateY(-2px)}
 .btn.sm{padding:9px 15px;font-size:13px;min-height:0}
-.btn.ghost{background:var(--card);color:var(--text);border:1px solid var(--stroke-2)}
-.btn.ghost:hover{background:var(--card-solid);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.65)}
+.btn.ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
 
-/* CTA PRINCIPAL — el elemento más llamativo */
+/* CTA PRINCIPAL — blurple sólido estilo Discord */
 .btn.cta{
-  background:linear-gradient(135deg,var(--gold) 0%,var(--magenta) 45%,var(--violet) 100%);
-  background-size:200% 200%;color:#fff;font-weight:800;font-size:16px;
+  background:var(--blurple);color:#fff;font-weight:800;font-size:16px;
   padding:17px 26px;letter-spacing:.2px;
-  box-shadow:0 14px 34px -10px rgba(236,72,153,.7),0 0 0 1px rgba(255,255,255,.12) inset;
-  animation:ctaShine 5s ease infinite;
+  box-shadow:0 10px 26px -10px rgba(88,101,242,.75);
 }
-.btn.cta:hover{transform:translateY(-3px) scale(1.035);box-shadow:0 22px 48px -12px rgba(236,72,153,.85)}
-.btn.cta:active{transform:translateY(-1px) scale(.99)}
-.btn.cta:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.btn.cta:hover{background:var(--blurple-dark);transform:translateY(-3px);box-shadow:0 16px 34px -12px rgba(88,101,242,.85)}
+.btn.cta:active{transform:translateY(-1px)}
+.btn.cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+/* Variante sobre banda blurple: botón blanco con texto blurple */
+.btn.cta.on-blurple{background:#fff;color:var(--blurple);box-shadow:0 10px 26px -10px rgba(0,0,0,.35)}
+.btn.cta.on-blurple:hover{background:#f0f1fe;color:var(--blurple-dark)}
 .btn.cta .wa-ico{width:22px;height:22px;flex:0 0 22px}
-@keyframes ctaShine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .wa-ico{width:20px;height:20px;flex:0 0 20px}
 
-/* ---------- HERO (base: móvil, 1 columna) ---------- */
-.hero{padding:calc(var(--nav-h) + 30px) 0 34px}
-.hero-grid{display:flex;flex-direction:column;gap:26px}
+/* ---------- HERO (banda blurple, patrón help center de Discord) ---------- */
+.hero{
+  padding:calc(var(--nav-h) + 30px) 0 0;
+  background:linear-gradient(160deg,var(--blurple) 0%,#6a76f5 100%);
+  color:#fff;
+}
+.hero-grid{display:flex;flex-direction:column;gap:26px;padding-bottom:36px}
 .kicker{
   display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:1.6px;color:var(--cyan);
-  background:rgba(37,211,238,.10);border:1px solid rgba(37,211,238,.3);
+  text-transform:uppercase;letter-spacing:1.6px;color:#fff;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);
   padding:6px 13px;border-radius:100px;margin-bottom:18px;
 }
-.hero h1{font-weight:800;line-height:1.08;letter-spacing:-.5px;font-size:clamp(29px,8vw,40px)}
-.hero h1 .g1{background:linear-gradient(120deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero h1 .g2{background:linear-gradient(120deg,var(--magenta),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p.sub{font-size:16px;color:var(--text-dim);margin-top:16px;font-weight:500}
+.hero h1{font-weight:800;line-height:1.08;letter-spacing:-.5px;font-size:clamp(29px,8vw,40px);color:#fff}
+.hero h1 .g1,.hero h1 .g2{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-decoration-thickness:3px;text-underline-offset:6px}
+.hero p.sub{font-size:16px;color:rgba(255,255,255,.88);margin-top:16px;font-weight:500}
+.hero p.sub b{color:#fff}
 .hero-cta{display:flex;flex-direction:column;gap:12px;margin-top:26px}
 .hero-cta .btn{width:100%}
-.trust-line{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:12.5px;color:var(--text-mute);font-weight:600;line-height:1.5}
-.trust-line .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);flex:0 0 6px}
+.trust-line{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.78);font-weight:600;line-height:1.5}
+.trust-line .dot{width:6px;height:6px;border-radius:50%;background:#57F287;flex:0 0 6px}
 
-/* hero visual */
+/* hero visual: render real */
 .hero-visual{position:relative;display:grid;place-items:center;min-height:260px;order:-1}
-.orb{position:absolute;border-radius:50%;filter:blur(6px);opacity:.5;animation:float 7s ease-in-out infinite}
-.orb.o1{width:140px;height:140px;background:radial-gradient(circle at 30% 30%,var(--violet),transparent 70%);top:0;left:8%}
-.orb.o2{width:120px;height:120px;background:radial-gradient(circle at 30% 30%,var(--cyan),transparent 70%);bottom:0;right:6%;animation-delay:-2.5s}
-.orb.o3{width:100px;height:100px;background:radial-gradient(circle at 30% 30%,var(--magenta),transparent 70%);top:40%;right:28%;animation-delay:-4.5s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
 .hero-card{
-  position:relative;z-index:2;width:min(280px,76vw);aspect-ratio:1;border-radius:26px;
-  background:linear-gradient(160deg,rgba(48,27,98,.85),rgba(26,13,58,.9));
-  border:1px solid var(--stroke-2);box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden;
+  position:relative;z-index:2;width:min(280px,76vw);border-radius:20px;
+  background:#fff;border:1px solid var(--border);box-shadow:0 24px 48px -18px rgba(0,0,0,.4);
+  overflow:hidden;
 }
-.hero-card .hero-emoji{font-size:104px;filter:drop-shadow(0 14px 30px rgba(168,85,247,.6));animation:float 5.5s ease-in-out infinite}
-.hero-card .slot-tag{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--text-mute);font-weight:600;padding:0 10px}
+.hero-card img{width:100%;height:auto;display:block}
+.hero-card .slot-tag{text-align:center;font-size:10.5px;color:var(--mute);font-weight:600;padding:9px 10px;background:#fff}
 .hero-badge{
-  position:absolute;z-index:3;background:var(--card-solid);border:1px solid var(--stroke-2);
+  position:absolute;z-index:3;background:#fff;border:1px solid var(--border);color:var(--ink);
   border-radius:13px;padding:9px 12px;box-shadow:var(--shadow);font-size:11.5px;font-weight:700;
   display:flex;align-items:center;gap:8px;
 }
 .hero-badge.b-a{top:4%;left:0} .hero-badge.b-b{bottom:6%;right:0}
 .hero-badge .e{font-size:17px}
-.hero-badge small{display:block;font-weight:500;color:var(--text-mute);font-size:10px}
+.hero-badge small{display:block;font-weight:500;color:var(--mute);font-size:10px}
 
-/* ---------- FEATURES GRID (base: móvil, 2 columnas) ---------- */
-.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:32px}
+/* ---------- FEATURES GRID (franja blanca bajo el hero) ---------- */
+.features-band{background:var(--bg);padding:26px 0 6px}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .feat{
-  background:var(--card);border:1px solid var(--stroke);border-radius:14px;
-  padding:15px 12px;text-align:center;box-shadow:var(--shadow);
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:15px 12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
 }
 .feat .fi{font-size:20px;line-height:1}
-.feat b{font-size:clamp(19px,5.5vw,24px);font-weight:800;line-height:1}
-.feat span{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-mute);font-weight:600}
-.feat.c1 b{color:var(--cyan)} .feat.c2 b{color:var(--magenta)} .feat.c3 b{color:var(--gold)}
-.feat.c4 b{color:var(--violet-bright)} .feat.c5 b{color:var(--green)}
+.feat b{font-size:clamp(19px,5.5vw,24px);font-weight:800;line-height:1;color:var(--ink)}
+.feat span{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--mute);font-weight:600}
+.feat.c1 b,.feat.c2 b,.feat.c3 b,.feat.c4 b,.feat.c5 b{color:var(--blurple)}
 .feat.wide{grid-column:1 / -1}   /* el 5º (1:1) ocupa la fila completa en móvil */
 
 /* ---------- SECCIONES ---------- */
 section{padding:40px 0}
-.sec-tag{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--violet-bright);margin-bottom:10px}
-.sec-h{font-size:clamp(23px,6.5vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.3px}
-.sec-h .hl{background:linear-gradient(120deg,var(--cyan),var(--violet-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sec-intro{color:var(--text-dim);margin-top:14px;font-weight:500;font-size:15px}
+section.alt{background:var(--bg-soft)}
+.sec-tag{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--blurple);margin-bottom:10px}
+.sec-h{font-size:clamp(23px,6.5vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.3px;color:var(--ink)}
+.sec-h .hl{color:var(--blurple)}
+.sec-intro{color:var(--body-c);margin-top:14px;font-weight:500;font-size:15px}
 
 /* ---------- CARDS ---------- */
 .grid{display:grid;gap:14px;grid-template-columns:1fr}
-.card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:20px;transition:.18s}
-.card:hover{transform:translateY(-4px);border-color:var(--stroke-2)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong)}
 .card .badge{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:12px}
 .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
-.card p{font-size:14px;color:var(--text-dim)}
-.b-violet{background:rgba(168,85,247,.16);color:var(--violet-bright)}
-.b-cyan{background:rgba(37,211,238,.14);color:var(--cyan)}
-.b-magenta{background:rgba(236,72,153,.16);color:var(--pink)}
-.b-gold{background:rgba(251,191,36,.16);color:var(--gold)}
-.b-green{background:rgba(163,230,53,.15);color:var(--green)}
+.card p{font-size:14px;color:var(--body-c)}
+.b-violet{background:var(--blurple-soft);color:var(--blurple)}
+.b-cyan{background:#e5f6fa;color:var(--cyan)}
+.b-magenta{background:#fce8f0;color:var(--pink)}
+.b-gold{background:#fdf3dc;color:#946412}
+.b-green{background:#e6f4ea;color:var(--green)}
 
 /* ---------- RESULTADO (split) ---------- */
 .split{display:flex;flex-direction:column;gap:24px}
 .result-visual{
-  border-radius:20px;border:1px solid var(--stroke-2);overflow:hidden;position:relative;aspect-ratio:4/3;
-  background:linear-gradient(150deg,rgba(48,27,98,.7),rgba(26,13,58,.85));display:grid;place-items:center;box-shadow:var(--shadow);
-  order:-1;
+  border-radius:20px;border:1px solid var(--border);overflow:hidden;position:relative;
+  background:var(--card-soft);box-shadow:var(--shadow);order:-1;
 }
-.result-visual .big-emoji{font-size:92px;filter:drop-shadow(0 12px 28px rgba(236,72,153,.5))}
-.result-visual .slot-tag{position:absolute;bottom:0;left:0;right:0;padding:9px;text-align:center;font-size:11px;color:var(--text-mute);font-weight:600;background:rgba(18,8,38,.5)}
+.result-visual img{width:100%;height:auto;display:block}
+.result-visual .slot-tag{padding:10px;text-align:center;font-size:11.5px;color:var(--mute);font-weight:600;background:#fff;border-top:1px solid var(--border)}
 .check{list-style:none;display:grid;gap:11px;margin-top:20px}
-.check li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--text-dim)}
-.check li::before{content:"✓";flex:0 0 22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg-0);margin-top:2px}
-.check li b{color:var(--text)}
+.check li{display:block;position:relative;padding-left:33px;font-size:14.5px;color:var(--body-c)}
+.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--blurple);color:#fff}
+.check li b{color:var(--ink)}
 
 /* ---------- LOGÍSTICA ---------- */
-.info{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:16px 18px}
+.info{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .info .e{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex:0 0 40px}
 .info h4{font-size:15px;font-weight:800;margin-bottom:3px}
-.info p{font-size:13.5px;color:var(--text-dim)}
+.info p{font-size:13.5px;color:var(--body-c)}
+.info p b{color:var(--ink)}
 
 /* ---------- CITA ---------- */
 .quote{
-  background:linear-gradient(120deg,rgba(236,72,153,.14),rgba(168,85,247,.10));
-  border:1px solid rgba(236,72,153,.32);border-left:4px solid var(--magenta);border-radius:16px;padding:22px 20px;margin-top:8px;
+  background:var(--blurple-soft);
+  border:1px solid #d5daFC;border-left:4px solid var(--blurple);border-radius:16px;padding:22px 20px;margin-top:8px;
 }
-.quote .q{font-size:clamp(17px,4.6vw,22px);font-weight:700;color:#fff;font-style:italic;line-height:1.45}
-.quote .who{font-size:12px;color:var(--pink);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:12px}
+.quote .q{font-size:clamp(17px,4.6vw,22px);font-weight:700;color:var(--ink);font-style:italic;line-height:1.45}
+.quote .who{font-size:12px;color:var(--blurple);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:12px}
 
 /* ---------- TESTIMONIOS ---------- */
-.tcard{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:20px}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .tcard .stars{color:var(--gold);font-size:15px;letter-spacing:2px;margin-bottom:11px}
-.tcard p{font-size:14.5px;color:var(--text);font-style:italic;line-height:1.55}
+.tcard p{font-size:14.5px;color:var(--ink);font-style:italic;line-height:1.55}
 .tcard .who{display:flex;align-items:center;gap:11px;margin-top:15px}
-.tcard .av{width:40px;height:40px;border-radius:50%;flex:0 0 40px;display:grid;place-items:center;font-size:18px;background:linear-gradient(135deg,var(--violet),var(--cyan))}
-.tcard .who b{font-size:13.5px;display:block}
-.tcard .who span{font-size:11.5px;color:var(--text-mute)}
+.tcard .av{width:40px;height:40px;border-radius:50%;flex:0 0 40px;display:grid;place-items:center;font-size:18px;background:var(--blurple-soft)}
+.tcard .who b{font-size:13.5px;display:block;color:var(--ink)}
+.tcard .who span{font-size:11.5px;color:var(--mute)}
 
 /* ---------- FAQ ---------- */
 .faq{display:grid;gap:11px}
-.qa{background:var(--card);border:1px solid var(--stroke);border-radius:14px;overflow:hidden;transition:.18s}
-.qa[open]{border-color:var(--stroke-2)}
-.qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s}
+.qa[open]{border-color:var(--blurple);box-shadow:0 4px 14px rgba(88,101,242,.12)}
+.qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
 .qa summary::-webkit-details-marker{display:none}
-.qa summary .plus{flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:16px;font-weight:800;background:var(--card-solid);border:1px solid var(--stroke-2);color:var(--cyan);transition:.2s}
-.qa[open] summary .plus{transform:rotate(45deg);color:var(--magenta)}
-.qa .a{padding:0 18px 18px;color:var(--text-dim);font-size:14px}
+.qa summary .plus{flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:16px;font-weight:800;background:var(--blurple-soft);border:1px solid #d5daFC;color:var(--blurple);transition:.2s}
+.qa[open] summary .plus{transform:rotate(45deg)}
+.qa .a{padding:0 18px 18px;color:var(--body-c);font-size:14px}
+.qa .a b{color:var(--ink)}
 
 /* ---------- CTA FINAL ---------- */
 .cta-final{
   text-align:center;border-radius:24px;padding:36px 22px;
-  background:linear-gradient(140deg,rgba(168,85,247,.24),rgba(37,211,238,.10) 55%,rgba(236,72,153,.18));
-  border:1px solid var(--stroke-2);box-shadow:var(--shadow);
+  background:linear-gradient(160deg,var(--blurple),#6a76f5);
+  box-shadow:0 20px 44px -16px rgba(88,101,242,.55);
 }
-.cta-final h2{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.4px}
-.cta-final p{color:var(--text-dim);margin:14px auto 26px;font-weight:600;font-size:16px;max-width:520px}
+.cta-final h2{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.4px;color:#fff}
+.cta-final p{color:rgba(255,255,255,.88);margin:14px auto 26px;font-weight:600;font-size:16px;max-width:520px}
 .cta-final .btn{width:100%;max-width:420px;margin:0 auto}
-.cta-final .fine{margin-top:16px;font-size:12.5px;color:var(--text-mute);font-weight:600}
+.cta-final .fine{margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.75);font-weight:600}
 
 /* ---------- FOOTER ---------- */
-.foot{border-top:1px solid var(--stroke);padding:28px 0 90px;color:var(--text-mute);font-size:13px}
+.foot{background:var(--ink);padding:28px 0 90px;color:#b5bac1;font-size:13px}
 .foot .wrap{display:flex;flex-direction:column;gap:14px;text-align:center}
-.foot a{color:var(--text-dim);font-weight:600}
+.foot a{color:#dbdee1;font-weight:600}
 .foot a:hover{color:#fff}
 .foot .flinks{display:flex;gap:20px;justify-content:center}
 
@@ -235,7 +229,7 @@ section{padding:40px 0}
 .wa-float{
   position:fixed;bottom:18px;right:18px;z-index:50;width:56px;height:56px;border-radius:50%;
   background:linear-gradient(135deg,var(--wa),var(--wa-dark));display:grid;place-items:center;
-  box-shadow:0 14px 30px -8px rgba(37,211,55,.6);animation:pulse 2.6s infinite;transition:transform .2s;
+  box-shadow:0 14px 30px -8px rgba(37,211,102,.6);animation:pulse 2.6s infinite;transition:transform .2s;
 }
 .wa-float:hover{transform:scale(1.08)}
 .wa-float svg{width:30px;height:30px}
@@ -247,35 +241,59 @@ html.js .reveal-l{opacity:0;transform:translateY(26px);transition:opacity .7s ea
 html.js .reveal-r{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform:none}
 
-/* ---------- PIPELINE 3D ---------- */
+/* ---------- PORTFOLIO 3D (material real: Akari / Oracle) ---------- */
 .pipe3d{display:flex;flex-direction:column;gap:22px;margin-top:28px}
-.model-embed{position:relative;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:1px solid var(--stroke-2);box-shadow:var(--shadow);background:linear-gradient(160deg,rgba(48,27,98,.75),rgba(26,13,58,.92))}
-.model-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;z-index:1}
-.model-embed .model-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:84px;z-index:0}
-.model-embed .model-fallback span{animation:spinY 9s linear infinite;filter:drop-shadow(0 12px 26px rgba(37,211,238,.5))}
-@keyframes spinY{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
-.model-cap{font-size:12.5px;color:var(--text-mute);text-align:center;margin-top:11px;font-weight:600}
-.model-cap b{color:var(--cyan)}
+.model-embed{
+  position:relative;width:100%;aspect-ratio:3/4;max-height:560px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--border);box-shadow:var(--shadow);background:var(--card-soft);
+}
+.model-embed model-viewer{width:100%;height:100%;--poster-color:transparent;background:var(--card-soft)}
+.model-embed .mv-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--card-soft)}
+.model-embed.mv-failed model-viewer{display:none}
+.model-embed.mv-failed .mv-fallback{display:flex}
+.mv-fallback img{max-height:78%;width:auto;border-radius:12px}
+.mv-fallback a{color:var(--blurple);font-weight:700;font-size:13.5px;text-decoration:underline}
+.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin-top:11px;font-weight:600}
+.model-cap b{color:var(--blurple)}
 
-.pbr{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:18px 16px}
-.pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:var(--text)}
+.pbr{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px 16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:var(--ink)}
 .pbr-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-.pbr-tab{flex:1 1 auto;min-width:72px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid var(--stroke);background:var(--card-solid);color:var(--text-dim);cursor:pointer;transition:.15s}
-.pbr-tab:hover{color:#fff}
-.pbr-tab.active{background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;border-color:transparent}
-.pbr-stage{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid var(--stroke);background:#0e0722}
+.pbr-tab{flex:1 1 auto;min-width:64px;font-family:inherit;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid var(--border);background:var(--card-soft);color:var(--body-c);cursor:pointer;transition:.15s}
+.pbr-tab:hover{color:var(--ink);border-color:var(--border-strong)}
+.pbr-tab.active{background:var(--blurple);color:#fff;border-color:transparent}
+.pbr-stage{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#f0f0f2}
 .pbr-layer{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
 .pbr-layer.active{opacity:1}
-.pbr-layer svg{width:100%;height:100%;display:block}
-.pbr-desc{margin-top:14px;text-align:center;font-size:13.5px;color:var(--text-dim);min-height:56px}
-.pbr-desc b{color:var(--text)}
+.pbr-layer img{width:100%;height:100%;object-fit:cover;display:block}
+.pbr-desc{margin-top:14px;text-align:center;font-size:13.5px;color:var(--body-c);min-height:56px}
+.pbr-desc b{color:var(--ink)}
 
+/* antes / después real: escultura → LookDev */
 .staff{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-.staff .col{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px 12px;text-align:center;position:relative;overflow:hidden}
+.staff .col{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px;text-align:center;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .staff .col .lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
-.staff .before .lbl{color:var(--text-mute)} .staff .after{border-color:var(--stroke-2)} .staff .after .lbl{color:var(--gold)}
-.staff svg{width:auto;height:180px;margin:0 auto;display:block}
-.staff .arrow{text-align:center;grid-column:1/-1;color:var(--violet-bright);font-weight:800;font-size:13px;margin-top:2px}
+.staff .before .lbl{color:var(--mute)} .staff .after{border-color:var(--blurple)} .staff .after .lbl{color:var(--blurple)}
+.staff .col .ph{aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:#f0f0f2}
+.staff .col .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.staff .arrow{text-align:center;grid-column:1/-1;color:var(--blurple);font-weight:800;font-size:13px;margin-top:2px}
+
+/* galería de renders + video */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.gal-item{
+  position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);
+  background:var(--card-soft);cursor:zoom-in;aspect-ratio:8/11;box-shadow:0 2px 8px rgba(0,0,0,.05);
+  padding:0;transition:.18s;
+}
+.gal-item:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.gal-item img,.gal-item video{width:100%;height:100%;object-fit:cover;display:block}
+.gal-item .tag{position:absolute;bottom:8px;left:8px;right:8px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(35,39,42,.72);border-radius:8px;padding:4px 8px;text-align:center}
+.gal-note{font-size:12.5px;color:var(--mute);text-align:center;margin-top:12px;font-weight:600}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(35,39,42,.9);padding:20px;cursor:zoom-out}
+.lightbox.open{display:grid}
+.lightbox img{max-width:min(92vw,720px);max-height:88vh;width:auto;height:auto;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 
 /* =========================================================================
    TABLET — 768px y superior
@@ -283,8 +301,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 @media (min-width:768px){
   .wrap{padding:0 32px}
   :root{--nav-h:66px}
-  .nav-links a.lnk{display:inline-flex;font-size:13.5px;font-weight:600;color:var(--text-dim);transition:.15s;margin-right:6px}
-  .nav-links a.lnk:hover{color:#fff}
+  .nav-links a.lnk{display:inline-flex;font-size:13.5px;font-weight:600;color:var(--body-c);transition:.15s;margin-right:6px}
+  .nav-links a.lnk:hover{color:var(--blurple)}
   .nav-links{gap:22px}
   .btn.sm{padding:10px 18px;font-size:13.5px}
   .hero p.sub{font-size:17.5px;max-width:600px}
@@ -298,6 +316,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .split{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
   .result-visual{order:0}
   .pipe3d{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .gallery{grid-template-columns:repeat(3,1fr)}
   .cta-final{padding:52px 40px}
   .foot .wrap{flex-direction:row;justify-content:space-between;text-align:left}
 }
@@ -307,16 +326,16 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
    ========================================================================= */
 @media (min-width:1024px){
   .wrap{padding:0 40px}
-  .hero{padding:calc(var(--nav-h) + 54px) 0 56px}
-  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}
+  .hero{padding:calc(var(--nav-h) + 54px) 0 0}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center;padding-bottom:56px}
   .hero-visual{order:0;min-height:340px}
   .hero-card{width:min(340px,90%)}
-  .hero-card .hero-emoji{font-size:128px}
   .hero h1{font-size:clamp(40px,4.4vw,58px);letter-spacing:-1px}
   .features{grid-template-columns:repeat(5,1fr)}
   section{padding:60px 0}
   .grid.g3{grid-template-columns:repeat(3,1fr)}
   .grid.g4{grid-template-columns:repeat(4,1fr)}
+  .gallery{grid-template-columns:repeat(5,1fr)}
   .sec-h{max-width:760px}
   .sec-intro{max-width:640px}
 }
@@ -339,7 +358,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     </a>
     <nav class="nav-links">
       <a href="#beneficios" class="lnk">Beneficios</a>
-      <a href="#pipeline" class="lnk">Cómo se crea</a>
+      <a href="#portfolio" class="lnk">Cómo se crea</a>
       <a href="#como" class="lnk">Cómo funciona</a>
       <a href="#faq" class="lnk">Preguntas</a>
       <a href="#" class="btn wa sm js-wa">
@@ -358,9 +377,9 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <div class="hero-copy reveal-l">
         <span class="kicker">◆ Clases en vivo, uno a uno · 10 a 14 años</span>
         <h1>Convierte las horas de <span class="g1">Roblox</span> de tu hijo en una <span class="g2">habilidad real</span></h1>
-        <p class="sub">Un curso guiado paso a paso donde aprende a crear personajes 3D profesionales con Blender y llevarlos a Roblox. <b style="color:var(--text)">Sin experiencia previa.</b> Solo curiosidad y ganas de crear.</p>
+        <p class="sub">Un curso guiado paso a paso donde aprende a crear personajes 3D profesionales con Blender y llevarlos a Roblox. <b>Sin experiencia previa.</b> Solo curiosidad y ganas de crear.</p>
         <div class="hero-cta">
-          <a href="#" class="btn cta js-wa">
+          <a href="#" class="btn cta on-blurple js-wa">
             <svg class="wa-ico" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C4.4 9.5 9.6 4.6 16 4.6c6.3 0 11.4 5.1 11.4 11.4S22.3 24.8 16 24.8zm6.3-8.5c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3 2.9 1.2 3.5 1 4.1.9.6-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.3z"/></svg>
             ¡Empieza a crear tu primer personaje! (Clase Gratis)
           </a>
@@ -370,18 +389,20 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       </div>
 
       <div class="hero-visual reveal-r">
-        <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
         <div class="hero-badge b-a"><span class="e">🎨</span><div>Modela<small>desde cero</small></div></div>
         <div class="hero-badge b-b"><span class="e">🎮</span><div>Juega su creación<small>dentro de Roblox</small></div></div>
         <div class="hero-card">
-          <div class="hero-emoji">🦸</div>
-          <!-- SLOT: reemplazar por un render real del personaje 3D o screenshot en Roblox -->
-          <div class="slot-tag">[ Aquí irá el render del personaje ]</div>
+          <img src="assets/render-akari-1.jpg" alt="Akari, personaje 3D creado en Blender por el instructor" width="802" height="1100" loading="eager">
+          <div class="slot-tag">Akari · personaje real creado por tu instructor</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- FEATURES: 5 datos clave -->
+<!-- FEATURES: 5 datos clave -->
+<div class="features-band">
+  <div class="wrap">
     <div class="features reveal">
       <div class="feat c1"><span class="fi">🎂</span><b data-count="14" data-prefix="10-">10-14</b><span>Años</span></div>
       <div class="feat c2"><span class="fi">📚</span><b data-count="20">20</b><span>Clases</span></div>
@@ -390,7 +411,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <div class="feat c5 wide"><span class="fi">👤</span><b>1:1</b><span>Personalizada</span></div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ============ GANCHO / BENEFICIOS ============ -->
 <section id="beneficios">
@@ -410,13 +431,12 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 </section>
 
 <!-- ============ RESULTADO TANGIBLE ============ -->
-<section id="resultado">
+<section id="resultado" class="alt">
   <div class="wrap">
     <div class="split">
       <div class="result-visual reveal-l">
-        <div class="big-emoji">🦸✨</div>
-        <!-- SLOT: reemplazar por screenshot real del personaje caminando en Roblox -->
-        <div class="slot-tag">[ Screenshot del personaje jugable en Roblox ]</div>
+        <img src="assets/render-front.jpg" alt="Vista frontal del personaje 3D Akari terminado" width="802" height="1100" loading="lazy">
+        <div class="slot-tag">Akari · personaje real creado por tu instructor</div>
       </div>
       <div class="reveal-r">
         <div class="sec-tag">Lo que se lleva a casa</div>
@@ -434,131 +454,92 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   </div>
 </section>
 
-<!-- ============ PIPELINE 3D ============ -->
-<section id="pipeline">
+<!-- ============ PORTFOLIO 3D (material real del instructor) ============ -->
+<section id="portfolio">
   <div class="wrap">
     <div class="reveal">
       <div class="sec-tag">Cómo se crea un personaje 3D</div>
       <h2 class="sec-h">Del boceto al <span class="hl">personaje jugable</span>: el pipeline profesional</h2>
-      <p class="sec-intro">El mismo proceso que usan los estudios de videojuegos, explicado paso a paso. Esto es lo que tu hijo aprende a hacer.</p>
+      <p class="sec-intro">El mismo proceso que usan los estudios de videojuegos, mostrado con un personaje <b style="color:var(--ink)">real</b> creado por tu instructor: <b style="color:var(--ink)">Akari</b>. Esto es lo que tu hijo aprende a hacer.</p>
     </div>
 
     <div class="pipe3d">
-      <!-- Modelo 3D real girando (Sketchfab) -->
+      <!-- Modelo 3D real interactivo (creado por el instructor) -->
       <div class="reveal-l">
-        <div class="model-embed">
-          <!-- Fallback CSS mientras/si el iframe no carga -->
-          <div class="model-fallback"><span>🦫</span></div>
-          <!-- Modelo real: CapyBara_Low_F_03 por Martijn (Sketchfab). Para cambiarlo, reemplaza el src. -->
-          <iframe title="Modelo 3D girando"
-            src="https://sketchfab.com/models/cc09facc069f4eb29a64a66a134ec4a8/embed?autospin=1&autostart=1&preload=1&ui_controls=0&ui_infos=0&ui_stop=0&ui_watermark=0&ui_hint=0&transparent=1&dnt=1"
-            allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy"></iframe>
+        <div class="model-embed" id="modelEmbed">
+          <model-viewer
+            src="assets/oracle.glb"
+            poster="assets/poster-oracle.jpg"
+            alt="Modelo 3D interactivo de Akari, personaje creado en Blender"
+            camera-controls auto-rotate
+            loading="lazy" reveal="auto"
+            shadow-intensity="1" exposure="1.1"
+            touch-action="pan-y"></model-viewer>
+          <div class="mv-fallback">
+            <img src="assets/poster-oracle.jpg" alt="Akari, personaje 3D">
+            <a href="assets/akari-turntable.mp4" target="_blank" rel="noopener">Ver el modelo girando en video →</a>
+          </div>
         </div>
-        <div class="model-cap">🖱️ <b>Gira solo</b> · un modelo real hecho en Blender. Arrástralo para explorarlo.</div>
+        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
       </div>
 
-      <!-- Desglose PBR interactivo -->
+      <!-- Desglose PBR con los mapas reales del personaje -->
       <div class="pbr reveal-r">
-        <div class="pbr-h">🎨 Las 4 capas de un personaje</div>
+        <div class="pbr-h">🎨 Las 5 capas de textura de Akari (reales)</div>
         <div class="pbr-tabs" id="pbrTabs">
-          <button class="pbr-tab active" data-layer="wire">Topología</button>
+          <button class="pbr-tab active" data-layer="color">Color</button>
           <button class="pbr-tab" data-layer="normal">Normales</button>
-          <button class="pbr-tab" data-layer="ao">Oclusión</button>
-          <button class="pbr-tab" data-layer="albedo">Color</button>
+          <button class="pbr-tab" data-layer="rough">Rugosidad</button>
+          <button class="pbr-tab" data-layer="metal">Metal</button>
+          <button class="pbr-tab" data-layer="emissive">Emisivo</button>
         </div>
         <div class="pbr-stage" id="pbrStage">
-          <!-- TOPOLOGÍA (wireframe) -->
-          <div class="pbr-layer active" data-layer="wire">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="200" height="200" fill="#0e0722"/>
-              <g fill="none" stroke="#25d3ee" stroke-width="1" opacity=".9">
-                <polygon points="100,28 70,55 130,55"/><polygon points="70,55 130,55 100,88"/>
-                <polygon points="70,55 100,88 62,92"/><polygon points="130,55 100,88 138,92"/>
-                <polygon points="62,92 100,88 138,92"/><polygon points="62,92 138,92 80,130"/>
-                <polygon points="138,92 80,130 120,130"/><polygon points="80,130 120,130 100,158"/>
-                <polygon points="70,55 62,92 48,78"/><polygon points="130,55 138,92 152,78"/>
-                <polygon points="62,92 48,78 44,112"/><polygon points="138,92 152,78 156,112"/>
-                <polygon points="62,92 44,112 80,130"/><polygon points="138,92 156,112 120,130"/>
-              </g>
-              <circle cx="82" cy="86" r="4" fill="#25d3ee"/><circle cx="118" cy="86" r="4" fill="#25d3ee"/>
-            </svg>
-          </div>
-          <!-- NORMAL MAP -->
-          <div class="pbr-layer" data-layer="normal">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs><radialGradient id="nrm" cx="50%" cy="42%" r="65%">
-                <stop offset="0%" stop-color="#b0b0ff"/><stop offset="55%" stop-color="#8080ff"/><stop offset="100%" stop-color="#5a6ad0"/>
-              </radialGradient></defs>
-              <rect width="200" height="200" fill="#7a86e0"/>
-              <path d="M100 26 C150 26 160 80 150 120 C142 155 120 172 100 172 C80 172 58 155 50 120 C40 80 50 26 100 26 Z" fill="url(#nrm)"/>
-              <circle cx="80" cy="90" r="13" fill="#6f78c8"/><circle cx="120" cy="90" r="13" fill="#6f78c8"/>
-              <circle cx="83" cy="87" r="5" fill="#c8c8ff"/><circle cx="123" cy="87" r="5" fill="#c8c8ff"/>
-              <ellipse cx="100" cy="120" rx="16" ry="9" fill="#9a9aff"/>
-            </svg>
-          </div>
-          <!-- AMBIENT OCCLUSION -->
-          <div class="pbr-layer" data-layer="ao">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs><radialGradient id="aoG" cx="50%" cy="40%" r="62%">
-                <stop offset="0%" stop-color="#ffffff"/><stop offset="70%" stop-color="#d7d7d7"/><stop offset="100%" stop-color="#6f6f6f"/>
-              </radialGradient></defs>
-              <rect width="200" height="200" fill="#e9e9e9"/>
-              <path d="M100 26 C150 26 160 80 150 120 C142 155 120 172 100 172 C80 172 58 155 50 120 C40 80 50 26 100 26 Z" fill="url(#aoG)"/>
-              <ellipse cx="80" cy="92" rx="16" ry="12" fill="#8f8f8f" opacity=".7"/>
-              <ellipse cx="120" cy="92" rx="16" ry="12" fill="#8f8f8f" opacity=".7"/>
-              <ellipse cx="100" cy="126" rx="20" ry="10" fill="#9a9a9a" opacity=".55"/>
-            </svg>
-          </div>
-          <!-- ALBEDO (color base) -->
-          <div class="pbr-layer" data-layer="albedo">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="alb" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#c79a6b"/><stop offset="100%" stop-color="#a9764a"/>
-              </linearGradient></defs>
-              <rect width="200" height="200" fill="#241452"/>
-              <path d="M100 26 C150 26 160 80 150 120 C142 155 120 172 100 172 C80 172 58 155 50 120 C40 80 50 26 100 26 Z" fill="url(#alb)"/>
-              <circle cx="80" cy="90" r="12" fill="#fff"/><circle cx="120" cy="90" r="12" fill="#fff"/>
-              <circle cx="82" cy="91" r="6" fill="#2a1857"/><circle cx="122" cy="91" r="6" fill="#2a1857"/>
-              <path d="M84 128 Q100 140 116 128" fill="none" stroke="#7a4a2a" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="66" cy="120" r="7" fill="#ec4899" opacity=".5"/><circle cx="134" cy="120" r="7" fill="#ec4899" opacity=".5"/>
-            </svg>
-          </div>
+          <div class="pbr-layer active" data-layer="color"><img src="assets/map-color.jpg" alt="Mapa de color real del personaje Akari" loading="lazy"></div>
+          <div class="pbr-layer" data-layer="normal"><img src="assets/map-normal.jpg" alt="Mapa de normales real del personaje Akari" loading="lazy"></div>
+          <div class="pbr-layer" data-layer="rough"><img src="assets/map-roughness.jpg" alt="Mapa de rugosidad real del personaje Akari" loading="lazy"></div>
+          <div class="pbr-layer" data-layer="metal"><img src="assets/map-metalness.jpg" alt="Mapa de metalicidad real del personaje Akari" loading="lazy"></div>
+          <div class="pbr-layer" data-layer="emissive"><img src="assets/map-emissive.jpg" alt="Mapa emisivo real del personaje Akari" loading="lazy"></div>
         </div>
-        <div class="pbr-desc" id="pbrDesc"><b>Topología:</b> la malla de triángulos, el "esqueleto" del modelo. Cuantos menos, más ligero corre en Roblox.</div>
+        <div class="pbr-desc" id="pbrDesc"><b>Color base:</b> la "pintura" pura de cada superficie del personaje, sin luces ni sombras. Este es el mapa real de Akari.</div>
       </div>
     </div>
 
-    <!-- Bastón antes / después -->
+    <!-- Antes / después real: escultura → LookDev -->
     <div class="reveal" style="margin-top:24px">
-      <div class="pbr-h" style="font-size:15px;margin-bottom:14px">✨ Cómo esas capas transforman un objeto: el bastón</div>
+      <div class="pbr-h" style="font-size:15px;margin-bottom:14px">✨ De la escultura digital al personaje terminado: el mismo modelo</div>
       <div class="staff">
         <div class="col before">
-          <div class="lbl">Antes · modelo gris</div>
-          <svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
-            <rect x="26" y="40" width="8" height="150" rx="4" fill="#8a8a8a"/>
-            <circle cx="30" cy="30" r="18" fill="#9a9a9a" stroke="#7a7a7a" stroke-width="2"/>
-          </svg>
+          <div class="lbl">Antes · escultura digital</div>
+          <div class="ph"><img src="assets/render-sculpt.jpg" alt="Escultura digital gris de Akari, antes de texturas" loading="lazy"></div>
         </div>
         <div class="col after">
-          <div class="lbl">Después · PBR completo</div>
-          <svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5a3a1e"/><stop offset="45%" stop-color="#8a5a2e"/><stop offset="50%" stop-color="#a06a34"/><stop offset="100%" stop-color="#4a2e16"/></linearGradient>
-              <radialGradient id="gem" cx="40%" cy="35%" r="70%"><stop offset="0%" stop-color="#c8f6ff"/><stop offset="45%" stop-color="#25d3ee"/><stop offset="100%" stop-color="#7a2ad0"/></radialGradient>
-            </defs>
-            <rect x="26" y="40" width="8" height="150" rx="4" fill="url(#wood)"/>
-            <rect x="24" y="60" width="12" height="6" rx="2" fill="#fbbf24"/>
-            <rect x="24" y="150" width="12" height="6" rx="2" fill="#fbbf24"/>
-            <circle cx="30" cy="30" r="18" fill="url(#gem)"/>
-            <circle cx="24" cy="24" r="5" fill="#fff" opacity=".8"/>
-          </svg>
+          <div class="lbl">Después · texturas y luces</div>
+          <div class="ph"><img src="assets/render-lookdev.jpg" alt="Akari terminada con materiales PBR y luces" loading="lazy"></div>
         </div>
         <div class="arrow">Mismo modelo · las texturas PBR le dan vida ✨</div>
       </div>
     </div>
+
+    <!-- Galería de renders + turntable -->
+    <div class="reveal" style="margin-top:28px">
+      <div class="pbr-h" style="font-size:15px;margin-bottom:2px">📸 Galería · Akari de todos los ángulos</div>
+      <div class="gallery">
+        <button class="gal-item" data-full="assets/render-front.jpg"><img src="assets/render-front.jpg" alt="Render frontal de Akari" loading="lazy"><span class="tag">Vista frontal</span></button>
+        <button class="gal-item" data-full="assets/render-akari-1.jpg"><img src="assets/render-akari-1.jpg" alt="Render de Akari, pose 1" loading="lazy"><span class="tag">Render final</span></button>
+        <button class="gal-item" data-full="assets/render-akari-2.jpg"><img src="assets/render-akari-2.jpg" alt="Render de Akari, pose 2" loading="lazy"><span class="tag">Render alternativo</span></button>
+        <button class="gal-item" data-full="assets/render-lookdev.jpg"><img src="assets/render-lookdev.jpg" alt="LookDev de Akari" loading="lazy"><span class="tag">LookDev</span></button>
+        <div class="gal-item" style="cursor:default">
+          <video src="assets/akari-turntable.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Video de Akari girando 360 grados"></video>
+          <span class="tag">Giro 360°</span>
+        </div>
+      </div>
+      <div class="gal-note">Todo el material de esta sección es trabajo real del instructor del curso.</div>
+    </div>
   </div>
 </section>
 
+<!-- Lightbox de la galería -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Imagen ampliada"><img src="" alt="Render ampliado de Akari"></div>
 
 <!-- ============ EL CAMINO / MÓDULOS — OCULTO (landing más directa). Se conserva comentado para poder restaurarlo. ============ -->
 <!--
@@ -582,7 +563,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 -->
 
 <!-- ============ CÓMO FUNCIONA ============ -->
-<section id="como">
+<section id="como" class="alt">
   <div class="wrap">
     <div class="reveal">
       <div class="sec-tag">Cómo funciona</div>
@@ -591,7 +572,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="grid g2" style="margin-top:24px">
       <div class="info reveal" data-delay="0"><div class="e b-cyan">💻</div><div><h4>Clases online en vivo</h4><p>Uno a uno por videollamada, con pantalla compartida. Tu hijo aprende desde casa, contigo cerca.</p></div></div>
       <div class="info reveal" data-delay="80"><div class="e b-violet">⏱️</div><div><h4>1 hora por semana · 5 meses</h4><p>20 clases a un ritmo tranquilo que respeta sus tiempos de colegio y descanso.</p></div></div>
-      <div class="info reveal" data-delay="160"><div class="e b-gold">🧰</div><div><h4>Solo necesita un PC</h4><p>Blender es <b style="color:var(--text)">gratis</b> y funciona en la mayoría de computadores. Nada de comprar programas caros.</p></div></div>
+      <div class="info reveal" data-delay="160"><div class="e b-gold">🧰</div><div><h4>Solo necesita un PC</h4><p>Blender es <b>gratis</b> y funciona en la mayoría de computadores. Nada de comprar programas caros.</p></div></div>
       <div class="info reveal" data-delay="240"><div class="e b-green">📊</div><div><h4>Progreso medible</h4><p>Cada clase tiene objetivos y criterios claros. Sabrás exactamente qué está aprendiendo.</p></div></div>
     </div>
   </div>
@@ -617,12 +598,12 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 </section>
 
 <!-- ============ TESTIMONIOS ============ -->
-<section id="testimonios">
+<section id="testimonios" class="alt">
   <div class="wrap">
     <div class="reveal">
       <div class="sec-tag">Lo que dicen las familias</div>
       <h2 class="sec-h">Padres que ya <span class="hl">dieron el paso</span></h2>
-      <p class="sec-intro" style="color:var(--text-mute);font-size:13px">◆ Reemplaza estos testimonios con reseñas reales de tus familias.</p>
+      <p class="sec-intro" style="color:var(--mute);font-size:13px">◆ Reemplaza estos testimonios con reseñas reales de tus familias.</p>
     </div>
     <div class="grid g3" style="margin-top:22px">
       <div class="tcard reveal" data-delay="0"><div class="stars">★★★★★</div><p>"Mi hijo pasaba horas en Roblox y yo preocupada. Ahora modela sus propios personajes y me explica a mí cómo lo hace. Cambió todo."</p><div class="who"><div class="av">👩</div><div><b>Nombre de la mamá</b><span>Mamá de un alumno · 12 años</span></div></div></div>
@@ -656,7 +637,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="cta-final reveal">
       <h2>El primer personaje de tu hijo está a una clase de distancia</h2>
       <p>Convierte su tiempo en pantalla en una habilidad para el futuro. Agenda una clase de prueba gratis y sin compromiso.</p>
-      <a href="#" class="btn cta js-wa">
+      <a href="#" class="btn cta on-blurple js-wa">
         <svg class="wa-ico" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C4.4 9.5 9.6 4.6 16 4.6c6.3 0 11.4 5.1 11.4 11.4S22.3 24.8 16 24.8zm6.3-8.5c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3 2.9 1.2 3.5 1 4.1.9.6-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.3z"/></svg>
         ¡Empieza a crear tu primer personaje! (Clase Gratis)
       </a>
@@ -725,17 +706,18 @@ var countIO = new IntersectionObserver(function(entries){
 },{threshold:0.6});
 document.querySelectorAll('.feat b[data-count]').forEach(function(el){ countIO.observe(el); });
 
-// Desglose PBR: conmutar capas
+// Desglose PBR: conmutar los 5 mapas reales
 (function(){
   var tabs = document.getElementById('pbrTabs');
   if(!tabs) return;
   var stage = document.getElementById('pbrStage');
   var desc = document.getElementById('pbrDesc');
   var texts = {
-    wire:   '<b>Topología:</b> la malla de triángulos, el "esqueleto" del modelo. Cuantos menos, más ligero corre en Roblox.',
-    normal: '<b>Mapa de normales:</b> finge relieve y detalle sin añadir polígonos. Los colores le dicen a la luz cómo rebotar.',
-    ao:     '<b>Oclusión ambiental:</b> las sombras suaves de los rincones. Da profundidad y hace que el modelo se vea sólido.',
-    albedo: '<b>Color base (albedo):</b> el color puro del personaje, sin luces ni sombras. La pintura de cada superficie.'
+    color:    '<b>Color base:</b> la "pintura" pura de cada superficie del personaje, sin luces ni sombras. Este es el mapa real de Akari.',
+    normal:   '<b>Mapa de normales:</b> finge relieve y micro-detalle sin añadir polígonos. Los colores le dicen a la luz cómo rebotar.',
+    rough:    '<b>Rugosidad:</b> decide qué tan brillante o mate es cada zona — metal pulido, cuero gastado o tela suave.',
+    metal:    '<b>Metalicidad:</b> marca qué partes son metal de verdad (claro) y cuáles no (oscuro), para que reflejen la luz como tal.',
+    emissive: '<b>Emisivo:</b> las zonas que emiten luz propia. Son los detalles del personaje que brillan incluso en la oscuridad.'
   };
   tabs.addEventListener('click', function(e){
     var btn = e.target.closest('.pbr-tab'); if(!btn) return;
@@ -744,6 +726,29 @@ document.querySelectorAll('.feat b[data-count]').forEach(function(el){ countIO.o
     stage.querySelectorAll('.pbr-layer').forEach(function(l){ l.classList.toggle('active', l.dataset.layer===layer); });
     desc.innerHTML = texts[layer] || '';
   });
+})();
+
+// Fallback del visor 3D: si model-viewer no cargó del CDN, mostrar poster + video
+setTimeout(function(){
+  if(!window.customElements || !customElements.get('model-viewer')){
+    var embed = document.getElementById('modelEmbed');
+    if(embed) embed.classList.add('mv-failed');
+  }
+}, 6000);
+
+// Lightbox de la galería
+(function(){
+  var lb = document.getElementById('lightbox');
+  if(!lb) return;
+  var lbImg = lb.querySelector('img');
+  document.querySelectorAll('.gal-item[data-full]').forEach(function(item){
+    item.addEventListener('click', function(){
+      lbImg.src = item.dataset.full;
+      lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click', function(){ lb.classList.remove('open'); lbImg.src = ''; });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lb.classList.remove('open'); });
 })();
 </script>
 </body>

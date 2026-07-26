@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
 <link rel="icon" type="image/png" href="assets/logo-keveloper.png">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <style>
@@ -71,23 +70,26 @@ h1,h2,h3,h4{color:var(--ink)}
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.brand span{display:block;font-size:9.5px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:1.2px}
+.brand span{display:block;font-size:8.5px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+@media (min-width:768px){.brand span{font-size:9.5px;letter-spacing:1.2px}}
 
-/* ---------- RAIL DE SECCIONES (base: barra inferior flotante en móvil) ---------- */
-.rail{
-  position:fixed;z-index:45;left:50%;transform:translateX(-50%);bottom:14px;
-  display:flex;gap:4px;align-items:center;
-  background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
-  border:1px solid var(--border);border-radius:100px;padding:7px;
-  box-shadow:0 14px 34px -10px rgba(34,27,63,.4);
+/* ---------- MENÚ DE SECCIONES EN LA BARRA SUPERIOR (hamburguesa en móvil) ---------- */
+.nav-burger{
+  display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;
+  border:none;background:none;cursor:pointer;color:var(--ink);border-radius:12px;transition:.18s;
 }
-.ric{
-  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
-  color:var(--mute);font-size:18px;transition:.18s;position:relative;
+.nav-burger:hover{background:#efeefb}
+.nav-burger svg{width:24px;height:24px}
+.nav-links{
+  display:none;position:absolute;top:100%;left:0;right:0;
+  flex-direction:column;gap:2px;padding:10px 18px 16px;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);box-shadow:0 14px 26px -14px rgba(34,27,63,.35);
 }
-.ric i{display:grid;place-items:center;line-height:1;height:19px}
-.ric:hover{color:var(--ink);background:#efeefb}
-.ric.active{background:var(--grad-peri);color:#fff;box-shadow:0 8px 18px -8px var(--vio)}
+.nav.open .nav-links{display:flex}
+.nav-links a{font-size:14px;font-weight:700;color:var(--body-c);padding:10px 12px;border-radius:10px;transition:.15s}
+.nav-links a:hover{color:var(--ink);background:#efeefb}
+.nav-links a.active{color:var(--indigo);background:#efeefb}
 
 /* ---------- BOTONES ---------- */
 .btn{
@@ -114,15 +116,18 @@ h1,h2,h3,h4{color:var(--ink)}
 .hero{padding:calc(var(--nav-h) + 34px) 0 8px;overflow:hidden}
 .hero-grid{display:flex;flex-direction:column;gap:30px;padding-bottom:36px}
 .kicker{
-  display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;
-  text-transform:uppercase;letter-spacing:1.6px;color:#fff;
-  background:var(--grad-iri-chip);background-size:250% 100%;background-position:var(--iri) 50%;
-  box-shadow:0 6px 16px -8px var(--vio);
-  padding:8px 16px;border-radius:100px;margin-bottom:18px;
+  display:block;font-size:13px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.6px;color:var(--ink);
+  margin-bottom:16px;
 }
-.hero h1{font-weight:800;line-height:1.08;letter-spacing:-.5px;font-size:clamp(29px,8vw,40px);color:var(--ink)}
-.hero h1 .g1,.hero h1 .g2{
+.kicker .hl{
   color:var(--indigo);
+  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero h1{font-weight:500;line-height:1.14;letter-spacing:-.4px;font-size:clamp(25px,6.8vw,34px);color:var(--ink)}
+.hero h1 .g1,.hero h1 .g2{
+  font-weight:700;color:var(--indigo);
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
@@ -130,6 +135,7 @@ h1,h2,h3,h4{color:var(--ink)}
 .hero p.sub b{color:var(--ink)}
 .hero-cta{display:flex;flex-direction:column;gap:12px;margin-top:26px}
 .hero-cta .btn{width:100%}
+.cta-lead{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.2px;flex-basis:100%}
 
 /* hero visual: mosaico bento (mensajes + imágenes) */
 .hero-visual{position:relative;display:grid;place-items:center}
@@ -138,18 +144,16 @@ h1,h2,h3,h4{color:var(--ink)}
   background:radial-gradient(closest-side, rgba(188,185,216,.55), rgba(188,185,216,.18) 60%, transparent 75%);
 }
 .bento{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(440px,100%)}
-.bento .tile{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);min-width:0}
-.bento .tile.timg{aspect-ratio:4/5;background:var(--lav-100)}
-.bento .tile.timg img{width:100%;height:100%;object-fit:cover;display:block}
-.bento .tile.msg{display:flex;flex-direction:column;justify-content:center;gap:7px;padding:18px 16px;aspect-ratio:4/5}
-.bento .tile.msg .ic{font-size:26px;line-height:1}
-.bento .tile.msg b{font-size:15.5px;font-weight:800;line-height:1.25}
-.bento .tile.msg small{font-size:12px;font-weight:500;line-height:1.45;opacity:.85}
-.bento .tile.msg.navy{background:var(--grad-deep);color:#e9e8f4}
-.bento .tile.msg.navy b{color:var(--greenl)}
-.bento .tile.msg.peri{background:var(--grad-peri);color:#fff}
-.bento .tile.msg.peri b{color:#fff}
-.bento > :nth-child(even){transform:translateY(14px)}
+.bento .tile{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);min-width:0;display:flex;flex-direction:column}
+.bento .tile img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;background:var(--lav-100)}
+.bento .tile .txt{flex:1;display:flex;flex-direction:column;gap:5px;padding:14px 15px 16px}
+.bento .tile .txt .ic{font-size:22px;line-height:1}
+.bento .tile .txt b{font-size:14.5px;font-weight:800;line-height:1.25}
+.bento .tile .txt small{font-size:11.5px;font-weight:500;line-height:1.45;opacity:.85}
+.bento .tile.navy .txt{background:var(--grad-deep);color:#e9e8f4}
+.bento .tile.navy .txt b{color:var(--greenl)}
+.bento .tile.peri .txt{background:var(--grad-peri);color:#fff}
+.bento .tile.peri .txt b{color:#fff}
 .bento-cap{position:relative;z-index:1;margin-top:26px;text-align:center;font-size:12px;color:var(--mute);font-weight:600}
 
 /* ---------- FEATURES: banda navy (patrón "built for the future") ---------- */
@@ -174,14 +178,17 @@ h1,h2,h3,h4{color:var(--ink)}
 section{padding:44px 0}
 section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .sec-tag{
-  display:inline-flex;align-items:center;font-size:13px;font-weight:800;text-transform:uppercase;
-  letter-spacing:1.8px;color:#fff;
-  background:var(--grad-iri-chip);background-size:250% 100%;background-position:var(--iri) 50%;
-  padding:8px 18px;border-radius:100px;margin-bottom:16px;box-shadow:0 6px 16px -8px var(--vio);
+  display:block;font-size:13px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1.8px;color:var(--ink);margin-bottom:14px;
 }
-.sec-h{font-size:clamp(23px,6.5vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.3px;color:var(--ink)}
-.sec-h .hl{
+.sec-tag .hl{
   color:var(--indigo);
+  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sec-h{font-size:clamp(20px,5.6vw,27px);font-weight:500;line-height:1.22;letter-spacing:-.2px;color:var(--ink)}
+.sec-h .hl{
+  font-weight:700;color:var(--indigo);
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
@@ -287,7 +294,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .cta-final .fine{margin-top:16px;font-size:12.5px;color:#9a96b8;font-weight:600}
 
 /* ---------- FOOTER ---------- */
-.foot{background:var(--navy);padding:28px 0 140px;color:#b5b2c9;font-size:13px}
+.foot{background:var(--navy);padding:28px 0 40px;color:#b5b2c9;font-size:13px}
 .foot .wrap{display:flex;flex-direction:column;gap:14px;text-align:center}
 .foot a{color:#dcdaec;font-weight:600}
 .foot a:hover{color:var(--greenl)}
@@ -295,7 +302,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 
 /* ---------- FLOATING WA (degradado cian→verde del logo, icono oficial) ---------- */
 .wa-float{
-  position:fixed;bottom:84px;right:14px;z-index:50;width:56px;height:56px;border-radius:50%;
+  position:fixed;bottom:18px;right:14px;z-index:50;width:56px;height:56px;border-radius:50%;
   background:var(--grad-lime);display:grid;place-items:center;
   box-shadow:0 14px 30px -8px rgba(56,189,248,.65);animation:pulse 2.6s infinite;transition:transform .2s;
 }
@@ -396,25 +403,20 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
    ========================================================================= */
 @media (min-width:1024px){
   .wrap{padding:0 40px}
-  /* rail vertical flotante a la izquierda (patrón de la referencia) */
-  .rail{
-    left:16px;right:auto;top:50%;bottom:auto;transform:translateY(-50%);
-    flex-direction:column;padding:9px 7px;border-radius:100px;
+  /* menú de secciones inline en la barra superior */
+  .nav-burger{display:none}
+  .nav-links{
+    display:flex;position:static;flex-direction:row;gap:4px;padding:0;
+    background:none;border:none;box-shadow:none;backdrop-filter:none;
   }
-  .ric::after{
-    content:attr(data-tip);position:absolute;left:calc(100% + 14px);top:50%;
-    transform:translateY(-50%) scale(.92);transform-origin:left center;
-    background:var(--navy);color:#fff;font-size:12px;font-weight:700;
-    padding:6px 11px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;
-  }
-  .ric:hover::after{opacity:1;transform:translateY(-50%) scale(1)}
+  .nav-links a{font-size:13.5px;padding:9px 12px;white-space:nowrap}
   .wa-float{bottom:18px;right:18px}
   .foot{padding-bottom:40px}
   .hero{padding:calc(var(--nav-h) + 54px) 0 8px}
   .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center;padding-bottom:56px}
-  .hero h1{font-size:clamp(40px,4.4vw,58px);letter-spacing:-1px}
+  .hero h1{font-size:clamp(32px,3.4vw,44px);letter-spacing:-.7px}
+  .sec-h{font-size:clamp(23px,2.2vw,29px)}
   .bento{gap:14px}
-  .bento > :nth-child(even){transform:translateY(22px)}
   .features{grid-template-columns:repeat(5,1fr)}
   section{padding:64px 0}
   .grid.g3{grid-template-columns:repeat(3,1fr)}
@@ -440,42 +442,47 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <img class="logo-img" src="assets/logo-keveloper.png" alt="Logo Keveloper" width="44" height="44">
       <div><b class="wordmark">KEVELOPER ACADEMY</b><span>Personajes 3D para Roblox · Curso 1:1</span></div>
     </a>
+    <nav class="nav-links" id="navLinks" aria-label="Secciones de la página">
+      <a href="#top" class="active">Inicio</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#portfolio">Portfolio 3D</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#instructor">Instructor</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
-
-<!-- Rail de secciones: barra inferior en móvil, rail vertical en escritorio -->
-<nav class="rail" aria-label="Secciones de la página">
-  <a href="#top" class="ric active" aria-label="Inicio" data-tip="Inicio"><i class="fi fi-rr-home"></i></a>
-  <a href="#beneficios" class="ric" aria-label="Beneficios" data-tip="Beneficios"><i class="fi fi-rr-apps"></i></a>
-  <a href="#portfolio" class="ric" aria-label="Portfolio 3D" data-tip="Portfolio 3D"><i class="fi fi-rr-cube"></i></a>
-  <a href="#como" class="ric" aria-label="Cómo funciona" data-tip="Cómo funciona"><i class="fi fi-rr-calendar-clock"></i></a>
-  <a href="#instructor" class="ric" aria-label="Instructor" data-tip="Instructor"><i class="fi fi-rr-user"></i></a>
-  <a href="#faq" class="ric" aria-label="Preguntas" data-tip="Preguntas"><i class="fi fi-rr-interrogation"></i></a>
-</nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy reveal-l">
-        <span class="kicker">◆ Curso de Blender en vivo, uno a uno · 10 a 14 años</span>
+        <span class="kicker">◆ Curso de <span class="hl">Blender</span> en vivo, uno a uno · 10 a 14 años</span>
         <h1>Convierte las horas de <span class="g1">Roblox</span> de tu hijo en una <span class="g2">habilidad real</span></h1>
         <p class="sub">Un curso guiado paso a paso donde aprende a crear personajes 3D profesionales con <b>Blender</b> y llevarlos a Roblox. <b>Sin experiencia previa.</b> Solo curiosidad y ganas de crear.</p>
         <div class="hero-cta">
+          <div class="cta-lead">Empieza a crear tu primer personaje</div>
           <a href="#" class="btn cta js-wa">
             <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-            ¡Empieza a crear tu primer personaje! (Clase Gratis)
+            Primera clase gratis
           </a>
-          <a href="guia.html" class="btn ghost">Ver el temario completo →</a>
         </div>
       </div>
 
       <div class="hero-visual reveal-r">
         <div class="bento">
-          <div class="tile timg"><img src="assets/render-akari-1.jpg" alt="Akari, personaje 3D creado en Blender por el instructor" width="802" height="1100" loading="eager"></div>
-          <div class="tile msg navy"><span class="ic">🎨</span><b>Modela desde cero</b><small>De un cubo simple a un personaje completo, paso a paso.</small></div>
-          <div class="tile msg peri"><span class="ic">🎮</span><b>Juega su creación</b><small>Su personaje termina caminando dentro de Roblox.</small></div>
-          <div class="tile timg"><img src="assets/render-front.jpg" alt="Vista frontal del personaje 3D Akari" width="802" height="1100" loading="eager"></div>
+          <div class="tile navy">
+            <img src="assets/render-akari-1.jpg" alt="Akari, personaje 3D creado en Blender por el instructor" width="802" height="1100" loading="eager">
+            <div class="txt"><span class="ic">🎨</span><b>Modela desde cero</b><small>De un cubo simple a un personaje completo, paso a paso.</small></div>
+          </div>
+          <div class="tile peri">
+            <img src="assets/render-front.jpg" alt="Vista frontal del personaje 3D Akari" width="802" height="1100" loading="eager">
+            <div class="txt"><span class="ic">🎮</span><b>Juega su creación</b><small>Su personaje termina caminando dentro de Roblox.</small></div>
+          </div>
         </div>
         <div class="bento-cap">Akari · personaje real creado por tu instructor</div>
       </div>
@@ -501,7 +508,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="beneficios">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Por qué este curso</div>
+      <div class="sec-tag">Por qué <span class="hl">este curso</span></div>
       <h2 class="sec-h">Tu hijo ya ama Roblox. <span class="hl">¿Y si además aprende a crearlo?</span></h2>
       <p class="sec-intro">El mismo tiempo frente a la pantalla, pero produciendo en vez de solo consumiendo. Estas son las habilidades reales que se lleva.</p>
     </div>
@@ -523,7 +530,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
         <div class="slot-tag">Akari · personaje real creado por tu instructor<small>Akari es un ejemplo de referencia: muestra cómo puede quedar un héroe o protagonista similar. El proyecto de tu hijo será su propio diseño.</small></div>
       </div>
       <div class="reveal-r">
-        <div class="sec-tag">Lo que se lleva a casa</div>
+        <div class="sec-tag">Lo que se lleva <span class="hl">a casa</span></div>
         <h2 class="sec-h">Su propio <span class="hl">Personaje 3D</span>, caminando dentro de Roblox</h2>
         <p class="sec-intro">No es teoría. Al terminar, tu hijo tendrá un personaje que él mismo creó de principio a fin y que puede mostrar, mover y jugar.</p>
         <ul class="check">
@@ -542,7 +549,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="portfolio">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Cómo se crea un personaje 3D en Blender</div>
+      <div class="sec-tag">Cómo se crea un personaje 3D en <span class="hl">Blender</span></div>
       <h2 class="sec-h">Del boceto al <span class="hl">personaje jugable</span>: el pipeline profesional</h2>
       <p class="sec-intro">El mismo proceso que usan los estudios de videojuegos, mostrado con un personaje <b style="color:var(--ink)">real</b> creado por tu instructor: <b style="color:var(--ink)">Akari</b>. Esto es lo que tu hijo aprende a hacer.</p>
     </div>
@@ -648,7 +655,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="como" class="alt">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Cómo funciona</div>
+      <div class="sec-tag">Cómo <span class="hl">funciona</span></div>
       <h2 class="sec-h">Sencillo para ti, <span class="hl">divertido para tu hijo</span></h2>
     </div>
     <div class="grid g2" style="margin-top:24px">
@@ -664,7 +671,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="metodo">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Nuestra forma de enseñar</div>
+      <div class="sec-tag">Nuestra forma de <span class="hl">enseñar</span></div>
       <h2 class="sec-h">Enseñamos a <span class="hl">pensar como artista</span>, no a memorizar botones</h2>
     </div>
     <div class="quote reveal" style="margin-top:22px">
@@ -684,7 +691,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="testimonios" class="alt">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Lo que dicen las familias</div>
+      <div class="sec-tag">Lo que dicen <span class="hl">las familias</span></div>
       <h2 class="sec-h">Padres que ya <span class="hl">dieron el paso</span></h2>
       <p class="sec-intro" style="color:var(--mute);font-size:13px">◆ Reemplaza estos testimonios con reseñas reales de tus familias.</p>
     </div>
@@ -701,7 +708,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="instructor" class="alt">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Quién enseña</div>
+      <div class="sec-tag">Quién <span class="hl">enseña</span></div>
       <h2 class="sec-h">El <span class="hl">instructor</span> a cargo</h2>
     </div>
     <div class="instructor-wrap reveal">
@@ -727,7 +734,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="faq">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Preguntas frecuentes</div>
+      <div class="sec-tag">Preguntas <span class="hl">frecuentes</span></div>
       <h2 class="sec-h">Lo que <span class="hl">los padres</span> suelen preguntar</h2>
     </div>
     <div class="faq reveal" style="margin-top:24px">
@@ -745,7 +752,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="tiktok" class="alt">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Mira cómo enseño</div>
+      <div class="sec-tag">Mira <span class="hl">cómo enseño</span></div>
       <h2 class="sec-h">Tutoriales gratis en <span class="hl">TikTok</span></h2>
     </div>
     <div class="instructor-wrap reveal">
@@ -773,7 +780,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <p>Convierte su tiempo en pantalla en una habilidad para el futuro. Agenda una clase de prueba gratis y sin compromiso.</p>
       <a href="#" class="btn cta js-wa">
         <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-        ¡Empieza a crear tu primer personaje! (Clase Gratis)
+        Primera clase gratis
       </a>
       <div class="fine">Cupos limitados · Sin tarjeta de crédito · Atención 1 a 1</div>
     </div>
@@ -896,9 +903,28 @@ document.querySelectorAll('.feat b[data-count]').forEach(function(el){ countIO.o
   upd();
 })();
 
-// Scroll-spy del rail de secciones
+// Menú hamburguesa (móvil): abrir/cerrar y cerrar al elegir sección
 (function(){
-  var links = [].slice.call(document.querySelectorAll('.rail a'));
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('navBurger');
+  var links = document.getElementById('navLinks');
+  if(!nav || !burger || !links) return;
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.closest('a')){
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
+// Scroll-spy del menú de secciones
+(function(){
+  var links = [].slice.call(document.querySelectorAll('.nav-links a'));
   if(!links.length || !('IntersectionObserver' in window)) return;
   var map = new Map();
   links.forEach(function(l){

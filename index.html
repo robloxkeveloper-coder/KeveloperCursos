@@ -173,6 +173,11 @@ h1,h2,h3,h4{color:var(--ink)}
 }
 .fcard .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--mute);font-weight:700}
 .fcard p{font-size:13.5px;color:var(--body-c);line-height:1.55;margin-top:4px;font-weight:500}
+.fcard p b{   /* keyword: degradado de dos paradas, legible a 13.5px (el iri baja demasiado el contraste) */
+  font-size:inherit;font-weight:800;color:var(--indigo);
+  background:var(--grad-text);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
 .fdots{display:flex;justify-content:center;gap:7px;margin-top:18px}
 .fdot{
   width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;
@@ -504,23 +509,23 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="fgal" id="fgal">
       <article class="fcard">
         <span class="fi">🎂</span><b>10+</b><span class="lbl">Años en adelante</span>
-        <p>Desde los 10 años y sin límite superior: el material funciona igual de bien con un niño de primaria que con un adolescente que quiere entrar al 3D.</p>
+        <p>Desde los <b>10 años</b> y <b>sin límite superior</b>: el material funciona igual de bien con un niño de primaria que con un adolescente que quiere entrar al 3D.</p>
       </article>
       <article class="fcard">
         <span class="fi">📚</span><b data-count="20">20</b><span class="lbl">Clases</span>
-        <p>Un plan estructurado en 5 módulos, desde los primeros clics en Blender hasta el personaje terminado y caminando dentro de Roblox.</p>
+        <p>Un plan estructurado en <b>5 módulos</b>, desde los primeros clics en <b>Blender</b> hasta el <b>personaje terminado</b> y caminando dentro de Roblox.</p>
       </article>
       <article class="fcard">
         <span class="fi">📅</span><b data-count="5">5</b><span class="lbl">Meses</span>
-        <p>Una clase por semana, sin prisas. Queda tiempo real para practicar entre sesiones y asentar lo aprendido antes de avanzar.</p>
+        <p><b>Una clase por semana</b>, sin prisas. Queda tiempo real para <b>practicar entre sesiones</b> y asentar lo aprendido antes de avanzar.</p>
       </article>
       <article class="fcard">
         <span class="fi">⏱️</span><b data-count="60">60</b><span class="lbl">Min por clase</span>
-        <p>Una hora de trabajo enfocado: teoría corta, práctica guiada y un avance concreto del personaje al final de cada sesión.</p>
+        <p>Una hora de <b>trabajo enfocado</b>: teoría corta, práctica guiada y un <b>avance concreto</b> del personaje al final de cada sesión.</p>
       </article>
       <article class="fcard">
         <span class="fi">👁️</span><b>1:1</b><span class="lbl">Atención personal</span>
-        <p>Clases individuales en vivo. Veo su pantalla en todo momento, corrijo al instante y ajusto el ritmo a cómo va avanzando.</p>
+        <p><b>Clases individuales en vivo</b>. Veo su pantalla en todo momento, <b>corrijo al instante</b> y ajusto el ritmo a cómo va avanzando.</p>
       </article>
     </div>
     <div class="fdots" id="fdots" role="tablist" aria-label="Navegación de la galería"></div>
@@ -938,7 +943,7 @@ document.querySelectorAll('.fcard b[data-count]').forEach(function(el){ countIO.
     timer = setInterval(function(){
       idx++;
       gal.scrollTo({left: idx * step(), behavior:'smooth'});
-    }, 4000);
+    }, 6000);
   }
   function restart(){ stop(); start(); }
 

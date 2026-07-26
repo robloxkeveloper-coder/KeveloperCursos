@@ -358,36 +358,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .pbr-desc{margin-top:14px;text-align:center;font-size:13.5px;color:var(--body-c);min-height:56px}
 .pbr-desc b{color:var(--ink)}
 
-/* antes / después real: escultura → LookDev */
-.staff{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-.staff .col{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px;text-align:center;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(86,84,113,.06)}
-.staff .col .lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
-.staff .before .lbl{color:var(--mute)} .staff .after{border-color:var(--peri)} .staff .after .lbl{color:var(--indigo)}
-.staff .col .ph{aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:#eceaf4}
-.staff .col .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.staff .arrow{
-  text-align:center;grid-column:1/-1;color:var(--indigo);font-weight:800;font-size:13px;margin-top:2px;
-  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-
-/* galería de renders + video */
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-.gal-item{
-  position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);
-  background:var(--card-soft);cursor:zoom-in;aspect-ratio:8/11;box-shadow:0 2px 10px rgba(86,84,113,.08);
-  padding:0;transition:.18s;
-}
-.gal-item:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.gal-item img,.gal-item video{width:100%;height:100%;object-fit:cover;display:block}
-.gal-item .tag{position:absolute;bottom:8px;left:8px;right:8px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(30,27,46,.78);border-radius:8px;padding:4px 8px;text-align:center}
-.gal-note{font-size:12.5px;color:var(--mute);text-align:center;margin-top:12px;font-weight:600}
-
-/* lightbox */
-.lightbox{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(30,27,46,.92);padding:20px;cursor:zoom-out}
-.lightbox.open{display:grid}
-.lightbox img{max-width:min(92vw,720px);max-height:88vh;width:auto;height:auto;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-
 /* =========================================================================
    TABLET — 768px y superior
    ========================================================================= */
@@ -405,7 +375,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .split{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
   .result-visual{order:0}
   .pipe3d{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-  .gallery{grid-template-columns:repeat(3,1fr)}
   .instructor{flex-direction:row;text-align:left;gap:34px;padding:36px 40px}
   .instructor .photo{width:156px;height:156px;flex:0 0 156px}
   .cta-final{padding:52px 40px}
@@ -435,7 +404,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   section{padding:64px 0}
   .grid.g3{grid-template-columns:repeat(3,1fr)}
   .grid.g4{grid-template-columns:repeat(4,1fr)}
-  .gallery{grid-template-columns:repeat(3,1fr)}
   .sec-h{max-width:760px}
   .sec-intro{max-width:640px}
 }
@@ -605,7 +573,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 
       <!-- Desglose PBR con los mapas reales del personaje -->
       <div class="pbr reveal-r">
-        <div class="pbr-h">🎨 Las 5 capas de textura de Akari (reales)</div>
+        <div class="pbr-h">Las 5 capas de textura de Akari (reales)</div>
         <div class="pbr-tabs" id="pbrTabs">
           <button class="pbr-tab active" data-layer="color">Color</button>
           <button class="pbr-tab" data-layer="normal">Normales</button>
@@ -624,40 +592,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       </div>
     </div>
 
-    <!-- Antes / después real: escultura → LookDev -->
-    <div class="reveal" style="margin-top:24px">
-      <div class="pbr-h" style="font-size:15px;margin-bottom:14px">✨ De la escultura digital al personaje terminado: el mismo modelo</div>
-      <div class="staff">
-        <div class="col before">
-          <div class="lbl">Antes · escultura digital</div>
-          <div class="ph"><img src="assets/render-sculpt.jpg" alt="Escultura digital gris de Akari, antes de texturas" loading="lazy"></div>
-        </div>
-        <div class="col after">
-          <div class="lbl">Después · texturas y luces</div>
-          <div class="ph"><img src="assets/render-lookdev.jpg" alt="Akari terminada con materiales PBR y luces" loading="lazy"></div>
-        </div>
-        <div class="arrow">Mismo modelo · las texturas PBR le dan vida ✨</div>
-      </div>
-    </div>
-
-    <!-- Galería de renders + turntable -->
-    <div class="reveal" style="margin-top:28px">
-      <div class="pbr-h" style="font-size:15px;margin-bottom:2px">📸 Galería · Akari de todos los ángulos</div>
-      <div class="gallery">
-        <button class="gal-item" data-full="assets/render-front.jpg"><img src="assets/render-front.jpg" alt="Render frontal de Akari" loading="lazy"><span class="tag">Vista frontal</span></button>
-        <button class="gal-item" data-full="assets/render-akari-1.jpg"><img src="assets/render-akari-1.jpg" alt="Render de Akari, pose 1" loading="lazy"><span class="tag">Render final</span></button>
-        <div class="gal-item" style="cursor:default">
-          <video src="assets/akari-turntable.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Video de Akari girando 360 grados"></video>
-          <span class="tag">Giro 360°</span>
-        </div>
-      </div>
-      <div class="gal-note">Todo el material de esta sección es trabajo real del instructor del curso. Akari es un ejemplo: el proyecto de tu hijo no será este mismo personaje, sino su propio héroe creado con lo que aprende.</div>
-    </div>
   </div>
 </section>
-
-<!-- Lightbox de la galería -->
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Imagen ampliada"><img src="" alt="Render ampliado de Akari"></div>
 
 <!-- ============ EL CAMINO / MÓDULOS — OCULTO (landing más directa). Se conserva comentado para poder restaurarlo. ============ -->
 <!--
@@ -1063,20 +999,6 @@ setTimeout(function(){
   }
 }, 6000);
 
-// Lightbox de la galería
-(function(){
-  var lb = document.getElementById('lightbox');
-  if(!lb) return;
-  var lbImg = lb.querySelector('img');
-  document.querySelectorAll('.gal-item[data-full]').forEach(function(item){
-    item.addEventListener('click', function(){
-      lbImg.src = item.dataset.full;
-      lb.classList.add('open');
-    });
-  });
-  lb.addEventListener('click', function(){ lb.classList.remove('open'); lbImg.src = ''; });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lb.classList.remove('open'); });
-})();
 </script>
 </body>
 </html>

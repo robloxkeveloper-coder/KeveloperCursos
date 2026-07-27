@@ -357,8 +357,28 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .model-embed.mv-failed .mv-fallback{display:flex}
 .mv-fallback img{max-height:78%;width:auto;border-radius:12px}
 .mv-fallback a{color:var(--indigo);font-weight:700;font-size:13.5px;text-decoration:underline}
-.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin-top:11px;font-weight:600}
+.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin:0 0 11px;font-weight:600}
 .model-cap b{color:var(--indigo)}
+/* señales de interactividad sobre el visor: informativas, nunca roban el gesto */
+.mv-badge{
+  position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;
+  background:var(--grad-deep);color:#fff;font-size:11.5px;font-weight:700;
+  padding:6px 12px;border-radius:100px;letter-spacing:.2px;
+  box-shadow:0 4px 12px -4px rgba(34,27,63,.5);
+}
+.mv-hint{
+  position:absolute;left:50%;bottom:18%;z-index:2;pointer-events:none;
+  font-size:34px;line-height:1;margin-left:-17px;
+  filter:drop-shadow(0 3px 6px rgba(34,27,63,.45));
+  animation:mv-sweep 2.6s ease-in-out infinite;
+  transition:opacity .3s ease,visibility 0s linear .3s;
+}
+@keyframes mv-sweep{
+  0%,100%{transform:translateX(-26px) rotate(-8deg)}
+  50%    {transform:translateX(26px) rotate(8deg)}
+}
+.mv-seen .mv-hint{opacity:0;visibility:hidden} /* primer arrastre real: la pista ya cumplió */
+.mv-failed .mv-badge,.mv-failed .mv-hint{display:none} /* el poster estático no promete un 360° */
 
 .pbr{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px 16px;box-shadow:0 2px 10px rgba(86,84,113,.06)}
 .pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:var(--ink)}
@@ -565,6 +585,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="pipe3d">
       <!-- Modelo 3D real interactivo (creado por el instructor) -->
       <div class="reveal-l">
+        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
         <div class="model-embed" id="modelEmbed">
           <model-viewer
             src="assets/oracle.glb"
@@ -574,12 +595,13 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
             reveal="auto"
             shadow-intensity="1" exposure="1.1"
             touch-action="pan-y"></model-viewer>
+          <div class="mv-badge" aria-hidden="true">↻ 360° · Arrástrame</div>
+          <div class="mv-hint" aria-hidden="true">👆</div>
           <div class="mv-fallback">
             <img src="assets/poster-oracle.jpg" alt="Akari, personaje 3D">
             <a href="assets/akari-turntable.mp4" target="_blank" rel="noopener">Ver el modelo girando en video →</a>
           </div>
         </div>
-        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
       </div>
 
       <!-- Desglose PBR con los mapas reales del personaje -->
@@ -651,7 +673,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <h2 class="sec-h">Enseñamos a <span class="hl">pensar como artista</span>, no a memorizar botones</h2>
     </div>
     <div class="quote reveal" style="margin-top:22px">
-      <div class="q">"Nada de lenguaje universitario. Frases cortas, ejemplos cotidianos y muchas comparaciones: la caja invisible, las piezas de LEGO, la foto de los detalles."</div>
+      <div class="q">"Lo complejo, explicado simple. A tu ritmo, con tus palabras, con ejemplos de tu vida diaria."</div>
       <div class="who">La filosofía del curso</div>
     </div>
     <div class="grid g3 reveal" style="margin-top:18px">
@@ -1009,6 +1031,19 @@ setTimeout(function(){
     if(embed) embed.classList.add('mv-failed');
   }
 }, 6000);
+
+// La manita del visor se retira al primer arrastre real (ratón, touch o flechas).
+// auto-rotate también emite camera-change ('automatic-rotation'): filtrar es obligatorio.
+(function(){
+  var embed = document.getElementById('modelEmbed');
+  var mv = embed && embed.querySelector('model-viewer');
+  if(!mv) return;
+  mv.addEventListener('camera-change', function onUser(e){
+    if(!e.detail || e.detail.source !== 'user-interaction') return;
+    embed.classList.add('mv-seen');
+    mv.removeEventListener('camera-change', onUser);
+  });
+})();
 
 </script>
 </body>

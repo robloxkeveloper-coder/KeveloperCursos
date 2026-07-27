@@ -349,21 +349,24 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .pipe3d{display:flex;flex-direction:column;gap:22px;margin-top:28px}
 .model-embed{
   position:relative;width:100%;aspect-ratio:3/4;max-height:560px;border-radius:18px;overflow:hidden;
-  border:1px solid var(--border);box-shadow:var(--shadow);background:var(--card-soft);
+  border:1px solid var(--navy-2);box-shadow:var(--shadow);
+  /* fondo cinematográfico: brillo peri sutil tras el personaje, oscuro en los bordes */
+  background:radial-gradient(130% 90% at 50% 36%, rgba(99,102,241,.32), transparent 62%), var(--grad-deep);
 }
-.model-embed model-viewer{width:100%;height:100%;--poster-color:transparent;background:var(--card-soft)}
-.model-embed .mv-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--card-soft)}
+.model-embed model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent}
+.model-embed .mv-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px}
 .model-embed.mv-failed model-viewer{display:none}
 .model-embed.mv-failed .mv-fallback{display:flex}
 .mv-fallback img{max-height:78%;width:auto;border-radius:12px}
-.mv-fallback a{color:var(--indigo);font-weight:700;font-size:13.5px;text-decoration:underline}
-.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin:0 0 11px;font-weight:600}
+.mv-fallback a{color:var(--lav-300);font-weight:700;font-size:13.5px;text-decoration:underline}
+.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin:11px 0 0;font-weight:600}
 .model-cap b{color:var(--indigo)}
 /* señales de interactividad sobre el visor: informativas, nunca roban el gesto */
 .mv-badge{
   position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;
   background:var(--grad-deep);color:#fff;font-size:11.5px;font-weight:700;
   padding:6px 12px;border-radius:100px;letter-spacing:.2px;
+  border:1px solid rgba(201,197,242,.45);   /* la pill era invisible sobre el panel oscuro */
   box-shadow:0 4px 12px -4px rgba(34,27,63,.5);
 }
 .mv-hint{
@@ -380,18 +383,21 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .mv-seen .mv-hint{opacity:0;visibility:hidden} /* primer arrastre real: la pista ya cumplió */
 .mv-failed .mv-badge,.mv-failed .mv-hint{display:none} /* el poster estático no promete un 360° */
 
-.pbr{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px 16px;box-shadow:0 2px 10px rgba(86,84,113,.06)}
-.pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:var(--ink)}
+/* panel PBR oscuro, a juego con el visor (claro-sobre-oscuro, AA computado) */
+.pbr{background:var(--grad-deep);border:1px solid var(--navy-2);border-radius:18px;padding:18px 16px;box-shadow:var(--shadow)}
+.pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:#fff}
 .pbr-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-.pbr-tab{flex:1 1 auto;min-width:64px;font-family:inherit;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid var(--border);background:var(--card-soft);color:var(--body-c);cursor:pointer;transition:.15s}
-.pbr-tab:hover{color:var(--ink);border-color:var(--border-strong)}
-.pbr-tab.active{background:var(--grad-peri);color:#fff;border-color:transparent}
-.pbr-stage{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#eceaf4}
+.pbr-tab{flex:1 1 auto;min-width:64px;font-family:inherit;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid rgba(201,197,242,.45);background:rgba(255,255,255,.06);color:var(--lav-300);cursor:pointer;transition:.15s}
+.pbr-tab:hover{color:#fff;border-color:rgba(201,197,242,.7)}
+.pbr-tab:focus-visible{outline:2px solid var(--lav-300);outline-offset:2px}
+/* indigo→plum en vez de --grad-peri: mismo linaje, pero el blanco 11.5px da ≥5.9:1 (AA) */
+.pbr-tab.active{background:linear-gradient(135deg,var(--indigo),var(--plum));color:#fff;border-color:transparent}
+.pbr-stage{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid rgba(201,197,242,.3);background:var(--navy)}
 .pbr-layer{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
 .pbr-layer.active{opacity:1}
 .pbr-layer img{width:100%;height:100%;object-fit:cover;display:block}
-.pbr-desc{margin-top:14px;text-align:center;font-size:13.5px;color:var(--body-c);min-height:56px}
-.pbr-desc b{color:var(--ink)}
+.pbr-desc{margin-top:14px;text-align:center;font-size:13.5px;color:var(--lav-300);min-height:56px}
+.pbr-desc b{color:#fff}
 
 /* =========================================================================
    TABLET — 768px y superior
@@ -409,7 +415,12 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .grid.g4{grid-template-columns:repeat(2,1fr)}
   .split{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
   .result-visual{order:0}
-  .pipe3d{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  /* los dos paneles comparten tope y base: el alto lo dicta .pbr y el visor lo llena;
+     el pie de foto cuelga por debajo sin restar altura a la columna */
+  .pipe3d{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-bottom:56px}
+  .pipe3d > :first-child{display:flex;flex-direction:column;position:relative}
+  .model-embed{flex:1;aspect-ratio:auto;max-height:none}
+  .model-cap{position:absolute;top:100%;left:0;right:0;margin:11px 0 0}
   .instructor{flex-direction:row;text-align:left;gap:34px;padding:36px 40px}
   .instructor .photo{width:156px;height:156px;flex:0 0 156px}
   .cta-final{padding:52px 40px}
@@ -585,7 +596,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="pipe3d">
       <!-- Modelo 3D real interactivo (creado por el instructor) -->
       <div class="reveal-l">
-        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
         <div class="model-embed" id="modelEmbed">
           <model-viewer
             src="assets/oracle.glb"
@@ -593,7 +603,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
             alt="Modelo 3D interactivo de Akari, personaje creado en Blender"
             camera-controls auto-rotate
             reveal="auto"
-            shadow-intensity="1" exposure="1.1"
+            shadow-intensity="1" exposure="1.6" shadow-softness="0.9" tone-mapping="neutral"
             touch-action="pan-y"></model-viewer>
           <div class="mv-badge" aria-hidden="true">↻ 360° · Arrástrame</div>
           <div class="mv-hint" aria-hidden="true">👆</div>
@@ -602,6 +612,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
             <a href="assets/akari-turntable.mp4" target="_blank" rel="noopener">Ver el modelo girando en video →</a>
           </div>
         </div>
+        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
       </div>
 
       <!-- Desglose PBR con los mapas reales del personaje -->
@@ -928,12 +939,17 @@ document.querySelectorAll('.fcard b[data-count]').forEach(function(el){ countIO.
   }
 })();
 
-// Desglose PBR: conmutar los 5 mapas reales
+// Desglose PBR + visor 3D: un solo controlador. El ciclo de 5s conmuta los 5 mapas
+// reales y repinta el modelo con el mapa activo; «color» restaura el render original.
+// Si el visor falló (mv-failed) o model-viewer no cargó, el ciclo 2D sigue solo.
 (function(){
   var tabs = document.getElementById('pbrTabs');
   if(!tabs) return;
   var stage = document.getElementById('pbrStage');
   var desc = document.getElementById('pbrDesc');
+  var pipe = document.querySelector('.pipe3d') || stage;
+  var embed = document.getElementById('modelEmbed');
+  var mv = embed && embed.querySelector('model-viewer');
   var texts = {
     color:    '<b>Color base:</b> la "pintura" pura de cada superficie del personaje, sin luces ni sombras. Este es el mapa real de Akari.',
     normal:   '<b>Mapa de normales:</b> finge relieve y micro-detalle sin añadir polígonos. Los colores le dicen a la luz cómo rebotar.',
@@ -941,30 +957,140 @@ document.querySelectorAll('.fcard b[data-count]').forEach(function(el){ countIO.
     metal:    '<b>Metalicidad:</b> marca qué partes son metal de verdad (claro) y cuáles no (oscuro), para que reflejen la luz como tal.',
     emissive: '<b>Emisivo:</b> las zonas que emiten luz propia. Son los detalles del personaje que brillan incluso en la oscuridad.'
   };
+  var maps = {
+    normal:   'assets/map-normal.jpg',
+    rough:    'assets/map-roughness.jpg',
+    metal:    'assets/map-metalness.jpg',
+    emissive: 'assets/map-emissive.jpg'
+  };
   var order = ['color','normal','rough','metal','emissive'];
+  // luz por capa: Color brillante (el rostro se lee), mapas neutros, Emisivo oscuro
+  var exposures = {color:1.6, normal:1.2, rough:1.2, metal:1.2, emissive:0.7};
   var idx = 0, timer = null;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- pintar el mapa activo sobre el modelo (scene-graph de model-viewer) ---
+  var modelReady = false, pendingLayer = null, applySeq = 0;
+  var texCache = new Map();   // url → Promise<Texture>: cada textura se crea una sola vez
+  var originals = [];         // por material: textura base y factores de fábrica
+
+  function mvUsable(){
+    return mv && modelReady && !embed.classList.contains('mv-failed');
+  }
+  function getTex(url){
+    if(!texCache.has(url)) texCache.set(url, mv.createTexture(url));
+    return texCache.get(url);
+  }
+  function applyLayerToModel(layer){
+    if(!mv) return;
+    if(!modelReady){ pendingLayer = layer; return; }   // se aplica al llegar 'load'
+    if(!mvUsable()) return;
+    var seq = ++applySeq;
+    mv.exposure = exposures[layer] || 1.2;
+    if(layer === 'color'){
+      originals.forEach(function(o){
+        try{
+          o.pbr.baseColorTexture.setTexture(o.baseTex);
+          o.pbr.setMetallicFactor(o.metallic);
+          o.pbr.setRoughnessFactor(o.roughness);
+          o.mat.setEmissiveFactor(o.emissive);
+          if(o.mat.setEmissiveStrength) o.mat.setEmissiveStrength(o.strength);
+        }catch(err){}
+      });
+      return;
+    }
+    var url = maps[layer];
+    if(!url) return;
+    getTex(url).then(function(tex){
+      if(seq !== applySeq || !mvUsable()) return;   // llegó tarde: ya manda otra capa
+      originals.forEach(function(o){
+        try{
+          o.pbr.baseColorTexture.setTexture(tex);
+          o.pbr.setMetallicFactor(0);    // respuesta a luz neutra: el mapa se lee plano
+          o.pbr.setRoughnessFactor(1);
+          if(layer === 'emissive'){
+            // la emissiveTexture original sigue montada: factor pleno + strength alto
+            // hacen que las líneas emitan de verdad sobre el modo más oscuro del ciclo
+            o.mat.setEmissiveFactor([1,1,1]);
+            if(o.mat.setEmissiveStrength) o.mat.setEmissiveStrength(3.5);
+          } else {
+            o.mat.setEmissiveFactor([0,0,0]);
+            if(o.mat.setEmissiveStrength) o.mat.setEmissiveStrength(o.strength);
+          }
+        }catch(err){}
+      });
+    }).catch(function(){});
+  }
+  if(mv){
+    mv.addEventListener('load', function(){
+      if(modelReady || !mv.model) return;
+      mv.model.materials.forEach(function(mat){
+        var pbr = mat.pbrMetallicRoughness;
+        originals.push({
+          mat: mat, pbr: pbr,
+          baseTex: pbr.baseColorTexture && pbr.baseColorTexture.texture,
+          metallic: pbr.metallicFactor,
+          roughness: pbr.roughnessFactor,
+          emissive: (mat.emissiveFactor || [0,0,0]).slice(),
+          strength: (typeof mat.emissiveStrength === 'number') ? mat.emissiveStrength : 1
+        });
+      });
+      modelReady = true;
+      if(pendingLayer){ var p = pendingLayer; pendingLayer = null; applyLayerToModel(p); }
+    });
+
+    // Iluminación de 3 puntos sin HDR externo: equirectangular generado en canvas.
+    // Colores de luz (no de marca): key cálida arriba-izda, fill fría dcha, rim blanca
+    // detrás-arriba (la costura de la equirect queda a la espalda del modelo).
+    try{
+      var cv = document.createElement('canvas'); cv.width = 1024; cv.height = 512;
+      var cx = cv.getContext('2d');
+      if(cx){
+        cx.fillStyle = '#08060f'; cx.fillRect(0, 0, 1024, 512);
+        var spot = function(x, y, r, rgb, a){
+          var g = cx.createRadialGradient(x, y, 0, x, y, r);
+          g.addColorStop(0, 'rgba(' + rgb + ',' + a + ')');
+          g.addColorStop(1, 'rgba(' + rgb + ',0)');
+          cx.fillStyle = g; cx.fillRect(0, 0, 1024, 512);
+        };
+        spot(315, 150, 320, '255,213,170', 1);     // key
+        spot(512, 230, 300, '255,240,225', .6);    // frontal suave: el rostro siempre se lee
+        spot(790, 250, 320, '150,185,255', .55);   // fill
+        spot(64,  105, 190, '255,255,255', .9);    // rim (partida en la costura)
+        spot(960, 105, 190, '255,255,255', .9);
+        cv.toBlob(function(b){
+          if(b && mv) mv.setAttribute('environment-image', URL.createObjectURL(b));
+        }, 'image/png');
+      }
+      mv.addEventListener('error', function(){
+        // si el visor rechaza el entorno generado, retirarlo restaura el de fábrica
+        if(mv.hasAttribute('environment-image')) mv.removeAttribute('environment-image');
+      });
+    }catch(err){}
+  }
+
   function setLayer(layer){
     idx = Math.max(0, order.indexOf(layer));
     tabs.querySelectorAll('.pbr-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.layer===layer); });
     stage.querySelectorAll('.pbr-layer').forEach(function(l){ l.classList.toggle('active', l.dataset.layer===layer); });
     desc.innerHTML = texts[layer] || '';
+    applyLayerToModel(layer);
   }
   function stop(){ if(timer){ clearInterval(timer); timer = null; } }
   function start(){
     if(reduced || timer) return;
-    timer = setInterval(function(){ setLayer(order[(idx + 1) % order.length]); }, 4000);
+    timer = setInterval(function(){ setLayer(order[(idx + 1) % order.length]); }, 5000);
   }
   tabs.addEventListener('click', function(e){
     var btn = e.target.closest('.pbr-tab'); if(!btn) return;
     setLayer(btn.dataset.layer);
-    stop(); start();   // el click manual reinicia el ciclo de 4s
+    stop(); start();   // el click manual repinta el modelo y reinicia el ciclo de 5s
   });
-  // Ciclo automático solo mientras el desglose está a la vista
+  // Ciclo automático mientras cualquiera de los dos paneles esté a la vista
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(entries){
       if(entries[0].isIntersecting){ start(); } else { stop(); }
-    }, {threshold:.25}).observe(stage);
+    }, {threshold:.25}).observe(pipe);
   } else {
     start();
   }

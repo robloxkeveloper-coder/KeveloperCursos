@@ -129,7 +129,7 @@ h1,h2,h3,h4{color:var(--ink)}
 .hero p.sub b{color:var(--ink)}
 .hero-cta{display:flex;flex-direction:column;gap:12px;margin-top:26px}
 .hero-cta .btn{width:100%}
-.cta-lead{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.2px;flex-basis:100%}
+.cta-lead{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.2px;flex-basis:100%;text-align:center}
 .cta-lead .hl{
   color:var(--indigo);
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
@@ -180,19 +180,16 @@ h1,h2,h3,h4{color:var(--ink)}
   box-shadow:0 14px 32px -16px rgba(0,0,0,.55);
   display:flex;flex-direction:column;gap:6px;
 }
-.fcard .fi{font-size:30px;line-height:1}
-.fcard b{
-  font-size:clamp(24px,7vw,30px);font-weight:800;line-height:1;color:var(--indigo);
+.fhead{display:flex;align-items:center;gap:10px}   /* icono → número → etiqueta, en fila */
+.fcard .fi{font-size:26px;line-height:1;flex:0 0 auto}
+.fcard .fhead b{
+  font-size:clamp(22px,6vw,27px);font-weight:800;line-height:1;color:var(--indigo);
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.fcard .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--mute);font-weight:700}
-.fcard p{font-size:13.5px;color:var(--body-c);line-height:1.55;margin-top:4px;font-weight:500}
-.fcard p b{   /* keyword: degradado de dos paradas, legible a 13.5px (el iri baja demasiado el contraste) */
-  font-size:inherit;font-weight:800;color:var(--indigo);
-  background:var(--grad-text);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.fcard .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--mute);font-weight:700;line-height:1.3}
+.fcard p{font-size:13.5px;color:var(--body-c);line-height:1.55;margin-top:6px;font-weight:500}
+.fcard p b{color:var(--ink);font-weight:700}
 .fdots{display:flex;justify-content:center;gap:7px;margin-top:18px}
 .fdot{
   width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;
@@ -228,6 +225,9 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:0 2px 10px rgba(86,84,113,.06)}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong)}
 .card .badge{font-size:30px;line-height:1;margin-bottom:12px}
+/* card en fila: icono a la izquierda del título, mismo ritmo que .info (el formato de referencia) */
+.card.row{display:flex;gap:13px;align-items:flex-start}
+.card.row .badge{margin-bottom:0;font-size:26px;line-height:1.3;flex:0 0 40px;width:40px;text-align:center}
 .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
 .card p{font-size:14px;color:var(--body-c)}
 
@@ -300,9 +300,16 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .btn.linkedin{background:#0a66c2;color:#fff;box-shadow:0 8px 20px -10px #0a66c2;margin-top:18px}
 .btn.linkedin:hover{background:#004182;transform:translateY(-2px)}
 .btn.linkedin svg{width:20px;height:20px;flex:0 0 20px}
-.btn.tiktok{background:#161622;color:#fff;box-shadow:0 8px 20px -10px #161622;margin-top:18px}
-.btn.tiktok:hover{background:#000;transform:translateY(-2px)}
-.btn.tiktok svg{width:20px;height:20px;flex:0 0 20px}
+/* TikTok: negro de marca con el doble acento cian/rosa del logo */
+.btn.tiktok{
+  background:#010101;color:#fff;margin-top:18px;
+  box-shadow:-4px 4px 14px -6px rgba(37,244,238,.75), 4px -4px 14px -6px rgba(254,44,85,.75), 0 10px 22px -12px rgba(0,0,0,.7);
+}
+.btn.tiktok:hover{
+  transform:translateY(-2px);
+  box-shadow:-5px 5px 18px -6px rgba(37,244,238,.95), 5px -5px 18px -6px rgba(254,44,85,.95), 0 14px 26px -12px rgba(0,0,0,.7);
+}
+.btn.tiktok svg{width:20px;height:20px;flex:0 0 20px;filter:drop-shadow(-1.5px 1px 0 #25F4EE) drop-shadow(1.5px -1px 0 #FE2C55)}
 .instructor .photo.logo{background:var(--grad-deep);border-radius:50%}
 .instructor .photo.logo img{object-fit:contain;padding:16px;border-radius:50%}
 
@@ -359,8 +366,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .model-embed.mv-failed .mv-fallback{display:flex}
 .mv-fallback img{max-height:78%;width:auto;border-radius:12px}
 .mv-fallback a{color:var(--lav-300);font-weight:700;font-size:13.5px;text-decoration:underline}
-.model-cap{font-size:12.5px;color:var(--mute);text-align:center;margin:11px 0 0;font-weight:600}
-.model-cap b{color:var(--indigo)}
+.model-cap{font-size:13px;color:var(--body-c);text-align:left;margin:0 0 10px;font-weight:600}
+.model-cap b{color:var(--ink);font-weight:800}
 /* señales de interactividad sobre el visor: informativas, nunca roban el gesto */
 .mv-badge{
   position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;
@@ -408,6 +415,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .hero p.sub{font-size:17.5px;max-width:600px}
   .hero-cta{flex-direction:row;flex-wrap:wrap}
   .hero-cta .btn{width:auto}
+  .cta-lead{text-align:left}   /* con botón auto-width y copy a la izquierda, el centrado es solo móvil */
   .fcard{flex-basis:calc((100% - 14px) / 2)}
   .fgal{gap:14px}
   .grid.g2{grid-template-columns:repeat(2,1fr)}
@@ -416,11 +424,10 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .split{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
   .result-visual{order:0}
   /* los dos paneles comparten tope y base: el alto lo dicta .pbr y el visor lo llena;
-     el pie de foto cuelga por debajo sin restar altura a la columna */
+     el subtítulo va arriba y resta su alto a la columna con normalidad */
   .pipe3d{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-bottom:56px}
-  .pipe3d > :first-child{display:flex;flex-direction:column;position:relative}
+  .pipe3d > :first-child{display:flex;flex-direction:column}
   .model-embed{flex:1;aspect-ratio:auto;max-height:none}
-  .model-cap{position:absolute;top:100%;left:0;right:0;margin:11px 0 0}
   .instructor{flex-direction:row;text-align:left;gap:34px;padding:36px 40px}
   .instructor .photo{width:156px;height:156px;flex:0 0 156px}
   .cta-final{padding:52px 40px}
@@ -522,19 +529,19 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   <div class="wrap">
     <div class="fgal" id="fgal">
       <article class="fcard">
-        <span class="fi">🎂</span><b>10+</b><span class="lbl">Años en adelante</span>
+        <div class="fhead"><span class="fi">🎂</span><b>10+</b><span class="lbl">Años en adelante</span></div>
         <p>Desde los <b>10 años</b> y <b>sin límite superior</b>: el material funciona igual de bien con un niño de primaria que con un adolescente que quiere entrar al 3D.</p>
       </article>
       <article class="fcard">
-        <span class="fi">📚</span><b data-count="20">20</b><span class="lbl">Clases</span>
+        <div class="fhead"><span class="fi">📚</span><b data-count="20">20</b><span class="lbl">Clases</span></div>
         <p>Un plan estructurado en <b>5 módulos</b>, desde los primeros clics en <b>Blender</b> hasta el <b>personaje terminado</b> y caminando dentro de Roblox.</p>
       </article>
       <article class="fcard">
-        <span class="fi">📅</span><b data-count="5">5</b><span class="lbl">Meses</span>
+        <div class="fhead"><span class="fi">📅</span><b data-count="5">5</b><span class="lbl">Meses</span></div>
         <p><b>Una clase por semana</b>, sin prisas. Queda tiempo real para <b>practicar entre sesiones</b> y asentar lo aprendido antes de avanzar.</p>
       </article>
       <article class="fcard">
-        <span class="fi">⏱️</span><b data-count="60">60</b><span class="lbl">Min por clase</span>
+        <div class="fhead"><span class="fi">⏱️</span><b data-count="60">60</b><span class="lbl">Min por clase</span></div>
         <p>Una hora de <b>trabajo enfocado</b>: teoría corta, práctica guiada y un <b>avance concreto</b> del personaje al final de cada sesión.</p>
       </article>
     </div>
@@ -552,10 +559,10 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <p class="sec-intro">El mismo tiempo frente a la pantalla, pero produciendo en vez de solo consumiendo. Estas son las habilidades reales que se lleva.</p>
     </div>
     <div class="grid g4" style="margin-top:26px">
-      <div class="card reveal" data-delay="0"><div class="badge">🎨</div><h3>De consumir a crear</h3><p>Pasa de jugar lo que otros hicieron a diseñar y modelar sus propios personajes 3D.</p></div>
-      <div class="card reveal" data-delay="80"><div class="badge">🧠</div><h3>Habilidades que sirven</h3><p>Pensamiento espacial, arte digital, lógica, paciencia y constancia: base de carreras como diseño, animación y videojuegos.</p></div>
-      <div class="card reveal" data-delay="160"><div class="badge">👁️</div><h3>Atención 1 a 1</h3><p>Clases individuales en vivo. El profe se adapta al ritmo de tu hijo, sin quedarse atrás ni aburrirse.</p></div>
-      <div class="card reveal" data-delay="240"><div class="badge">🚀</div><h3>Sin experiencia previa</h3><p>Empieza desde el primer clic en Blender. Todo explicado con palabras sencillas y ejemplos que un niño entiende.</p></div>
+      <div class="card row reveal" data-delay="0"><div class="badge">🎨</div><div><h3>De consumir a crear</h3><p>Pasa de jugar lo que otros hicieron a diseñar y modelar sus propios personajes 3D.</p></div></div>
+      <div class="card row reveal" data-delay="80"><div class="badge">🧠</div><div><h3>Habilidades que sirven</h3><p>Pensamiento espacial, arte digital, lógica, paciencia y constancia: base de carreras como diseño, animación y videojuegos.</p></div></div>
+      <div class="card row reveal" data-delay="160"><div class="badge">👁️</div><div><h3>Atención 1 a 1</h3><p>Clases individuales en vivo. El profe se adapta al ritmo de tu hijo, sin quedarse atrás ni aburrirse.</p></div></div>
+      <div class="card row reveal" data-delay="240"><div class="badge">🚀</div><div><h3>Sin experiencia previa</h3><p>Empieza desde el primer clic en Blender. Todo explicado con palabras sencillas y ejemplos que un niño entiende.</p></div></div>
     </div>
   </div>
 </section>
@@ -569,7 +576,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
         <div class="slot-tag">Akari · personaje real creado por tu instructor<small>Akari es un ejemplo de referencia: muestra cómo puede quedar un héroe o protagonista similar. El proyecto de tu hijo será su propio diseño.</small></div>
       </div>
       <div class="reveal-r">
-        <div class="sec-tag">Lo que se lleva <span class="hl">a casa</span></div>
+        <div class="sec-tag">El <span class="hl">resultado final</span></div>
         <h2 class="sec-h">Su propio <span class="hl">Personaje 3D</span>, caminando dentro de Roblox</h2>
         <p class="sec-intro">No es teoría. Al terminar, tu hijo tendrá un personaje que él mismo creó de principio a fin y que puede mostrar, mover y jugar.</p>
         <ul class="check">
@@ -596,6 +603,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="pipe3d">
       <!-- Modelo 3D real interactivo (creado por el instructor) -->
       <div class="reveal-l">
+        <div class="model-cap"><b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
         <div class="model-embed" id="modelEmbed">
           <model-viewer
             src="assets/oracle.glb"
@@ -612,7 +620,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
             <a href="assets/akari-turntable.mp4" target="_blank" rel="noopener">Ver el modelo girando en video →</a>
           </div>
         </div>
-        <div class="model-cap">🖱️ <b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
       </div>
 
       <!-- Desglose PBR con los mapas reales del personaje -->
@@ -688,9 +695,9 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <div class="who">La filosofía del curso</div>
     </div>
     <div class="grid g3 reveal" style="margin-top:18px">
-      <div class="card"><div class="badge">🧱</div><h3>Formas simples</h3><p>Todo se construye con cubos, esferas y cilindros. Como jugar con LEGO.</p></div>
-      <div class="card"><div class="badge">🎯</div><h3>100% práctico</h3><p>Cada clase construye algo real. Aprende creando, no mirando.</p></div>
-      <div class="card"><div class="badge">💛</div><h3>A su ritmo</h3><p>Al ser 1:1, nunca va demasiado rápido ni demasiado lento. Va a su paso.</p></div>
+      <div class="card row"><div class="badge">🧱</div><div><h3>Formas simples</h3><p>Todo se construye con cubos, esferas y cilindros. Como jugar con LEGO.</p></div></div>
+      <div class="card row"><div class="badge">🎯</div><div><h3>100% práctico</h3><p>Cada clase construye algo real. Aprende creando, no mirando.</p></div></div>
+      <div class="card row"><div class="badge">💛</div><div><h3>A su ritmo</h3><p>Al ser 1:1, nunca va demasiado rápido ni demasiado lento. Va a su paso.</p></div></div>
     </div>
   </div>
 </section>

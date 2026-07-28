@@ -34,7 +34,7 @@
   --grad-iri-chip:linear-gradient(110deg,#6366F1,#8B5CF6,#D946EF,#8B5CF6,#6366F1);
   /* la parada del 68% mantiene ≥.86 de alfa detrás de TODO el texto (el titular llega
      al 66% de la altura del bloque); el degradado muere por encima del texto, no en él */
-  --scrim-deep:linear-gradient(to top, rgba(22,17,43,.95), rgba(22,17,43,.86) 68%, rgba(22,17,43,0));
+  --scrim-deep:linear-gradient(to top, rgba(59,30,134,.95), rgba(59,30,134,.86) 68%, rgba(59,30,134,0));
   --scrim-peri:linear-gradient(to top, rgba(59,30,134,.95), rgba(59,30,134,.86) 68%, rgba(59,30,134,0));
   --iri:0%;
   --shadow:0 10px 30px -12px rgba(109,40,217,.22);
@@ -128,7 +128,7 @@ h1,h2,h3,h4{color:var(--ink)}
 .hero p.sub{font-size:16px;color:var(--body-c);margin-top:16px;font-weight:500}
 .hero p.sub b{color:var(--ink)}
 .hero-cta{display:flex;flex-direction:column;gap:12px;margin-top:26px}
-.hero-cta .btn{width:100%}
+.hero-cta .btn{width:auto;align-self:center}   /* al ancho del texto, en eje con el lead centrado */
 .cta-lead{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.2px;flex-basis:100%;text-align:center}
 .cta-lead .hl{font-weight:800}
 
@@ -183,7 +183,7 @@ h1,h2,h3,h4{color:var(--ink)}
   background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.fcard .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--mute);font-weight:700;line-height:1.3}
+.fcard .lbl{font-size:14px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink);font-weight:800;line-height:1.2}
 /* el párrafo arranca en la columna del texto: 34px de caja de icono + 10px de gap */
 .fcard p{font-size:13.5px;color:var(--body-c);line-height:1.55;margin:8px 0 0 44px;font-weight:500}
 .fcard p b{color:var(--ink);font-weight:700}
@@ -231,8 +231,8 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
   background:var(--card-soft);box-shadow:var(--shadow);order:-1;
 }
 .result-visual img,.result-visual video{width:100%;height:auto;display:block}
-.result-visual .slot-tag{padding:10px;text-align:center;font-size:11.5px;color:var(--mute);font-weight:600;background:#fff;border-top:1px solid var(--border)}
-.result-visual .slot-tag small{display:block;margin-top:4px;font-size:10.5px;font-weight:500;opacity:.85}
+.result-visual .slot-tag{padding:13px 14px;text-align:center;font-size:13px;color:var(--ink);font-weight:700;background:#fff;border-top:1px solid var(--border)}
+.result-visual .slot-tag small{display:block;margin-top:5px;font-size:12px;font-weight:500;color:var(--body-c)}
 .check{list-style:none;display:grid;gap:11px;margin-top:20px}
 .check li{display:block;position:relative;padding-left:33px;font-size:14.5px;color:var(--body-c)}
 .check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-peri);color:#fff}
@@ -366,8 +366,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .model-embed.mv-failed .mv-fallback{display:flex}
 .mv-fallback img{max-height:78%;width:auto;border-radius:12px}
 .mv-fallback a{color:var(--lav-300);font-weight:700;font-size:13.5px;text-decoration:underline}
-.model-cap{font-size:13px;color:var(--body-c);text-align:left;margin:0 0 10px;font-weight:600}
-.model-cap b{color:var(--ink);font-weight:800}
 /* señales de interactividad sobre el visor: informativas, nunca roban el gesto */
 .mv-badge{
   position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;
@@ -413,8 +411,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
   .wrap{padding:0 32px}
   :root{--nav-h:66px}
   .hero p.sub{font-size:17.5px;max-width:600px}
-  .hero-cta{flex-direction:row;flex-wrap:wrap}
-  .hero-cta .btn{width:auto}
+  .hero-cta{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+  .hero-cta .btn{align-self:auto}   /* en fila, el botón se alinea a la izquierda con el copy */
   .cta-lead{text-align:left}   /* con botón auto-width y copy a la izquierda, el centrado es solo móvil */
   .fcard{flex-basis:calc((100% - 14px) / 2)}
   .fgal{gap:14px}
@@ -595,7 +593,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 <section id="portfolio">
   <div class="wrap">
     <div class="reveal">
-      <div class="sec-tag">Cómo se crea un personaje 3D en <span class="hl">Blender</span></div>
+      <div class="sec-tag">Cómo se <span class="hl">crea</span> un <span class="hl">personaje</span> 3D en <span class="hl">Blender</span></div>
       <h2 class="sec-h">Del boceto al <span class="hl">personaje jugable</span>: el pipeline profesional</h2>
       <p class="sec-intro">El mismo proceso que usan los estudios de videojuegos, mostrado con un personaje <b style="color:var(--ink)">real</b> creado por tu instructor: <b style="color:var(--ink)">Akari</b>. Esto es lo que tu hijo aprende a hacer.</p>
     </div>
@@ -603,7 +601,6 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="pipe3d">
       <!-- Modelo 3D real interactivo (creado por el instructor) -->
       <div class="reveal-l">
-        <div class="model-cap"><b>Gíralo tú mismo</b> · Akari, modelo real hecho en Blender por tu instructor. Arrástralo para explorarlo.</div>
         <div class="model-embed" id="modelEmbed">
           <model-viewer
             src="assets/oracle.glb"

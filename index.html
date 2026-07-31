@@ -22,10 +22,6 @@
   --card:#ffffff; --card-soft:#faf9ff;
   --border:#e5e3f4; --border-strong:#d5d1ec;
   --lav-100:#e7e6fd; --lav-300:#c9c5f2; --peri:#6366F1; --indigo:#5A54C9; --plum:#6D28D9;
-  /* hermano de --lav-300 en la escala, al mismo nivel de luminancia (≈10:1 sobre el navy)
-     pero fuera de su matiz: el lavanda comparte familia con el fondo oscuro y por eso se
-     percibe apagado aunque el número pase de sobra. Es matiz, no contraste. */
-  --cyan-300:#a8dce4;
   --vio:#6366F1; --vio-2:#8B5CF6; --mag:#D946EF;
   --cyanl:#38BDF8; --greenl:#34D399;
   --navy:#16112B; --navy-2:#221B3F;
@@ -266,8 +262,11 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
    se quedan claras a propósito — mismo juego que las fcards sobre la banda navy. */
 .sec-dark{background:var(--grad-deep)}
 .sec-dark .sec-tag,.sec-dark .sec-h,.sec-dark .sec-h .hl{color:#fff}
-.sec-dark .sec-intro,.sec-dark .check li{color:var(--cyan-300)}   /* mismo ≈10:1 que el lavanda, pero sin compartir matiz con el navy: es lo que se percibía apagado */
-.sec-dark .check li b{color:#fff}
+/* todo el bloque en blanco: sobre el navy, el resalte lo lleva el peso y no el color.
+   Es la misma regla que ya sigue .sec-h .hl — un color distinto para las palabras clave
+   competiría con los titulares en vez de jerarquizar dentro del párrafo. */
+.sec-dark .sec-intro,.sec-dark .check li,.sec-dark .check li b{color:#fff}
+.sec-dark .check li b{font-weight:800}   /* 400 → 800: el salto que antes daba el cambio de color */
 
 /* ---------- LOGÍSTICA ---------- */
 /* estas 4 viven en #como, que es .alt (#fff): sin el degradado serían blanco sobre blanco */

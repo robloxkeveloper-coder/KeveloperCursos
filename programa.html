@@ -25,9 +25,6 @@
   --card:#ffffff; --card-soft:#faf9ff;
   --border:#e5e3f4; --border-strong:#d5d1ec;
   --lav-100:#e7e6fd; --lav-300:#c9c5f2; --peri:#6366F1; --indigo:#5A54C9; --plum:#6D28D9;
-  /* hermano de --lav-300 al mismo nivel de luminancia pero fuera de su matiz: el lavanda
-     comparte familia con el navy del fondo y se percibe apagado. Es matiz, no contraste. */
-  --cyan-300:#a8dce4;
   --vio:#6366F1; --vio-2:#8B5CF6; --mag:#D946EF;
   --cyanl:#38BDF8; --greenl:#34D399;
   --navy:#16112B; --navy-2:#221B3F;
@@ -221,8 +218,9 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .check li b{color:var(--ink)}
 .sec-dark{background:var(--grad-deep)}
 .sec-dark .sec-tag,.sec-dark .sec-h,.sec-dark .sec-h .hl{color:#fff}
-.sec-dark .sec-intro,.sec-dark .check li{color:var(--cyan-300)}   /* mismo ≈10:1 que el lavanda, pero sin compartir matiz con el navy */
-.sec-dark .check li b{color:#fff}
+/* todo el bloque en blanco: sobre el navy el resalte lo lleva el peso, no el color */
+.sec-dark .sec-intro,.sec-dark .check li,.sec-dark .check li b{color:#fff}
+.sec-dark .check li b{font-weight:800}   /* 400 → 800: el salto que antes daba el cambio de color */
 .sec-dark .fine-note{margin-top:18px;font-size:12.5px;color:#9a96b8;font-weight:600}
 
 /* ---------- FAQ ---------- */

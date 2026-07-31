@@ -202,7 +202,9 @@ section{padding:44px 0}
 section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .sec-tag{   /* título de sección: manda sobre el subtítulo */
   display:block;font-size:clamp(19px,5.2vw,25px);font-weight:800;text-transform:uppercase;
-  letter-spacing:1px;line-height:1.25;color:var(--ink);margin-bottom:10px;
+  /* 1.05 y no menos: son mayúsculas con tilde alta (CÓMO, QUIÉN, POR QUÉ) y por debajo
+     de ahí la caja de línea empieza a comerse el acento */
+  letter-spacing:1px;line-height:1.05;color:var(--ink);margin-bottom:10px;
 }
 .sec-tag .hl{
   color:var(--indigo);
@@ -348,6 +350,39 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .wa-float svg{width:28px;height:28px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 15px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
 
+/* ---------- ONDA — el pulso de .wa-float, reutilizable y en el color de cada botón ----------
+   El anillo vive en un ::after, no en el botón: así cada botón conserva su sombra de
+   profundidad. (.wa-float pierde la suya mientras late, justo por animar su box-shadow directo.)
+   Crece por spread y no por scale(): el spread crece los mismos píxeles por los cuatro lados,
+   mientras que un scale() sobre una píldora de 420px crecería cinco veces más a lo ancho que
+   a lo alto y deformaría el gesto. El spread pinta, así que en reposo solo late lo que debe
+   llamar —los CTAs y el tab activo—; el resto dispara la onda al interactuar. */
+@keyframes wave{
+  0%  {box-shadow:0 0 0 0                  var(--wave)}
+  70% {box-shadow:0 0 0 var(--wave-r,14px) transparent}
+  100%{box-shadow:0 0 0 0                  transparent}
+}
+.btn.cta,.btn.linkedin,.btn.tiktok,.pbr-tab,.qa summary .plus{position:relative}
+.btn.cta::after,.btn.linkedin::after,.btn.tiktok::after,
+.pbr-tab.active::after,.qa summary .plus::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+}
+/* el color de la onda es el que ya usa el botón, no uno nuevo */
+.btn.cta{--wave:rgba(52,211,153,.5)}       /* verde de --grad-lime, el mismo del flotante */
+.btn.linkedin{--wave:rgba(10,102,194,.5)}  /* su propio #0a66c2 */
+.btn.tiktok{--wave:rgba(37,244,238,.5)}    /* el acento cian #25F4EE de su doble sombra */
+/* --plum, con alfa alto porque late sobre el panel navy; 9px para no invadir al tab vecino (gap 7px) */
+.pbr-tab.active{--wave:rgba(109,40,217,.55);--wave-r:9px}
+/* --peri, y corto a propósito: .qa recorta con overflow:hidden */
+.qa summary .plus{--wave:rgba(99,102,241,.45);--wave-r:8px}
+
+.btn.cta::after,.btn.linkedin::after,.btn.tiktok::after,.pbr-tab.active::after{animation:wave 2.6s infinite}
+/* sin regla para [open]: al ser un estado permanente, la onda se relanzaba también al
+   retirar el cursor. El momento de activación ya lo cubren :hover (ratón, y táctil —Chrome
+   deja el :hover pegado tras el toque) y :focus-visible (teclado). */
+.qa summary:hover .plus::after,
+.qa summary:focus-visible .plus::after{animation:wave 2.6s infinite}
+
 /* ---------- SCROLL REVEAL (solo bajo html.js) ---------- */
 html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 html.js .reveal-l{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
@@ -462,7 +497,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 }
 
 @media (prefers-reduced-motion: reduce){
-  *{scroll-behavior:auto !important;animation:none !important}
+  /* los pseudo-elementos hacen falta explícitos: `*` no los alcanza, y la onda vive en ::after */
+  *,*::before,*::after{scroll-behavior:auto !important;animation:none !important}
   html.js .reveal,html.js .reveal-l,html.js .reveal-r{opacity:1 !important;transform:none !important;transition:none !important}
 }
 </style>
@@ -674,9 +710,9 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
       <h2 class="sec-h">Sencillo para ti, <span class="hl">divertido para tu hijo</span></h2>
     </div>
     <div class="grid g2" style="margin-top:24px">
-      <div class="info reveal" data-delay="0"><div class="e">💻</div><div><h4>Clases online en vivo</h4><p>Uno a uno por videollamada, con pantalla compartida. Tu hijo aprende desde casa, contigo cerca.</p></div></div>
+      <div class="info reveal" data-delay="0"><div class="e">🛜</div><div><h4>Clases online en vivo</h4><p>Uno a uno por videollamada, con pantalla compartida. Tu hijo aprende desde casa, contigo cerca.</p></div></div>
       <div class="info reveal" data-delay="80"><div class="e">⏱️</div><div><h4>1 hora por semana · 5 meses</h4><p>20 clases a un ritmo tranquilo que respeta sus tiempos de colegio y descanso.</p></div></div>
-      <div class="info reveal" data-delay="160"><div class="e">🧰</div><div><h4>Solo necesita un PC</h4><p>Blender es <b>gratis</b> y funciona en la mayoría de computadores. Nada de comprar programas caros.</p></div></div>
+      <div class="info reveal" data-delay="160"><div class="e">💻</div><div><h4>Solo necesita un PC de gama media</h4><p>Blender es <b>gratis</b> y corre bien en un equipo de gama media. Nada de comprar programas caros ni un PC gamer.</p></div></div>
       <div class="info reveal" data-delay="240"><div class="e">📊</div><div><h4>Progreso medible</h4><p>Cada clase tiene objetivos y criterios claros. Sabrás exactamente qué está aprendiendo.</p></div></div>
     </div>
   </div>

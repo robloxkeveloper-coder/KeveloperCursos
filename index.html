@@ -22,6 +22,10 @@
   --card:#ffffff; --card-soft:#faf9ff;
   --border:#e5e3f4; --border-strong:#d5d1ec;
   --lav-100:#e7e6fd; --lav-300:#c9c5f2; --peri:#6366F1; --indigo:#5A54C9; --plum:#6D28D9;
+  /* hermano de --lav-300 en la escala, al mismo nivel de luminancia (≈10:1 sobre el navy)
+     pero fuera de su matiz: el lavanda comparte familia con el fondo oscuro y por eso se
+     percibe apagado aunque el número pase de sobra. Es matiz, no contraste. */
+  --cyan-300:#a8dce4;
   --vio:#6366F1; --vio-2:#8B5CF6; --mag:#D946EF;
   --cyanl:#38BDF8; --greenl:#34D399;
   --navy:#16112B; --navy-2:#221B3F;
@@ -32,12 +36,25 @@
   --grad-text:linear-gradient(120deg,#6366F1,#8B5CF6);
   --grad-iri:linear-gradient(110deg,#38BDF8,#8B5CF6,#D946EF,#34D399,#38BDF8);
   --grad-iri-chip:linear-gradient(110deg,#6366F1,#8B5CF6,#D946EF,#8B5CF6,#6366F1);
+  /* tornasol acotado a violeta↔azul, sin el tramo magenta/verde de --grad-iri */
+  --grad-iri-vio:linear-gradient(110deg,#8B5CF6,#38BDF8,#6366F1,#38BDF8,#8B5CF6);
+  /* Chapa de tarjeta: blanco puro donde caen el icono y el titular, derivando a un gris
+     que lleva el peri de la marca dentro — por eso lee plateado y no gris sucio.
+     152° porque una diagonal lee como luz y una vertical lee como degradado; el blanco
+     aguanta hasta el 38% para que el brillo sea luz de canto y no un lavado uniforme;
+     y el matiz deriva al azul-violeta (#eeecf8 tiene B 10 por encima de R, mismo linaje
+     que --lav-100) en vez de a gris neutro, que sobre este fondo lavanda se vería sucio. */
+  --grad-card:linear-gradient(152deg,#ffffff 0%,#fdfdff 38%,#f5f4fb 72%,#eeecf8 100%);
   /* la parada del 68% mantiene ≥.86 de alfa detrás de TODO el texto (el titular llega
      al 66% de la altura del bloque); el degradado muere por encima del texto, no en él */
   --scrim-deep:linear-gradient(to top, rgba(59,30,134,.95), rgba(59,30,134,.86) 68%, rgba(59,30,134,0));
   --scrim-peri:linear-gradient(to top, rgba(59,30,134,.95), rgba(59,30,134,.86) 68%, rgba(59,30,134,0));
   --iri:0%;
   --shadow:0 10px 30px -12px rgba(109,40,217,.22);
+  /* el nivel que faltaba: en reposo solo había .06 de alfa (invisible), así que la tarjeta
+     únicamente cobraba cuerpo al pasar el ratón o al abrirse. Con esto ya se lee como objeto
+     antes de tocarla, y --shadow sigue siendo un escalón por encima en la interacción. */
+  --shadow-rest:0 4px 14px -4px rgba(109,40,217,.13);
   --radius:16px; --nav-h:60px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -172,7 +189,7 @@ h1,h2,h3,h4{color:var(--ink)}
 .fgal::-webkit-scrollbar{display:none}
 .fcard{
   flex:0 0 84%;scroll-snap-align:start;
-  background:var(--card);border-radius:16px;padding:20px 18px;
+  background:var(--grad-card);border-radius:16px;padding:20px 18px;
   box-shadow:0 14px 32px -16px rgba(0,0,0,.55);
   display:flex;flex-direction:column;gap:6px;
 }
@@ -217,7 +234,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 
 /* ---------- CARDS ---------- */
 .grid{display:grid;gap:14px;grid-template-columns:1fr}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:0 2px 10px rgba(86,84,113,.06)}
+.card{background:var(--grad-card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:var(--shadow-rest)}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong)}
 .card .badge{font-size:30px;line-height:1;margin-bottom:12px}
 /* card en fila: icono a la izquierda del título, mismo ritmo que .info (el formato de referencia) */
@@ -237,7 +254,10 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .result-visual .slot-tag small{display:block;margin-top:5px;font-size:12px;font-weight:500;color:var(--body-c)}
 .check{list-style:none;display:grid;gap:11px;margin-top:20px}
 .check li{display:block;position:relative;padding-left:33px;font-size:14.5px;color:var(--body-c)}
-.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-peri);color:#fff}
+/* lima con el ✓ en navy, el mismo patrón que .btn.cta. El ✓ blanco sobre el peri daba 4.23:1
+   en el extremo violeta y fallaba AA a 12px; así mide 8.53:1 sobre el cian y 9.51:1 sobre el
+   verde. El tick TIENE que ir oscuro: blanco sobre este lima serían 2.14:1 y 1.92:1. */
+.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-lime);color:var(--navy)}
 .check li b{color:var(--ink)}
 
 /* #resultado en oscuro: contrasta con las secciones claras vecinas.
@@ -246,11 +266,13 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
    se quedan claras a propósito — mismo juego que las fcards sobre la banda navy. */
 .sec-dark{background:var(--grad-deep)}
 .sec-dark .sec-tag,.sec-dark .sec-h,.sec-dark .sec-h .hl{color:#fff}
-.sec-dark .sec-intro,.sec-dark .check li{color:var(--lav-300)}
+.sec-dark .sec-intro,.sec-dark .check li{color:var(--cyan-300)}   /* mismo ≈10:1 que el lavanda, pero sin compartir matiz con el navy: es lo que se percibía apagado */
 .sec-dark .check li b{color:#fff}
 
 /* ---------- LOGÍSTICA ---------- */
-.info{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(86,84,113,.06)}
+/* estas 4 viven en #como, que es .alt (#fff): sin el degradado serían blanco sobre blanco */
+.info{display:flex;gap:13px;align-items:flex-start;background:var(--grad-card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;transition:.18s;box-shadow:var(--shadow-rest)}
+.info:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--border-strong)}   /* no tenía hover: era la única familia de tarjeta que no respondía */
 .info .e{width:40px;font-size:26px;line-height:1.3;flex:0 0 40px;text-align:center}
 .info h4{font-size:15px;font-weight:800;margin-bottom:3px}
 .info p{font-size:13.5px;color:var(--body-c)}
@@ -265,7 +287,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .quote .who{font-size:12px;color:var(--indigo);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:12px}
 
 /* ---------- TESTIMONIOS (oculto, estilos conservados) ---------- */
-.tcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(86,84,113,.06)}
+.tcard{background:var(--grad-card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(86,84,113,.06)}
 .tcard .stars{color:var(--vio-2);font-size:15px;letter-spacing:2px;margin-bottom:11px}
 .tcard p{font-size:14.5px;color:var(--ink);font-style:italic;line-height:1.4}
 .tcard .who{display:flex;align-items:center;gap:11px;margin-top:15px}
@@ -275,8 +297,10 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 
 /* ---------- FAQ ---------- */
 .faq{display:grid;gap:11px}
-.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s}
-.qa[open]{border-color:var(--peri);box-shadow:0 6px 18px rgba(132,136,181,.2)}
+/* estaba a box-shadow:none, así que la fila solo cobraba cuerpo al abrirla — era el caso
+   que delataba que la profundidad solo aparecía al interactuar */
+.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
+.qa[open]{border-color:var(--peri);box-shadow:var(--shadow)}   /* --shadow y no el .2 de antes: con el reposo subido, ese valor ya no se distinguía */
 .qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary .plus{flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:16px;font-weight:800;background:var(--grad-peri);color:#fff;transition:.2s}
@@ -314,8 +338,17 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
   box-shadow:-5px 5px 18px -6px rgba(37,244,238,.95), 5px -5px 18px -6px rgba(254,44,85,.95), 0 14px 26px -12px rgba(0,0,0,.7);
 }
 .btn.tiktok svg{width:20px;height:20px;flex:0 0 20px;filter:drop-shadow(-1.5px 1px 0 #25F4EE) drop-shadow(1.5px -1px 0 #FE2C55)}
-.instructor .photo.logo{background:var(--grad-deep);border-radius:50%}
-.instructor .photo.logo img{object-fit:contain;padding:16px;border-radius:50%}
+/* aro tornasol violeta↔azul, desplazándose con --iri igual que el wordmark y los titulares.
+   Antes pisaba con --grad-deep el aro violeta que .photo trae de serie, así que su anillo de
+   4px era navy sobre navy: invisible. */
+.instructor .photo.logo{
+  background:var(--grad-iri-vio);background-size:250% 100%;background-position:var(--iri) 50%;
+  border-radius:50%;
+  box-shadow:0 12px 30px -10px rgba(99,102,241,.55), 0 0 26px -6px rgba(56,189,248,.45);
+}
+/* el navy vuelve, pero SOLO detrás del logo: el PNG es transparente y sin esto el degradado
+   asomaría por detrás de la marca en vez de quedarse en el aro */
+.instructor .photo.logo img{object-fit:contain;padding:16px;border-radius:50%;background:var(--grad-deep)}
 
 /* ---------- CTA FINAL (panel navy + blob lavanda, botón lima) ---------- */
 .cta-final{
@@ -331,6 +364,11 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .cta-final h2{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.4px;color:#fff}
 .cta-final p{color:#c9c6dd;margin:14px auto 26px;font-weight:600;font-size:16px;max-width:520px}
 .cta-final .btn{width:100%;max-width:420px;margin:0 auto}
+/* .btn.ghost usa --ink, que sobre este panel navy sería invisible: dentro se aclara.
+   Mismo recurso que .sec-dark usa con los títulos — scoping, no una clase nueva. */
+.cta-final .btn.ghost{color:#fff;border-color:rgba(201,197,242,.5);background:rgba(255,255,255,.05)}
+.cta-final .btn.ghost:hover{border-color:var(--lav-300);background:rgba(255,255,255,.11)}
+.cta-final .btn + .btn{margin-top:12px}   /* los dos van a 100%/420px y se apilan */
 .cta-final .fine{margin-top:16px;font-size:12.5px;color:#9a96b8;font-weight:600}
 
 /* ---------- FOOTER ---------- */
@@ -829,6 +867,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
     <div class="cta-final reveal">
       <h2>El primer personaje de tu hijo está a una clase de distancia</h2>
       <p>Convierte su tiempo en pantalla en una habilidad para el futuro. Agenda una clase de prueba gratis y sin compromiso.</p>
+      <!-- ruta relativa a propósito: la URL absoluta rompería la previsualización local -->
+      <a href="programa.html" class="btn ghost">Ver el programa clase a clase</a>
       <a href="#" class="btn cta js-wa">
         <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
         Primera clase gratis

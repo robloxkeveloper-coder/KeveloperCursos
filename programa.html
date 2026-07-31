@@ -25,6 +25,9 @@
   --card:#ffffff; --card-soft:#faf9ff;
   --border:#e5e3f4; --border-strong:#d5d1ec;
   --lav-100:#e7e6fd; --lav-300:#c9c5f2; --peri:#6366F1; --indigo:#5A54C9; --plum:#6D28D9;
+  /* hermano de --lav-300 al mismo nivel de luminancia pero fuera de su matiz: el lavanda
+     comparte familia con el navy del fondo y se percibe apagado. Es matiz, no contraste. */
+  --cyan-300:#a8dce4;
   --vio:#6366F1; --vio-2:#8B5CF6; --mag:#D946EF;
   --cyanl:#38BDF8; --greenl:#34D399;
   --navy:#16112B; --navy-2:#221B3F;
@@ -34,8 +37,15 @@
   --grad-lime:linear-gradient(135deg,#38BDF8,#34D399);
   --grad-text:linear-gradient(120deg,#6366F1,#8B5CF6);
   --grad-iri:linear-gradient(110deg,#38BDF8,#8B5CF6,#D946EF,#34D399,#38BDF8);
+  /* Chapa de tarjeta — mismo valor que en index.html (los dos :root están duplicados
+     mientras no exista base.css). Blanco puro donde caen el icono y el titular, y deriva
+     a un gris con el peri de la marca dentro para que lea plateado y no gris sucio. */
+  --grad-card:linear-gradient(152deg,#ffffff 0%,#fdfdff 38%,#f5f4fb 72%,#eeecf8 100%);
   --iri:0%;
   --shadow:0 10px 30px -12px rgba(109,40,217,.22);
+  /* el nivel intermedio que faltaba: en reposo solo había .06 de alfa, así que la tarjeta
+     solo cobraba cuerpo al interactuar. --shadow sigue siendo el escalón de arriba. */
+  --shadow-rest:0 4px 14px -4px rgba(109,40,217,.13);
   --radius:16px; --nav-h:60px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -155,7 +165,9 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 
 /* ---------- CARDS ---------- */
 .grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:26px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:0 2px 10px rgba(86,84,113,.06)}
+/* .acto y .modcard heredan el degradado de aquí. 8 de las 14 tarjetas de esta página
+   viven en secciones .alt (#fff), donde el blanco plano no se separaba del fondo. */
+.card{background:var(--grad-card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:var(--shadow-rest)}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong)}
 .card .badge{font-size:30px;line-height:1;margin-bottom:12px}
 .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
@@ -185,7 +197,9 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .modcard.m3::before{background:linear-gradient(#D946EF,#8B5CF6)}
 .modcard.m4::before{background:linear-gradient(#F59E0B,#D946EF)}
 .modcard.m5::before{background:linear-gradient(#34D399,#6366F1)}
-.modcard .mnum{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--mute)}
+/* --body-c y no --mute: a 11.5px esto es texto pequeño y necesita 4.5:1. Con --mute daba
+   4.27:1 ya sobre blanco, y el degradado de la tarjeta lo bajaba a 3.67:1 */
+.modcard .mnum{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--body-c)}
 .modcard .mnum b{color:var(--indigo)}
 .modcard h3{margin-top:4px}
 .modcard ul{list-style:none;display:grid;gap:7px;margin-top:12px}
@@ -200,18 +214,22 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 /* ---------- CHECKLIST (lo que se lleva) ---------- */
 .check{list-style:none;display:grid;gap:11px;margin-top:20px}
 .check li{display:block;position:relative;padding-left:33px;font-size:14.5px;color:var(--body-c)}
-.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-peri);color:#fff}
+/* lima con el ✓ en navy, igual que .btn.cta. El ✓ blanco sobre el peri daba 4.23:1 en el
+   extremo violeta y fallaba AA a 12px; así mide 8.53:1 y 9.51:1. El tick TIENE que ir
+   oscuro: blanco sobre este lima serían 2.14:1 y 1.92:1. */
+.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-lime);color:var(--navy)}
 .check li b{color:var(--ink)}
 .sec-dark{background:var(--grad-deep)}
 .sec-dark .sec-tag,.sec-dark .sec-h,.sec-dark .sec-h .hl{color:#fff}
-.sec-dark .sec-intro,.sec-dark .check li{color:var(--lav-300)}
+.sec-dark .sec-intro,.sec-dark .check li{color:var(--cyan-300)}   /* mismo ≈10:1 que el lavanda, pero sin compartir matiz con el navy */
 .sec-dark .check li b{color:#fff}
 .sec-dark .fine-note{margin-top:18px;font-size:12.5px;color:#9a96b8;font-weight:600}
 
 /* ---------- FAQ ---------- */
 .faq-list{display:grid;gap:12px;margin-top:26px}
-.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s}
-.qa[open]{border-color:var(--peri);box-shadow:0 6px 18px rgba(132,136,181,.2)}
+/* estaba a box-shadow:none: la fila solo cobraba cuerpo al abrirla */
+.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
+.qa[open]{border-color:var(--peri);box-shadow:var(--shadow)}   /* con el reposo subido, el .2 de antes ya no se distinguía */
 .qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary .plus{flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:16px;font-weight:800;background:var(--grad-peri);color:#fff;transition:.2s}
@@ -233,6 +251,11 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .cta-final h2{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.4px;color:#fff}
 .cta-final p{color:#c9c6dd;margin:14px auto 26px;font-weight:600;font-size:16px;max-width:520px}
 .cta-final .btn{width:100%;max-width:420px;margin:0 auto}
+/* .btn.ghost usa --ink, invisible sobre este panel navy: dentro se aclara. Mismo recurso
+   que .sec-dark usa con los títulos — scoping, no una clase nueva en el marcado. */
+.cta-final .btn.ghost{color:#fff;border-color:rgba(201,197,242,.5);background:rgba(255,255,255,.05)}
+.cta-final .btn.ghost:hover{border-color:var(--lav-300);background:rgba(255,255,255,.11)}
+.cta-final .btn + .btn{margin-top:12px}   /* los dos van a 100%/420px y se apilan */
 .cta-final .fine{margin-top:16px;font-size:12.5px;color:#9a96b8;font-weight:600}
 
 /* ---------- FOOTER ---------- */
@@ -508,6 +531,8 @@ html.js .reveal.in{opacity:1;transform:none}
     <div class="cta-final reveal">
       <h2>El programa ya está listo. Solo falta tu mago.</h2>
       <p>Agenda la clase de prueba gratis: tu hijo construye su primer modelo 3D y tú ves el método en vivo. Sin compromiso.</p>
+      <!-- ruta relativa a propósito: la absoluta rompería la previsualización local -->
+      <a href="index.html" class="btn ghost">Volver al inicio</a>
       <a href="#" class="btn cta js-wa">
         <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
         Agendar la clase de prueba gratis

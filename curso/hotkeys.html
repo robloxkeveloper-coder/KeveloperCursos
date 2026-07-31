@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarjeta de hotkeys · Curso Mago Fantástico</title>
+<meta name="description" content="Todas las hotkeys de Blender 5.2 del curso Mago Fantástico, acumuladas clase a clase y agrupadas por categoría. La tarjeta de referencia del estudiante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html" class="active" aria-current="page"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">⌨ Referencia acumulativa · Blender 5.2 LTS</span>
+      <h1>Tarjeta de <span class="g1">hotkeys</span></h1>
+      <p class="sub">Todas las teclas del curso, en dos vistas: <strong>por clase</strong> (en qué momento entró cada una — ninguna clase usa una tecla que no haya sido presentada antes) y <strong>por categoría</strong> (para encontrarla rápido cuando la mano la olvida). Las clases 5, 16, 17, 19 y 20 no declaran teclas nuevas: son clases de flujo.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Teclas</span> 39 + 2 re-oficios</span>
+        <span class="meta-chip"><span class="mono">Se congela en</span> Clase 18</span>
+      </div>
+    </header>
+
+    <section id="por-clase" aria-labelledby="h-clase">
+      <div class="sec-head"><span class="num">01</span><h2 id="h-clase">Por clase — el orden en que llegaron</h2><div class="line"></div></div>
+      <div class="tbl-wrap" tabindex="0">
+        <table class="tbl">
+          <thead><tr><th scope="col">Clase</th><th scope="col">Hotkeys nuevas</th><th scope="col">Qué hacen</th></tr></thead>
+          <tbody>
+            <tr><td><b><a href="clase-01.html">01</a></b></td><td class="num-cell">G · R · S · Shift+A · X · Ctrl+Z</td><td>Mover, rotar, escalar · añadir objeto · borrar · deshacer</td></tr>
+            <tr><td><b><a href="clase-02.html">02</a></b></td><td class="num-cell">Tab · 1 · 2 · 3 · E · Ctrl+R</td><td>Edit Mode · vértice/arista/cara · extruir · loop cut</td></tr>
+            <tr><td><b><a href="clase-03.html">03</a></b></td><td class="num-cell">Ctrl+B · Alt+clic · Shift+D</td><td>Bevel · seleccionar loop · duplicar</td></tr>
+            <tr><td><b><a href="clase-04.html">04</a></b></td><td class="num-cell">Ctrl+E · U</td><td>Mark Seam · unwrap</td></tr>
+            <tr><td><b><a href="clase-05.html">05</a></b></td><td class="num-cell">—</td><td>Clase de flujo: materiales, export, import</td></tr>
+            <tr><td><b><a href="clase-06.html">06</a></b></td><td class="num-cell">N · Numpad 1 · Numpad 3 · Numpad 7</td><td>Panel de propiedades · vistas frontal, lateral y superior</td></tr>
+            <tr><td><b><a href="clase-07.html">07</a></b></td><td class="num-cell">O · Alt+Z · B</td><td>Edición proporcional · X-ray · selección de caja</td></tr>
+            <tr><td><b><a href="clase-08.html">08</a></b></td><td class="num-cell">F · M · Ctrl+J</td><td>Rellenar cara · fusionar vértices · unir objetos</td></tr>
+            <tr><td><b><a href="clase-09.html">09</a></b></td><td class="num-cell">H · Alt+H · L · /</td><td>Esconder · mostrar todo · seleccionar conectado · local view</td></tr>
+            <tr><td><b><a href="clase-10.html">10</a></b></td><td class="num-cell">Shift+N</td><td>Recalcular normales hacia afuera</td></tr>
+            <tr><td><b><a href="clase-11.html">11</a></b></td><td class="num-cell">Shift+S</td><td>Menú de snap (cursor y selección)</td></tr>
+            <tr><td><b><a href="clase-12.html">12</a></b></td><td class="num-cell">Alt+D</td><td>Duplicado enlazado</td></tr>
+            <tr><td><b><a href="clase-13.html">13</a></b></td><td class="num-cell">Alt+S · Ctrl+Numpad+ · Ctrl+Numpad−</td><td>Inflar por normales · crecer/encoger selección</td></tr>
+            <tr><td><b><a href="clase-14.html">14</a></b></td><td class="num-cell">F · Shift+F <small>(Sculpt Mode)</small></td><td>Tamaño y fuerza del pincel — re-oficio declarado de F</td></tr>
+            <tr><td><b><a href="clase-15.html">15</a></b></td><td class="num-cell">Ctrl+Space</td><td>Maximizar el editor bajo el cursor</td></tr>
+            <tr><td><b><a href="clase-16.html">16</a></b></td><td class="num-cell">—</td><td>Clase de flujo: el bake vive en paneles</td></tr>
+            <tr><td><b><a href="clase-17.html">17</a></b></td><td class="num-cell">—</td><td>Clase de flujo: pintura con el arsenal existente</td></tr>
+            <tr><td><b><a href="clase-18.html">18</a></b></td><td class="num-cell">Ctrl+A</td><td>Aplicar transformaciones — la última tecla del curso</td></tr>
+            <tr><td><b><a href="clase-19.html">19</a></b></td><td class="num-cell">—</td><td>Clase de flujo: export, bundling, Avatar Setup</td></tr>
+            <tr><td><b><a href="clase-20.html">20</a></b></td><td class="num-cell">—</td><td>Clase de flujo: corrección, magia y presentación</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warn">
+        <span class="wi" aria-hidden="true">📖</span>
+        <p><strong>Regla del curso:</strong> ninguna clase usa una hotkey que no haya sido introducida antes. Si una tecla aparece en una práctica, su clase de origen está en esta tabla. Las teclas con "re-oficio" (F en Sculpt Mode, L en el UV Editor) se declaran de nuevo en la clase donde cambian de significado.</p>
+      </div>
+    </section>
+
+    <section id="por-categoria" aria-labelledby="h-cat">
+      <div class="sec-head"><span class="num">02</span><h2 id="h-cat">Por categoría — para encontrarla rápido</h2><div class="line"></div></div>
+      <div class="grid g2">
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">✋</span>Transformar</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">G</span><span class="kf">Mover</span><span class="kw">Clase 1 · + X/Y/Z para encerrar en un eje</span></div>
+            <div class="key"><span class="kbd">R</span><span class="kf">Rotar</span><span class="kw">Clase 1</span></div>
+            <div class="key"><span class="kbd">S</span><span class="kf">Escalar</span><span class="kw">Clase 1</span></div>
+            <div class="key"><span class="kbd">Alt + S</span><span class="kf">Inflar/desinflar por normales</span><span class="kw">Clase 13 · la herramienta de vestir</span></div>
+            <div class="key"><span class="kbd">Ctrl + A</span><span class="kf">Aplicar transformaciones</span><span class="kw">Clase 18 · ficha a limpio antes del export</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🧱</span>Construir y editar malla</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">Shift + A</span><span class="kf">Añadir objeto</span><span class="kw">Clase 1</span></div>
+            <div class="key"><span class="kbd">X</span><span class="kf">Borrar</span><span class="kw">Clase 1</span></div>
+            <div class="key"><span class="kbd">E</span><span class="kf">Extruir</span><span class="kw">Clase 2</span></div>
+            <div class="key"><span class="kbd">Ctrl + R</span><span class="kf">Loop cut</span><span class="kw">Clase 2</span></div>
+            <div class="key"><span class="kbd">Ctrl + B</span><span class="kf">Bevel</span><span class="kw">Clase 3</span></div>
+            <div class="key"><span class="kbd">Shift + D</span><span class="kf">Duplicar</span><span class="kw">Clase 3 · copia independiente</span></div>
+            <div class="key"><span class="kbd">Alt + D</span><span class="kf">Duplicado enlazado</span><span class="kw">Clase 12 · gemelas que cambian juntas</span></div>
+            <div class="key"><span class="kbd">F</span><span class="kf">Rellenar cara</span><span class="kw">Clase 8 · en Edit Mode</span></div>
+            <div class="key"><span class="kbd">M</span><span class="kf">Fusionar vértices</span><span class="kw">Clase 8 · Merge by Distance mata duplicados</span></div>
+            <div class="key"><span class="kbd">Ctrl + J</span><span class="kf">Unir objetos</span><span class="kw">Clase 8 · jamás accesorio con cuerpo</span></div>
+            <div class="key"><span class="kbd">Shift + N</span><span class="kf">Recalcular normales</span><span class="kw">Clase 10 · el anti-agujero-fantasma</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Seleccionar</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">1</span><span class="kbd">2</span><span class="kbd">3</span><span class="kf">Vértice · arista · cara</span><span class="kw">Clase 2 · en Edit Mode</span></div>
+            <div class="key"><span class="kbd">Alt + clic</span><span class="kf">Seleccionar loop</span><span class="kw">Clase 3</span></div>
+            <div class="key"><span class="kbd">B</span><span class="kf">Selección de caja</span><span class="kw">Clase 7 · con X-ray atrapa la espalda</span></div>
+            <div class="key"><span class="kbd">L</span><span class="kf">Seleccionar conectado</span><span class="kw">Clase 9 · en UV Editor: la isla entera (clase 15)</span></div>
+            <div class="key"><span class="kbd">Ctrl + Numpad +</span><span class="kf">Crecer selección</span><span class="kw">Clase 13</span></div>
+            <div class="key"><span class="kbd">Ctrl + Numpad −</span><span class="kf">Encoger selección</span><span class="kw">Clase 13</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">👁</span>Ver y navegar</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">N</span><span class="kf">Panel de propiedades</span><span class="kw">Clase 6 · posición, rotación, dimensiones</span></div>
+            <div class="key"><span class="kbd">Numpad 1</span><span class="kbd">Numpad 3</span><span class="kbd">Numpad 7</span><span class="kf">Vistas frontal · lateral · superior</span><span class="kw">Clase 6</span></div>
+            <div class="key"><span class="kbd">Alt + Z</span><span class="kf">X-ray</span><span class="kw">Clase 7</span></div>
+            <div class="key"><span class="kbd">H</span><span class="kf">Esconder selección</span><span class="kw">Clase 9</span></div>
+            <div class="key"><span class="kbd">Alt + H</span><span class="kf">Mostrar todo</span><span class="kw">Clase 9 · el ritual antes de guardar</span></div>
+            <div class="key"><span class="kbd">/</span><span class="kf">Local view</span><span class="kw">Clase 9 · a solas con la selección</span></div>
+            <div class="key"><span class="kbd">Ctrl + Space</span><span class="kf">Maximizar editor</span><span class="kw">Clase 15</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🗺</span>Modos, UVs y rescate</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">Tab</span><span class="kf">Edit Mode ↔ Object Mode</span><span class="kw">Clase 2 · mira la esquina del viewport</span></div>
+            <div class="key"><span class="kbd">O</span><span class="kf">Edición proporcional</span><span class="kw">Clase 7 · se enciende, se usa, se apaga</span></div>
+            <div class="key"><span class="kbd">Ctrl + E</span><span class="kf">Menú de aristas → Mark Seam</span><span class="kw">Clase 4</span></div>
+            <div class="key"><span class="kbd">U</span><span class="kf">Unwrap</span><span class="kw">Clase 4</span></div>
+            <div class="key"><span class="kbd">Ctrl + Z</span><span class="kf">Deshacer</span><span class="kw">Clase 1 · la tecla más importante del curso</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🗿</span>Sculpt Mode</h3>
+          <div class="keys">
+            <div class="key"><span class="kbd">F</span><span class="kf">Tamaño del pincel</span><span class="kw">Clase 14 · re-oficio de F en Sculpt Mode</span></div>
+            <div class="key"><span class="kbd">Shift + F</span><span class="kf">Fuerza del pincel</span><span class="kw">Clase 14</span></div>
+            <div class="key"><span class="kbd">Shift</span><span class="kf">(mantener) Alisar</span><span class="kw">Clase 14</span></div>
+            <div class="key"><span class="kbd">Ctrl</span><span class="kf">(mantener) Invertir el pincel</span><span class="kw">Clase 14 · hundir en vez de sacar</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><b>Tarjeta de hotkeys · Curso Mago Fantástico.</b> Blender 5.2 LTS — los detalles de versión viven en el <a href="pipeline.html">pipeline técnico</a>. Volver al <a href="index.html">mapa del curso</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

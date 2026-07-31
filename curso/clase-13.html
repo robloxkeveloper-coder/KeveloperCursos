@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 13 · La túnica — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 13 del curso Mago Fantástico: la túnica rígida del mago, ajustada al cuerpo con Alt+S y selección creciente en Blender 5.2. Cierre del módulo de accesorios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html" class="active" aria-current="page"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m3">🟨 M3 · Accesorios y ropa · Clase 13</span>
+      <h1>La <span class="g2">túnica</span></h1>
+      <p class="sub">El módulo se cierra vistiendo al mago. La túnica del curso es <strong>modelada rígida</strong> (decisión fijada en el <a href="pipeline.html#decisiones" style="color:inherit;text-decoration:underline">pipeline</a>): una pieza que envuelve el cuerpo sin atravesarlo, ajustada con la herramienta que faltaba — <strong>inflar y desinflar a lo largo de las normales</strong>.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 3</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c13_tunica_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Modelar la <strong>túnica rígida</strong> (<code>ACC_tunica</code>): una campana que nace del pecho y cae hasta media bota, envolviendo el cuerpo <strong>sin intersecciones visibles</strong>. Con ella se cierra el módulo 3 y el mago queda completo en geometría: cuerpo (A) + accesorios (B) + ropa (C).</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">📌</span>
+          <p><strong>Por qué rígida y no ropa por capas</strong> (decisión del operador, <a href="pipeline.html#decisiones">pipeline 08</a>): la ropa por capas con caging es el sistema profesional de Roblox, pero su complejidad no cabe en el curso — y el tiempo es el riesgo nº 1. La túnica rígida se comporta como un accesorio más: sigue al cuerpo sin deformarse. Es un intercambio consciente: menos realismo al caminar, curso que sí se termina.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"La ropa no flota: cae, toca y acompaña al cuerpo que viste."</p>
+          <p class="who">Metáfora nº 13 · La tela</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: mirar la referencia de bata/túnica de la tarea. La tela real hace tres cosas: se apoya en los hombros, cae por gravedad y se abre al llegar abajo. Nuestra túnica low poly debe insinuar esas tres — con veinte caras y buena intención.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Alt+S — encoger/inflar por normales:</strong> mueve cada vértice a lo largo de su propia dirección "hacia afuera". Es LA herramienta de ropa: la túnica se modela pegada y con Alt+S se infla uniformemente hasta que el cuerpo deja de asomar. S escala desde un centro; Alt+S "engorda" — la diferencia se demuestra en vivo.</p>
+        <p><strong>Crecer y encoger la selección (Ctrl+Numpad+ / Ctrl+Numpad−):</strong> seleccionas una cara y la selección se expande a las vecinas, anillo a anillo. Para agarrar "la falda entera desde la cintura" sin clic a clic.</p>
+        <p><strong>El margen de seguridad:</strong> la ropa rígida necesita aire entre tela y cuerpo (en este curso, un margen visible a simple vista en X-ray). Si la tela roza el cuerpo, cualquier movimiento del avatar en Roblox la hará parpadear (z-fighting) o el cuerpo la atravesará.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Alt + S</span><span class="kf">Inflar / desinflar por normales</span><span class="kw">Cada vértice sale "hacia su afuera". La herramienta de vestir.</span></div>
+          <div class="key"><span class="kbd">Ctrl + Numpad +</span><span class="kf">Crecer la selección</span><span class="kw">La selección se expande a los vecinos, anillo a anillo.</span></div>
+          <div class="key"><span class="kbd">Ctrl + Numpad −</span><span class="kf">Encoger la selección</span><span class="kw">El camino inverso: soltar los bordes de la selección.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Alt + Z</span><span class="kbd">E</span><span class="kbd">Ctrl + R</span><span class="kf">Repaso</span><span class="kw">X-ray para vigilar el margen; extrusión y cortes para la campana.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c13_tunica_v01.blend</code>). Observar la referencia de tela: hombros, caída, apertura. Plan: campana → ajuste → mangas si da el reloj.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>La campana.</b> Cilindro de 12 lados alrededor del torso, del pecho a media bota. Loop cuts en cintura y cadera. Escalar el anillo inferior: la túnica se abre al caer. Ya parece falda de mago — pero atraviesa el cuerpo por todas partes.</span></div>
+          <div class="tl"><span class="t">15–25</span><span><b>El ajuste.</b> <b>Alt+Z</b> (X-ray) para ver el cuerpo dentro de la tela. Anillo a anillo (Alt+clic, o Ctrl+Numpad+ desde una cara): <b>Alt+S</b> hacia afuera hasta que el cuerpo deja de asomar + margen visible. En el pecho, ceñida; abajo, acampanada. La tela "toca sin tocar".</span></div>
+          <div class="tl"><span class="t">25–33</span><span><b>El borde con peso.</b> El anillo inferior se corta con un loop extra y se desplaza en zigzag suave (vértices alternos arriba/abajo con proporcional pequeño): el dobladillo ondulado que hace "tela" a la tela. Un solo loop, gran efecto.</span></div>
+          <div class="tl"><span class="t">33–40</span><span><b>Mangas (si hay reloj) o cuello de la túnica.</b> Mangas: cilindros cortos y anchos alrededor del antebrazo, mismo método (campana + Alt+S). Sin reloj: un anillo elevado alrededor del cuello de la túnica basta para rematarla. Nombrar <code>ACC_tunica</code>, a la colección Accesorios.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Desfile de cierre del módulo.</b> Orbitar el mago completo: cuerpo + 4 accesorios + túnica. Prueba de separación general (mover cada pieza y devolverla). Contador leído contra el objetivo del pipeline. Guardar. El mago está VESTIDO.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>El cuerpo asoma a través de la tela</b> — el error central de la ropa rígida. Detección: orbitar despacio en shading sólido buscando "manchas" de cuerpo. Corrección: Alt+S en el anillo culpable. Se revisa dos veces: al ajustar y al cerrar.</li>
+          <li><b>Alt+S global cuando el problema es local</b> — inflar TODA la túnica porque asoma UNA rodilla la convierte en tienda de campaña. Seleccionar el anillo del problema, no la prenda.</li>
+          <li><b>S en vez de Alt+S</b> — escalar desde el centro adelgaza la tela arriba y la infla abajo. Si la túnica "se deforma raro" al ajustar, casi siempre es esta confusión.</li>
+          <li><b>Túnica hasta el suelo exacto</b> — rozando el piso, se hunde al primer paso del avatar. Media bota: se ve larga, no barre el suelo.</li>
+          <li><b>Fusionarla al cuerpo</b> — sigue siendo la regla del módulo: la túnica es asset C, objeto propio. El Ctrl+J solo entre piezas de la propia túnica (campana + mangas).</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existe <b><code>ACC_tunica</code></b>: campana del pecho a media bota, dobladillo con carácter, objeto separado.</li>
+          <li><b>El cuerpo no asoma</b> por ningún ángulo en shading sólido, y hay margen visible en X-ray.</li>
+          <li>Usó <b>Alt+S por anillos</b> (no global) y puede explicar la diferencia con S.</li>
+          <li>El mago completo (cuerpo + 5 piezas) pasa la <b>prueba de separación</b> y el contador sigue en objetivo.</li>
+          <li>Archivo guardado como <b><code>MF_c13_tunica_v01.blend</code></b>. Módulo 3 cerrado.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Sin mangas y sin dobladillo ondulado: <strong>la campana bien ajustada ES la túnica</strong>. Los remates se añaden en 10 minutos la próxima clase desde el checkpoint del profesor. Lo que no se negocia: que el cuerpo no asome.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Vestuario completo: <strong>cinturón con hebilla</strong> sobre la túnica (torus aplastado + cubo biselado), <strong>capucha</strong> caída sobre la espalda (media esfera abierta), o bolsillos parche. Cada pieza: separada o unida a la túnica — jamás al cuerpo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c13_tunica_v01.blend</code></div>
+          <small>El mago completo en geometría: cuerpo conforme (A) + 4 accesorios (B) + túnica rígida (C). El módulo 4 lo pinta.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 13 · La túnica · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🥻</span>Qué construimos hoy</h3>
+        <p>¡Vestimos al mago! Su <strong>túnica</strong>: una campana de tela que cae del pecho a las botas, se abre al llegar abajo y — lo más difícil — <strong>no deja que el cuerpo la atraviese</strong>. Para eso llega la herramienta de sastre: inflar la tela hacia afuera, anillo por anillo.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Alt + S</span><span class="kf">Inflar / desinflar la tela</span></div>
+          <div class="key"><span class="kbd">Ctrl + Numpad +</span><span class="kf">Crecer la selección</span></div>
+          <div class="key"><span class="kbd">Ctrl + Numpad −</span><span class="kf">Encoger la selección</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Ojo sastre: <strong>S</strong> escala desde el centro (deforma), <strong>Alt+S</strong> infla hacia afuera (viste). Para ropa, casi siempre Alt+S.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c13) y miré mi referencia de tela.</li>
+          <li>Construí la <b>campana</b>: cilindro del pecho a media bota, abierto abajo.</li>
+          <li>Encendí <b>X-ray</b> para ver el cuerpo dentro de la tela.</li>
+          <li>Ajusté <b>anillo por anillo</b> con Alt+S: ceñida arriba, amplia abajo.</li>
+          <li>Comprobé orbitando: <b>el cuerpo no asoma</b> por ningún lado. 🕵️</li>
+          <li>Le di <b>ondas al dobladillo</b> — la tela pesa y se nota.</li>
+          <li>La nombré <b>ACC_tunica</b> y la guardé en la colección Accesorios.</li>
+          <li>Desfile final: mi mago completo y vestido. Guardé <b>MF_c13_tunica_v01.blend</b>. 🎉</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El toque final</div>
+          <p>Elige UN extra de vestuario y constrúyelo: cinturón con hebilla, capucha caída, bolsillo secreto. Regla de siempre: pieza separada (o unida a la túnica), nunca fundida al cuerpo.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Tu mago ya tiene toda su geometría — falta pintarlo. Prepara la <strong>paleta definitiva</strong>: tus 3 colores del concept + 1 color de brillo para la gema. Píntalos juntos en un papel y mira si combinan. El módulo 4 los hará realidad.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">¡Fin del módulo 3! Dibuja a tu mago completo y vestido — compáralo con el dibujo de la clase 6. ¿Cuánto se parece? ¿En qué lo superaste?</p>
+        <div class="draw-box"><span>Mi mago vestido</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-12.html"><small>Anterior · Clase 12</small><b>← La varita</b></a>
+      <a class="next" href="clase-14.html"><small>Siguiente · Clase 14</small><b>High poly y sculpt →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 13 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

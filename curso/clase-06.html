@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 06 · El mago en papel — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 6 del curso Mago Fantástico: concept art en papel y bloqueo del cuerpo del mago en Blender 5.2 — A-pose, simetría y mirando a −Z desde el primer cubo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html" class="active" aria-current="page"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🟩 M2 · Cuerpo del mago · Clase 06</span>
+      <h1>El mago en <span class="g1">papel</span></h1>
+      <p class="sub">Arranca el proyecto grande. Antes de tocar Blender, el mago nace <strong>dibujado</strong>: media hora de lápiz que ahorra meses de errores. Después, el dibujo entra al viewport como referencia y el cuerpo se bloquea en cajas — <strong>en A-pose, simétrico y mirando a −Z</strong> desde el minuto uno.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 4</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c06_mago_bloqueo_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Salir de la clase con dos cosas: un <strong>concept art frontal del mago</strong> (papel, simple, con decisiones tomadas: sombrero, túnica, barba ¿sí o no?, paleta de 3 colores) y el <strong>bloqueo del cuerpo en Blender</strong> — cajas proporcionadas en A-pose, centradas y mirando a −Z. Las reglas duras de Roblox (<a href="pipeline.html#requisitos">pipeline, sección 03</a>) se instalan hoy como hábitos de arranque, no como correcciones de la clase 18.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">📐</span>
+          <p><strong>Tres reglas desde el primer cubo:</strong> el mago está <strong>centrado en el eje Y</strong> y es <strong>simétrico</strong>; sus brazos van en <strong>A-pose</strong> (diagonal, sin tocar el cuerpo); y su cara mira hacia <strong>−Z</strong>. Corregir la orientación en la clase 18 costaría una tarde; hoy cuesta cero.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Nadie construye una casa sin planos: el dibujo barato de hoy evita el error caro de mañana."</p>
+          <p class="who">Metáfora nº 6 · Los planos</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: los estudios de videojuegos dibujan a sus personajes decenas de veces antes de modelar un solo vértice. No porque no sepan modelar — porque borrar un lápiz cuesta un segundo y rehacer un modelo cuesta una semana. Hoy trabajamos como ellos.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Concept art no es "dibujar bonito": es decidir.</strong> ¿Sombrero puntiagudo o capucha? ¿Túnica hasta los pies o hasta la rodilla? ¿Barba? ¿Delgado o robusto? Cada pregunta contestada en papel es una duda que no frenará el modelado. La calidad del dibujo no importa; la claridad de las decisiones, sí.</p>
+        <p><strong>El bloqueo (blocking)</strong> es la versión "de cajas" del personaje: una caja por masa corporal — torso, cadera, cabeza, brazos, piernas. Proporción antes que detalle, siempre. El muñeco de bloques del módulo 1 <em>era</em> un bloqueo — por eso el estudiante ya sabe hacerlo.</p>
+        <p><strong>Las vistas ortográficas</strong> son los planos del arquitecto: frontal (Numpad 1), lateral (Numpad 3), superior (Numpad 7) — sin perspectiva, medibles, comparables con el dibujo. El panel N muestra posición y dimensiones exactas del objeto seleccionado: los números al servicio de la proporción.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">N</span><span class="kf">Panel lateral de propiedades</span><span class="kw">Posición, rotación y dimensiones exactas de lo seleccionado.</span></div>
+          <div class="key"><span class="kbd">Numpad 1</span><span class="kf">Vista frontal ortográfica</span><span class="kw">La vista del concept art — desde aquí se compara con el dibujo.</span></div>
+          <div class="key"><span class="kbd">Numpad 3</span><span class="kf">Vista lateral ortográfica</span><span class="kw">El perfil: la panza del mago y la caída del sombrero viven aquí.</span></div>
+          <div class="key"><span class="kbd">Numpad 7</span><span class="kf">Vista superior ortográfica</span><span class="kw">Desde arriba: comprobar que los brazos abren simétricos.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Shift + A</span><span class="kbd">G</span><span class="kbd">S</span><span class="kf">Repaso</span><span class="kw">El bloqueo es la clase 1 con propósito: añadir cajas, moverlas, escalarlas.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–15</span><span><b>Concept art.</b> Papel y lápiz, vista frontal, brazos en diagonal (¡ya en A-pose!). Guiar con preguntas, no con el lápiz: forma del sombrero, largo de túnica, barba, 3 colores máximo. Firmarlo — es un documento oficial del proyecto. Foto a <code>01_referencias</code>.</span></div>
+          <div class="tl"><span class="t">15–20</span><span><b>Montar el estudio.</b> Archivo nuevo → <code>MF_c06_mago_bloqueo_v01.blend</code>. Importar la foto: Add → Image → Reference, vista frontal (Numpad 1). El dibujo queda de fondo como plano de obra.</span></div>
+          <div class="tl"><span class="t">20–30</span><span><b>Masas centrales.</b> Caja del torso y caja de la cadera sobre la referencia, <b>centradas en X=0</b> (panel N para comprobarlo). Caja de la cabeza — solo proporción, la cabeza real es plantilla y llega en la clase 9. Modificador Mirror desde ya.</span></div>
+          <div class="tl"><span class="t">30–38</span><span><b>Extremidades en A-pose.</b> Caja del brazo derecho <b>en diagonal</b> siguiendo el dibujo (R para inclinarla), sin tocar el torso; caja de la pierna derecha. El Mirror pone el otro lado. Numpad 7: ¿abren igual los dos brazos?</span></div>
+          <div class="tl"><span class="t">38–45</span><span><b>La regla de −Z y guardado.</b> Comprobar juntos hacia dónde mira el mago (la cara del bloqueo apunta a <b>−Z</b>; en el panel N y con Numpad 1 se verifica). Nombrar los objetos en el Outliner (<code>bloqueo_torso</code>, <code>bloqueo_brazo</code>…) y guardar.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Concept con pose "de acción"</b> — brazos cruzados, varita en alto. Se dibuja en A-pose aunque duela: es el plano de fábrica, no el póster. El póster llega en la clase 20.</li>
+          <li><b>Detallar una caja</b> — quince minutos esculpiendo la caja del torso mientras las piernas no existen. Regla del bloqueo: todas las masas primero, ningún detalle después… hasta la clase 7.</li>
+          <li><b>Bloqueo descentrado</b> — el mago crece torcido desde la base y el Mirror del módulo entero queda envenenado. Detección: panel N, X ≠ 0. Corrección hoy: mover a X=0 y seguir.</li>
+          <li><b>Brazos pegados al cuerpo (I-pose)</b> — la <a href="pipeline.html#requisitos">regla del pipeline</a> es explícita: A-pose o T-pose, sin miembros solapados vistos de frente; I-pose da peores resultados en Avatar Setup.</li>
+          <li><b>Referencia torcida o gigante</b> — el dibujo importado no está en la vista frontal o tapa la escena. Importarlo estando ya en Numpad 1 y ajustar su tamaño en el panel N.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existe un <b>concept art frontal firmado</b> con decisiones tomadas (sombrero, túnica, barba, 3 colores), fotografiado en <code>01_referencias</code>.</li>
+          <li>El bloqueo tiene <b>todas las masas</b>: cabeza, torso, cadera, brazos y piernas — proporcionadas contra el dibujo.</li>
+          <li>El conjunto está <b>centrado (X=0), simétrico vía Mirror, en A-pose y mirando a −Z</b> — las cuatro cosas comprobadas, no supuestas.</li>
+          <li>Archivo guardado como <b><code>MF_c06_mago_bloqueo_v01.blend</code></b> con objetos nombrados.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>El dibujo es lo irrenunciable — sin decisiones no hay módulo 2. Si el reloj aprieta, el bloqueo se reduce a <strong>torso + cabeza + una pierna + un brazo con Mirror</strong>, y la clase 7 arranca desde el checkpoint del profesor completándolo en 10 minutos.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Segunda vista del concept: <strong>el perfil</strong> (lateral), e importarla en Numpad 3. Con dos planos, el bloqueo gana profundidad real: ¿cuánto sobresale la panza?, ¿cae el sombrero hacia atrás? Es exactamente cómo trabajan los estudios.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c06_mago_bloqueo_v01.blend</code></div>
+          <small>Bloqueo completo en A-pose, centrado, mirando a −Z, con la referencia montada. Más la foto del concept en 01_referencias.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 06 · El mago en papel · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧙</span>Qué construimos hoy</h3>
+        <p>¡Empieza el proyecto grande: <strong>tu mago</strong>! Pero primero, papel. Hoy decides cómo es — sombrero, túnica, barba, colores — dibujándolo como hacen los estudios profesionales. Después, tu dibujo entra a Blender y construyes su <strong>esqueleto de cajas</strong> encima. Tres reglas sagradas: brazos en diagonal (A-pose), todo simétrico, y mirando hacia <strong>−Z</strong>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">N</span><span class="kf">Panel de números (posición y tamaño)</span></div>
+          <div class="key"><span class="kbd">Numpad 1</span><span class="kf">Vista frontal</span></div>
+          <div class="key"><span class="kbd">Numpad 3</span><span class="kf">Vista lateral</span></div>
+          <div class="key"><span class="kbd">Numpad 7</span><span class="kf">Vista desde arriba</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Estas vistas no tienen perspectiva: son <strong>planos</strong>, como los de un arquitecto. Perfectas para comparar con tu dibujo.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Dibujé a mi mago <b>de frente</b>, con los brazos en diagonal.</li>
+          <li>Decidí: sombrero ☐ · túnica ☐ · barba ☐ · mis <b>3 colores</b> ☐.</li>
+          <li>Firmé mi concept art y le tomamos <b>foto</b> para la carpeta 01_referencias.</li>
+          <li>Importé el dibujo a Blender como <b>imagen de referencia</b>.</li>
+          <li>Construí las cajas del <b>torso, cadera y cabeza</b>, centradas (X = 0).</li>
+          <li>Puse el <b>brazo en diagonal</b> y la pierna — el Mirror hizo el otro lado.</li>
+          <li>Comprobé desde arriba (Numpad 7) que los brazos abren <b>iguales</b>.</li>
+          <li>Verifiqué que mi mago mira a <b>−Z</b> y guardé <b>MF_c06_mago_bloqueo_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Tres magos, un ganador</div>
+          <p>Dibuja <strong>tres siluetas de mago</strong> bien distintas en miniatura (sombrero enorme / túnica gigante / flaco y alto). Elige la mejor y explica por qué ganó. Los concept artists hacen esto siempre: la primera idea casi nunca es la buena.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Colorea tu concept art con tus <strong>3 colores elegidos</strong> (lápices, marcadores, lo que tengas). Ese dibujo coloreado será la guía de textura del módulo 4 — sí, lo que pintes esta semana aparecerá en Roblox en unos meses.</p>
+          <span class="time">≈ 15–20 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Bocetos rápidos: prueba aquí sombreros, barbas y varitas antes de decidir los definitivos.</p>
+        <div class="draw-box"><span>Laboratorio de ideas</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-05.html"><small>Anterior · Clase 05</small><b>← ¡A Roblox!</b></a>
+      <a class="next" href="clase-07.html"><small>Siguiente · Clase 07</small><b>Torso y piernas →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 06 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

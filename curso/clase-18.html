@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 18 · Optimización — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 18 del curso Mago Fantástico: limpieza, naming, escala aplicada y verificación completa contra los presupuestos y requisitos de Avatar Setup en Blender 5.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html" class="active" aria-current="page"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m5">🟥 M5 · Del taller a Roblox · Clase 18</span>
+      <h1>Optimi<span class="g1">zación</span></h1>
+      <p class="sub">Arranca el módulo final. Antes del viaje, la inspección: <strong>limpieza de malla, nombres definitivos, escala aplicada y el checklist completo del pipeline</strong> — presupuestos de triángulos y requisitos de Avatar Setup, uno por uno, con el modelo delante. Un modelo validado hoy es un Avatar Setup sin sustos la próxima semana.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 1</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c18_mago_limpio_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Entregar un <strong>modelo validado</strong>: malla limpia (sin duplicados, sin caras internas, normales al derecho), objetos con nombres definitivos, <strong>transformaciones aplicadas</strong> (Ctrl+A — la tecla que faltaba), triángulos leídos contra la tabla y el <a href="pipeline.html#requisitos">checklist del pipeline</a> recitado con evidencia. La clase es una auditoría — y el auditor es el estudiante; el profesor solo pregunta.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Menos es más rápido: cada triángulo que sobra lo paga el jugador — en cada frame, para siempre."</p>
+          <p class="who">Metáfora nº 18 · La mochila</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: nadie corre una maratón con piedras en la mochila. Un modelo pasa su vida entera renderizándose 60 veces por segundo en el teléfono de alguien — cada gramo que le quitemos hoy es velocidad regalada a cada visitante, cada vez. La optimización no es tacañería: es cortesía.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Aplicar transformaciones (Ctrl+A → All Transforms):</strong> mientras trabajábamos, cada objeto acumuló escalas y rotaciones "pendientes" — el objeto se VE bien, pero su ficha dice "escala 0.7". Los exportadores y los motores leen la ficha, no la vista: por eso los modelos llegan gigantes o acostados. Aplicar transformaciones pone la ficha a limpio: escala 1, rotación 0, tal como se ve.</p>
+        <p><strong>La escala del mago para Roblox:</strong> un avatar R15 ronda los 1.5–2 m en Blender (1 unidad = 1 m). Se verifica en el panel N con el mago seleccionado — si mide 18 m, hoy es el día de arreglarlo (escalar en Object Mode, luego Ctrl+A).</p>
+        <p><strong>La auditoría de malla</strong> reutiliza todo lo aprendido: Merge by Distance (clase 8), Non Manifold (clase 10), Face Orientation + Shift+N (clase 10). Hoy se ejecutan como batería, en orden, sobre cada objeto.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + A</span><span class="kf">Aplicar transformaciones (Object Mode)</span><span class="kw">Escala 1, rotación 0 — la ficha a limpio antes del export.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">M</span><span class="kbd">Shift + N</span><span class="kbd">L</span><span class="kbd">N</span><span class="kf">Repaso</span><span class="kw">La batería de limpieza completa: fusionar, normales, componentes, medidas.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c18_mago_limpio_v01.blend</code>) y el plan sobre la mesa: limpiar → nombrar → aplicar → medir → recitar. Imprimir (o abrir) el <a href="recursos.html">checklist de validación de recursos</a>.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>Batería de limpieza, objeto por objeto</b> (cuerpo, 4 accesorios, túnica): Merge by Distance por zonas → Non Manifold (cero) → Face Orientation (azul) → Shift+N si hace falta. El estudiante ejecuta, el profesor lleva la cuenta en el checklist.</span></div>
+          <div class="tl"><span class="t">15–22</span><span><b>El censo del Outliner.</b> Borrar lo que no viaja: bloqueos de la clase 6, experimentos, duplicados olvidados. La colección HighPoly se conserva (es archivo del proyecto) pero se marca excluida. Nombres definitivos verificados: <code>Mago_cuerpo</code>, <code>ACC_sombrero</code>, <code>ACC_pelo</code>, <code>ACC_barba</code>, <code>ACC_varita</code>, <code>ACC_tunica</code>.</span></div>
+          <div class="tl"><span class="t">22–30</span><span><b>Escala y transformaciones.</b> Panel N: ¿cuánto mide el mago? Ajustar a ~1.7 m si hace falta. Después, cada objeto: <b>Ctrl+A → All Transforms</b>. Verificar en la ficha: escala 1.0, rotación 0. Explicar el porqué con el cuento del "objeto que se ve bien pero su ficha miente".</span></div>
+          <div class="tl"><span class="t">30–40</span><span><b>El gran recuento.</b> Triángulos por parte contra la <a href="pipeline.html#triangulos">tabla del pipeline</a>: cabeza &lt; 4.000, torso &lt; 1.750, extremidades &lt; 1.248 c/u, total en el objetivo 8.000–9.000 (con los accesorios aparte, que no entran en el presupuesto del cuerpo pero se leen igual). Anotar los números en la bitácora — son los datos oficiales del proyecto.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>El recitado final.</b> El estudiante recorre el checklist de Avatar Setup con el modelo en pantalla, demostrando cada punto (no diciendo "sí" — enseñando dónde): watertight ✔ contiguo ✔ humanoide ✔ A-pose ✔ −Z ✔ simétrico ✔ cuello ✔ sin accesorios en la malla ✔ 5 componentes ✔ con textura ✔. Guardar. Modelo VALIDADO.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Ctrl+A con el pivote donde no toca</b> — aplicar transformaciones con el origen desplazado puede mover la geometría aparente. Aplicar y verificar visualmente cada objeto; Ctrl+Z si algo salta.</li>
+          <li><b>Merge by Distance global sobre el cuerpo</b> — el fantasma de la clase 9: fusionaría los 5 componentes de la cabeza. Por zonas, protegiendo las bolsas, siempre.</li>
+          <li><b>Borrar la colección HighPoly "porque ya no sirve"</b> — sirve: es la fuente de los bakes; si un mapa necesita rehacerse, sin ella no hay de dónde. Excluir ≠ borrar.</li>
+          <li><b>Validar de memoria</b> — "sí, es watertight" sin correr Non Manifold delante. La auditoría vale porque muestra evidencia; el recitado sin demostración es teatro.</li>
+          <li><b>Optimizar de más</b> — borrar loops "para bajar números" cuando ya se está a la mitad del presupuesto rompe silueta gratis. El objetivo es margen, no récord.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>La <b>batería de limpieza</b> pasó en los 6 objetos con evidencia en pantalla.</li>
+          <li>El Outliner contiene <b>solo lo que viaja</b> + HighPoly excluida, todo con nombres definitivos.</li>
+          <li>Todos los objetos tienen <b>escala 1 / rotación 0</b> tras Ctrl+A, y el mago mide ~1.7 m.</li>
+          <li>Los <b>triángulos por parte están anotados</b> y dentro de la tabla, total en el objetivo del curso.</li>
+          <li>El <b>checklist de Avatar Setup se recitó con demostración</b>, punto por punto, y <b><code>MF_c18_mago_limpio_v01.blend</code></b> está guardado.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Prioridad: <strong>cuerpo limpio + Ctrl+A + checklist del cuerpo</strong> — es lo que Avatar Setup valida. La limpieza fina de accesorios puede terminarla el profesor en el checkpoint. Lo que no se salta: el recitado con evidencia, aunque sea solo del cuerpo.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Auditoría de lujo: <strong>cazar los triángulos invisibles</strong> (caras bajo el sombrero, tapas dentro de las botas — geometría que nadie verá jamás) y decidir caso por caso si quitarlas paga su riesgo. Es la conversación de optimización más adulta que existe, en miniatura.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c18_mago_limpio_v01.blend</code></div>
+          <small>El modelo validado: limpio, nombrado, con transformaciones aplicadas y presupuestos verificados. La clase 19 lo exporta y lo somete a Avatar Setup.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 18 · Optimización · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔍</span>Qué construimos hoy</h3>
+        <p>Hoy no se modela: hoy se <strong>inspecciona</strong>. Tu mago pasa su revisión técnica completa antes del gran viaje — como un coche antes de una carrera. Malla limpia, nombres perfectos, medidas correctas y el checklist de Roblox punto por punto. Hoy el inspector eres <strong>tú</strong>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + A</span><span class="kf">Aplicar transformaciones (poner la ficha a limpio)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Secreto de exportador: un objeto puede VERSE bien pero su ficha interna decir "escala 0.7, rotación 90°". Roblox lee la ficha. <strong>Ctrl+A</strong> hace que ficha y realidad coincidan.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c18) — la del modelo limpio.</li>
+          <li>Pasé la <b>batería de limpieza</b> a cada pieza: duplicados, goteras, normales.</li>
+          <li>Hice el censo del Outliner: <b>borré lo que no viaja</b>, revisé cada nombre.</li>
+          <li>Medí a mi mago: <b>~1.7 metros</b>, como un avatar de verdad.</li>
+          <li>Apliqué <b>Ctrl+A</b> a todo: escala 1, rotación 0. Fichas limpias.</li>
+          <li>Conté triángulos <b>por parte</b> y los comparé con la tabla del pipeline.</li>
+          <li>Anoté mis números oficiales. 📊</li>
+          <li>Recité el <b>checklist de Roblox completo</b> demostrando cada punto, y guardé <b>MF_c18_mago_limpio_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El inspector implacable</div>
+          <p>Cambio de roles: tu profesor "esconde" un problema en una copia del modelo (un duplicado, una cara volteada, una escala rara) y tú tienes <strong>5 minutos para encontrarlo</strong> con tus herramientas de auditoría. ¿Aceptas el caso, detective?</p>
+          <span class="time">+5–10 min al final de la clase</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>La próxima clase tu mago entra a Roblox <strong>como avatar</strong>. Prepara la experiencia donde vivirá: abre tu baseplate del curso en Studio y déjala lista (o piensa qué escenario le construirás). Y descansa — la semana que viene es LA semana.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja tu "ficha técnica oficial": tu mago de frente con sus números — triángulos por parte, altura, y las 6 piezas del Outliner listadas al lado.</p>
+        <div class="draw-box"><span>Ficha técnica de mi mago</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-17.html"><small>Anterior · Clase 17</small><b>← PBR completo</b></a>
+      <a class="next" href="clase-19.html"><small>Siguiente · Clase 19</small><b>Avatar Setup →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 18 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

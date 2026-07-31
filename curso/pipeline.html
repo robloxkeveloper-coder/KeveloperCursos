@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline técnico · Curso Mago Fantástico</title>
+<meta name="description" content="Fuente de verdad técnica del curso Mago Fantástico: Blender 5.2 LTS, presupuestos de triángulos, requisitos de Avatar Setup, texturas y export a Roblox.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html" class="active" aria-current="page"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">⚙ Fuente de verdad técnica · 2026-07-30</span>
+      <h1>Pipeline <span class="g1">técnico</span></h1>
+      <p class="sub">Todo lo que el curso da por cierto sobre herramientas, límites y formatos vive en esta página. <strong>Si una clase contradice al pipeline, gana el pipeline</strong> — y se corrige la clase. Se revisa antes de cada cohorte, porque Roblox cambia sus requisitos.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Blender</span> 5.2 LTS</span>
+        <span class="meta-chip"><span class="mono">Destino</span> Avatar R15 · Roblox</span>
+        <span class="meta-chip"><span class="mono">Verificado</span> 2026-07-30</span>
+      </div>
+    </header>
+
+    <section id="version" aria-labelledby="h-version">
+      <div class="sec-head"><span class="num">01</span><h2 id="h-version">Versión de herramientas</h2><div class="line"></div></div>
+      <div class="panel">
+        <p style="color:var(--text-dim);font-size:14.3px;margin-bottom:10px"><strong>Blender 5.2 LTS</strong> (estable desde el 14 de julio de 2026) es la versión del curso, por decisión del operador el 2026-07-30. Todas las hotkeys, menús y capturas del material se escriben contra 5.2 LTS. Los detalles que dependen de la versión viven <strong>solo aquí</strong>: las clases referencian esta página, no duplican números de versión.</p>
+        <p style="color:var(--text-dim);font-size:14.3px"><strong>Roblox Studio</strong> se usa en su versión actual (se actualiza solo). Las funciones que el curso necesita: importador de malla 3D, <em>Avatar Setup</em> con auto-configuración, y <code>SurfaceAppearance</code> con máscaras emissive.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">📌</span>
+          <p>El plan original recomendaba Blender 4.5 LTS (más tutoriales y UI más documentada). El operador fijó <strong>5.2 LTS</strong>. Si en la práctica real la interfaz difiere de lo redactado, se corrige <strong>esta página</strong> y las clases quedan alineadas por referencia.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="assets" aria-labelledby="h-assets">
+      <div class="sec-head"><span class="num">02</span><h2 id="h-assets">El mago son tres grupos de assets, no uno</h2><div class="line"></div></div>
+      <p class="sec-intro">Roblox trata el cuerpo, los accesorios y la ropa como cosas distintas, con reglas distintas. Confundirlos es la causa nº 1 de validaciones fallidas.</p>
+      <div class="grid g3">
+        <div class="tcard"><div class="badge b-violet" aria-hidden="true">🧍</div><div><h3>(A) Cuerpo base</h3><p>El mago "desnudo", conforme a <strong>todos</strong> los requisitos de la sección 03. Sin pelo, sin barba, sin sombrero, sin túnica en la malla.</p></div></div>
+        <div class="tcard"><div class="badge b-magenta" aria-hidden="true">🎩</div><div><h3>(B) Accesorios rígidos</h3><p>Sombrero, cabello, barba y varita. Objetos <strong>separados</strong>, nunca fusionados al cuerpo.</p></div></div>
+        <div class="tcard"><div class="badge b-gold" aria-hidden="true">🥻</div><div><h3>(C) Ropa</h3><p>La túnica. En este curso se modela <strong>rígida</strong> (decisión fijada), como un accesorio más — no como ropa por capas con caging.</p></div></div>
+      </div>
+      <div class="warn">
+        <span class="wi" aria-hidden="true">📁</span>
+        <p><strong>Bundling:</strong> los accesorios deben empaquetarse en una <code>Folder</code> junto con el modelo del cuerpo para que Avatar Setup los procese y genere attachments y datos de caging. Cuerpo suelto + accesorios sueltos = accesorios ignorados.</p>
+      </div>
+    </section>
+
+    <section id="requisitos" aria-labelledby="h-requisitos">
+      <div class="sec-head"><span class="num">03</span><h2 id="h-requisitos">Requisitos duros de Avatar Setup</h2><div class="line"></div></div>
+      <p class="sec-intro">Copiados de la investigación del plan del curso (verificada el 2026-07-30 contra <span class="mono" style="font-size:12px">create.roblox.com/docs/avatar-setup/auto-setup-requirements</span>). No son consejos: si el cuerpo no cumple <strong>todos</strong>, la validación falla. El cuerpo base debe ser:</p>
+      <div class="panel">
+        <ul class="blist">
+          <li><b>Watertight y contiguo</b> — sin agujeros, sin caras traseras expuestas, una sola pieza conectada (excepto ojos y boca).</li>
+          <li><b>Humanoide</b> — dos brazos, dos piernas, torso, cabeza.</li>
+          <li><b>En A-pose o T-pose</b>, sin miembros que se solapen vistos de frente. I-pose da peores resultados.</li>
+          <li><b>Mirando hacia el eje Z negativo.</b></li>
+          <li><b>Simétrico</b>, centrado en el eje Y.</li>
+          <li><b>Con cuello distinto</b>, no fundido con hombros ni torso superior.</li>
+          <li><b>Sin accesorios</b> — nada de cabello, cejas, barba, pestañas ni sombrero en la malla del cuerpo.</li>
+          <li><b>Con 5 componentes de cabeza</b>: 2 ojos (medias esferas dentro de "eyebags") y una "mouthbag" que contiene dientes superiores, dientes inferiores y lengua. Cada componente conectado individualmente y <b>sin compartir vértices</b> entre sí ni con la cabeza.</li>
+          <li><b>Con textura</b> — uno o más mapas; si hay varios, la herramienta los combina en uno solo.</li>
+        </ul>
+      </div>
+      <div class="warn hard">
+        <span class="wi" aria-hidden="true">🧠</span>
+        <p><strong>La cabeza es plantilla.</strong> Los eyebags y la mouthbag no son modelables desde cero por un estudiante de 10–14 años en el tiempo del curso. El profesor entrega una cabeza base conforme que el estudiante <strong>deforma y personaliza</strong> (clases 9–10). Se enseña como práctica profesional real — los estudios trabajan con <em>base meshes</em> — no como atajo.</p>
+      </div>
+    </section>
+
+    <section id="triangulos" aria-labelledby="h-triangulos">
+      <div class="sec-head"><span class="num">04</span><h2 id="h-triangulos">Presupuesto de triángulos</h2><div class="line"></div></div>
+      <p class="sec-intro">Límite duro por parte del cuerpo. Se verifica en Blender con el overlay de estadísticas (clases 10 y 18).</p>
+      <div class="tbl-wrap" tabindex="0">
+        <table class="tbl">
+          <caption class="visually-hidden" style="position:absolute;left:-999px">Presupuesto máximo de triángulos por parte del cuerpo</caption>
+          <thead><tr><th scope="col">Parte</th><th scope="col">Máx. triángulos</th></tr></thead>
+          <tbody>
+            <tr><td><b>Cabeza</b></td><td class="num-cell">4.000</td></tr>
+            <tr><td><b>Torso</b></td><td class="num-cell">1.750</td></tr>
+            <tr><td><b>Brazo (c/u)</b></td><td class="num-cell">1.248</td></tr>
+            <tr><td><b>Pierna (c/u)</b></td><td class="num-cell">1.248</td></tr>
+            <tr class="total"><td><b>Total</b></td><td class="num-cell">10.742</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warn hard">
+        <span class="wi" aria-hidden="true">⚠</span>
+        <p>La herramienta añade "caps" a las extremidades al segmentar, lo que <strong>suma</strong> al conteo. Si el modelo llega justo al límite, la validación falla. <strong>Objetivo de diseño del curso: quedarse en torno a 8.000–9.000</strong> para dejar margen.</p>
+      </div>
+    </section>
+
+    <section id="texturas" aria-labelledby="h-texturas">
+      <div class="sec-head"><span class="num">05</span><h2 id="h-texturas">Texturas: qué se pinta y qué se hornea</h2><div class="line"></div></div>
+      <div class="grid g2">
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🎨</span>Resolución y mapas</h3>
+          <ul class="blist">
+            <li><b>1024 × 1024 px</b> es la resolución de trabajo y el máximo que Roblox acepta por textura. Todo el set del mago se pinta a ese tamaño.</li>
+            <li>Set PBR del cuerpo y accesorios: <b>base color</b>, <b>roughness</b>, <b>metallic</b>, <b>normal</b> y <b>máscara emissive</b> (clase 17).</li>
+            <li>Formato de trabajo: PNG. Nada de JPG en mapas que no sean base color — comprime artefactos en normal y roughness.</li>
+            <li>Si el cuerpo lleva varios mapas, Avatar Setup los combina en uno solo (requisito 03) — por eso los UVs del cuerpo se empaquetan en <b>un solo tile 0–1</b> (clase 15).</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🔥</span>Bake vs pintado</h3>
+          <ul class="blist">
+            <li><b>Se hornea</b> (high → low, clase 16): <b>normal y AO</b>, y solo donde el detalle se ve — sombrero, túnica y varita. Un normal map sobre un cuerpo cartoon low poly casi no se nota; no se gasta tiempo ahí.</li>
+            <li><b>Se pinta</b> (clase 17): base color plano estilo cartoon, roughness por zonas (tela mate, gema pulida, metal de la hebilla), y la máscara emissive.</li>
+            <li>El cuerpo del mago <b>no lleva sculpt ni bake</b>: silueta y color hacen el personaje; el detalle fino va en los accesorios.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="emissive" aria-labelledby="h-emissive">
+      <div class="sec-head"><span class="num">06</span><h2 id="h-emissive">Emissive: máscara, no color</h2><div class="line"></div></div>
+      <div class="panel">
+        <p style="color:var(--text-dim);font-size:14.3px;margin-bottom:10px">Las Emissive Masks salieron de beta en <strong>febrero de 2026</strong> y están disponibles en experiencias publicadas, vía <code>EmissiveMaskContent</code>, <code>EmissiveTint</code> y <code>EmissiveStrength</code> en <code>SurfaceAppearance</code>.</p>
+        <ul class="blist">
+          <li><b>Es una máscara en escala de grises, no un mapa de color:</b> blanco emite, negro no, gris emite parcialmente.</li>
+          <li><b>El color lo pone <code>EmissiveTint</code></b> (propiedad en Studio), y la intensidad <code>EmissiveStrength</code>.</li>
+          <li>Se enseña así desde la clase 17 <b>para no crear expectativas falsas</b>: pintar la máscara de morado no hace brillo morado — hace brillo gris a medias.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="export" aria-labelledby="h-export">
+      <div class="sec-head"><span class="num">07</span><h2 id="h-export">Export y bundling: el orden exacto</h2><div class="line"></div></div>
+      <p class="sec-intro">El flujo de la clase 19, resumido. Cada paso existe porque saltárselo rompe algo concreto.</p>
+      <ol class="steps">
+        <li class="step"><div class="do">Limpieza en Blender</div><div class="press">Naming correcto de cada objeto, escala aplicada (<code>Ctrl+A</code> → All Transforms), sin modificadores pendientes, sin objetos huérfanos. Clase 18.</div></li>
+        <li class="step"><div class="do">Verificar presupuestos y requisitos</div><div class="press">Triángulos por parte dentro de la tabla 04; checklist completo de la sección 03 (watertight, simetría, −Z, cuello, 5 componentes de cabeza).</div></li>
+        <li class="step"><div class="do">Exportar FBX desde Blender 5.2</div><div class="press">Cuerpo con sus texturas; accesorios como mallas separadas. Y-up del FBX lo maneja el importador de Studio — lo que importa es que el modelo mire a <code>−Z</code> en Blender.</div></li>
+        <li class="step"><div class="do">Importar en Studio con el 3D Importer</div><div class="press">Revisar la previsualización: escala, orientación, texturas presentes.</div></li>
+        <li class="step"><div class="do">Empaquetar en una <code>Folder</code></div><div class="press">El modelo del cuerpo + los accesorios rígidos, juntos en la misma <code>Folder</code>, y esa Folder es lo que se entrega a Avatar Setup.</div></li>
+        <li class="step"><div class="do">Avatar Setup</div><div class="press">Auto-configuración: segmentación R15, rig, attachments y caging de accesorios. Si valida, se prueba el avatar en una experiencia.</div><div class="err">Si falla, se lee el error, se corrige en Blender y se re-exporta — nunca se "arregla" la malla dentro de Studio.</div></li>
+      </ol>
+      <div class="warn">
+        <span class="wi" aria-hidden="true">🛟</span>
+        <p><strong>Plan B del pipeline</strong> (documentado porque Avatar Setup falla con frecuencia ante mallas no watertight o proporciones raras): importar el mago como modelo/NPC con rig manual. El estudiante conserva un entregable presentable aunque la validación no pase en la clase 19; la clase 20 reserva tiempo para corregir e reintentar.</p>
+      </div>
+    </section>
+
+    <section id="decisiones" aria-labelledby="h-decisiones">
+      <div class="sec-head"><span class="num">08</span><h2 id="h-decisiones">Decisiones fijadas del curso</h2><div class="line"></div></div>
+      <div class="tbl-wrap" tabindex="0">
+        <table class="tbl">
+          <thead><tr><th scope="col">Decisión</th><th scope="col">Qué se fijó</th><th scope="col">Por qué</th></tr></thead>
+          <tbody>
+            <tr><td><b>Versión de Blender</b></td><td>5.2 LTS</td><td>Decisión del operador (2026-07-30), revierte la recomendación 4.5 LTS del plan.</td></tr>
+            <tr><td><b>Cabeza del mago</b></td><td>Plantilla del profesor</td><td>Eyebags + mouthbag no son modelables desde cero a esta edad y en este tiempo. Práctica real de estudio (base mesh).</td></tr>
+            <tr><td><b>Túnica</b></td><td>Modelada rígida</td><td>La opción simple; la ropa por capas con caging queda fuera del alcance. El tiempo es el riesgo nº 1 del curso.</td></tr>
+            <tr><td><b>Publicación</b></td><td>Material público en GitHub Pages</td><td>Aceptado explícitamente por el operador el 2026-07-30.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="munyeco" aria-labelledby="h-munyeco">
+      <div class="sec-head"><span class="num">09</span><h2 id="h-munyeco">El muñeco de bloques (M1) no es un avatar</h2><div class="line"></div></div>
+      <div class="panel">
+        <ul class="blist">
+          <li>El proyecto del Módulo 1 se llama <b>"muñeco de bloques"</b> o <b>"figura articulada"</b> — <b>nunca</b> con nombres de marcas de juguetes. Las políticas de Marketplace de Roblox incluyen la propiedad intelectual, y el parecido con una marca registrada es un problema evitable desde el nombre.</li>
+          <li>El muñeco <b>no pasa Avatar Setup</b> — no tiene cuello distinto, ni eyebags, y sus proporciones son de bloque. <b>En la clase 5 entra a Roblox como MeshPart, no como avatar.</b> Eso se dice explícito en el material, para que el estudiante no espere algo que no va a ocurrir.</li>
+          <li>Su función es recorrer el ciclo completo (modelar → UVs → textura → export → Studio) a escala pequeña en el primer mes. El avatar de verdad es el mago de los módulos 2–5.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="menor" aria-labelledby="h-menor">
+      <div class="sec-head"><span class="num">10</span><h2 id="h-menor">Cuenta de un menor: uso in-experience</h2><div class="line"></div></div>
+      <div class="warn hard">
+        <span class="wi" aria-hidden="true">🔒</span>
+        <p>Publicar avatares en el <strong>Marketplace</strong> de Roblox exige verificación de identidad con documento — no disponible para la cuenta de un menor. Este curso apunta a <strong>uso in-experience</strong>: el mago vive y se juega en las experiencias propias del estudiante. No se promete ni se intenta la venta en Marketplace. Esto aparece dicho en las clases 19 y 20.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><b>Pipeline técnico · Curso Mago Fantástico.</b> Fechado 2026-07-30. Se revisa antes de cada cohorte. Volver al <a href="index.html">mapa del curso</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

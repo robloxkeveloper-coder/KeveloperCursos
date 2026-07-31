@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 07 · Torso y piernas — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 7 del curso Mago Fantástico: modelar el torso y las piernas del mago en Blender 5.2 con edición proporcional, X-ray y selección de caja, dentro del presupuesto de triángulos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html" class="active" aria-current="page"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🟩 M2 · Cuerpo del mago · Clase 07</span>
+      <h1>Torso y <span class="g1">piernas</span></h1>
+      <p class="sub">El bloqueo se convierte en cuerpo. Con un cilindro de pocas caras, extrusiones y la <strong>edición proporcional</strong>, la mitad inferior del mago toma forma orgánica — sin dejar de ser low poly. Y aparece el número que gobierna el módulo: el <strong>presupuesto de triángulos</strong>.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 3</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c07_mago_piernas_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Modelar el <strong>torso y las piernas reales del mago</strong> sobre el bloqueo de la clase 6, en una sola malla con Mirror, manteniendo silueta cartoon y malla limpia. Introducir el hábito de <strong>mirar el contador de triángulos</strong>: el overlay de estadísticas queda encendido desde hoy hasta el final del curso.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">🔢</span>
+          <p><strong>El presupuesto manda</strong> (<a href="pipeline.html#triangulos">pipeline, sección 04</a>): torso máx. <strong>1.750</strong> triángulos, cada pierna máx. <strong>1.248</strong> — y el objetivo del curso es quedar muy por debajo (total 8.000–9.000 de 10.742). Con la densidad de hoy (cilindros de 8–12 lados) se llega sobrados; el número se mira para <em>aprender a mirarlo</em>.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"De lo grande a lo pequeño: primero las montañas, luego los árboles, al final las hojas."</p>
+          <p class="who">Metáfora nº 7 · Las montañas</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: un pintor de paisajes no empieza por las hojas de un árbol — bloquea el cielo, las montañas, los valles, y las hojas llegan al final. Hoy modelamos montañas (masas del cuerpo); los detalles (hebillas, arrugas, texturas) tienen sus propias clases más adelante.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>¿Por qué cilindros y no cubos?</strong> Un torso es más tubo que caja: un cilindro de 8–12 lados da la redondez con poquísima geometría. Regla low poly del curso: <em>empieza con las caras mínimas que aguanten la forma</em> — siempre se puede añadir; quitar es más doloroso.</p>
+        <p><strong>Edición proporcional (O):</strong> mover un vértice arrastrando suavemente a sus vecinos, con radio ajustable (scroll). Es la diferencia entre "pellizcar" la malla y "amasarla" — las formas orgánicas nacen de amasar.</p>
+        <p><strong>X-ray (Alt+Z) + selección de caja (B):</strong> en modo normal, seleccionar "lo que se ve" deja atrás los vértices de la espalda — el clásico "moví media cintura". X-ray hace la malla translúcida y la caja atrapa todo, delante y detrás.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">O</span><span class="kf">Edición proporcional</span><span class="kw">Mover arrastrando a los vecinos. Scroll ajusta el radio de influencia.</span></div>
+          <div class="key"><span class="kbd">Alt + Z</span><span class="kf">X-ray — malla translúcida</span><span class="kw">Ver y seleccionar a través del modelo.</span></div>
+          <div class="key"><span class="kbd">B</span><span class="kf">Selección de caja</span><span class="kw">Arrastrar un rectángulo que atrapa vértices. Con X-ray: también los de atrás.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">E</span><span class="kbd">Ctrl + R</span><span class="kbd">Alt + clic</span><span class="kf">Repaso</span><span class="kw">Extrusiones para crecer, loop cuts para controlar, loops para dar forma.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Preparar el lienzo.</b> Abrir el checkpoint, versión nueva <code>MF_c07_mago_piernas_v01.blend</code>. Encender el <b>overlay de estadísticas</b> (Overlays → Statistics): el contador de triángulos queda visible para siempre. Anotar el número inicial.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>El torso real.</b> Cilindro de 12 lados sobre la caja del bloqueo (que pasa a una colección "bloqueo" oculta). Loop cuts en cintura y pecho, y con <b>Alt+clic + S</b> dar la forma del concept: ¿mago panzón o esbelto? El dibujo decide, no la inercia.</span></div>
+          <div class="tl"><span class="t">15–22</span><span><b>Amasar.</b> Activar <b>O</b> y con <b>Alt+Z</b> + <b>B</b> seleccionar anillos completos (delante y detrás) para empujar la panza, hundir la espalda. Primera vez que la malla se siente arcilla y no ladrillos.</span></div>
+          <div class="tl"><span class="t">22–32</span><span><b>La pierna.</b> Extruir hacia abajo desde la cadera (lado derecho — Mirror trabaja): muslo → rodilla (loop cut) → tobillo → bota. La bota del mago puede ser un bloque con personalidad: punta redondeada con un bevel suave.</span></div>
+          <div class="tl"><span class="t">32–40</span><span><b>Silueta y control de daños.</b> Numpad 1 y 3 contra el concept: ¿la silueta coincide? Girar en perspectiva, buscar caras estiradas o vértices sueltos. Leer el contador: torso + piernas suele quedar en <b>500–900 triángulos</b> — kilómetros por debajo del límite, y así debe ser.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Nombrar y guardar.</b> El objeto se llama <code>Mago_cuerpo</code> desde hoy — será el nombre que viaje hasta Roblox. Guardar y comparar lado a lado con el concept: foto mental del progreso.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Edición proporcional olvidada encendida</b> — media hora después "todo se mueve raro". Detección: el círculo gris alrededor del cursor. Ritual: O se enciende, se usa, se apaga.</li>
+          <li><b>Mover solo la mitad visible</b> — la cintura queda bien de frente y rota de perfil. Detección: Numpad 3 tras cada cambio grande. Prevención: X-ray + B.</li>
+          <li><b>Añadir loop cuts "por si acaso"</b> — cada corte multiplica triángulos que la clase 18 tendrá que borrar. Regla: un loop cut necesita una razón (una rodilla, una cintura) o no entra.</li>
+          <li><b>Modelar sobre el bloqueo sin ocultarlo</b> — cajas y cuerpo se confunden. Colección "bloqueo" apagada en el Outliner; se enciende solo para comparar.</li>
+          <li><b>Perder la A-pose</b> — al amasar la cadera, la pierna se cierra hacia dentro. Comprobar contra la referencia: las piernas bajan rectas y separadas, como en el dibujo.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Torso y piernas modelados <b>en una sola malla</b> con Mirror activo, sobre el bloqueo de la clase 6.</li>
+          <li>La silueta <b>coincide con el concept art</b> en vista frontal y lateral.</li>
+          <li>El contador de estadísticas está <b>encendido y leído</b>: el estudiante dice el número de triángulos sin buscar.</li>
+          <li>Usó <b>edición proporcional y X-ray + B</b> al menos una vez cada uno, con intención.</li>
+          <li>Archivo guardado como <b><code>MF_c07_mago_piernas_v01.blend</code></b>, objeto <code>Mago_cuerpo</code>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>El torso con forma es la victoria del día. Las piernas pueden quedarse en <strong>tubos rectos sin rodilla ni bota</strong> — se refinan en 10 minutos al arrancar la clase 8 desde el checkpoint del profesor. No sacrificar la lectura del contador: ese hábito es de hoy.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Detalle de silueta con presupuesto: un <strong>cinturón</strong> (loop cut + extrusión fina hacia afuera) o <strong>botas con caña</strong> (dos loop cuts y S). Reto numérico: añadirlo gastando <em>menos de 100 triángulos</em> — que lo verifique en el contador.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c07_mago_piernas_v01.blend</code></div>
+          <small>Mitad inferior del mago modelada y proporcionada, Mirror activo, estadísticas encendidas. La clase 8 le pone brazos, manos y cuello.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 07 · Torso y piernas · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🦵</span>Qué construimos hoy</h3>
+        <p>Tu mago deja de ser cajas: hoy modelamos su <strong>torso y sus piernas de verdad</strong>, con curvas suaves y silueta cartoon. Aprendes a "amasar" la malla con la edición proporcional — y conoces el número que todo artista de videojuegos vigila: el <strong>contador de triángulos</strong>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">O</span><span class="kf">Edición proporcional (amasar)</span></div>
+          <div class="key"><span class="kbd">Alt + Z</span><span class="kf">X-ray — ver a través de la malla</span></div>
+          <div class="key"><span class="kbd">B</span><span class="kf">Seleccionar con caja</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Combo pro: <strong>Alt+Z</strong> + <strong>B</strong> = atrapar también los vértices de la espalda. Adiós al error de "moví solo la mitad".</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c07) y encendí el <b>contador de triángulos</b>.</li>
+          <li>Puse un <b>cilindro de 12 lados</b> donde estaba la caja del torso.</li>
+          <li>Marqué <b>cintura y pecho</b> con loop cuts y les di forma.</li>
+          <li>"Amasé" la panza con <b>edición proporcional</b> (¡y la apagué después!).</li>
+          <li>Usé <b>X-ray + B</b> para mover anillos completos, delante y detrás.</li>
+          <li>Extruí la <b>pierna</b>: muslo → rodilla → tobillo → bota.</li>
+          <li>Comparé mi silueta con mi <b>concept art</b> de frente y de perfil.</li>
+          <li>Leí mi número de triángulos 👀 y guardé <b>MF_c07_mago_piernas_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El reto de los 100</div>
+          <p>Añádele a tu mago <strong>un detalle de silueta</strong> — cinturón, botas altas, hombreras — gastando <strong>menos de 100 triángulos</strong>. El contador es el juez. Así piensan los artistas de videojuegos: belleza con presupuesto.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Modela una <strong>seta gigante de cuento</strong> con un cilindro (tallo) y edición proporcional (el sombrero se amasa desde una esfera achatada). Es el mismo músculo de hoy en un objeto que perdona todo.</p>
+          <span class="time">≈ 15–20 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja a tu mago <strong>de perfil</strong>: ¿cuánto sobresale la panza?, ¿cómo caen las botas? Te servirá la próxima clase.</p>
+        <div class="draw-box"><span>Mi mago de perfil</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-06.html"><small>Anterior · Clase 06</small><b>← El mago en papel</b></a>
+      <a class="next" href="clase-08.html"><small>Siguiente · Clase 08</small><b>Brazos, manos y cuello →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 07 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

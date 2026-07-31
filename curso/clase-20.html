@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 20 · Avatar jugable — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 20 del curso Mago Fantástico: corrección final, EmissiveTint, el avatar jugable en su experiencia y la presentación 'yo hice esto'. El cierre del curso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html" class="active" aria-current="page"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m5">🟥 M5 · Del taller a Roblox · Clase 20 · FINAL</span>
+      <h1>Avatar <span class="g1">jugable</span></h1>
+      <p class="sub">La última clase tiene tres actos: <strong>corregir</strong> lo que la validación haya dejado pendiente, <strong>encender la magia</strong> (EmissiveTint sobre la máscara de la clase 17) y <strong>presentar</strong>. El mago camina, la gema brilla, y el estudiante dice las tres palabras que resumen cinco meses: <strong>"yo hice esto"</strong>.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 0</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c20_final_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Cerrar el curso con el <strong>avatar jugable dentro de una experiencia</strong> — caminando, saltando, con su brillo mágico encendido — y con una <strong>presentación</strong> donde el estudiante cuenta el viaje completo con sus propios materiales (dibujos, checkpoints, capturas). La rúbrica final vive en <a href="recursos.html">recursos</a>; hoy se aplica en positivo: celebrar lo que hay, nombrar lo que sigue.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Enseñar lo que hiciste es hacerlo dos veces: al contarlo, descubres cuánto sabes."</p>
+          <p class="who">Metáfora nº 20 · El espejo</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque (la última): hoy el estudiante es el profesor. Presentar la obra — qué construí, cómo, qué salió mal y cómo lo arreglé — es la habilidad que convierte veinte clases sueltas en un oficio contado con orgullo. Los artistas que saben contar su trabajo llegan el doble de lejos.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 5 min</h3>
+        <p><strong>EmissiveTint, el pago de la promesa:</strong> la máscara gris de la clase 17 dice DÓNDE brilla; hoy, en el <code>SurfaceAppearance</code> de la varita, <code>EmissiveTint</code> pone el COLOR (el de la tarea de la clase 17) y <code>EmissiveStrength</code> la intensidad. Cambiar el tint en vivo y ver la MISMA máscara brillar verde, azul o dorada — la demostración definitiva de por qué máscara y color viajan separados.</p>
+        <p><strong>Uso in-experience:</strong> se repite una última vez, ahora con el avatar delante (<a href="pipeline.html#menor">pipeline, sección 10</a>): este mago vive y se juega en las experiencias del estudiante. El Marketplace exige verificación de identidad de adulto — no es el objetivo ni la vía del curso. El logro no es vender: es haber construido, de cero, un avatar que camina.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <p style="margin-bottom:10px"><strong>Ninguna — el arsenal se cerró en la clase 18.</strong> La <a href="hotkeys.html">tarjeta acumulativa</a> es, desde hoy, el mapa de todo lo que estas manos saben hacer.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–12</span><span><b>Acto 1 — Correcciones.</b> Si la clase 19 dejó diagnóstico pendiente: aplicarlo (Blender → corregir → re-exportar → re-validar). Si Avatar Setup validó: pulido fino (posición de accesorios, escala final). Si el plan B quedó activo: asegurar que el mago-modelo se ve impecable en escena. Todo camino termina en un mago presentable.</span></div>
+          <div class="tl"><span class="t">12–20</span><span><b>Acto 2 — Encender la magia.</b> En el <code>SurfaceAppearance</code> de la varita: <b>EmissiveTint</b> al color elegido + <b>EmissiveStrength</b> al gusto. Probar 2–3 colores en vivo sobre la misma máscara (la lección de la clase 17, cerrada con broche). Ajustar la iluminación de la escena para que el brillo luzca (una zona en penumbra ayuda).</span></div>
+          <div class="tl"><span class="t">20–30</span><span><b>El paseo inaugural.</b> Cargar el avatar en la experiencia y <b>Play</b>: caminar, saltar, emotes. Observar la túnica rígida en movimiento (el intercambio consciente de la clase 13, visto en vivo). Capturas y video corto para <code>05_capturas</code> — el material de la presentación.</span></div>
+          <div class="tl"><span class="t">30–42</span><span><b>Acto 3 — "Yo hice esto".</b> Presentación al público invitado (o al profesor como público): el dibujo de la clase 1 junto al avatar caminando; el viaje por módulos con los checkpoints como hitos; UNA cosa que salió mal y cómo se arregló (la mejor parte de toda presentación honesta); y la demo en vivo. El profesor aplica la <a href="recursos.html">rúbrica</a> en positivo y por escrito.</span></div>
+          <div class="tl"><span class="t">42–45</span><span><b>Cierre del curso.</b> Guardar <code>MF_c20_final_v01.blend</code> y el lugar de Studio. Entregar la carpeta del curso completa (blends, texturas, exports, capturas) como el portafolio que es. Última pregunta al estudiante: "¿qué construyes ahora?" — porque el pipeline ya es suyo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Gastar los 45 minutos en pulido</b> — el pulido es un pozo sin fondo y la presentación es el objetivo. El acto 1 tiene 12 minutos; lo que no quepa se anota como "siguiente versión" (los juegos reales también hacen eso).</li>
+          <li><b>EmissiveStrength al máximo</b> — la gema se convierte en un foco que quema la escena. Menos es magia; más es soldadura.</li>
+          <li><b>La presentación como examen</b> — el estudiante recita nervioso en vez de contar con orgullo. El formato es show-and-tell, el público está invitado a preguntar, y el error-arreglado vale más que la perfección.</li>
+          <li><b>Prometer el Marketplace</b> — "y ahora lo vendo" no es el cierre. El cierre es in-experience, dicho con claridad y sin rebajar el logro: un avatar propio, de cero, a los 10–14 años.</li>
+          <li><b>No guardar la última versión</b> — la emoción del final hace olvidar el ritual más viejo del curso. c20 guardado, carpeta entregada, y ahora sí: celebración.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo" (del curso entero)</h3>
+        <ul class="eval">
+          <li>El <b>avatar es jugable</b> en una experiencia: camina, salta, con accesorios puestos — por Avatar Setup o por el plan B documentado.</li>
+          <li>La <b>gema brilla</b> con EmissiveTint del color elegido, y el estudiante explica máscara vs tint sin ayuda.</li>
+          <li>La <b>presentación ocurrió</b>: viaje contado, error-arreglado incluido, demo en vivo.</li>
+          <li>La <b>rúbrica final está aplicada por escrito</b> y la carpeta del curso, completa y entregada.</li>
+          <li><b><code>MF_c20_final_v01.blend</code></b> guardado. Curso cerrado. 🎓</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>La presentación <strong>no se recorta</strong> — se recorta el pulido. Un avatar con un accesorio torcido que su autor presenta con orgullo es un cierre de curso perfecto; un avatar perfecto sin presentación, no. Si las correcciones del acto 1 desbordan, plan B activo y a presentar.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>El epílogo de lujo: una <strong>pose de póster</strong> (la pose de acción que la clase 6 prohibió, ahora sí, sobre el rig), un <strong>escenario</strong> para la foto final (torre de mago con Parts), o grabar el <strong>video-trailer</strong> de 30 segundos del personaje. El material del portafolio crece solo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c20_final_v01.blend</code> <span aria-hidden="true">·</span> la carpeta completa del curso</div>
+          <small>El portafolio entero: 20 checkpoints, texturas, exports, capturas y un avatar jugable. No es el checkpoint de una clase — es el de un artista 3D que empieza.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 20 · Avatar jugable · <span class="mono">Curso Mago Fantástico</span> · ¡FINAL!</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏆</span>Qué construimos hoy</h3>
+        <p>Hoy no construyes una pieza — <strong>terminas una obra</strong>. Tu mago camina dentro de Roblox, su gema brilla del color que TÚ elegiste, y se lo presentas al mundo con las tres palabras más grandes del curso: <strong>"yo hice esto"</strong>. Del cubo gris de la clase 1 a un avatar completo. Cinco meses. Tu trabajo.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <p style="font-size:14px;color:var(--text-dim)"><strong>Todas.</strong> Las 40 y pico teclas del curso son tuyas — la <a href="hotkeys.html">tarjeta acumulativa</a> es tu mapa de superpoderes. Hoy no aprendes teclas: las usas para cerrar tu obra.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Corregí lo pendiente de la clase 19 (si había algo).</li>
+          <li>Puse el <b>EmissiveTint</b> del color de MI historia de la varita. ✨</li>
+          <li>Probé 2–3 colores de brillo sobre la misma máscara — magia pura.</li>
+          <li>Cargué mi avatar y le di <b>Play</b>: ¡camina! ¡salta! ¡ES MI MAGO!</li>
+          <li>Grabé las <b>capturas y el video</b> del paseo inaugural.</li>
+          <li>Presenté mi viaje: el dibujo de la clase 1 junto al avatar de hoy.</li>
+          <li>Conté <b>un error y cómo lo arreglé</b> — la mejor parte de mi historia.</li>
+          <li>Guardé <b>MF_c20_final_v01.blend</b>… y celebré. 🎉🧙</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El póster final</div>
+          <p>Toma LA foto: tu mago en su mejor ángulo, gema brillando, en un rincón con buena luz de tu experiencia. Esa imagen es el póster de tu curso — imprímela, ponla de fondo de pantalla, gánatela.</p>
+          <span class="time">+10 min si hay tiempo en clase</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea (la última… y es distinta)</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para siempre</div>
+          <p>No hay tarea de esta clase. Hay una pregunta: <strong>¿qué construyes ahora?</strong> El pipeline entero es tuyo — modelar, desplegar, pintar, hornear, exportar. ¿Un dragón? ¿Un robot? ¿El compañero de tu mago? Elige, dibuja la primera idea… y ya sabes cómo sigue.</p>
+          <span class="time">El resto de tu vida de artista 3D 🚀</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">El último dibujo del curso: tu mago terminado — y a su lado, <strong>tu próximo proyecto</strong>. Compara esta hoja con la de la clase 1. Ese salto lo diste tú.</p>
+        <div class="draw-box"><span>Mi mago · Mi próximo proyecto</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-19.html"><small>Anterior · Clase 19</small><b>← Avatar Setup</b></a>
+      <a class="next" href="index.html"><small>Fin del curso</small><b>Volver al mapa 🎓</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 20 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

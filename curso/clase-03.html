@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 03 · Formas con carácter — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 3 del curso Mago Fantástico: bevel, modificador Mirror y selección de loops en Blender 5.2. Brazos, manos y cabeza — la silueta completa del muñeco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html" class="active" aria-current="page"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m1">🟦 M1 · El muñeco de bloques · Clase 03</span>
+      <h1>Formas con <span class="g2">carácter</span></h1>
+      <p class="sub">El muñeco termina su cuerpo: <strong>brazos, manos y cabeza</strong>. Tres herramientas nuevas hacen el trabajo pesado — el bevel suaviza, el modificador <strong>Mirror</strong> construye la mitad del muñeco gratis, y la selección de loops agarra anillos enteros de un clic. Al final de la hora, la silueta completa.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 3</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c03_muneco_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Completar la <strong>silueta del muñeco de bloques</strong> — brazos, manos y cabeza con proporciones deliberadas — y aprender la idea más rentable del modelado: <strong>la simetría no se modela dos veces, se calcula</strong>. El modificador Mirror que hoy construye un brazo es el mismo que en el módulo 2 construirá medio mago.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"La silueta manda: si tu personaje se reconoce viendo solo su sombra, funciona."</p>
+          <p class="who">Metáfora nº 3 · La sombra</p>
+        </div>
+        <p style="margin-top:12px">Juego de arranque: pensar en personajes famosos de videojuegos y dibujar solo su contorno en negro — se reconocen igual. Los detalles llegan después; primero la sombra tiene que contar quién es. Hoy el muñeco gana su sombra.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>El bevel</strong> convierte una arista afilada en una banda con grosor. Los objetos reales casi nunca tienen bordes perfectos — un microbisel atrapa luz y hace que todo parezca menos "hecho en computadora".</p>
+        <p><strong>Los modificadores</strong> son máquinas que trabajan sobre la malla sin destruirla: se apilan, se ajustan y se pueden apagar. <strong>Mirror</strong> es el primero del curso: espeja la malla sobre un eje. Se modela la mitad derecha y la izquierda aparece sola — y si se mueve un vértice, su gemelo se mueve con él. Condición: el <strong>origen del objeto</strong> debe estar en el centro.</p>
+        <p><strong>Seleccionar loops:</strong> Alt + clic sobre una arista selecciona el anillo entero al que pertenece. Con anillos completos, dar forma a una cintura o a un hombro es un solo gesto en vez de veinte clics.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + B</span><span class="kf">Bevel — biselar aristas</span><span class="kw">Scroll durante el bevel añade segmentos. Bordes amables con la luz.</span></div>
+          <div class="key"><span class="kbd">Alt + clic</span><span class="kf">Seleccionar un loop entero</span><span class="kw">Un anillo completo de aristas o caras de un solo clic.</span></div>
+          <div class="key"><span class="kbd">Shift + D</span><span class="kf">Duplicar la selección</span><span class="kw">Copia geometría o objetos. Hoy: duplicar la mano ya hecha.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Tab</span><span class="kbd">E</span><span class="kbd">Ctrl + R</span><span class="kf">Repaso de la clase 2</span><span class="kw">Todo el trabajo de hoy pasa por Edit Mode y extrusiones.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Abrir el checkpoint</b> (<code>MF_c02…</code> propio o del profesor) y guardarlo ya como <code>MF_c03_muneco_v01.blend</code> — versión nueva antes de tocar nada.</span></div>
+          <div class="tl"><span class="t">06–14</span><span><b>Instalar el Mirror.</b> En Properties → Modifiers → Add Modifier → Mirror (eje X). Demostración del truco: borrar la mitad izquierda del torso en Edit Mode y ver cómo el espejo la reconstruye. A partir de aquí, solo se modela el lado derecho.</span></div>
+          <div class="tl"><span class="t">14–24</span><span><b>El brazo.</b> Seleccionar la cara lateral del hombro derecho, <b>E</b> hacia afuera en tres tramos (hombro → codo → muñeca), afinando con <b>S</b>. El izquierdo aparece solo — momento "¡¿qué?!" garantizado.</span></div>
+          <div class="tl"><span class="t">24–30</span><span><b>La mano.</b> Un cubo pequeño aplastado como manopla al final del brazo (sin dedos — bloques, no cirugía). <b>Shift+D</b> demuestra duplicar… y se descarta el duplicado: el espejo ya pone la otra mano. Que vea las dos rutas.</span></div>
+          <div class="tl"><span class="t">30–38</span><span><b>La cabeza.</b> Extruir desde la cara superior del torso un cuello corto y luego la cabeza en bloque, o añadir un cubo aparte — decisión del estudiante, se discuten los dos caminos. Ajustar proporción: cabeza grande = personaje simpático (regla cartoon).</span></div>
+          <div class="tl"><span class="t">38–45</span><span><b>Bevel de carácter.</b> <b>Alt+clic</b> para seleccionar los loops de aristas más duros (bordes del torso, filo de la cabeza) y <b>Ctrl+B</b> suave. Orbitar la silueta completa: ¿se reconoce su sombra? Guardar.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Mirror con el origen descentrado</b> — el lado espejado aparece separado o montado. Detección: hueco o solape en el centro. Corrección: Object → Set Origin → Origin to World Center (con el muñeco centrado).</li>
+          <li><b>Bevel desbocado</b> — un bevel grande sobre aristas juntas hace que la malla se pliegue sobre sí misma. Regla: bevel pequeño, y si se ve raro, Ctrl+Z sin piedad.</li>
+          <li><b>Modelar el lado equivocado</b> — edita la mitad espejada y "no pasa nada". Detección: los cambios no se ven. La mitad real es la que tiene vértices seleccionables.</li>
+          <li><b>Shift+D seguido de clic sin mirar</b> — deja una copia montada exactamente encima de la original. Detección: "este cubo se ve más oscuro" (son dos superpuestos). Outliner no miente: contar objetos.</li>
+          <li><b>Proporciones tímidas</b> — cabeza apenas más grande, manos apenas visibles. En cartoon la proporción se exagera: si parece "un poquito", no se lee.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El muñeco tiene <b>cuerpo completo</b>: torso, piernas, brazos con manos y cabeza — y su silueta se reconoce como personaje.</li>
+          <li>Los brazos y manos existen <b>vía Mirror</b>: se modeló solo el lado derecho.</li>
+          <li>Hay al menos <b>un loop seleccionado con Alt+clic y un bevel aplicado</b> con intención.</li>
+          <li>Archivo guardado como <b><code>MF_c03_muneco_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Prioridad: <strong>Mirror + un brazo</strong>. La cabeza puede ser un cubo sin refinar y el bevel puede esperar — se recupera en 5 minutos al inicio de la clase 4. Lo que no se negocia es que el estudiante vea el espejo funcionando.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Carácter extra con lo aprendido: hombreras (extrusión corta hacia arriba en el hombro), orejas o cuernos en bloque, cinturón con un loop cut + S. Reto: que la silueta cuente <em>qué clase de personaje es</em> sin ningún color.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c03_muneco_v01.blend</code></div>
+          <small>Muñeco de bloques con cuerpo completo y Mirror activo, listo para el desplegado de UVs de la clase 4.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 03 · Formas con carácter · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">👤</span>Qué construimos hoy</h3>
+        <p>El muñeco termina su cuerpo: <strong>brazos, manos y cabeza</strong>. Y aprendes el mejor truco del modelado: el <strong>espejo</strong>. Modelas un brazo… y el otro aparece solo, calcado, gratis. Los profesionales lo usan en casi todo — desde hoy, tú también.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + B</span><span class="kf">Bevel — suavizar bordes</span></div>
+          <div class="key"><span class="kbd">Alt + clic</span><span class="kf">Seleccionar un anillo entero</span></div>
+          <div class="key"><span class="kbd">Shift + D</span><span class="kf">Duplicar</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">El Mirror no es una tecla: es un <strong>modificador</strong> — una máquina que se enchufa al objeto en el panel de la llave inglesa 🔧.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Abrí mi archivo de la clase 2 y lo guardé como <b>versión nueva</b> (c03).</li>
+          <li>Le puse el modificador <b>Mirror</b> al muñeco (eje X).</li>
+          <li>Extruí el <b>brazo derecho</b> en tres tramos: hombro, codo, muñeca.</li>
+          <li>Vi aparecer el brazo izquierdo <b>solo</b>. 🤯</li>
+          <li>Le puse una <b>manopla</b> como mano.</li>
+          <li>Le construí la <b>cabeza</b> — bien grande, que se vea simpático.</li>
+          <li>Suavicé los bordes duros con <b>Ctrl+B</b> (poquito, con estilo).</li>
+          <li>Miré su <b>silueta</b> desde lejos: ¿se reconoce? Guardé como <b>MF_c03_muneco_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El juego de la sombra</div>
+          <p>Cambia <strong>tres cosas</strong> de la silueta de tu muñeco para que se reconozca solo por su sombra: ¿hombreras?, ¿orejas puntiagudas?, ¿piernas larguísimas? Compruébalo mirándolo a contraluz (vista frontal, bien lejos).</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Modela un <strong>trofeo</strong> con Mirror: media copa (extrusiones + S) y el espejo hace la otra mitad. Bevel en el borde superior para que brille con clase. Foto o archivo para enseñarlo la próxima clase.</p>
+          <span class="time">≈ 15–20 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja solo la <strong>silueta</strong> de tu muñeco, rellena en negro. Si alguien de tu familia adivina qué es, ganaste.</p>
+        <div class="draw-box"><span>La sombra de mi muñeco</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-02.html"><small>Anterior · Clase 02</small><b>← Dentro de la malla</b></a>
+      <a class="next" href="clase-04.html"><small>Siguiente · Clase 04</small><b>El desplegado →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 03 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

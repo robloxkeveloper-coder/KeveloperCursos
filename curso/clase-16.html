@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 16 · El bake — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 16 del curso Mago Fantástico: hornear normal y ambient occlusion del high poly al low poly en Blender 5.2. El detalle esculpido, capturado en imágenes de 1024 px.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html" class="active" aria-current="page"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m4">🟧 M4 · Detalle y texturas · Clase 16</span>
+      <h1>El <span class="g1">bake</span></h1>
+      <p class="sub">La magia prometida en la clase 14 se cumple: el detalle esculpido del high poly se <strong>fotografía</strong> en dos imágenes — el <strong>normal map</strong> (cómo rebota la luz) y el <strong>ambient occlusion</strong> (dónde se acumula la sombra) — y el low poly ligero se las pone. Millones de triángulos de apariencia, cero triángulos de costo.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 0</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c16_bake_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Hornear <strong>normal + AO</strong> de las copias _HP sobre los low poly de sombrero, túnica y varita — a <strong>1024×1024, PNG</strong>, como fija el <a href="pipeline.html#texturas">pipeline</a> — y ver el "antes/después" en el low poly. Es la clase más técnica del módulo: el ritmo lo marca la precisión del setup, no la velocidad. Un bake bien configurado sale a la primera; uno mal configurado enseña a leer errores.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Hornear es fotografiar una escultura: la foto pesa gramos, la escultura pesa toneladas — y en pantalla nadie nota la diferencia."</p>
+          <p class="who">Metáfora nº 16 · La fotografía</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: en un museo, la postal de la estatua cabe en el bolsillo y la estatua no. Los videojuegos están llenos de "postales": superficies planas vestidas con fotos de detalle. Hoy el estudiante fabrica las suyas — y entiende de golpe cómo los juegos AAA parecen tener infinito detalle en hardware finito.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 10 min</h3>
+        <p><strong>Normal map:</strong> una imagen (esos tonos azul-violeta) donde cada píxel guarda una dirección — "aquí la superficie mira un poco a la izquierda, aquí hacia arriba". El motor la usa para inclinar la luz como si la geometría existiera. No mueve ni un vértice: engaña a la luz.</p>
+        <p><strong>Ambient occlusion (AO):</strong> una imagen en grises — "a este rincón le llega poca luz ambiente". Multiplica la sombra suave en pliegues y recovecos. Gratis en rendimiento, enorme en percepción de volumen.</p>
+        <p><strong>Cómo funciona el bake:</strong> Blender (con el motor Cycles) dispara rayos desde la superficie del low poly hacia el high poly y anota lo que encuentra, guardándolo en el tile UV de la clase 15 — por eso los UVs iban primero. El margen de error se controla con <em>Extrusion</em> (cuánto se infla el low poly para "envolver" al high). Distancia corta: rayos que no alcanzan; larga: capturan la pieza equivocada.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <p style="margin-bottom:10px"><strong>Ninguna.</strong> El bake vive en paneles (Render Properties → Bake), no en el teclado. Clase de flujo, como la 5: pocas teclas, mucho oficio.</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">H</span><span class="kbd">Alt + H</span><span class="kbd">/</span><span class="kf">Repaso</span><span class="kw">Gestionar qué par high/low está visible para cada horneado.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Preparar el horno.</b> Versión nueva (<code>MF_c16_bake_v01.blend</code>). Motor de render a <b>Cycles</b>. En el material del sombrero low poly: nodo Image Texture nuevo → imagen <code>sombrero_normal</code> (1024×1024, non-color). El nodo queda <b>seleccionado</b>: ahí aterriza el horneado.</span></div>
+          <div class="tl"><span class="t">06–16</span><span><b>Primer bake: normal del sombrero.</b> Seleccionar <code>ACC_sombrero_HP</code>, luego Shift+clic el low (activo). Render Properties → Bake → tipo <b>Normal</b>, ✔ <em>Selected to Active</em>, Extrusion 0.05. Hornear. Aparece la imagen azul-violeta: el detalle esculpido, convertido en foto.</span></div>
+          <div class="tl"><span class="t">16–24</span><span><b>El momento payoff.</b> Conectar el normal map al material del low poly (nodo Normal Map entre imagen y shader). Ver el sombrero low poly en Material Preview: ¡las abolladuras y costuras están ahí! Alternar el nodo on/off — el antes/después que justifica dos clases de trabajo. Guardar la imagen como PNG en <code>03_texturas</code>.</span></div>
+          <div class="tl"><span class="t">24–32</span><span><b>Bake de AO del sombrero.</b> Nueva imagen <code>sombrero_ao</code>, tipo de bake <b>Ambient Occlusion</b>, mismo dúo. La imagen gris con las sombras de los pliegues. Guardar PNG. (Se conectará multiplicando el color en la clase 17 — hoy basta con tenerla.)</span></div>
+          <div class="tl"><span class="t">32–42</span><span><b>Producción en serie.</b> Repetir el ciclo completo con la <b>túnica</b> (el estudiante guía, el profesor asiste) y la <b>varita</b> (el estudiante solo, si el reloj acompaña). Seis imágenes en total en <code>03_texturas</code>, nombradas con el patrón <code>pieza_mapa.png</code>.</span></div>
+          <div class="tl"><span class="t">42–45</span><span><b>Cierre.</b> Antes/después de las tres piezas, carpetas ordenadas, guardar. El detalle ya no depende del high poly: vive en fotos.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Bake negro o vacío</b> — el nodo de imagen no estaba seleccionado en el material del low, o el orden selección high→low se invirtió. Checklist antes de cada horneado: imagen creada, nodo seleccionado, high primero, low activo, Selected to Active ✔.</li>
+          <li><b>Manchas y rayas imposibles</b> — Extrusion corta: rayos que no alcanzan el high. Subirla poco a poco (0.05 → 0.1). Si captura la pieza de al lado: bajar, o esconder las demás piezas (H) durante ese bake.</li>
+          <li><b>Normal map lavado o sin efecto</b> — la imagen se creó como sRGB. Los mapas de datos (normal, AO) van en <b>Non-Color</b>. Se fija al crear la imagen y al cargarla.</li>
+          <li><b>Hornear sin guardar las imágenes</b> — el bake vive en RAM; cerrar Blender lo evapora. Ritual: bake → Image → Save As → <code>03_texturas</code>, cada vez.</li>
+          <li><b>El AO conectado como color directo</b> — el sombrero se ve gris sucio. El AO multiplica, no sustituye — y eso es materia de la clase 17; hoy solo se guarda.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existen <b>6 PNG en <code>03_texturas</code></b>: normal + AO de sombrero, túnica y varita, a 1024, nombrados con el patrón del curso.</li>
+          <li>El <b>normal del sombrero está conectado</b> y el antes/después se ve en Material Preview.</li>
+          <li>El estudiante explica <b>qué guarda un normal map y qué guarda el AO</b> — con sus palabras.</li>
+          <li>Resolvió al menos <b>un bake fallido</b> leyendo el síntoma (es esperable y valioso que ocurra).</li>
+          <li>Archivo guardado como <b><code>MF_c16_bake_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p><strong>Un solo par completo</strong> — sombrero: normal + AO + conexión + antes/después. Túnica y varita se hornean desde el checkpoint del profesor la próxima semana en 10 minutos (el setup ya estará hecho). Entender el ciclo &gt; repetirlo tres veces.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Hornear también un <strong>AO del cuerpo</strong> (sin high poly: AO se puede hornear de un objeto sobre sí mismo) — sombra suave gratis bajo la barba y entre los dedos para la clase 17. Y comparar: ¿qué pasa horneando el normal a 256 px? La resolución como recurso, visto en vivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c16_bake_v01.blend</code> <span aria-hidden="true">·</span> <code>03_texturas/*.png</code></div>
+          <small>Los mapas horneados de las tres piezas, guardados y verificados. La clase 17 pinta encima el color, el roughness y el brillo mágico.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 16 · El bake · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📸</span>Qué construimos hoy</h3>
+        <p>Hoy le hacemos <strong>fotos mágicas</strong> a tus esculturas: el <strong>normal map</strong> (la foto azul que guarda cómo rebota la luz) y el <strong>AO</strong> (la foto gris de las sombras escondidas). Tu sombrero ligero se pone la foto… y de repente tiene todas las abolladuras del pesado. Así hacen TODOS los videojuegos.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px"><strong>Cero teclas nuevas</strong> — hoy se trabaja en los paneles del horno (Render → Bake). Repaso útil:</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">H</span><span class="kbd">Alt + H</span><span class="kf">Esconder / mostrar piezas entre horneados</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c16) y puse el motor en <b>Cycles</b>.</li>
+          <li>Creé la imagen <b>sombrero_normal</b> (1024, non-color) en el material del sombrero ligero.</li>
+          <li>Seleccioné <b>primero el _HP y después el ligero</b> (el orden importa).</li>
+          <li>Horneé el <b>normal</b>: ✔ Selected to Active. ¡Salió la foto azul!</li>
+          <li>La conecté y vi el <b>antes/después</b> — abolladuras sin triángulos. 🤯</li>
+          <li>Horneé el <b>AO</b> (la foto gris de sombras).</li>
+          <li><b>Guardé cada PNG</b> en 03_texturas (¡el bake se evapora si no!).</li>
+          <li>Repetí con túnica y varita, y guardé <b>MF_c16_bake_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El detective de mapas</div>
+          <p>Abre tu normal map como imagen y estúdialo: ¿reconoces los pliegues de tu túnica en el dibujo azul? ¿Dónde está la cicatriz del sombrero? Aprender a "leer" mapas con los ojos es un superpoder de artista técnico.</p>
+          <span class="time">+5 min donde sea</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>La próxima clase pintamos TODO. Ten lista tu <strong>paleta final</strong> (los 3 colores + el color del brillo de la gema) y decide: ¿qué partes del mago brillarán en la oscuridad? Solo lo que pintes de blanco en la máscara mágica brillará…</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja el "antes/después" de tu sombrero: a la izquierda el ligero liso, a la derecha el mismo con su foto de detalle puesta.</p>
+        <div class="draw-box"><span>Antes / después del bake</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-15.html"><small>Anterior · Clase 15</small><b>← UVs del mago</b></a>
+      <a class="next" href="clase-17.html"><small>Siguiente · Clase 17</small><b>PBR completo →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 16 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

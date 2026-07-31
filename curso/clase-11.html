@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 11 · Sombrero, pelo y barba — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 11 del curso Mago Fantástico: sombrero, cabello y barba como accesorios rígidos separados — nunca fusionados al cuerpo — en Blender 5.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html" class="active" aria-current="page"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m3">🟨 M3 · Accesorios y ropa · Clase 11</span>
+      <h1>Sombrero, pelo y <span class="g2">barba</span></h1>
+      <p class="sub">Arranca el módulo que convierte un cuerpo en un personaje. Tres accesorios en una hora — y una regla de hierro que viene directa de Roblox: los accesorios son <strong>objetos separados, nunca fusionados al cuerpo</strong>. Hoy el Ctrl+J está prohibido.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 1</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c11_accesorios_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Modelar <strong>sombrero, cabello y barba</strong> como tres objetos independientes y bien nombrados (<code>ACC_sombrero</code>, <code>ACC_pelo</code>, <code>ACC_barba</code>), colocados sobre el cuerpo sin tocarlo por dentro. El estudiante debe salir entendiendo el <em>porqué</em>: son el <strong>asset B</strong> del <a href="pipeline.html#assets">pipeline</a>, y Roblox los procesa como piezas propias con sus attachments.</p>
+        <div class="warn hard">
+          <span class="wi" aria-hidden="true">⛔</span>
+          <p><strong>Regla del pipeline, sin excepciones:</strong> el cuerpo base va <em>"sin accesorios — nada de cabello, cejas, barba, pestañas ni sombrero en la malla del cuerpo"</em>. Si un accesorio se fusiona al cuerpo, Avatar Setup lo trata como deformidad del cráneo. Hoy se modela CERCA del cuerpo, nunca DENTRO de su malla. Ctrl+J queda guardado en el cajón hasta nuevo aviso.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"El sombrero no es parte de la cabeza: lo que en la vida real se quita y se pone, en 3D se modela aparte."</p>
+          <p class="who">Metáfora nº 11 · El perchero</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: en el armario de tu casa, la ropa no está cosida a tu cuerpo. Los videojuegos funcionan igual — por eso tu avatar de Roblox puede cambiarse de sombrero. Hoy construimos el perchero del mago: cada pieza suelta, cada pieza suya.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Accesorio rígido</strong> = un objeto que acompaña al avatar sin deformarse (el sombrero gira con la cabeza, no se dobla con ella). Roblox le genera un attachment — un punto de anclaje — durante Avatar Setup, siempre que llegue como objeto separado dentro de la <code>Folder</code> (clase 19).</p>
+        <p><strong>El cursor 3D como grúa de precisión:</strong> hasta hoy se colocaba "a ojo". <strong>Shift+S</strong> abre el menú de snap: <em>Cursor to Selected</em> (llevar el cursor a la coronilla) y <em>Selection to Cursor</em> (teletransportar el sombrero exactamente ahí). Dos gestos y el accesorio aterriza donde debe.</p>
+        <p><strong>Pelo y barba low poly:</strong> no son pelos — son <em>masas</em> con silueta de pelo. Un casquete que envuelve el cráneo, una cuña que cae del mentón. La textura (módulo 4) hará el resto.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Shift + S</span><span class="kf">Menú de snap (cursor y selección)</span><span class="kw">La grúa de precisión: Cursor to Selected → Selection to Cursor.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Shift + A</span><span class="kbd">E</span><span class="kbd">Ctrl + B</span><span class="kbd">O</span><span class="kf">Repaso</span><span class="kw">Los accesorios se modelan con todo el arsenal de los módulos 1–2.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c11_accesorios_v01.blend</code>) y las referencias de sombrero de la tarea sobre la mesa. Crear una colección <code>Accesorios</code> en el Outliner: ahí vivirá el asset B.</span></div>
+          <div class="tl"><span class="t">05–18</span><span><b>El sombrero.</b> Cono de pocas caras (12) + un cilindro aplastado como ala. Doblar la punta con edición proporcional — un sombrero de mago sin doblez es un cucurucho. Posicionarlo con <b>Shift+S</b>: cursor a la coronilla, sombrero al cursor, ajuste fino con G. Nombrarlo <code>ACC_sombrero</code>.</span></div>
+          <div class="tl"><span class="t">18–28</span><span><b>El pelo.</b> Duplicar el casquete del cráneo NO — modelar aparte: media esfera envolvente ligeramente más grande que el cráneo, con mechones extruidos hacia la nuca. Debe "flotar" un milímetro sobre la cabeza, sin compartir malla. <code>ACC_pelo</code>.</span></div>
+          <div class="tl"><span class="t">28–38</span><span><b>La barba.</b> La firma del mago: cuña extruida desde un cubo, afinada con loop cuts y proporcional, cayendo del mentón. ¿Barba puntiaguda, cuadrada, trenzada? El concept manda. <code>ACC_barba</code>. Verificación con clic en cada pieza: ¿tres objetos + cuerpo en el Outliner? Perfecto.</span></div>
+          <div class="tl"><span class="t">38–45</span><span><b>Inspección de separación.</b> Seleccionar el cuerpo en Object Mode: ¿se ilumina algún accesorio? No debe. Mover el sombrero con G y devolverlo: si algo del cuerpo se mueve con él, hay problema. Contador de triángulos del conjunto leído y guardar.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>El reflejo de Ctrl+J</b> — tres clases cosiendo piezas crean el hábito; hoy es el error capital. Detección: el Outliner pierde objetos. Corrección: Ctrl+Z y recordar el perchero.</li>
+          <li><b>Accesorio incrustado en el cráneo</b> — el pelo comparte espacio con la cabeza y parpadea (z-fighting). El pelo envuelve por FUERA, con un margen visible en vista lateral.</li>
+          <li><b>Modelar el accesorio en el origen y dejarlo ahí</b> — sombrero en el suelo, prisas al final. Shift+S existe para colocarlo en 10 segundos; usarlo temprano.</li>
+          <li><b>Nombres por defecto</b> — <code>Cube.003</code> no sobrevive al viaje a Studio. La convención <code>ACC_*</code> se aplica al crear, no al final.</li>
+          <li><b>Accesorios sin Mirror donde conviene</b> — el pelo y la barba suelen ser simétricos: Mirror también funciona en objetos nuevos. El sombrero doblado, en cambio, gana con asimetría deliberada.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existen <b>tres objetos accesorio</b> (<code>ACC_sombrero</code>, <code>ACC_pelo</code>, <code>ACC_barba</code>) en la colección <code>Accesorios</code>.</li>
+          <li><b>Ninguno comparte malla con el cuerpo</b>: la prueba de "mover y devolver" pasa limpia.</li>
+          <li>Los tres siguen el <b>concept art</b> y se leen en la silueta (Numpad 1, contraluz mental).</li>
+          <li>El estudiante explica <b>por qué no se fusionan</b> — con sus palabras, citando lo que hará Avatar Setup.</li>
+          <li>Archivo guardado como <b><code>MF_c11_accesorios_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Prioridad absoluta: <strong>el sombrero</strong> — es el accesorio que define al mago y el vehículo de la regla de separación. Pelo y barba pueden ser bloques toscos (se refinan la próxima clase desde el checkpoint del profesor) o directamente esperar.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Detalles con presupuesto: una <strong>hebilla</strong> en el sombrero (cubo con bevel), <strong>cejas</strong> como accesorio extra (¡también van separadas! — dos cuñas mini <code>ACC_cejas</code>), o mechones sueltos en la barba. Cada pieza nueva: separada, nombrada, en la colección.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c11_accesorios_v01.blend</code></div>
+          <small>Cuerpo base + colección Accesorios con sombrero, pelo y barba separados y nombrados. La clase 12 añade la varita.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 11 · Sombrero, pelo y barba · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎩</span>Qué construimos hoy</h3>
+        <p>¡Tu mago por fin parece mago! Hoy le hacemos su <strong>sombrero, su pelo y su barba</strong>. Regla de oro nueva: los accesorios son como la ropa de verdad — <strong>se quitan y se ponen</strong>, así que se modelan como piezas separadas. Hoy está <em>prohibido</em> el Ctrl+J.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Shift + S</span><span class="kf">La grúa mágica (snap)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Combo de colocación perfecta: selecciona la coronilla → <strong>Shift+S → Cursor to Selected</strong> → selecciona el sombrero → <strong>Shift+S → Selection to Cursor</strong>. ¡Plop! Aterrizaje exacto.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c11) y creé la colección <b>Accesorios</b>.</li>
+          <li>Modelé el <b>sombrero</b>: cono + ala… y le doblé la punta con estilo.</li>
+          <li>Lo coloqué en la coronilla con la <b>grúa Shift+S</b>.</li>
+          <li>Lo nombré <b>ACC_sombrero</b> (nada de Cube.003 😤).</li>
+          <li>Modelé el <b>pelo</b> envolviendo el cráneo por fuera, sin tocarlo.</li>
+          <li>Modelé la <b>barba</b> de mi concept: cae del mentón, pieza aparte.</li>
+          <li>Hice la <b>prueba de separación</b>: muevo cada accesorio y el cuerpo ni se entera.</li>
+          <li>Conté objetos en el Outliner: cuerpo + 3 accesorios ✔ y guardé <b>MF_c11_accesorios_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El intercambio</div>
+          <p>Como tus accesorios son piezas sueltas… ¡juega con ellos! Duplica el sombrero, hazle una variante loca (altísimo, aplastado, doble punta) y pruébale los dos a tu mago. ¿Cuál cuenta mejor su historia? Borra el perdedor.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Diseña la <strong>varita</strong> en papel: ¿recta o nudosa? ¿con gema en la punta? ¿cuántas gemas? ¿de qué color brillarán? La próxima clase la construimos — y las gemas van a tener un truco de duplicación mágica.</p>
+          <span class="time">≈ 10–15 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja a tu mago con sus tres accesorios puestos — y al lado, el "perchero": las mismas piezas flotando separadas, como en el Outliner.</p>
+        <div class="draw-box"><span>El mago y su perchero</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-10.html"><small>Anterior · Clase 10</small><b>← La cabeza II</b></a>
+      <a class="next" href="clase-12.html"><small>Siguiente · Clase 12</small><b>La varita →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 11 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

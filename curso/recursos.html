@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos del curso · Curso Mago Fantástico</title>
+<meta name="description" content="Recursos transversales del curso Mago Fantástico: carpetas y versionado, las 20 metáforas de Mentalidad de Artista 3D, la rúbrica de progreso y el checklist de validación Roblox.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html" class="active" aria-current="page"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">📦 Transversales del curso</span>
+      <h1>Recursos del <span class="g2">curso</span></h1>
+      <p class="sub">Lo que acompaña a las 20 clases de principio a fin: el sistema de <strong>carpetas y versionado</strong>, el banco completo de las <strong>20 metáforas</strong> de Mentalidad de Artista 3D, la <strong>rúbrica de progreso</strong> y el <strong>checklist de validación</strong> para Roblox.</p>
+    </header>
+
+    <section id="carpetas" aria-labelledby="h-carp">
+      <div class="sec-head"><span class="num">01</span><h2 id="h-carp">Carpetas y versionado</h2><div class="line"></div></div>
+      <p class="sec-intro">Se instala en la clase 1 y se respeta las 20. Un proyecto ordenado es un proyecto que sobrevive a los accidentes.</p>
+      <div class="grid g2">
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">📁</span>El árbol de carpetas</h3>
+          <div class="tbl-wrap" tabindex="0" style="background:var(--card-solid)">
+<pre class="mono" style="padding:16px 18px;font-size:13px;line-height:1.7;color:var(--text-dim)">MagoFantastico/
+├── 01_referencias/   ← concept art, fotos, inspiración
+├── 02_blends/        ← los .blend, TODOS con versión
+├── 03_texturas/      ← PNG: bakes y set PBR
+├── 04_exports/       ← FBX que viajan a Roblox
+└── 05_capturas/      ← el diario visual del progreso</pre>
+          </div>
+          <ul class="blist" style="margin-top:12px">
+            <li>Nombres de carpeta con número: se ordenan solas y el flujo se lee de arriba a abajo.</li>
+            <li>Todo en <b>minúsculas, sin espacios, sin eñes ni acentos</b> — los nombres de archivo viajan entre sistemas que no siempre los entienden.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🔢</span>El patrón de nombres</h3>
+          <p style="color:var(--text-dim);font-size:14px;margin-bottom:10px"><code>MF_c[clase]_[tema]_v[versión].blend</code></p>
+          <div class="keys">
+            <div class="key"><span class="kbd" style="font-size:11px">MF_c01_robot_v01.blend</span><span class="kf">El primer archivo del curso</span></div>
+            <div class="key"><span class="kbd" style="font-size:11px">MF_c10_mago_base_v01.blend</span><span class="kf">El cuerpo conforme</span></div>
+            <div class="key"><span class="kbd" style="font-size:11px">MF_c20_final_v01.blend</span><span class="kf">La obra terminada</span></div>
+          </div>
+          <ul class="blist" style="margin-top:12px">
+            <li><b>Cada clase abre una versión nueva</b> (c07 → c08) — nunca se sobreescribe la anterior: es el checkpoint.</li>
+            <li>Si dentro de una clase algo grande va a intentarse, se sube la v (<code>v01 → v02</code>) antes de arriesgar.</li>
+            <li>Regla de oro heredada del muñeco: <b>un archivo con versión es trabajo que no se puede perder.</b></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="metaforas" aria-labelledby="h-meta">
+      <div class="sec-head"><span class="num">02</span><h2 id="h-meta">Mentalidad de Artista 3D — las 20 metáforas</h2><div class="line"></div></div>
+      <p class="sec-intro">Una por clase, sin repetir. Cinco minutos de conversación que instalan la idea grande del día antes de tocar el teclado.</p>
+      <div class="tbl-wrap" tabindex="0">
+        <table class="tbl">
+          <thead><tr><th scope="col">Nº</th><th scope="col">Clase</th><th scope="col">Metáfora</th><th scope="col">La idea que instala</th></tr></thead>
+          <tbody>
+            <tr><td class="num-cell">1</td><td><a href="clase-01.html">01</a></td><td><b>El taller</b> — "Un escultor camina alrededor de la piedra antes de dar el primer golpe."</td><td>En 3D te mueves alrededor de la obra; orbitar es la mitad del trabajo.</td></tr>
+            <tr><td class="num-cell">2</td><td><a href="clase-02.html">02</a></td><td><b>La malla</b> — "Toda escultura 3D es piel: por fuera sólida, por dentro hueca."</td><td>Los modelos son redes de puntos, no masas macizas.</td></tr>
+            <tr><td class="num-cell">3</td><td><a href="clase-03.html">03</a></td><td><b>La sombra</b> — "Si tu personaje se reconoce viendo solo su sombra, funciona."</td><td>La silueta manda; el detalle llega después.</td></tr>
+            <tr><td class="num-cell">4</td><td><a href="clase-04.html">04</a></td><td><b>La caja de cartón</b> — "Desplegar es desarmar una caja: caja y plantilla son la misma cosa."</td><td>Los UVs son el modelo aplanado; las seams deciden la plantilla.</td></tr>
+            <tr><td class="num-cell">5</td><td><a href="clase-05.html">05</a></td><td><b>La entrega</b> — "Un artista termina cuando su obra vive donde la gente la ve."</td><td>Exportar es parte del arte, no un trámite.</td></tr>
+            <tr><td class="num-cell">6</td><td><a href="clase-06.html">06</a></td><td><b>Los planos</b> — "Nadie construye una casa sin planos."</td><td>El dibujo barato de hoy evita el error caro de mañana.</td></tr>
+            <tr><td class="num-cell">7</td><td><a href="clase-07.html">07</a></td><td><b>Las montañas</b> — "Primero las montañas, luego los árboles, al final las hojas."</td><td>De lo grande a lo pequeño: masas antes que detalles.</td></tr>
+            <tr><td class="num-cell">8</td><td><a href="clase-08.html">08</a></td><td><b>El guante</b> — "Un guante dice más que veinte dedos."</td><td>Simplificar es elegir lo que se nota, no recortar.</td></tr>
+            <tr><td class="num-cell">9</td><td><a href="clase-09.html">09</a></td><td><b>Los hombros de gigantes</b> — "Los profesionales no empiezan de cero."</td><td>Heredar y transformar una base mesh es oficio real.</td></tr>
+            <tr><td class="num-cell">10</td><td><a href="clase-10.html">10</a></td><td><b>Lo esencial</b> — "Un modelo está terminado cuando ya no le sobra nada."</td><td>La economía de medios es una virtud artística.</td></tr>
+            <tr><td class="num-cell">11</td><td><a href="clase-11.html">11</a></td><td><b>El perchero</b> — "Lo que en la vida real se quita y se pone, en 3D se modela aparte."</td><td>Los accesorios son objetos separados, siempre.</td></tr>
+            <tr><td class="num-cell">12</td><td><a href="clase-12.html">12</a></td><td><b>El tesoro</b> — "Los objetos pequeños cargan la magia grande."</td><td>Un buen prop concentra la historia del personaje.</td></tr>
+            <tr><td class="num-cell">13</td><td><a href="clase-13.html">13</a></td><td><b>La tela</b> — "La ropa no flota: cae, toca y acompaña."</td><td>La ropa creíble insinúa gravedad y contacto.</td></tr>
+            <tr><td class="num-cell">14</td><td><a href="clase-14.html">14</a></td><td><b>La luz</b> — "El detalle no vive en la piedra: vive en cómo la luz la recorre."</td><td>El normal map es un truco de luz, no geometría.</td></tr>
+            <tr><td class="num-cell">15</td><td><a href="clase-15.html">15</a></td><td><b>La maleta</b> — "Todo cabe si cada cosa tiene su sitio — y lo importante viaja arriba."</td><td>Texel density: los píxeles se reparten con intención.</td></tr>
+            <tr><td class="num-cell">16</td><td><a href="clase-16.html">16</a></td><td><b>La fotografía</b> — "La foto pesa gramos, la escultura toneladas — y en pantalla nadie nota la diferencia."</td><td>El bake transfiere apariencia sin costo de geometría.</td></tr>
+            <tr><td class="num-cell">17</td><td><a href="clase-17.html">17</a></td><td><b>La piel</b> — "El mismo modelo puede ser de madera, oro o gelatina."</td><td>El material es la mitad del personaje.</td></tr>
+            <tr><td class="num-cell">18</td><td><a href="clase-18.html">18</a></td><td><b>La mochila</b> — "Cada triángulo que sobra lo paga el jugador, en cada frame."</td><td>Optimizar es cortesía con quien juega.</td></tr>
+            <tr><td class="num-cell">19</td><td><a href="clase-19.html">19</a></td><td><b>El enchufe</b> — "Los estándares no son jaulas: si tu pieza encaja, funciona en todos lados."</td><td>Las reglas de Avatar Setup son el enchufe del ecosistema.</td></tr>
+            <tr><td class="num-cell">20</td><td><a href="clase-20.html">20</a></td><td><b>El espejo</b> — "Enseñar lo que hiciste es hacerlo dos veces."</td><td>Presentar la obra convierte las clases en oficio.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rubrica" aria-labelledby="h-rub">
+      <div class="sec-head"><span class="num">03</span><h2 id="h-rub">Rúbrica de progreso</h2><div class="line"></div></div>
+      <p class="sec-intro">Se aplica al cierre de cada módulo (y completa en la clase 20), siempre en positivo: nombra dónde está el estudiante y cuál es el siguiente paso — nunca es una nota.</p>
+      <div class="tbl-wrap" tabindex="0">
+        <table class="tbl">
+          <thead><tr><th scope="col">Dimensión</th><th scope="col">🌱 En camino</th><th scope="col">🌿 Logrado</th><th scope="col">🌳 Dominado</th></tr></thead>
+          <tbody>
+            <tr><td><b>Navegación y viewport</b></td><td>Orbita y hace zoom con recordatorios.</td><td>Se mueve con soltura; usa vistas ortográficas cuando conviene.</td><td>Cambia de vista sin pensar; su cámara siempre está donde la necesita.</td></tr>
+            <tr><td><b>Modelado</b></td><td>Construye con primitivas y extrusiones guiadas.</td><td>Box modeling autónomo: extrusión, loops, bevel, Mirror con propósito.</td><td>Elige la herramienta antes de que se la sugieran; su malla queda limpia a la primera.</td></tr>
+            <tr><td><b>UVs y texturas</b></td><td>Despliega con ayuda y detecta estiramientos con el checker.</td><td>Marca seams con criterio; pinta su set PBR completo.</td><td>Administra texel density con intención y explica sus decisiones de packing.</td></tr>
+            <tr><td><b>Pipeline y validación</b></td><td>Sigue el checklist con acompañamiento.</td><td>Ejecuta export → import → Avatar Setup y lee los errores.</td><td>Diagnostica un fallo de validación y planifica su corrección sin ayuda.</td></tr>
+            <tr><td><b>Hábitos de proyecto</b></td><td>Guarda con nombre correcto cuando se le recuerda.</td><td>Versiona cada clase y mantiene sus carpetas solo.</td><td>Sus archivos cuentan la historia del proyecto; cualquiera podría retomarlos.</td></tr>
+            <tr><td><b>Voz de artista</b></td><td>Describe qué hizo.</td><td>Explica por qué lo hizo y qué corrigió por el camino.</td><td>Presenta su obra con orgullo, incluye el error-arreglado y responde preguntas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="checklist" aria-labelledby="h-check">
+      <div class="sec-head"><span class="num">04</span><h2 id="h-check">Checklist de validación para Roblox</h2><div class="line"></div></div>
+      <p class="sec-intro">La lista que el estudiante recita con evidencia en la clase 18, antes del Avatar Setup de la 19. Los límites exactos y su fuente viven en el <a href="pipeline.html">pipeline técnico</a> — si esta lista y el pipeline difieren, gana el pipeline.</p>
+      <div class="grid g2">
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🧍</span>El cuerpo base (asset A)</h3>
+          <ul class="check">
+            <li><b>Watertight y contiguo</b> — Non Manifold selecciona cero; una sola pieza (salvo ojos y boca).</li>
+            <li><b>Humanoide</b> — dos brazos, dos piernas, torso, cabeza.</li>
+            <li><b>A-pose</b> — miembros sin solaparse vistos de frente.</li>
+            <li><b>Mirando a −Z</b> — verificado en vista frontal.</li>
+            <li><b>Simétrico y centrado en el eje Y.</b></li>
+            <li><b>Cuello distinto</b> — se lee como pieza propia en vista lateral.</li>
+            <li><b>Sin accesorios en la malla</b> — nada de pelo, cejas, barba ni sombrero.</li>
+            <li><b>5 componentes de cabeza</b> — 2 ojos en eyebags + mouthbag (dientes sup., dientes inf., lengua), sin compartir vértices: el test de L pasa.</li>
+            <li><b>Con textura</b> — el set PBR conectado.</li>
+            <li><b>Normales al derecho</b> — Face Orientation azul.</li>
+            <li><b>Triángulos dentro de la tabla del pipeline</b> — cabeza 4.000 · torso 1.750 · brazo 1.248 c/u · pierna 1.248 c/u · total 10.742, con el objetivo del curso en 8.000–9.000.</li>
+            <li><b>Escala aplicada</b> — Ctrl+A hecho; el mago mide ~1.7 m.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🎩</span>Accesorios, ropa y viaje (assets B y C)</h3>
+          <ul class="check">
+            <li>Cada accesorio es un <b>objeto separado</b>, jamás fusionado al cuerpo.</li>
+            <li>Nombres definitivos: <code>Mago_cuerpo</code>, <code>ACC_sombrero</code>, <code>ACC_pelo</code>, <code>ACC_barba</code>, <code>ACC_varita</code>, <code>ACC_tunica</code>.</li>
+            <li>La túnica (rígida) <b>no deja asomar el cuerpo</b> desde ningún ángulo.</li>
+            <li>La <b>máscara emissive es escala de grises</b> — el color va en <code>EmissiveTint</code>, en Studio.</li>
+            <li>FBX exportado con <b>Selected Objects</b> y texturas empacadas.</li>
+            <li>En Studio: cuerpo + accesorios <b>juntos en una <code>Folder</code></b> antes de Avatar Setup.</li>
+            <li>Si la validación falla: <b>leer el error → corregir en Blender → re-exportar</b>. Nunca parchear en Studio.</li>
+            <li>Plan B disponible: importar como modelo/NPC con rig manual.</li>
+            <li>Destino del avatar: <b>uso in-experience</b> — el Marketplace exige verificación de identidad de adulto y no es el objetivo del curso.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="remember">
+        <div class="ri" aria-hidden="true">💾</div>
+        <p><b>Y siempre</b> Cada clase entrega su <span class="mono">.blend</span> de checkpoint. Un estudiante atrasado arranca desde el archivo del profesor — nadie se queda varado. Es la regla más vieja del curso y la última en olvidarse.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><b>Recursos · Curso Mago Fantástico.</b> Los límites técnicos viven en el <a href="pipeline.html">pipeline</a>; las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>. Volver al <a href="index.html">mapa del curso</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 01 · El taller 3D — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 1 del curso Mago Fantástico: interfaz de Blender 5.2, navegación en el espacio 3D y primeras transformaciones. Construimos un robot de formas básicas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html" class="active" aria-current="page"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m1">🟦 M1 · El muñeco de bloques · Clase 01</span>
+      <h1>El taller <span class="g1">3D</span></h1>
+      <p class="sub">Primera vez dentro de Blender: aprender a moverse por el espacio 3D sin marearse, crear objetos y transformarlos. Al final de la hora hay un <strong>robot de formas básicas</strong> en pantalla — construido por el estudiante, no por el profesor.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 6</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c01_robot_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Que el estudiante <strong>pierda el miedo al espacio 3D</strong>: al terminar, orbita, hace zoom y encuadra la cámara sin ayuda, crea primitivas y las mueve, rota y escala con el teclado. El robot es la excusa; la victoria real es que la navegación deje de ser un obstáculo. Todo lo demás del curso se apoya en esto.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Un escultor camina alrededor de la piedra antes de dar el primer golpe."</p>
+          <p class="who">Metáfora nº 1 · El taller</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: en un dibujo, el papel se queda quieto. En 3D, <strong>tú te mueves alrededor de la obra</strong>. Un artista 3D orbita su modelo constantemente — mirar desde todos los lados no es perder el tiempo, es la mitad del trabajo. Hoy practicamos exactamente eso.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 10 min</h3>
+        <p><strong>El espacio 3D tiene tres ejes:</strong> X (ancho, rojo), Y (profundidad, verde) y Z (altura, azul). En Blender el suelo es el plano XY y "arriba" es +Z. Merece un minuto en la pizarra con los tres colores. Un adelanto sin profundizar: cuando llegue el mago, tendrá que mirar hacia <strong>−Z</strong> — ese detalle vive en el <a href="pipeline.html">pipeline</a> y llegará en su momento. Hoy basta con: tres ejes, tres colores.</p>
+        <p><strong>Blender es un taller con mesas.</strong> La ventana grande es el <em>Viewport 3D</em> (la mesa de trabajo); el panel derecho es el <em>Outliner</em> (la lista de todo lo que existe en la escena) y debajo están las <em>Propiedades</em>. No se explica más interfaz que esa: el resto se descubre usándolo.</p>
+        <p><strong>Navegar con el ratón</strong> (se demuestra en vivo, el estudiante repite): orbitar con la <strong>rueda pulsada</strong>, zoom con el <strong>scroll</strong>, desplazar la vista con <strong>Shift + rueda pulsada</strong>. Y la salida de emergencia cuando se pierde: menú <em>View → Frame All</em>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">G</span><span class="kf">Mover el objeto seleccionado</span><span class="kw">De "grab" — agarrar. Clic para soltar, Esc para cancelar.</span></div>
+          <div class="key"><span class="kbd">R</span><span class="kf">Rotar el objeto seleccionado</span><span class="kw">Girar la cabeza del robot, inclinar un brazo.</span></div>
+          <div class="key"><span class="kbd">S</span><span class="kf">Escalar el objeto seleccionado</span><span class="kw">Hacer el torso grande y la cabeza pequeña sin crear nada nuevo.</span></div>
+          <div class="key"><span class="kbd">Shift + A</span><span class="kf">Añadir un objeto nuevo</span><span class="kw">El menú "Add": cubos, esferas, cilindros — las piezas del robot.</span></div>
+          <div class="key"><span class="kbd">X</span><span class="kf">Borrar lo seleccionado</span><span class="kw">Pregunta antes de borrar. Primer uso: el cubo por defecto.</span></div>
+          <div class="key"><span class="kbd">Ctrl + Z</span><span class="kf">Deshacer</span><span class="kw">La tecla más importante del curso. Equivocarse es gratis.</span></div>
+        </div>
+        <p style="margin-top:12px">Truco de oro que se enseña hoy y se usa todo el curso: después de <span class="kbd" style="font-size:11px;padding:3px 8px">G</span>, <span class="kbd" style="font-size:11px;padding:3px 8px">R</span> o <span class="kbd" style="font-size:11px;padding:3px 8px">S</span>, pulsar <strong>X, Y o Z</strong> encierra el movimiento en ese eje. "G y luego Z" = subir en vertical, sin desviarse.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Abrir Blender 5.2 y reconocer el taller.</b> Escena por defecto: un cubo, una cámara, una luz. Seleccionar el cubo y borrarlo con <b>X</b> — primer acto oficial: hacer sitio.</span></div>
+          <div class="tl"><span class="t">05–12</span><span><b>Gimnasia de cámara.</b> Orbitar, zoom y desplazar alrededor de la rejilla hasta que salga sin pensar. Juego: "mírame la escena desde arriba… ahora desde el lado". Si se pierde: <b>View → Frame All</b>.</span></div>
+          <div class="tl"><span class="t">12–20</span><span><b>El torso.</b> <b>Shift+A → Mesh → Cube</b>. Con <b>S</b> alargarlo un poco y con <b>G</b> + <b>Z</b> levantarlo sobre la rejilla. Presentar el Outliner: el cubo ahora existe en la lista.</span></div>
+          <div class="tl"><span class="t">20–30</span><span><b>Cabeza y piernas.</b> Otra primitiva para la cabeza (cubo o esfera — que elija), <b>S</b> para hacerla más pequeña, <b>G</b>+<b>Z</b> encima del torso. Dos cilindros como piernas: aquí se practica <b>G</b> con ejes hasta que queden simétricas "a ojo".</span></div>
+          <div class="tl"><span class="t">30–38</span><span><b>Brazos y carácter.</b> Dos piezas más como brazos, <b>R</b> para inclinarlos. Cada error se resuelve en voz alta con <b>Ctrl+Z</b> — que vea que deshacer es parte del flujo, no una derrota.</span></div>
+          <div class="tl"><span class="t">38–45</span><span><b>Guardar como es debido.</b> <em>File → Save As</em> → carpeta del curso → <code>MF_c01_robot_v01.blend</code>. Se explica el esquema de nombres (está en <a href="recursos.html">recursos</a>): archivo con versión = nunca se pierde trabajo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>"¡Desapareció todo!"</b> — Casi siempre es un zoom involuntario o la vista mirando a la nada. Solución ritual: <b>View → Frame All</b>. Enseñarla como botón de pánico, sin drama.</li>
+          <li><b>Mover "por la pantalla" en vez de por un eje</b> — el objeto parece bien desde delante y flota al orbitar. Detección: orbitar SIEMPRE después de mover. Corrección: G + eje.</li>
+          <li><b>Clic en el vacío = deselección</b> — y la siguiente hotkey no hace nada. Que aprenda a leer la esquina: si no hay nada resaltado en el Outliner, no hay nada seleccionado.</li>
+          <li><b>Borrar sin querer y quedarse congelado</b> — reflejo a instalar hoy: algo raro pasó → <b>Ctrl+Z</b> antes de preguntar.</li>
+          <li><b>Guardar como "sin título.blend" en el escritorio</b> — la primera clase es donde se instala el hábito del nombre y la carpeta correctos. Cuesta 1 minuto hoy y ahorra un desastre en la clase 15.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El robot tiene <b>cabeza, torso, dos brazos y dos piernas</b>, todos de primitivas, sin atravesarse de forma evidente.</li>
+          <li>El estudiante <b>orbita, hace zoom y encuadra sin ayuda</b> cuando se le pide "enséñame el robot desde atrás".</li>
+          <li>Usa <b>G, R y S con soltura</b> y al menos una vez el bloqueo por eje (G+Z o similar).</li>
+          <li>El archivo está guardado como <b><code>MF_c01_robot_v01.blend</code></b> en la carpeta del curso.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Robot de <strong>4 piezas</strong>: cabeza, torso y dos piernas — sin brazos. La navegación es lo irrenunciable de hoy; las piezas extra no. Si la hora se acaba, el estudiante arranca la clase 2 desde el checkpoint del profesor y no pierde nada.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Ampliar el robot con primitivas nuevas: antena (cilindro fino), ojos (esferas), mochila (cubo). Reto de precisión: que los dos ojos queden simétricos usando solo G + eje. Nada de herramientas nuevas — profundidad, no adelanto.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c01_robot_v01.blend</code></div>
+          <small>El robot completo del profesor, con nombres limpios en el Outliner. Si el estudiante no terminó el suyo, la clase 2 arranca desde este archivo — nadie se queda varado.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 01 · El taller 3D · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🤖</span>Qué construimos hoy</h3>
+        <p>Tu primer modelo 3D: un <strong>robot de formas básicas</strong> — cubos, esferas y cilindros combinados hasta que tengan pinta de personaje. Y algo más importante todavía: hoy aprendes a <strong>moverte dentro del mundo 3D</strong> como un artista, girando alrededor de tu obra.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">G</span><span class="kf">Mover</span></div>
+          <div class="key"><span class="kbd">R</span><span class="kf">Rotar</span></div>
+          <div class="key"><span class="kbd">S</span><span class="kf">Escalar</span></div>
+          <div class="key"><span class="kbd">Shift + A</span><span class="kf">Añadir objeto</span></div>
+          <div class="key"><span class="kbd">X</span><span class="kf">Borrar</span></div>
+          <div class="key"><span class="kbd">Ctrl + Z</span><span class="kf">Deshacer (¡tu mejor amiga!)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Combo secreto: pulsa <strong>G</strong> y después <strong>Z</strong> → el objeto solo sube y baja, sin escaparse hacia los lados. Funciona también con X e Y, y con R y S.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Borré el cubo inicial con <b>X</b>.</li>
+          <li>Puedo girar alrededor de la escena, acercarme y alejarme sin perderme.</li>
+          <li>Creé el <b>torso</b> con Shift+A y lo levanté sobre el suelo con G+Z.</li>
+          <li>Puse una <b>cabeza</b> más pequeña encima (S para el tamaño).</li>
+          <li>Le di <b>dos piernas</b> lo más simétricas que pude.</li>
+          <li>Le di <b>dos brazos</b> y los incliné con R.</li>
+          <li>Miré mi robot <b>desde todos los lados</b>, como un escultor.</li>
+          <li>Guardé el archivo como <b>MF_c01_robot_v01.blend</b> en mi carpeta del curso.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Dale personalidad</div>
+          <p>Un robot con las mismas piezas que el de todos… no es tuyo. Añádele <strong>una cosa que lo haga único</strong>: una antena, un solo ojo gigante, patas de araña, una cabeza triangular. Solo puedes usar las herramientas de hoy — a ver hasta dónde llegan.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Abre Blender <strong>una vez</strong> esta semana (10 minutos bastan) y construye <em>cualquier cosa</em> con primitivas: una torre, un coche, un perrito cuadrado. No hace falta que quede bonito — hace falta que tus manos recuerden G, R y S.</p>
+          <span class="time">≈ 10–15 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja aquí el robot que te gustaría construir cuando sepas más — guarda esta hoja: lo compararemos con tu mago al final del curso.</p>
+        <div class="draw-box"><span>Mi robot ideal</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="index.html"><small>Mapa</small><b>← Todas las clases</b></a>
+      <a class="next" href="clase-02.html"><small>Siguiente · Clase 02</small><b>Dentro de la malla →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 01 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

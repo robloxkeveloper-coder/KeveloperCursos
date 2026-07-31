@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 09 · La cabeza I — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 9 del curso Mago Fantástico: la cabeza plantilla con eyebags y mouthbag, por qué Roblox exige 5 componentes, y cómo se une al cuerpo en Blender 5.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html" class="active" aria-current="page"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🟩 M2 · Cuerpo del mago · Clase 09</span>
+      <h1>La cabeza <span class="g1">I</span></h1>
+      <p class="sub">La pieza más técnica del avatar no se modela desde cero: el profesor entrega una <strong>cabeza plantilla</strong> conforme — con sus <strong>eyebags, su mouthbag y sus 5 componentes</strong> — y el estudiante aprende a leerla por dentro, a entender por qué Roblox la exige así, y a unirla al cuerpo del mago.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 4</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c09_mago_cabeza_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Que el estudiante <strong>entienda la anatomía técnica de una cabeza de avatar</strong> — qué es un eyebag, qué guarda la mouthbag, por qué los componentes no comparten vértices — y termine con <strong>la cabeza plantilla montada y cosida al cuello</strong> de su mago. La personalización (que sea <em>su</em> mago y no el genérico) es toda la clase 10.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">🧠</span>
+          <p><strong>Por qué plantilla y no desde cero</strong> (decisión fijada, <a href="pipeline.html#decisiones">pipeline 08</a>): los eyebags y la mouthbag exigen topología de precisión que no cabe en el tiempo ni la edad del curso. Se enseña como lo que es — práctica profesional real: los estudios trabajan sobre <em>base meshes</em> heredadas. No es un atajo; es el oficio.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Los profesionales no empiezan de cero: se suben a hombros de gigantes — y a eso lo llaman base mesh."</p>
+          <p class="who">Metáfora nº 9 · Los hombros de gigantes</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: nadie fabrica sus propios lápices antes de dibujar. En los estudios, las cabezas, las manos y los cuerpos base pasan de proyecto en proyecto y cada artista los transforma. Saber <em>heredar y transformar</em> es una habilidad tan real como modelar — y hoy se practica.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 10 min</h3>
+        <p><strong>La anatomía exigida</strong> (<a href="pipeline.html#requisitos">pipeline 03</a>): la cabeza lleva <strong>5 componentes</strong> — 2 ojos (medias esferas dentro de "eyebags": bolsas cerradas dentro del cráneo) y una "mouthbag" que contiene dientes superiores, dientes inferiores y lengua. Cada componente está conectado individualmente y <strong>no comparte vértices</strong> ni entre sí ni con la cabeza. Dibujo de pizarra: el corte lateral de la cabeza, con las bolsas dentro como cuevas.</p>
+        <p><strong>¿Por qué bolsas?</strong> Porque los ojos y la boca de un avatar <em>se mueven</em> (parpadeo, habla). Roblox necesita saber qué parte es ojo y qué parte es cráneo — y lo sabe porque son piezas separadas dentro de huecos cerrados. Si compartieran vértices, mover el ojo arrastraría la cara.</p>
+        <p><strong>Herramientas de exploración:</strong> la cabeza plantilla es una matrioshka — para verla por dentro hacen falta <strong>H/Alt+H</strong> (esconder y traer de vuelta), <strong>L</strong> (seleccionar todo lo conectado bajo el cursor: un componente entero de un toque) y <strong>/</strong> (local view: quedarse a solas con lo seleccionado).</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">H</span><span class="kf">Esconder lo seleccionado</span><span class="kw">Apartar el cráneo para ver las bolsas de dentro.</span></div>
+          <div class="key"><span class="kbd">Alt + H</span><span class="kf">Mostrar todo lo escondido</span><span class="kw">El "volved todos" — cierra cada sesión de exploración.</span></div>
+          <div class="key"><span class="kbd">L</span><span class="kf">Seleccionar lo conectado</span><span class="kw">Bajo el cursor: un componente entero de un toque. El detector de piezas.</span></div>
+          <div class="key"><span class="kbd">/</span><span class="kf">Local view — a solas con la selección</span><span class="kw">Aísla lo seleccionado; / otra vez para volver.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Ctrl + J</span><span class="kbd">F</span><span class="kbd">M</span><span class="kf">Repaso de la clase 8</span><span class="kw">La cirugía de coser la cabeza al cuello es la misma de las manos.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c09_mago_cabeza_v01.blend</code>) y entrega del tesoro: File → Append → <code>plantilla_cabeza.blend</code> del profesor. La cabeza aparece en escena, gigante o diminuta — da igual, ahora se ajusta.</span></div>
+          <div class="tl"><span class="t">05–18</span><span><b>Expedición al interior.</b> En Edit Mode: pasar el cursor por un ojo, <b>L</b> — se ilumina la media esfera. <b>/</b> para verla a solas. Volver, seleccionar el cráneo con L, <b>H</b> para esconderlo: ahí están las dos eyebags y la mouthbag con sus dientes y su lengua. Recorrer los <b>5 componentes</b> nombrándolos. <b>Alt+H</b> al terminar. Esta expedición ES la teoría hecha práctica.</span></div>
+          <div class="tl"><span class="t">18–26</span><span><b>El examen de los vértices compartidos.</b> Con L sobre un ojo: ¿se seleccionó SOLO el ojo? Si algo del cráneo se ilumina, compartiría vértices (en la plantilla no pasa — pero el estudiante debe saber hacer el test, porque en la clase 10 editará esta cabeza).</span></div>
+          <div class="tl"><span class="t">26–36</span><span><b>Montar y coser.</b> En Object Mode, escalar y posicionar la cabeza sobre el cuello (Numpad 1 y 3 contra el concept). <b>Ctrl+J</b> con el cuerpo, borrar la tapa del cuello y la base del cráneo, y coser el anillo con F/Bridge — igual que las manos. <b>M → Merge by Distance</b> SOLO con el anillo del cuello seleccionado, nunca con toda la cabeza (protegería… no: fusionaría las bolsas). Este matiz se dice dos veces.</span></div>
+          <div class="tl"><span class="t">36–45</span><span><b>Inspección y proporción.</b> ¿Cabeza-cuerpo en proporción cartoon (1:3 aprox.)? ¿El cuello sigue leyéndose distinto? ¿L sobre un ojo sigue seleccionando solo el ojo? Guardar. El mago ya tiene rostro — genérico, pero rostro.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Merge by Distance sobre toda la cabeza</b> — fusiona los componentes con el cráneo y destruye la anatomía de bolsas. Detección: L sobre un ojo selecciona también cara. Corrección: Ctrl+Z inmediato. El merge se hace solo sobre el anillo del cuello.</li>
+          <li><b>Escalar la cabeza en Edit Mode con todo seleccionado menos las bolsas</b> — ojos gigantes flotando fuera del cráneo. Escalar siempre en Object Mode antes del Ctrl+J, o con TODO seleccionado (A… que aún no es hotkey del curso: Select → All del menú).</li>
+          <li><b>Coser el cuello a la mandíbula</b> — el anillo de la base del cráneo no es el borde de la mouthbag. Verificar con / (local view) qué anillo se tiene antes de F.</li>
+          <li><b>Esconder con H y olvidar Alt+H</b> — "¡desapareció media cabeza!" al guardar. Ritual de cierre: Alt+H antes de cada guardado.</li>
+          <li><b>Proporción realista</b> — cabeza pequeña de adulto sobre cuerpo cartoon. Contra el concept: los personajes de este estilo llevan cabezón con orgullo.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El estudiante <b>nombra los 5 componentes</b> y explica para qué existen las bolsas — con sus palabras.</li>
+          <li>La cabeza está <b>cosida al cuello</b> como parte de la malla del cuerpo, sin caras internas.</li>
+          <li>El test de L pasa: <b>cada componente se selecciona solo</b>, sin arrastrar cráneo ni vecinos.</li>
+          <li>Proporción cartoon deliberada y cuello aún distinto en vista lateral.</li>
+          <li>Archivo guardado como <b><code>MF_c09_mago_cabeza_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>La expedición interior (los 5 componentes, entendidos) es lo irrenunciable. Si la costura del cuello no llega, la cabeza queda <strong>posicionada sin coser</strong> y la clase 10 arranca desde el checkpoint del profesor con la costura hecha. Entender &gt; terminar.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Primeros ajustes de proporción de cara con edición proporcional suave (O): frente más alta, mandíbula más ancha — sin tocar todavía nariz ni orejas (son de la clase 10). Regla: cada cambio pasa el test de L después.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c09_mago_cabeza_v01.blend</code></div>
+          <small>Cuerpo completo con la cabeza plantilla cosida y los 5 componentes intactos. La clase 10 la convierte en LA cara del mago.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 09 · La cabeza I · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🗿</span>Qué construimos hoy</h3>
+        <p>Hoy tu mago recibe su <strong>cabeza</strong> — una plantilla profesional que exploramos por dentro como una cueva: dos <strong>eyebags</strong> (bolsas con los ojos), y una <strong>mouthbag</strong> con dientes de arriba, dientes de abajo y lengua. Cinco piezas escondidas que hacen posible que tu avatar parpadee y hable. Y al final, la cosemos al cuello.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">H</span><span class="kf">Esconder lo seleccionado</span></div>
+          <div class="key"><span class="kbd">Alt + H</span><span class="kf">¡Que vuelva todo!</span></div>
+          <div class="key"><span class="kbd">L</span><span class="kf">Seleccionar una pieza entera</span></div>
+          <div class="key"><span class="kbd">/</span><span class="kf">Quedarte a solas con una pieza</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Regla de exploradores: el que esconde con <strong>H</strong>… recuerda el <strong>Alt+H</strong> antes de guardar. Nadie se queda dentro de la cueva.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c09) y traje la <b>cabeza plantilla</b> con Append.</li>
+          <li>Con <b>L</b> encontré un ojo. Con <b>/</b> lo vi a solas: ¡media esfera!</li>
+          <li>Escondí el cráneo con <b>H</b> y exploré la cueva: eyebags y mouthbag.</li>
+          <li>Nombré las <b>5 piezas</b>: ojo, ojo, dientes arriba, dientes abajo, lengua.</li>
+          <li>Hice el <b>test de L</b>: cada pieza se selecciona sola, sin arrastrar nada.</li>
+          <li>Puse la cabeza <b>en su sitio</b> sobre el cuello (¡bien grande, es cartoon!).</li>
+          <li>La cosí al cuello con <b>Ctrl+J + F</b>, como las manos de la semana pasada.</li>
+          <li><b>Alt+H</b> final, todo visible, y guardé <b>MF_c09_mago_cabeza_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El guía de la cueva</div>
+          <p>Dale un <strong>tour por dentro de la cabeza</strong> a tu profesor, pero al revés: tú explicas y él pregunta. "¿Y esto qué es? ¿Por qué no toca el cráneo?" Si respondes las cinco piezas sin ayuda, el título de Explorador de Mallas es tuyo.</p>
+          <span class="time">+5 min al final de la clase</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Mira de cerca la cara de tu personaje favorito de un videojuego o película animada: ¿cómo son sus <strong>ojos</strong>? ¿esferas brillantes, óvalos planos, puntos? Trae la respuesta — la próxima clase diseñas los rasgos de TU mago y esa referencia vale oro.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja la cabeza de tu mago <strong>de frente</strong>, con los rasgos que quieres darle la próxima clase: cejas, nariz, forma de la cara, orejas.</p>
+        <div class="draw-box"><span>La cara de mi mago</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-08.html"><small>Anterior · Clase 08</small><b>← Brazos, manos y cuello</b></a>
+      <a class="next" href="clase-10.html"><small>Siguiente · Clase 10</small><b>La cabeza II →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 09 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

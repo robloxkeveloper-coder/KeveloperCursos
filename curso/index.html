@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso Mago Fantástico · Blender a Roblox en 20 clases</title>
+<meta name="description" content="Mapa del curso Mago Fantástico: 20 clases para modelar un avatar R15 en Blender 5.2 LTS y llevarlo a Roblox. Guía del profesor y hoja del estudiante en cada clase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="../index.html">← Página del curso (venta)</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">El curso</div>
+        <a href="index.html" class="active" aria-current="page"><span class="ic">🗺</span>Mapa del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🧙 20 clases · 5 meses · 1 a 1 · Blender 5.2 LTS</span>
+      <h1>Curso <span class="g1">Mago</span> <span class="g2">Fantástico</span></h1>
+      <p class="sub">De cero Blender a un <strong>avatar R15 jugable en Roblox</strong>. Primero un muñeco de bloques que recorre el ciclo completo en un mes; después, el mago de verdad: cuerpo, accesorios, texturas y Avatar Setup. Cada clase trae la guía del profesor y la hoja del estudiante en la misma página.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Edad</span> 10–14 años</span>
+        <span class="meta-chip"><span class="mono">Ritmo</span> 1 clase/semana · 1 h</span>
+        <span class="meta-chip"><span class="mono">Requisito</span> Conocer Roblox Studio</span>
+      </div>
+    </header>
+
+    <section id="referencia" aria-labelledby="h-ref">
+      <div class="sec-head"><span class="num">📎</span><h2 id="h-ref">Referencia permanente</h2><div class="line"></div></div>
+      <p class="sec-intro">Tres páginas que se usan durante todo el curso. El pipeline manda: si una clase lo contradice, gana el pipeline.</p>
+      <div class="grid g3">
+        <a class="tcard" href="pipeline.html"><div class="badge b-violet" aria-hidden="true">⚙</div><div><h3>Pipeline técnico</h3><p>Fuente de verdad fechada: versiones, presupuestos de triángulos, requisitos de Avatar Setup, texturas y export.</p></div></a>
+        <a class="tcard" href="hotkeys.html"><div class="badge b-cyan" aria-hidden="true">⌨</div><div><h3>Tarjeta de hotkeys</h3><p>Todas las teclas del curso, acumuladas clase a clase y agrupadas por categoría.</p></div></a>
+        <a class="tcard" href="recursos.html"><div class="badge b-gold" aria-hidden="true">📦</div><div><h3>Recursos</h3><p>Carpetas y versionado, las 20 metáforas de Mentalidad de Artista 3D, la rúbrica y el checklist de validación.</p></div></a>
+      </div>
+    </section>
+
+    <section id="modulos" aria-labelledby="h-mod">
+      <div class="sec-head"><span class="num">🧩</span><h2 id="h-mod">Los 5 módulos</h2><div class="line"></div></div>
+      <div class="grid" style="gap:18px">
+
+        <article class="mod m1">
+          <span class="tag">M1 · CLASES 1–5</span>
+          <h3>El muñeco de bloques</h3>
+          <p class="st">El ciclo completo a escala pequeña: modelar, desplegar, texturizar, exportar y verlo dentro de Roblox en el primer mes. Entra como MeshPart, no como avatar — eso llega con el mago.</p>
+          <ol>
+            <li><a href="clase-01.html"><i>01</i>El taller 3D <span class="deliver">Robot de formas básicas</span></a></li>
+            <li><a href="clase-02.html"><i>02</i>Dentro de la malla <span class="deliver">Torso y piernas</span></a></li>
+            <li><a href="clase-03.html"><i>03</i>Formas con carácter <span class="deliver">Cuerpo completo</span></a></li>
+            <li><a href="clase-04.html"><i>04</i>El desplegado <span class="deliver">UVs sin estiramientos</span></a></li>
+            <li><a href="clase-05.html"><i>05</i>¡A Roblox! <span class="deliver">Muñeco en Studio</span></a></li>
+          </ol>
+        </article>
+
+        <article class="mod m2">
+          <span class="tag">M2 · CLASES 6–10</span>
+          <h3>Concepto y cuerpo del mago</h3>
+          <p class="st">Del dibujo en papel al cuerpo base conforme: A-pose, simetría, cuello distinto, cabeza con eyebags y mouthbag sobre plantilla del profesor.</p>
+          <ol>
+            <li><a href="clase-06.html"><i>06</i>El mago en papel <span class="deliver">Concept + bloqueo</span></a></li>
+            <li><a href="clase-07.html"><i>07</i>Torso y piernas <span class="deliver">Mitad inferior</span></a></li>
+            <li><a href="clase-08.html"><i>08</i>Brazos, manos y cuello <span class="deliver">Cuerpo bloqueado</span></a></li>
+            <li><a href="clase-09.html"><i>09</i>La cabeza I <span class="deliver">Cabeza estructurada</span></a></li>
+            <li><a href="clase-10.html"><i>10</i>La cabeza II <span class="deliver">Cuerpo base conforme</span></a></li>
+          </ol>
+        </article>
+
+        <article class="mod m3">
+          <span class="tag">M3 · CLASES 11–13</span>
+          <h3>Accesorios y ropa</h3>
+          <p class="st">Sombrero, cabello, barba, varita y túnica — objetos separados, nunca fusionados al cuerpo. Es lo que convierte un cuerpo en un personaje.</p>
+          <ol>
+            <li><a href="clase-11.html"><i>11</i>Sombrero, pelo y barba <span class="deliver">3 accesorios</span></a></li>
+            <li><a href="clase-12.html"><i>12</i>La varita <span class="deliver">Varita + gemas</span></a></li>
+            <li><a href="clase-13.html"><i>13</i>La túnica <span class="deliver">Ropa ajustada</span></a></li>
+          </ol>
+        </article>
+
+        <article class="mod m4">
+          <span class="tag">M4 · CLASES 14–17</span>
+          <h3>Detalle y texturas</h3>
+          <p class="st">High poly donde sí se ve, UVs del mago, bake de normal y AO, y el set PBR completo con su máscara emissive.</p>
+          <ol>
+            <li><a href="clase-14.html"><i>14</i>High poly y sculpt <span class="deliver">Versión high poly</span></a></li>
+            <li><a href="clase-15.html"><i>15</i>UVs del mago <span class="deliver">UVs completos</span></a></li>
+            <li><a href="clase-16.html"><i>16</i>El bake <span class="deliver">Mapas horneados</span></a></li>
+            <li><a href="clase-17.html"><i>17</i>PBR completo <span class="deliver">Set de texturas</span></a></li>
+          </ol>
+        </article>
+
+        <article class="mod m5">
+          <span class="tag">M5 · CLASES 18–20</span>
+          <h3>Del taller a Roblox</h3>
+          <p class="st">Optimización y limpieza, export y bundling, Avatar Setup y la presentación final: "yo hice esto".</p>
+          <ol>
+            <li><a href="clase-18.html"><i>18</i>Optimización <span class="deliver">Modelo validado</span></a></li>
+            <li><a href="clase-19.html"><i>19</i>Avatar Setup <span class="deliver">Avatar generado</span></a></li>
+            <li><a href="clase-20.html"><i>20</i>Avatar jugable <span class="deliver">Presentación final</span></a></li>
+          </ol>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="como-leer" aria-labelledby="h-leer">
+      <div class="sec-head"><span class="num">📖</span><h2 id="h-leer">Cómo se lee cada clase</h2><div class="line"></div></div>
+      <div class="grid g2">
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🧑‍🏫</span>Guía del profesor</h3>
+          <ul class="blist">
+            <li>Objetivo de la clase y concepto de <b>Mentalidad de Artista 3D</b> (5 min).</li>
+            <li>Teoría (5–10 min) y <b>hotkeys nuevas</b> — qué hacen y cuándo usarlas.</li>
+            <li><b>Práctica guiada minutada</b> (30–40 min), errores comunes y criterio de "listo".</li>
+            <li>Plan B si el estudiante va lento o rápido, y el <b>.blend de checkpoint</b> que se entrega al cerrar.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="blk-title"><span class="ic" aria-hidden="true">🎒</span>Hoja del estudiante</h3>
+          <ul class="blist">
+            <li>Qué construimos hoy y la <b>tarjeta de hotkeys</b> de la clase.</li>
+            <li>Checklist de pasos, <b>desafío creativo</b> y tarea.</li>
+            <li>Espacio para dibujar.</li>
+            <li><b>Se imprime sola:</b> al imprimir una clase, sale únicamente la hoja del estudiante (1–2 páginas A4).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="remember">
+        <div class="ri" aria-hidden="true">💾</div>
+        <p><b>Regla de oro</b> Cada clase termina entregando un archivo <span class="mono">.blend</span> de checkpoint. Un estudiante atrasado arranca la siguiente clase desde el archivo del profesor — nadie se queda varado.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><b>Curso Mago Fantástico</b> · Blender 5.2 LTS → Roblox · Material del curso, 2026. Ver también la <a href="../guia.html">guía general</a> y la <a href="../index.html">página del curso</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

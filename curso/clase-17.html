@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 17 · PBR completo — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 17 del curso Mago Fantástico: base color, roughness, metallic y la máscara emissive en escala de grises — el set PBR completo del mago en Blender 5.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html" class="active" aria-current="page"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m4">🟧 M4 · Detalle y texturas · Clase 17</span>
+      <h1>PBR <span class="g2">completo</span></h1>
+      <p class="sub">La clase del color. El mago recibe su set de texturas final: <strong>base color</strong> (la paleta del concept, por fin), <strong>roughness</strong> (mate la tela, pulida la gema), <strong>metallic</strong> (la hebilla) y la estrella del cierre: la <strong>máscara emissive</strong> — que es en <strong>escala de grises</strong>, y entenderlo bien evita la decepción más común del brillo mágico.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 0</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c17_texturas_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Cerrar el módulo 4 con el <strong>set PBR completo del mago</strong> en <code>03_texturas</code>: base color pintado sobre los UVs, roughness por zonas, metallic donde hay metal, y la máscara emissive. Todo a 1024, PNG, según el <a href="pipeline.html#texturas">pipeline</a>. Al final de la hora, el mago se ve — en el viewport de Blender — como se verá en Roblox.</p>
+        <div class="warn hard">
+          <span class="wi" aria-hidden="true">⚠</span>
+          <p><strong>La máscara emissive NO es un mapa de color</strong> (<a href="pipeline.html#emissive">pipeline, sección 06</a>): es <strong>escala de grises</strong> — blanco emite, negro no, gris emite parcialmente. <strong>El color del brillo lo pone <code>EmissiveTint</code> en Roblox Studio</strong>, y la intensidad <code>EmissiveStrength</code>. Pintar la máscara de morado no da brillo morado — da un gris a medias que decepciona. Se enseña así desde el primer trazo para no crear expectativas falsas.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"El material es la mitad del personaje: el mismo modelo puede ser de madera, de oro o de gelatina — sin mover un vértice."</p>
+          <p class="who">Metáfora nº 17 · La piel</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: imaginar el sombrero pintado de tres maneras — fieltro mate, cuero brillante, metal pulido. Misma forma, tres personajes distintos. Hoy se decide de qué está hecho el mago, y esa decisión pesa tanto como todo el modelado.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>PBR (Physically Based Rendering)</strong> = describir superficies como el mundo real: qué color tienen (<em>base color</em>), cuán rugosas son (<em>roughness</em>: 0 espejo, 1 tiza) y si son metal (<em>metallic</em>: sí/no, casi nunca "un poco"). Con esos tres datos, cualquier motor — Blender o Roblox — las ilumina creíblemente.</p>
+        <p><strong>Texture Paint:</strong> pintar directamente sobre el modelo 3D (o sobre el tile UV — ambas vistas son la misma imagen). Pinceles con los mismos F / Shift+F del sculpt. Para zonas limpias: seleccionar caras en Edit Mode y rellenar; para el resto, pincel y pulso.</p>
+        <p><strong>El AO de la clase 16</strong> se multiplica sobre el base color (nodo MixRGB en Multiply, factor ~0.7): las sombras horneadas "asientan" la pintura plana. Dos minutos, aspecto profesional inmediato.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <p style="margin-bottom:10px"><strong>Ninguna.</strong> Tercera clase de flujo — el arsenal está completo desde la clase 15; hoy se pinta con él.</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">F</span><span class="kbd">Shift + F</span><span class="kbd">Tab</span><span class="kbd">3</span><span class="kf">Repaso</span><span class="kw">Pincel del Texture Paint y selección de caras para rellenos limpios.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Preparar el taller de pintura.</b> Versión nueva (<code>MF_c17_texturas_v01.blend</code>), workspace Texture Paint. Crear <code>mago_basecolor</code> (1024, con un color de fondo neutro). La paleta de la tarea, cargada como muestras de color.</span></div>
+          <div class="tl"><span class="t">06–18</span><span><b>Base color del cuerpo.</b> Los bloques grandes por selección de caras + relleno (piel, botas, manos); los detalles a pincel (mejillas, cejas — la asimetría deliberada por fin es legal: es pintura, no malla). La cara, con calma: tiene el doble de píxeles esperándola.</span></div>
+          <div class="tl"><span class="t">18–26</span><span><b>Base color de accesorios y túnica</b> en su tile: los 3 colores del concept mandan. Multiplicar el <b>AO horneado</b> sobre el base color de las tres piezas — el "asentado" instantáneo. Guardar PNGs (el ritual de la clase 16 sigue vivo).</span></div>
+          <div class="tl"><span class="t">26–33</span><span><b>Roughness y metallic.</b> Imagen <code>mago_roughness</code> en grises: tela y fieltro casi blanco (mate), piel gris claro, gema y hebilla oscuras (pulidas). <code>mago_metallic</code>: negro todo, blanco SOLO la hebilla y remaches. Conectar y ver el viewport cobrar vida.</span></div>
+          <div class="tl"><span class="t">33–41</span><span><b>La máscara emissive.</b> Imagen <code>mago_emissive</code>, fondo NEGRO. Pintar de BLANCO solo lo que brilla: la gema de la varita, las gemas menores, ¿los ojos?, ¿runas en la túnica? Grises para brillos suaves. En Blender se previsualiza conectándola a Emission Strength — y se repite el mantra: <b>el color lo pondrá EmissiveTint en Studio</b>.</span></div>
+          <div class="tl"><span class="t">41–45</span><span><b>La primera foto de retrato.</b> Todos los mapas conectados, Material Preview, luz decente: el mago completo, pintado, con su detalle horneado y sus zonas de brillo marcadas. Captura para <code>05_capturas</code>. Guardar todo. Módulo 4 cerrado.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Pintar la máscara emissive de colores</b> — EL error que esta clase existe para prevenir. La máscara es gris; el color es de Studio. Si aparece un trazo violeta en <code>mago_emissive</code>, se corrige y se re-explica, sin drama.</li>
+          <li><b>Roughness/metallic/emissive como sRGB</b> — mapas de datos en Non-Color, como los del bake. Síntoma: materiales que responden "raro" a la luz.</li>
+          <li><b>Metallic "un poco" en todo</b> — deslizarlo a 0.3 global hace que todo parezca plástico mojado. Metal es binario: la hebilla sí, la tela jamás.</li>
+          <li><b>Pintar fuera de la isla</b> — el pincel 3D pinta lo que toca; con el margen de la clase 15, el sangrado leve es inofensivo, pero pintar la pierna "a través" del brazo (pintura traspasada) se evita con el occlude/backface culling del pincel activado.</li>
+          <li><b>Olvidar guardar las imágenes</b> — cuatro mapas nuevos en RAM. El ritual: cada mapa terminado → Save As → <code>03_texturas</code>. Sin excepciones.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El set está en <code>03_texturas</code>: <b>base color (cuerpo y accesorios), roughness, metallic y emissive</b>, a 1024, PNG, nombrados con el patrón.</li>
+          <li>La <b>máscara emissive es escala de grises</b> con fondo negro — y el estudiante recita qué pone el color (EmissiveTint) sin que se le pregunte dos veces.</li>
+          <li>El <b>AO multiplica</b> el base color de las piezas horneadas.</li>
+          <li>El mago en Material Preview <b>coincide con el concept art coloreado</b> de la clase 6.</li>
+          <li>Archivo guardado como <b><code>MF_c17_texturas_v01.blend</code></b> + captura de retrato en <code>05_capturas</code>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Base color completo + emissive de la gema: con eso el mago "está pintado y tiene magia". Roughness puede ser un valor único por material (sin mapa) y metallic esperar — se añaden en 15 minutos desde el checkpoint. La lección de la máscara gris no se recorta.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Nivel artesano: <strong>runas emissive</strong> en el borde de la túnica (pintadas en gris medio — brillo sutil), <strong>degradado</strong> en la túnica (oscura abajo, clara arriba: truco de lectura vertical), o pecas/nudillos a pincel fino en la piel. Cada extra, guardado en su mapa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c17_texturas_v01.blend</code> <span aria-hidden="true">·</span> set PBR completo en <code>03_texturas</code></div>
+          <small>El mago terminado en apariencia. El módulo 5 lo valida, lo exporta y lo convierte en avatar.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 17 · PBR completo · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎨</span>Qué construimos hoy</h3>
+        <p>¡La clase del color! Tu mago se pinta de verdad: su paleta del concept, materiales que se sienten (tela mate, gema pulida, hebilla metálica)… y la <strong>máscara mágica del brillo</strong>. Secreto importante: esa máscara se pinta en <strong>blanco y negro</strong> — blanco brilla, negro no. El <em>color</em> del brillo se elige después, en Roblox, con una propiedad llamada <strong>EmissiveTint</strong>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px"><strong>Cero teclas nuevas</strong> — tu arsenal está completo. Hoy, pincel:</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">F</span><span class="kbd">Shift + F</span><span class="kf">Tamaño y fuerza del pincel (como en sculpt)</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c17) y cargué mi paleta de colores.</li>
+          <li>Pinté el <b>base color del cuerpo</b>: bloques por selección, detalles a pincel.</li>
+          <li>Pinté <b>accesorios y túnica</b> con mis 3 colores del concept.</li>
+          <li>Multipliqué el <b>AO</b> encima — ¡las sombras asientan todo!</li>
+          <li>Pinté el <b>roughness</b>: tela casi blanca (mate), gema oscura (pulida).</li>
+          <li>Pinté el <b>metallic</b>: negro todo, blanco SOLO la hebilla.</li>
+          <li>Pinté la <b>máscara emissive en blanco y negro</b> — solo brilla lo blanco.</li>
+          <li>Guardé TODOS los PNG 💾, tomé el retrato de mi mago 📸 y guardé <b>MF_c17_texturas_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Runas secretas</div>
+          <p>Pinta <strong>runas</strong> en el borde de la túnica dentro de la máscara emissive — en gris medio, para un brillo sutil. Inventa qué significan: ¿protección?, ¿el nombre del mago en idioma antiguo? Solo tú sabrás leerlas.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Elige el <strong>color exacto del brillo</strong> de tu mago (el que pondremos en EmissiveTint): busca 2–3 opciones y decide. ¿Verde hechicero? ¿Azul hielo? ¿Dorado antiguo? En dos clases lo verás brillar dentro de Roblox.</p>
+          <span class="time">≈ 5 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">¡Fin del módulo 4! Dibuja a tu mago <strong>a todo color</strong> — con sus zonas de brillo marcadas con estrellitas. Compáralo con el dibujo coloreado de la clase 6.</p>
+        <div class="draw-box"><span>Mi mago a todo color</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-16.html"><small>Anterior · Clase 16</small><b>← El bake</b></a>
+      <a class="next" href="clase-18.html"><small>Siguiente · Clase 18</small><b>Optimización →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 17 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 19 · Avatar Setup — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 19 del curso Mago Fantástico: export FBX, bundling del cuerpo y accesorios en una Folder, y Avatar Setup en Roblox Studio. El mago se convierte en avatar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html" class="active" aria-current="page"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m5">🟥 M5 · Del taller a Roblox · Clase 19</span>
+      <h1>Avatar <span class="g2">Setup</span></h1>
+      <p class="sub">La clase del gran salto: <strong>export FBX definitivo, bundling del cuerpo y los accesorios en una <code>Folder</code></strong>, y el momento de la verdad — <strong>Avatar Setup</strong> convierte al mago en un avatar R15 con esqueleto. Y si la validación falla, no es tragedia: es la clase donde se aprende a leer errores de máquina.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 0</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c19_export_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Ejecutar <strong>el orden exacto del <a href="pipeline.html#export">pipeline (sección 07)</a></strong>: exportar el FBX del modelo validado, importarlo con el 3D Importer, <strong>empaquetar cuerpo + accesorios en una <code>Folder</code></strong> y correr Avatar Setup. Salida esperada: un <strong>avatar generado</strong> — o un error bien diagnosticado con su plan de corrección. Ambos resultados son éxito docente; solo uno es éxito de pipeline, y la clase 20 existe para cerrar la brecha.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">🧭</span>
+          <p><strong>Gestionar la expectativa al abrir:</strong> Avatar Setup falla con frecuencia en el primer intento — mallas no watertight, proporciones raras. Por eso existen el checklist de la clase 18 y el <a href="pipeline.html#export">plan B del pipeline</a>. Si valida a la primera: celebración. Si no: diagnóstico, y el mago igual termina jugable — por la puerta grande o por el plan B.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Los estándares no son jaulas — son enchufes: si tu pieza encaja en el estándar, funciona en todos lados."</p>
+          <p class="who">Metáfora nº 19 · El enchufe</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: cualquier cargador entra en cualquier enchufe de tu país — porque alguien fijó un estándar y todos lo respetan. Las reglas de Avatar Setup que llevamos 19 clases respetando son eso: el enchufe. Hoy conectamos — y si hicimos bien la pieza, la corriente pasa.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Qué hace Avatar Setup por dentro:</strong> segmenta el cuerpo en las 15 piezas del esqueleto R15, genera el rig (los "huesos"), crea los attachments de los accesorios y el caging. Por eso exigía cuello distinto (para saber dónde cortar la cabeza), A-pose (para no confundir brazo con torso), watertight (para no romper al segmentar) y los 5 componentes (para animar ojos y boca).</p>
+        <p><strong>Por qué la <code>Folder</code>:</strong> Avatar Setup procesa lo que recibe junto. Cuerpo suelto = avatar desnudo; cuerpo + accesorios en la misma Folder = avatar equipado con sus attachments generados. Es literalmente empaquetar la maleta del viaje.</p>
+        <p><strong>Leer errores de máquina:</strong> la validación dice QUÉ falló pero no siempre DÓNDE. Método del curso: leer el error completo en voz alta → traducirlo a nuestra checklist ("mesh not watertight" = goteras, clase 10) → volver a Blender, corregir, re-exportar. Nunca "arreglar" la malla dentro de Studio.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <p style="margin-bottom:10px"><strong>Ninguna.</strong> Como la clase 5 — el cierre de ciclo se juega en el flujo, no en el teclado. Todo el arsenal del curso queda declarado; la <a href="hotkeys.html">tarjeta acumulativa</a> tiene el mapa completo.</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">Ctrl + A</span><span class="kbd">N</span><span class="kf">Repaso</span><span class="kw">Última verificación de fichas limpias antes del export.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Export FBX definitivo.</b> Versión nueva (<code>MF_c19_export_v01.blend</code>). File → Export → FBX → <code>04_exports/MF_mago.fbx</code>: cuerpo y accesorios seleccionados (¡Selected Objects!), texturas empacadas o en carpeta conocida. El ritual de la clase 5, ahora con el proyecto grande.</span></div>
+          <div class="tl"><span class="t">06–14</span><span><b>3D Importer en Studio.</b> Importar el FBX, revisar la previsualización con calma: ¿todas las piezas?, ¿texturas presentes?, ¿tamaño razonable?, ¿mira hacia donde debe? Cualquier sorpresa aquí es más barata que después.</span></div>
+          <div class="tl"><span class="t">14–20</span><span><b>El bundling.</b> En el Explorer: crear una <b>Folder</b>, meter el modelo del cuerpo y los 5 accesorios. Verificar los <code>SurfaceAppearance</code> de las piezas horneadas (normal + roughness + metallic conectados). La maleta, lista.</span></div>
+          <div class="tl"><span class="t">20–32</span><span><b>El momento de la verdad.</b> Seleccionar la Folder → <b>Avatar Setup</b> → auto-configuración. Mientras corre: repasar qué está haciendo (segmentar, rig, attachments, caging). Si valida: inspeccionar el avatar en el editor — piezas R15, accesorios anclados, la previsualización de animaciones. Si falla: protocolo de lectura de errores, anotar el diagnóstico exacto y qué se corrige en Blender.</span></div>
+          <div class="tl"><span class="t">32–42</span><span><b>Según el resultado:</b> (a) Validó → probar el avatar sobre un rig de prueba en el editor de Avatar Setup, guardar el resultado, capturas a <code>05_capturas</code>. (b) Falló → aplicar la corrección si es rápida (goteras puntuales, normal volteada: 10 min) y reintentar; si es larga, documentarla como tarea de apertura de la clase 20 y dejar el <b>plan B</b> preparado (importar como modelo con rig manual — el mago SIEMPRE termina presentable).</span></div>
+          <div class="tl"><span class="t">42–45</span><span><b>Cierre honesto.</b> Estado real anotado en la bitácora: validado / corregible / plan B. Recordatorio de la <a href="pipeline.html#menor">regla del pipeline</a>: este avatar es para <b>uso in-experience</b> — publicar en Marketplace exige verificación de identidad que una cuenta de menor no tiene, y no es el objetivo del curso. Guardar todo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Accesorios fuera de la Folder</b> — el avatar valida… desnudo. Detección: la previsualización sin sombrero. Corrección: rehacer el bundling con TODO dentro y re-correr.</li>
+          <li><b>Texturas que no llegaron</b> — FBX exportado sin empacar imágenes. El importador lo muestra gris. Volver a Blender: File → External Data → Pack Resources, re-exportar.</li>
+          <li><b>"Mesh not watertight" tras haber validado en clase 18</b> — el export puede triangular distinto. No es traición: es el caso exacto para el protocolo de lectura → Non Manifold en Blender otra vez → suele ser un vértice suelto microscópico.</li>
+          <li><b>Pánico ante el primer fallo</b> — el estudiante siente que "todo el curso falló". Gestionarlo antes de que pase (por eso se abre la clase con la expectativa): los profesionales corren validaciones en bucle; fallar-corregir-reintentar ES el flujo.</li>
+          <li><b>Arreglar en Studio lo que se rompió en Blender</b> — mover vértices en Studio no existe, y "parchear" con escala o posición esconde el problema. La fuente de verdad es el .blend; el ciclo es corregir → re-exportar.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existe <b><code>MF_mago.fbx</code></b> en <code>04_exports</code>, con texturas empacadas.</li>
+          <li>El bundling en <b>Folder</b> se hizo correcto: cuerpo + 5 accesorios juntos.</li>
+          <li><b>Avatar Setup se ejecutó</b> y el resultado está documentado: avatar generado, o diagnóstico preciso + plan para la clase 20.</li>
+          <li>El estudiante puede explicar <b>qué hizo Avatar Setup</b> (segmentar, rig, attachments) y <b>por qué el curso entero apuntaba a este momento</b>.</li>
+          <li>Capturas del resultado en <code>05_capturas</code> y <b><code>MF_c19_export_v01.blend</code></b> guardado.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento (o la validación se atasca)</div>
+            <p>El <strong>plan B del pipeline</strong> se activa sin vergüenza: importar el mago como modelo/NPC con rig manual (R15 básico de Studio + el modelo como apariencia). El estudiante conserva un entregable presentable HOY, y el reintento de Avatar Setup queda como apertura de la clase 20 con el diagnóstico ya escrito.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>El avatar validado se lleva de paseo: cargarlo en la experiencia del estudiante, probar las <strong>animaciones por defecto</strong> (correr, saltar, emotes) y mirar cómo se comporta la túnica rígida en movimiento — la conversación perfecta sobre el intercambio que se hizo en la clase 13.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c19_export_v01.blend</code> <span aria-hidden="true">·</span> <code>MF_mago.fbx</code> <span aria-hidden="true">·</span> el lugar de Studio guardado</div>
+          <small>El mago exportado y sometido a Avatar Setup, con su estado real documentado. La clase 20 lo deja jugable y lo presenta al mundo.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 19 · Avatar Setup · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⚡</span>Qué construimos hoy</h3>
+        <p>El día que llevamos 19 semanas preparando: tu mago viaja a Roblox y <strong>Avatar Setup</strong> lo convierte en un <strong>avatar de verdad</strong> — con esqueleto, piezas R15 y sus accesorios anclados. Dato de profesional: si la validación falla al primer intento, <strong>es normal</strong>. Leer el error, corregir y reintentar es exactamente lo que hacen los artistas de los estudios.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px"><strong>Cero teclas nuevas</strong> — ¡tu arsenal está completo desde la clase 18! Hoy es día de pipeline puro.</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">Ctrl + A</span><span class="kf">Última revisión de fichas antes de exportar</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c19).</li>
+          <li>Exporté <b>MF_mago.fbx</b> con las texturas empacadas.</li>
+          <li>Lo importé en Studio y revisé la previsualización <b>con lupa</b>. 🔎</li>
+          <li>Creé la <b>Folder</b> y metí el cuerpo + los 5 accesorios juntos.</li>
+          <li>Ejecuté <b>Avatar Setup</b>… y respiré hondo.</li>
+          <li>Si validó: exploré mi avatar R15 pieza por pieza. 🎉</li>
+          <li>Si falló: <b>leí el error completo</b>, lo traduje a mi checklist y anoté el plan.</li>
+          <li>Guardé capturas del momento histórico y <b>MF_c19_export_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El traductor de errores</div>
+          <p>Si la validación dio algún error (¡o aunque no!), juega al traductor: toma un mensaje de error de Avatar Setup y tradúcelo a <strong>idioma de humanos</strong> — "significa que… y se arregla con…". Saber traducir máquina→humano es un superpoder que muchos adultos no tienen.</p>
+          <span class="time">+5 min donde sea</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>La próxima clase es LA presentación final. Piensa en tu <strong>público</strong>: ¿a quién invitas a ver tu avatar? ¿Familia, un amigo? Y prepara qué vas a contarles: el viaje del cubo gris de la clase 1 al mago que camina. Guarda tus dibujos de todo el curso — los vas a necesitar.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja el momento de hoy como una viñeta de cómic: tú, la pantalla, y el mago cruzando el portal de Blender a Roblox.</p>
+        <div class="draw-box"><span>El gran salto</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-18.html"><small>Anterior · Clase 18</small><b>← Optimización</b></a>
+      <a class="next" href="clase-20.html"><small>Siguiente · Clase 20</small><b>Avatar jugable →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 19 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

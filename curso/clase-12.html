@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · La varita — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 12 del curso Mago Fantástico: la varita y sus gemas mágicas con duplicados enlazados (Alt+D) en Blender 5.2. Props pequeños, carácter grande.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html" class="active" aria-current="page"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m3">🟨 M3 · Accesorios y ropa · Clase 12</span>
+      <h1>La <span class="g1">varita</span></h1>
+      <p class="sub">El prop estrella del mago. Pequeño en triángulos, gigante en personalidad: madera nudosa, punta con gema, y un truco profesional nuevo — los <strong>duplicados enlazados</strong>, gemas que se editan una vez y cambian todas a la vez.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 1</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c12_varita_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Modelar la <strong>varita con su(s) gema(s)</strong> como accesorio rígido (<code>ACC_varita</code>, en la colección Accesorios, separada del cuerpo — la regla de la clase 11 sigue vigente). Aprender la diferencia entre <strong>copiar (Shift+D)</strong> y <strong>enlazar (Alt+D)</strong>, y cuándo conviene cada una. La varita es además la protagonista del emissive de la clase 17 — hoy se deja lista para brillar.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Los objetos pequeños cargan la magia grande: un buen prop roba la mirada antes que el personaje entero."</p>
+          <p class="who">Metáfora nº 12 · El tesoro</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: piensa en los héroes que conoces — casi todos se reconocen por <em>su objeto</em>: la espada, el escudo, el martillo. El prop concentra la historia del personaje en algo que cabe en la mano. La varita de hoy es ESE objeto para tu mago.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Shift+D vs Alt+D:</strong> Shift+D crea una copia independiente (editas una, la otra ni se entera). <strong>Alt+D crea un duplicado enlazado</strong>: ambos comparten la misma malla — editar una gema en Edit Mode edita TODAS sus hermanas a la vez. Para 5 gemas idénticas en la varita: se modela una, se enlazan cuatro, y cualquier retoque futuro se hace una sola vez. Además el archivo pesa menos: una malla, cinco posiciones.</p>
+        <p><strong>Gemas low poly:</strong> una icosfera de 1 subdivisión (80 triángulos) con shading plano YA parece gema — las caras facetadas son el look. Es de los pocos objetos donde "menos suavizado" = "más creíble".</p>
+        <p><strong>La madera nudosa</strong> se insinúa con la silueta: dos o tres loop cuts rotados y escalados desigualmente rompen el "tubo perfecto" y la varita gana edad. El detalle fino (vetas) lo pondrá la textura.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Alt + D</span><span class="kf">Duplicado enlazado</span><span class="kw">Copias que comparten malla: editas una, cambian todas.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Shift + D</span><span class="kbd">Ctrl + R</span><span class="kbd">Shift + S</span><span class="kf">Repaso</span><span class="kw">Copia normal vs enlazada — hoy se usan las dos y se compara.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c12_varita_v01.blend</code>) con el diseño de la tarea sobre la mesa. Decidir juntos: ¿cuántas gemas y dónde?</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>El palo.</b> Cilindro fino de 8 lados, alargado. Tres loop cuts: rotar y escalar cada anillo un poco distinto — nace el nudo de madera. Un extremo más grueso (mango), el otro afinado (punta). Comparar con el dibujo.</span></div>
+          <div class="tl"><span class="t">15–25</span><span><b>La gema madre.</b> Icosfera de 1 subdivisión, escalada a tamaño de gema, colocada en la punta con <b>Shift+S</b>. Shade Flat para que las facetas canten. Nombrarla <code>ACC_varita_gema</code>.</span></div>
+          <div class="tl"><span class="t">25–33</span><span><b>La familia enlazada.</b> <b>Alt+D</b> para sembrar 2–4 gemas menores por el palo (incrustadas a medias, como crecidas de la madera). El momento mágico: entrar en Edit Mode de UNA y estirar un vértice — todas cambian. Discutir cuándo NO usar Alt+D (cuando quieres que sean distintas: Shift+D).</span></div>
+          <div class="tl"><span class="t">33–40</span><span><b>Ensamblar y entregar a la mano.</b> Unir palo y gemas en un solo objeto <code>ACC_varita</code> (Ctrl+J entre piezas del MISMO accesorio sí está permitido — la regla prohíbe fusionar CON EL CUERPO; distinción dicha en voz alta). Colocarla en la mano del mago con Shift+S, inclinada con carácter.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Ronda de accesorios completa.</b> Outliner: cuerpo + sombrero + pelo + barba + varita, todos separados, todos nombrados. Contador leído. Guardar. El asset B está completo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Alt+D esperando copias independientes</b> — el estudiante "arregla" una gema y descubre las cinco cambiadas. Es la lección del día funcionando: Ctrl+Z y elegir la herramienta correcta para la intención.</li>
+          <li><b>Ctrl+J de la varita con el cuerpo</b> — el reflejo maldito otra vez. La varita se une CON SUS GEMAS, jamás con el mago. Detección: el Outliner pierde el objeto <code>Mago_cuerpo</code>… no debe pasar.</li>
+          <li><b>Icosfera con demasiadas subdivisiones</b> — 2 subdivisiones = 320 triángulos por gema × 5 gemas: el prop más caro que la cabeza. 1 subdivisión y shading plano.</li>
+          <li><b>Varita perfectamente recta y lisa</b> — parece un lápiz, no un objeto mágico. Los nudos y el grosor variable son 2 minutos que valen todo el carácter.</li>
+          <li><b>La gema "flotando" sobre la punta</b> — sin contacto visual con el palo. Hundirla un poco o añadir garras simples (3 extrusiones diminutas del palo que la abrazan).</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existe <b><code>ACC_varita</code></b> en la colección Accesorios: palo nudoso + gema(s), un solo objeto separado del cuerpo.</li>
+          <li>Las gemas menores nacieron con <b>Alt+D</b> y el estudiante puede explicar la diferencia con Shift+D.</li>
+          <li>La varita está <b>en la mano del mago</b>, con una inclinación deliberada.</li>
+          <li>El conjunto sigue <b>dentro de presupuesto</b> (contador leído en voz alta).</li>
+          <li>Archivo guardado como <b><code>MF_c12_varita_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Varita mínima digna: <strong>palo con nudos + una sola gema en la punta</strong>. Las gemas menores y las garras son bonus. Que el Alt+D se demuestre aunque sea con dos gemas — es el concepto de la clase.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Subir el prop de nivel: <strong>espiral de madera</strong> envolviendo la punta (extrusión guiada girando la vista), una <strong>correa</strong> al mango, o el reto de diseño: modelar un <strong>libro de hechizos</strong> mini (<code>ACC_libro</code>) para el cinturón — separado y nombrado, claro.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c12_varita_v01.blend</code></div>
+          <small>Los 4 accesorios rígidos completos (asset B). La clase 13 cierra el módulo con la túnica.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 12 · La varita · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🪄</span>Qué construimos hoy</h3>
+        <p>La <strong>varita mágica</strong> — el objeto que define a tu mago. Madera nudosa, una gema en la punta y gemas pequeñas creciendo del palo. Y un superpoder nuevo: los <strong>duplicados enlazados</strong>, gemas gemelas que cambian todas juntas cuando editas una.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Alt + D</span><span class="kf">Duplicado enlazado (gemelas mágicas)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)"><strong>Shift+D</strong> = copia normal (cada una a lo suyo). <strong>Alt+D</strong> = gemelas conectadas (editas una, cambian todas). Elegir bien cuál usar es de profesionales.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c12) con mi diseño de varita delante.</li>
+          <li>Hice el <b>palo</b>: cilindro fino con nudos (anillos girados y escalados).</li>
+          <li>Un extremo grueso (mango), el otro afinado (punta) — como madera de verdad.</li>
+          <li>Creé la <b>gema madre</b>: icosfera facetada, brillante de pura geometría.</li>
+          <li>Sembré <b>gemas gemelas con Alt+D</b> por el palo.</li>
+          <li>Probé la magia: edité UNA gema… ¡y cambiaron TODAS! 🤯</li>
+          <li>Uní palo y gemas en <b>ACC_varita</b> (con el cuerpo, ¡jamás!).</li>
+          <li>La puse <b>en la mano</b> de mi mago con Shift+S y guardé <b>MF_c12_varita_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ La reliquia</div>
+          <p>Toda varita legendaria tiene historia. Inventa la de la tuya en <strong>tres datos</strong>: ¿de qué árbol salió?, ¿quién la talló?, ¿qué hace su gema? Escríbelos abajo — en la clase 17 la gema brillará del color de esa historia.</p>
+          <span class="time">+5 min donde sea</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Observa una <strong>túnica o bata de verdad</strong> (foto o del armario): ¿dónde se abre?, ¿cómo caen las mangas?, ¿llega al suelo? La próxima clase vestimos al mago — y la ropa 3D tiene sus propios trucos.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja tu varita en grande con sus gemas — y escribe sus tres datos de reliquia al lado.</p>
+        <div class="draw-box"><span>Mi varita y su historia</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-11.html"><small>Anterior · Clase 11</small><b>← Sombrero, pelo y barba</b></a>
+      <a class="next" href="clase-13.html"><small>Siguiente · Clase 13</small><b>La túnica →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 12 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

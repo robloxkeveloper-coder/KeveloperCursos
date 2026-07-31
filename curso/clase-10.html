@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 · La cabeza II — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 10 del curso Mago Fantástico: rasgos y personalización de la cabeza, malla watertight y control de polycount en Blender 5.2. El cuerpo base queda conforme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html" class="active" aria-current="page"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🟩 M2 · Cuerpo del mago · Clase 10</span>
+      <h1>La cabeza <span class="g2">II</span></h1>
+      <p class="sub">La plantilla se convierte en <strong>el mago del concept</strong>: nariz, cejas de anciano, pómulos, orejas. Y el módulo se cierra con el primer <strong>control de calidad técnico</strong> completo: malla watertight, normales correctas y presupuesto de triángulos leído contra la tabla del pipeline. Entregable: <strong>cuerpo base conforme</strong>.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 1</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c10_mago_base_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Doble: <strong>(1)</strong> personalizar la cabeza — que al final de la hora la cara sea la del concept art, no la de la plantilla — y <strong>(2)</strong> pasar el <strong>primer checklist técnico serio</strong> del curso: watertight, sin caras internas, normales bien, componentes intactos, triángulos dentro de presupuesto. Con eso, el <strong>cuerpo base (asset A) queda conforme</strong> y el módulo 2 se cierra.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Un modelo está terminado cuando ya no le sobra nada."</p>
+          <p class="who">Metáfora nº 10 · Lo esencial</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: la tentación al personalizar es <em>añadir</em> — más arrugas, más pliegues, más todo. Los grandes personajes cartoon son pocas formas muy bien elegidas. Hoy vale más mover diez vértices con intención que añadir cien sin ella. (Y el contador de triángulos vigila.)</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Watertight, dicho fácil:</strong> si la malla se llenara de agua, ¿gotea? Cada agujero, cada cara interior sobrante, cada borde sin cerrar es una gotera. Blender las encuentra por nosotros: Select → Select All by Trait → <em>Non Manifold</em> ilumina todo lo que no es "estanco". Cero seleccionado = malla sana.</p>
+        <p><strong>Normales:</strong> cada cara tiene un "lado de fuera". Si una cara mira hacia dentro, Roblox la pinta invisible (el agujero fantasma). El overlay <em>Face Orientation</em> pinta azul lo correcto y <strong>rojo lo volteado</strong>; <strong>Shift+N</strong> recalcula todas hacia afuera de un golpe.</p>
+        <p><strong>El presupuesto, ahora en serio</strong> (<a href="pipeline.html#triangulos">pipeline 04</a>): cabeza máx. 4.000 · torso 1.750 · brazo 1.248 c/u · pierna 1.248 c/u · total 10.742 — y el objetivo del curso es rondar 8.000–9.000 porque Avatar Setup añade caps que suman. Hoy se lee el total real del mago y se anota en la bitácora.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Shift + N</span><span class="kf">Recalcular normales hacia afuera</span><span class="kw">Todas las caras miran a la calle. El botón anti-agujero-fantasma.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">O</span><span class="kbd">L</span><span class="kbd">M</span><span class="kbd">H</span><span class="kf">Repaso</span><span class="kw">Los rasgos se amasan con proporcional; los componentes se comprueban con L.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c10_mago_base_v01.blend</code>), concept de la cara a mano (el dibujo de la tarea, si existe). Plan: primero el rostro, después el examen técnico.</span></div>
+          <div class="tl"><span class="t">05–20</span><span><b>Esculpir los rasgos con proporcional.</b> Con <b>O</b> radio pequeño: sacar la nariz (un anillo de caras al frente + G), marcar cejas de anciano (empujar el arco superciliar), hundir mejillas, sacar pómulos. Orejas si el concept las pide (extrusión corta lateral). Cada rasgo, comparado contra el dibujo en Numpad 1. <b>El test de L después de cada rasgo</b>: los ojos siguen siendo piezas propias.</span></div>
+          <div class="tl"><span class="t">20–28</span><span><b>Cacería de goteras.</b> Select → Select All by Trait → <b>Non Manifold</b>. Lo que se ilumine se arregla: caras internas del cuello o muñecas se borran, agujeros se cierran con F, duplicados con M (por zonas, nunca global). Objetivo: la cacería termina con <b>cero seleccionado</b>.</span></div>
+          <div class="tl"><span class="t">28–34</span><span><b>Normales al derecho.</b> Overlay <b>Face Orientation</b>: azul bueno, rojo traidor. Si hay rojo: seleccionar todo (Select → All) y <b>Shift+N</b>. Verificar que el azul ganó en todo el cuerpo… y dentro de las bolsas también.</span></div>
+          <div class="tl"><span class="t">34–42</span><span><b>El presupuesto contra la tabla.</b> Leer el total de triángulos del contador y compararlo con la <a href="pipeline.html#triangulos">tabla del pipeline</a>. El mago del curso suele quedar en 3.000–5.000 — margen de sobra. Checklist de cierre del módulo en voz alta: watertight ✔ contiguo ✔ simétrico ✔ A-pose ✔ −Z ✔ cuello ✔ 5 componentes ✔ presupuesto ✔.</span></div>
+          <div class="tl"><span class="t">42–45</span><span><b>Guardar y celebrar el hito.</b> El asset A — el cuerpo base — está <b>conforme</b>. Foto del mago de frente para <code>05_capturas</code>: es el "antes" de los accesorios.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Amasar la cara con radio proporcional grande</b> — la nariz sale y se lleva media cabeza (o un ojo interno). Radio pequeño, scroll para ajustarlo, y el test de L tras cada rasgo.</li>
+          <li><b>"Non Manifold selecciona las bolsas"</b> — no: los componentes internos son piezas cerradas y sanas. Si el estudiante entra en pánico, revisar QUÉ se iluminó: bordes de verdad abiertos vs. componentes correctamente separados.</li>
+          <li><b>Shift+N con las bolsas apuntando al revés</b> — las normales de las bolsas internas deben mirar hacia el interior de la bolsa (hacia donde se ven). Tras recalcular, revisar visualmente los ojos: si se ven raros, voltear solo esas caras (Mesh → Normals → Flip).</li>
+          <li><b>Personalizar rompiendo la simetría</b> — el Mirror sigue activo: los rasgos van en el lado real. Si un rasgo aparece solo a un lado, se editó la copia. (La asimetría deliberada — cicatriz, ceja alzada — llega con la textura, clase 17.)</li>
+          <li><b>Contar vértices en vez de triángulos</b> — el overlay muestra ambos; el presupuesto de Roblox habla de <em>triángulos</em>. Señalar la fila correcta del contador.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>La cara es <b>la del concept</b>: nariz, cejas y forma reconocibles como SU mago, no la plantilla.</li>
+          <li><b>Non Manifold selecciona cero</b> geometría rota; Face Orientation es azul donde debe.</li>
+          <li>Los <b>5 componentes pasan el test de L</b> después de toda la edición.</li>
+          <li>El <b>total de triángulos está anotado</b> y por debajo del objetivo del pipeline (8.000–9.000, contra el límite duro de 10.742).</li>
+          <li>El checklist del módulo se recitó completo con el modelo delante, y <b><code>MF_c10_mago_base_v01.blend</code></b> está guardado.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Rasgos mínimos viables: <strong>nariz y cejas</strong> — son el 80 % del carácter de un mago. Pómulos y orejas pueden esperar. El <strong>examen técnico no se recorta</strong>: watertight + normales + presupuesto son el cierre del módulo; sin ellos no hay "conforme".</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Refinar la expresión: la plantilla tiene boca neutra — con proporcional finísimo, insinuar una <strong>sonrisa sabia</strong> en las comisuras (sin tocar la mouthbag). Y el reto técnico: ¿cuántos triángulos podría <em>quitar</em> sin perder silueta? Solo contarlo, no hacerlo — es el aperitivo de la clase 18.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c10_mago_base_v01.blend</code></div>
+          <small>EL asset A: cuerpo base conforme — watertight, contiguo, simétrico, A-pose, −Z, cuello distinto, 5 componentes, dentro de presupuesto. Fin del módulo 2.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 10 · La cabeza II · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">😄</span>Qué construimos hoy</h3>
+        <p>Hoy la cabeza deja de ser "una" cabeza y se convierte en <strong>LA cabeza de tu mago</strong>: su nariz, sus cejas, sus pómulos — los de tu dibujo. Y al final, tu modelo pasa su <strong>primera inspección técnica profesional</strong>: sin goteras, sin caras al revés, y dentro del presupuesto de triángulos de Roblox.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Shift + N</span><span class="kf">Arreglar todas las caras volteadas</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Una sola tecla nueva, porque hoy el trabajo fino lo hacen las que ya dominas: <strong>O</strong> para amasar rasgos, <strong>L</strong> para el test de piezas, <strong>M</strong> para fusionar.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c10) con mi dibujo de la cara a la vista.</li>
+          <li>Saqué la <b>nariz</b> de mi mago (proporcional con radio pequeño).</li>
+          <li>Marqué sus <b>cejas</b> — de anciano sabio, de pillo, como sea el mío.</li>
+          <li>Después de cada rasgo hice el <b>test de L</b>: los ojos siguen sueltos. ✔</li>
+          <li>Cacé <b>goteras</b> con Non Manifold… hasta que seleccionó CERO.</li>
+          <li>Encendí Face Orientation: <b>azul = bien</b>. El rojo lo arreglé con Shift+N.</li>
+          <li>Leí mi <b>total de triángulos</b> y lo comparé con la tabla del pipeline.</li>
+          <li>Recité el checklist del módulo completo 💪 y guardé <b>MF_c10_mago_base_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ La prueba de la abuela</div>
+          <p>Enséñale la cara de tu mago (solo la cabeza, en pantalla) a alguien de tu casa junto a tu dibujo. Pregunta: <strong>"¿son el mismo personaje?"</strong> Si duda, algo del dibujo falta en el modelo — encuéntralo y añádelo.</p>
+          <span class="time">+10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>El módulo que viene: ¡accesorios! Junta <strong>referencias de sombreros de mago</strong> (3 fotos o dibujos mínimo: puntiagudo, doblado, con hebilla…) y decide cuál es el de tu mago. También vale adelantar ideas de varita.</p>
+          <span class="time">≈ 15 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">¡Fin del módulo 2! Dibuja a tu mago como está hoy: cuerpo completo, con su cara — el "antes" de los accesorios. Guarda esta hoja para compararla en la clase 20.</p>
+        <div class="draw-box"><span>Mi mago al cierre del módulo 2</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-09.html"><small>Anterior · Clase 09</small><b>← La cabeza I</b></a>
+      <a class="next" href="clase-11.html"><small>Siguiente · Clase 11</small><b>Sombrero, pelo y barba →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 10 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

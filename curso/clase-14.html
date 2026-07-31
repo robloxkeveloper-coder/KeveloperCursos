@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 14 · High poly y sculpt — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 14 del curso Mago Fantástico: versión high poly y sculpt donde sí se ve — sombrero, túnica y varita — en Blender 5.2. El detalle que luego se horneará.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html" class="active" aria-current="page"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m4">🟧 M4 · Detalle y texturas · Clase 14</span>
+      <h1>High poly y <span class="g1">sculpt</span></h1>
+      <p class="sub">Empieza el módulo del acabado. Hoy se esculpe — pero solo <strong>donde el detalle sí se ve</strong>: sombrero, túnica y varita. El cuerpo cartoon no gana nada con arrugas microscópicas, y el <a href="pipeline.html#texturas" style="color:inherit;text-decoration:underline">pipeline</a> lo dice claro. Nace la versión <strong>high poly</strong>: la escultura rica que la clase 16 fotografiará.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 2</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c14_highpoly_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Crear las <strong>copias high poly</strong> de sombrero, túnica y varita (sufijo <code>_HP</code>, colección propia), subdividirlas y <strong>esculpir detalle con propósito</strong>: pliegues en la túnica, abolladuras y costuras en el sombrero, vetas y nudos en la varita. El estudiante entiende el plan a dos clases vista: esto que hoy pesa millones de triángulos <em>nunca</em> viaja a Roblox — se hornea sobre el low poly en la clase 16.</p>
+        <div class="warn">
+          <span class="wi" aria-hidden="true">📌</span>
+          <p><strong>El cuerpo no se esculpe</strong> — regla del <a href="pipeline.html#texturas">pipeline</a>: un normal map horneado sobre un cuerpo cartoon low poly casi no se nota. El tiempo de sculpt va donde rinde: los tres objetos con superficie "material" (tela, fieltro, madera).</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"El detalle es un truco de luz: no vive en la piedra — vive en cómo la luz la recorre."</p>
+          <p class="who">Metáfora nº 14 · La luz</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: mirar una pared con gotelé al trasluz — de frente parece lisa, con luz rasante aparecen mil sombras diminutas. Los videojuegos explotan esto: guardan "cómo rebota la luz" en una imagen (el normal map) y la superficie parece detallada sin serlo. Hoy fabricamos la versión que la luz recorrerá.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>High poly vs low poly:</strong> el low poly (lo construido hasta hoy) es lo que viaja a Roblox — ligero, dentro de presupuesto. El high poly es su gemelo rico: millones de triángulos, todo el detalle, y se queda en casa. Entre ambos, el bake (clase 16) transfiere la apariencia.</p>
+        <p><strong>Sculpt Mode</strong> es Blender en modo arcilla: pinceles que empujan, pellizcan y alisan la malla. Necesita densidad — por eso primero se subdivide (Subdivision Surface, 2–3 niveles sobre la copia _HP). Pinceles del día: <em>Draw</em> (empujar/hundir con Ctrl), <em>Crease</em> (pliegues afilados) y <em>Smooth</em> (mantener Shift: alisar).</p>
+        <p><strong>Detalle con historia:</strong> un pliegue va donde la tela se dobla (codo del ala, cintura de la túnica); una abolladura, donde el sombrero vivió aventuras. El sculpt aleatorio se nota aleatorio — cada marca necesita su "porqué".</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">F</span><span class="kf">Tamaño del pincel (en Sculpt Mode)</span><span class="kw">La misma tecla que "rellenar" en Edit Mode — cada modo tiene su idioma.</span></div>
+          <div class="key"><span class="kbd">Shift + F</span><span class="kf">Fuerza del pincel (en Sculpt Mode)</span><span class="kw">Cuánto empuja cada pasada. Poca fuerza, muchas pasadas = control.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Shift + D</span><span class="kbd">H</span><span class="kbd">/</span><span class="kf">Repaso</span><span class="kw">Duplicar para crear las copias _HP; esconder y aislar para esculpir cómodo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–07</span><span><b>Fabricar los gemelos.</b> Versión nueva (<code>MF_c14_highpoly_v01.blend</code>). <b>Shift+D</b> sobre sombrero, túnica y varita → renombrar <code>ACC_sombrero_HP</code> etc. → colección <code>HighPoly</code>. Los originales low poly se esconden (H sobre objetos / ojo del Outliner): intocables desde ya.</span></div>
+          <div class="tl"><span class="t">07–14</span><span><b>Densidad para esculpir.</b> A cada _HP, modificador Subdivision Surface nivel 2–3 y aplicar. El contador salta a cientos de miles — y por primera vez ese número NO es problema: este modelo no viaja. Momento perfecto para re-explicar el plan bake.</span></div>
+          <div class="tl"><span class="t">14–26</span><span><b>La túnica, primera escultura.</b> Sculpt Mode, aislar con <b>/</b>. Pliegues verticales con <em>Crease</em> desde la cintura al dobladillo (la gravedad tira de la tela), arrugas suaves con <em>Draw</em> donde el cinturón aprieta, <em>Smooth</em> (Shift) para calmar excesos. <b>F</b> y <b>Shift+F</b> hasta que salgan solos.</span></div>
+          <div class="tl"><span class="t">26–34</span><span><b>El sombrero con pasado.</b> Abolladuras (Draw con Ctrl = hundir) en el cono, el borde del ala ligeramente ondulado, una costura (Crease fina) donde el ala encuentra la copa. Cada marca se justifica en voz alta: "esta abolladura es de cuando…".</span></div>
+          <div class="tl"><span class="t">34–42</span><span><b>La varita con vetas.</b> Crease a lo largo para las vetas de madera, Draw suave para engordar los nudos que la clase 12 insinuó. Las gemas NO se esculpen: sus facetas ya son su detalle.</span></div>
+          <div class="tl"><span class="t">42–45</span><span><b>Inspección de luz.</b> Encender MatCap (esfera de shading) y orbitar con luz rasante: ¿el detalle se lee? Guardar. Los gemelos ricos esperan su fotografía.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Esculpir el original low poly</b> — el desastre del día: destruye el modelo que viaja a Roblox. Prevención: originales escondidos ANTES de abrir Sculpt Mode; detección: el objeto activo debe terminar en _HP, siempre.</li>
+          <li><b>Sculpt sin subdividir</b> — pinceles que "no hacen nada" o estiran picos feos. Sin densidad no hay arcilla. Verificar el contador antes de esculpir.</li>
+          <li><b>Fuerza al máximo</b> — cráteres en vez de pliegues. Shift+F a 0.3–0.5 y capas suaves.</li>
+          <li><b>Detalle en zonas que el bake no verá</b> — el interior de la túnica, la base del sombrero. El tiempo va a las superficies visibles.</li>
+          <li><b>Perfeccionismo de escultor</b> — 20 minutos en un pliegue. Recordar el destino: esto se verá a través de un normal map de 1024 px en un personaje de 2 cm en pantalla. "Se lee de lejos" es el estándar, no "resiste zoom".</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>Existen <b>tres objetos _HP</b> en su colección, subdivididos y esculpidos; los originales low poly están <b>intactos</b>.</li>
+          <li>La túnica tiene <b>pliegues con gravedad</b>, el sombrero <b>marcas con historia</b>, la varita <b>vetas y nudos</b>.</li>
+          <li>El detalle <b>se lee con MatCap y luz rasante</b> a distancia media.</li>
+          <li>El estudiante explica <b>qué pasará con estos modelos</b> (bake, clase 16) y por qué no viajan a Roblox.</li>
+          <li>Archivo guardado como <b><code>MF_c14_highpoly_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Un solo objeto esculpido bien vale más que tres a medias: <strong>la túnica</strong> (los pliegues son el detalle que más se nota en el bake). Sombrero y varita salen del checkpoint del profesor. El concepto high/low + el manejo de pinceles son lo irrenunciable.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Subir el oficio: <strong>bordado</strong> en el borde de la túnica (Crease en zigzag), <strong>remiendos</strong> en el sombrero (parche con costuras), o el pincel <em>Cloth</em> de Blender en una zona de la túnica — el simulador de tela en la punta del pincel, espectacular y seguro sobre la copia _HP.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c14_highpoly_v01.blend</code></div>
+          <small>Low poly intacto + colección HighPoly con sombrero, túnica y varita esculpidos. La clase 15 despliega; la 16 hornea.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 14 · High poly y sculpt · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🗿</span>Qué construimos hoy</h3>
+        <p>¡Hoy Blender se convierte en arcilla! Hacemos <strong>copias de lujo</strong> del sombrero, la túnica y la varita, y las esculpimos con pinceles: pliegues de tela, abolladuras con historia, vetas de madera. Estas copias pesan millones de triángulos y <strong>jamás irán a Roblox</strong> — son la escultura que "fotografiaremos" en dos clases.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">F</span><span class="kf">Tamaño del pincel (esculpiendo)</span></div>
+          <div class="key"><span class="kbd">Shift + F</span><span class="kf">Fuerza del pincel (esculpiendo)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">¿F no era "rellenar"? En Edit Mode, sí. En Sculpt Mode cambia de oficio. Y dos trucos más: <strong>Shift</strong> mientras pintas = alisar, <strong>Ctrl</strong> = hundir en vez de sacar.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c14).</li>
+          <li>Dupliqué sombrero, túnica y varita y les puse el apellido <b>_HP</b>.</li>
+          <li><b>Escondí los originales</b> — esos no se tocan hoy. 🔒</li>
+          <li>Subdividí las copias: ahora tienen densidad de arcilla.</li>
+          <li>Esculpí <b>pliegues</b> en la túnica — la gravedad tira hacia abajo.</li>
+          <li>Le di al sombrero <b>marcas con historia</b> (cada abolladura cuenta algo).</li>
+          <li>Tallé <b>vetas y nudos</b> en la varita.</li>
+          <li>Miré todo con luz rasante (MatCap) 🔦 y guardé <b>MF_c14_highpoly_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ La cicatriz del sombrero</div>
+          <p>Todo sombrero de mago veterano tiene UNA marca famosa: un mordisco de dragón, una quemadura de hechizo fallido, un remiendo de tela robada. Escúlpela y prepara la historia de cómo pasó — te la preguntaré.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Caza texturas por tu casa con luz rasante (linterna del móvil pegadita a la superficie): una pared, unos vaqueros, madera vieja. Toma <strong>2–3 fotos</strong> de las sombras diminutas que aparecen. Eso exacto es lo que el normal map guardará.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja tu sombrero en grande y marca dónde van sus pliegues, costuras y su cicatriz famosa.</p>
+        <div class="draw-box"><span>El mapa de marcas del sombrero</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-13.html"><small>Anterior · Clase 13</small><b>← La túnica</b></a>
+      <a class="next" href="clase-15.html"><small>Siguiente · Clase 15</small><b>UVs del mago →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 14 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

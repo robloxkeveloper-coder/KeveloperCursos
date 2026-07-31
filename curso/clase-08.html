@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 08 · Brazos, manos y cuello — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 8 del curso Mago Fantástico: brazos en A-pose, manos simplificadas y el cuello distinto que Roblox exige, en Blender 5.2. El cuerpo del mago queda bloqueado completo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html" class="active" aria-current="page"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker">🟩 M2 · Cuerpo del mago · Clase 08</span>
+      <h1>Brazos, manos y <span class="g2">cuello</span></h1>
+      <p class="sub">El cuerpo se completa: <strong>brazos en A-pose, manos de mago simplificadas</strong> y la pieza que Roblox exige por contrato: un <strong>cuello distinto</strong>, ni fundido con los hombros ni con el torso. Al cerrar, el mago tiene cuerpo entero de los pies al cuello.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 3</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c08_mago_cuerpo_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Terminar el <strong>cuerpo bloqueado completo</strong>: brazos extruidos en A-pose siguiendo la referencia, manos tipo manopla con pulgar, y el <strong>cuello como forma propia y visible</strong>. Tres herramientas nuevas de cirugía de malla (rellenar, fusionar, unir objetos) que serán pan de cada día en las clases de cabeza.</p>
+        <div class="warn hard">
+          <span class="wi" aria-hidden="true">⚠</span>
+          <p><strong>El cuello no es decoración</strong> — es requisito del <a href="pipeline.html#requisitos">pipeline</a>: <em>"con cuello distinto, no fundido con hombros ni torso superior"</em>. Avatar Setup necesita verlo para segmentar la cabeza. Regla visual del curso: en la vista lateral, el cuello se lee como <strong>cilindro propio</strong> entre los hombros y el arranque de la cabeza — con sus propios loops.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Un guante dice más que veinte dedos: simplificar no es recortar — es elegir lo que se nota."</p>
+          <p class="who">Metáfora nº 8 · El guante</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: los personajes cartoon icónicos suelen tener manos de cuatro dedos, o directamente manoplas — y nadie lo nota jugando. El realismo no está en contar dedos: está en que la mano <em>se lea</em> como mano a tres metros. Hoy elegimos qué se nota.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>F rellena:</strong> con vértices o aristas seleccionados, crea la cara que falta. Es la aguja de coser mallas — cierra agujeros, une bordes.</p>
+        <p><strong>M fusiona:</strong> junta varios vértices en uno (At Center, At Last…). Su modo estrella, <em>Merge by Distance</em>, elimina duplicados invisibles — el fantasma de la clase 2 por fin tiene cura oficial.</p>
+        <p><strong>Ctrl+J une objetos:</strong> varios objetos pasan a ser una sola malla. La diferencia entre "estar cerca" y "ser una pieza" — central para Roblox, que exige el cuerpo <em>contiguo</em>. Hoy se usa para incorporar las manos al cuerpo.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">F</span><span class="kf">Rellenar cara / arista</span><span class="kw">Crea la cara que falta entre lo seleccionado. La aguja de coser.</span></div>
+          <div class="key"><span class="kbd">M</span><span class="kf">Fusionar vértices</span><span class="kw">Varios vértices → uno. Merge by Distance mata duplicados.</span></div>
+          <div class="key"><span class="kbd">Ctrl + J</span><span class="kf">Unir objetos en uno</span><span class="kw">De "objetos cerca" a "una sola pieza". Se selecciona todo y el activo manda.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">E</span><span class="kbd">O</span><span class="kbd">Alt + Z</span><span class="kf">Repaso</span><span class="kw">Los brazos son extrusiones; las formas suaves, edición proporcional.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c08_mago_cuerpo_v01.blend</code>) y plan en voz alta: brazo → mano → cuello. El contador de triángulos sigue a la vista.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>El brazo en A-pose.</b> Desde la cara lateral del hombro derecho, extruir <b>siguiendo la diagonal del concept</b>: hombro → codo (loop cut) → muñeca, afinando con S. Numpad 1: el brazo debe calcar el dibujo. El Mirror pone el izquierdo.</span></div>
+          <div class="tl"><span class="t">15–25</span><span><b>La manopla.</b> Cubo aparte: aplastarlo, bevel suave en los nudillos, y <b>una extrusión lateral como pulgar</b>. Posicionarla al final de la muñeca. Es un objeto separado a propósito — para practicar la unión.</span></div>
+          <div class="tl"><span class="t">25–32</span><span><b>La cirugía.</b> Seleccionar mano y cuerpo → <b>Ctrl+J</b> (ahora son una malla). Borrar la cara del extremo de la muñeca y la cara de la base de la mano, y coser el puente: seleccionar los bordes enfrentados y <b>F</b> cara a cara (o Bridge Edge Loops si los anillos coinciden). <b>M → Merge by Distance</b> al terminar: cero vértices duplicados.</span></div>
+          <div class="tl"><span class="t">32–40</span><span><b>El cuello distinto.</b> Seleccionar las caras superiores del torso entre los hombros, extruir <b>un cilindro corto y claro</b> hacia arriba con dos loops propios. Vista lateral: ¿se lee como pieza propia? Ese es el examen. La cabeza se posará ahí la próxima clase.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Inspección final.</b> Silueta contra el concept en Numpad 1 y 3, contador leído en voz alta, A-pose intacta (los brazos no tocan el torso), guardar.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Puente de muñeca con caras dentro</b> — se cosió la mano sin borrar las caras de contacto y quedaron tapas internas. Detección: Alt+Z revela caras dentro del brazo. Corrección: borrarlas y re-coser. Roblox exige watertight <em>sin</em> caras internas.</li>
+          <li><b>Merge by Distance con distancia gigante</b> — media mano colapsa en un punto. Usar el valor por defecto (0.0001 m) y leer cuántos vértices eliminó: si son cientos, Ctrl+Z y revisar.</li>
+          <li><b>Cuello tímido</b> — una transición suave hombros-cabeza que Avatar Setup no distingue. El examen de la vista lateral no es negociable: cilindro propio o no hay cuello.</li>
+          <li><b>El brazo baja recto (I-pose)</b> — al refinarlo se pierde la diagonal. La referencia de la clase 6 está ahí para esto: calcar, no recordar.</li>
+          <li><b>Ctrl+J con el objeto activo equivocado</b> — el nombre y el origen resultante son los del objeto activo (el último seleccionado). Seleccionar la mano primero y <code>Mago_cuerpo</code> al final.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El mago tiene <b>cuerpo completo</b>: piernas, torso, brazos en A-pose y manos incorporadas — <b>una sola malla</b> con Mirror.</li>
+          <li>El <b>cuello se lee como pieza propia</b> en la vista lateral, con loops propios.</li>
+          <li>El puente mano-brazo está <b>cosido sin caras internas</b> y pasó Merge by Distance.</li>
+          <li>La <b>A-pose sobrevive</b>: brazos en diagonal, sin tocar el torso, simétricos desde Numpad 7.</li>
+          <li>Archivo guardado como <b><code>MF_c08_mago_cuerpo_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>La mano puede quedarse en <strong>manopla sin pulgar</strong> (un bloque redondeado) y coserse la próxima semana desde el checkpoint del profesor. El <strong>cuello no se pospone</strong>: es requisito de Roblox y toma 5 minutos — se hace aunque sea lo único de la segunda mitad.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Refinar la manopla: <strong>separar un índice</strong> (la mano de 2 dedos + pulgar clásica del cartoon), o marcar la palma con un loop y una micro-rotación de muñeca para que la mano no quede "de robot". Presupuesto: +150 triángulos máximo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c08_mago_cuerpo_v01.blend</code></div>
+          <small>Cuerpo completo bloqueado: A-pose, cuello distinto, manos cosidas, una sola malla limpia. Listo para recibir la cabeza plantilla en la clase 9.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 08 · Brazos, manos y cuello · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💪</span>Qué construimos hoy</h3>
+        <p>Tu mago se completa del cuello para abajo: <strong>brazos en diagonal, manos de mago</strong> (tipo manopla con pulgar — como los grandes del cartoon) y el <strong>cuello</strong>, la pieza que Roblox exige ver clarita para convertir tu modelo en avatar. Hoy también aprendes cirugía de mallas: coser, fusionar y unir.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">F</span><span class="kf">Rellenar la cara que falta</span></div>
+          <div class="key"><span class="kbd">M</span><span class="kf">Fusionar vértices</span></div>
+          <div class="key"><span class="kbd">Ctrl + J</span><span class="kf">Unir objetos en uno</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Truco de doctor de mallas: después de coser, <strong>M → Merge by Distance</strong> elimina los puntos duplicados invisibles. Cóselo, fusiónalo, y tu malla queda sana.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c08).</li>
+          <li>Extruí el <b>brazo derecho en diagonal</b>, calcando mi dibujo (hombro → codo → muñeca).</li>
+          <li>Modelé la <b>manopla</b> con su pulgar en un objeto aparte.</li>
+          <li>Uní mano y cuerpo con <b>Ctrl+J</b>.</li>
+          <li>Cosí el puente muñeca-mano con <b>F</b> (¡sin caras escondidas dentro!).</li>
+          <li>Pasé <b>M → Merge by Distance</b>: malla sin puntos fantasma.</li>
+          <li>Extruí el <b>cuello</b>: un cilindro corto y claro, con sus propios anillos.</li>
+          <li>Miré de perfil: ¿el cuello se ve como pieza propia? ✔ Guardé <b>MF_c08_mago_cuerpo_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Manos que hablan</div>
+          <p>Las manos cuentan historias: prueba a rotar <strong>solo las muñecas</strong> de tu mago para que las palmas miren un poco hacia adelante — como si estuviera a punto de lanzar un hechizo. Un giro pequeño, un carácter enorme.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Practica la cirugía: crea <strong>dos cubos separados</strong>, únelos con Ctrl+J, borra las caras que se miran y cose el puente con F. Repítelo hasta que salga en menos de un minuto — la próxima clase coseremos la <em>cabeza</em>.</p>
+          <span class="time">≈ 15 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja la <strong>mano de tu mago</strong> en grande: ¿manopla, tres dedos, guante con anillo? La próxima vez que la modeles, ya estará decidida.</p>
+        <div class="draw-box"><span>La mano del mago</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-07.html"><small>Anterior · Clase 07</small><b>← Torso y piernas</b></a>
+      <a class="next" href="clase-09.html"><small>Siguiente · Clase 09</small><b>La cabeza I →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 08 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

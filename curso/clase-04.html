@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 04 · El desplegado — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 4 del curso Mago Fantástico: seams, unwrap y cube projection en Blender 5.2. El muñeco de bloques desplegado en UVs sin estiramientos, con textura de cuadrícula.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html" class="active" aria-current="page"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m1">🟦 M1 · El muñeco de bloques · Clase 04</span>
+      <h1>El <span class="g1">desplegado</span></h1>
+      <p class="sub">Para pintar un modelo 3D primero hay que <strong>aplanarlo</strong>: cortarlo por costuras invisibles y extenderlo sobre un papel cuadrado. Eso son los UVs. El muñeco de bloques — todo caras planas y ángulos rectos — es el objeto perfecto para verlo con claridad total.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 2</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c04_muneco_uv_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Que el estudiante entienda <strong>qué es un UV y por qué existe</strong>, marque seams con criterio, despliegue el muñeco completo y detecte estiramientos usando la textura de cuadrícula. Es el concepto más abstracto del módulo — por eso se enseña sobre el muñeco de bloques: sus caras planas hacen <strong>visible</strong> lo que en un cuerpo orgánico sería invisible.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Desplegar un modelo es desarmar una caja de cartón: la caja y su plantilla plana son la misma cosa."</p>
+          <p class="who">Metáfora nº 4 · La caja de cartón</p>
+        </div>
+        <p style="margin-top:12px">Arranque con las manos: llevar una caja pequeña de verdad (o de cereal), despegarla y aplastarla frente al estudiante. Eso — exactamente eso — es lo que Blender hace con el muñeco hoy. Dónde cortas la caja decide qué forma tiene la plantilla: esos cortes son las <strong>seams</strong>.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 10 min</h3>
+        <p><strong>UV = las coordenadas del modelo sobre el papel.</strong> Cada vértice 3D recibe una posición 2D en un cuadrado (el "tile 0–1"). La textura se pinta en ese cuadrado y el modelo la "viste". Se llaman U y V porque X e Y ya estaban ocupadas por el espacio 3D.</p>
+        <p><strong>Seam = costura.</strong> Igual que una camiseta tiene costuras en los hombros y los lados, el modelo necesita cortes para poder aplanarse sin arrugas. Regla de colocación: donde menos se vean (interior de las piernas, nuca, axilas) — y en el muñeco, en las aristas duras, donde el corte es natural.</p>
+        <p><strong>Estirar es el enemigo.</strong> Si una isla UV queda deformada, la textura se estira como una calcomanía sobre un globo. Detector oficial: la <strong>textura de cuadrícula</strong> (checker) — si los cuadrados se ven cuadrados y del mismo tamaño en todo el modelo, el desplegado está sano.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + E</span><span class="kf">Menú de aristas → Mark Seam</span><span class="kw">Con aristas seleccionadas: marcar (o quitar) una costura.</span></div>
+          <div class="key"><span class="kbd">U</span><span class="kf">Menú de unwrap</span><span class="kw">Unwrap despliega respetando las seams; Cube Projection es el atajo para objetos de bloques.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Tab</span><span class="kbd">2</span><span class="kbd">Alt + clic</span><span class="kf">Repaso</span><span class="kw">Las seams se marcan en modo arista, y Alt+clic selecciona el anillo entero de una vez.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Preparar el taller de UVs.</b> Abrir el checkpoint, guardar como <code>MF_c04_muneco_uv_v01.blend</code>. Cambiar al workspace <b>UV Editing</b>: viewport a la derecha, papel cuadrado a la izquierda. Presentar el tablero vacío.</span></div>
+          <div class="tl"><span class="t">06–14</span><span><b>Experimento control:</b> seleccionar todo y <b>U → Unwrap</b> sin ninguna seam. Resultado: un amasijo. Perfecto — así se ve un desplegado sin costuras. Ctrl+Z y a cortar como es debido.</span></div>
+          <div class="tl"><span class="t">14–24</span><span><b>Marcar seams en el torso.</b> En modo arista (2), <b>Alt+clic</b> en los loops laterales del torso, <b>Ctrl+E → Mark Seam</b> (se pintan rojas). Pensarlo como la caja de cartón: ¿por dónde cortarías para aplanarlo?</span></div>
+          <div class="tl"><span class="t">24–32</span><span><b>Seams de piernas, brazos y cabeza.</b> Cortes por el interior de las piernas y brazos (donde no se ven) y un corte trasero en la cabeza. <b>U → Unwrap</b>: las islas se acomodan en el papel. Nombrarlas juntos: "esta isla es el torso, esta la pierna…".</span></div>
+          <div class="tl"><span class="t">32–40</span><span><b>El detector de estiramientos.</b> Material nuevo rápido con textura <b>checker</b> (Image → Generated → Color Grid). Si algún cuadrado se ve alargado, la seam de esa zona necesita otro corte — se corrige en vivo. Comparar con <b>U → Cube Projection</b>: el atajo válido para objetos 100% de bloques, y sus límites.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Revisión final y guardado.</b> Checker uniforme en todo el muñeco, islas sin solaparse, guardar. El muñeco ya tiene su plantilla de pintura — la usamos la próxima clase.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Pocas seams → islas estiradas.</b> Detección: cuadrados del checker deformados. Corrección: una seam más en la zona y re-unwrap. Es un ciclo normal, no un fracaso.</li>
+          <li><b>Demasiadas seams → confeti.</b> Cincuenta islas diminutas imposibles de pintar. Regla del curso: las mínimas costuras que dejen el checker uniforme.</li>
+          <li><b>Islas solapadas</b> — dos partes del cuerpo comparten el mismo trozo de papel y se pintan a la vez. Detección: en el UV Editor, islas montadas una sobre otra.</li>
+          <li><b>Marcar seams con caras en vez de aristas</b> — Mark Seam vive en el menú de aristas (Ctrl+E); en modo cara el flujo confunde. Ritual: tecla 2 antes de cortar.</li>
+          <li><b>El checker no se ve</b> — viewport en modo sólido. Cambiar el shading a Material Preview (la esfera de arriba a la derecha).</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El muñeco completo está desplegado: <b>cada parte tiene su isla</b> y ninguna se solapa.</li>
+          <li>La textura de cuadrícula se ve <b>uniforme y sin estiramientos</b> en torso, piernas, brazos y cabeza.</li>
+          <li>El estudiante explica con sus palabras <b>qué es una seam y por qué va donde va</b>.</li>
+          <li>Archivo guardado como <b><code>MF_c04_muneco_uv_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Usar <strong>U → Cube Projection</strong> para todo el muñeco: en un modelo de bloques da un resultado decente en un minuto. Marcar seams a mano queda como ejercicio de la clase siguiente con el checkpoint del profesor. El concepto (modelo → papel plano) es lo irrenunciable.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Reordenar las islas en el UV Editor (G y S funcionan ahí igual): las grandes más grandes, aprovechar las esquinas, dejar el papel "bien empacado". Es exactamente el trabajo pro de la clase 15 — que lo pruebe hoy en fácil.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c04_muneco_uv_v01.blend</code></div>
+          <small>Muñeco desplegado sin estiramientos, con el material checker montado. Listo para recibir color en la clase 5.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 04 · El desplegado · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📦</span>Qué construimos hoy</h3>
+        <p>Hoy no añadimos piezas: <strong>aplanamos</strong>. Tu muñeco se corta por costuras invisibles y se extiende sobre un papel cuadrado, como una caja de cartón desarmada. Ese papel se llama <strong>UV</strong>, y es donde se pintará tu personaje la próxima clase.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + E</span><span class="kf">Mark Seam — marcar costura</span></div>
+          <div class="key"><span class="kbd">U</span><span class="kf">Unwrap — desplegar</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Las costuras se pintan de <strong>rojo</strong> en el modelo. Piensa como un sastre: ¿dónde esconderías las costuras de una camiseta?</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c04) antes de empezar.</li>
+          <li>Abrí el workspace <b>UV Editing</b>: modelo a la derecha, papel a la izquierda.</li>
+          <li>Probé desplegar <b>sin costuras</b>… y salió un monstruo arrugado. 😅</li>
+          <li>Marqué seams en el <b>torso</b> con Ctrl+E (¡se ven rojas!).</li>
+          <li>Corté piernas y brazos <b>por dentro</b>, donde no se ve, y la cabeza por detrás.</li>
+          <li>Hice <b>U → Unwrap</b> y encontré cada parte en el papel.</li>
+          <li>Le puse la textura de <b>cuadrícula</b> y busqué cuadrados estirados.</li>
+          <li>Cuadrícula uniforme = victoria. Guardé como <b>MF_c04_muneco_uv_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ El sastre loco</div>
+          <p>Despliega <strong>un cubo de tres maneras distintas</strong> cambiando dónde pones las seams: en cruz, en tira, en dos mitades. Mira las tres plantillas en el papel — mismo cubo, tres cajas de cartón diferentes.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Busca en tu casa <strong>una caja pequeña</strong> (de cereal, de pasta de dientes), despégala con cuidado y aplánala. Tráela o toma una foto: es un UV de verdad, hecho en fábrica. Fíjate <em>dónde decidieron cortar</em>.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja tu muñeco desarmado y plano, como la plantilla de una caja de cartón: torso, piernas, brazos y cabeza, cada uno como isla separada.</p>
+        <div class="draw-box"><span>Mi muñeco aplanado</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-03.html"><small>Anterior · Clase 03</small><b>← Formas con carácter</b></a>
+      <a class="next" href="clase-05.html"><small>Siguiente · Clase 05</small><b>¡A Roblox! →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 04 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

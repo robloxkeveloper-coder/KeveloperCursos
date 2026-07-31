@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 02 · Dentro de la malla — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 2 del curso Mago Fantástico: Edit Mode, vértices, aristas y caras, extrusión y loop cuts en Blender 5.2. El torso y las piernas del muñeco de bloques.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html" class="active" aria-current="page"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m1">🟦 M1 · El muñeco de bloques · Clase 02</span>
+      <h1>Dentro de la <span class="g1">malla</span></h1>
+      <p class="sub">Hasta hoy los objetos eran piezas cerradas. Hoy se abren: entramos en <strong>Edit Mode</strong> y descubrimos que todo modelo 3D es una red de vértices, aristas y caras. Con extrusión y loop cuts nace el cuerpo del <strong>muñeco de bloques</strong>: torso y piernas en una sola malla.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 6</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c02_torso_piernas_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Que el estudiante entienda y use la diferencia entre <strong>Object Mode y Edit Mode</strong>, seleccione por vértice, arista y cara, y construya con <strong>extrusión</strong> en vez de apilar primitivas. Al cerrar: el torso y las dos piernas del muñeco salen de <strong>un solo cubo</strong>, no de tres objetos. Este cambio de método — esculpir la malla en vez de amontonar piezas — es la habilidad central de todo el curso.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Toda escultura 3D es piel: por fuera parece sólida, por dentro está hueca — es una red de puntos."</p>
+          <p class="who">Metáfora nº 2 · La malla</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: un globo con forma de perro no tiene perro dentro — solo aire y una piel de goma. Los modelos 3D son iguales: el "cubo" es en realidad 8 puntos, 12 aristas y 6 caras, y dentro no hay nada. Hoy el estudiante ve esa red por primera vez y aprende a estirarla.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 10 min</h3>
+        <p><strong>Los tres ladrillos de toda malla:</strong> vértice (un punto), arista (la línea entre dos puntos), cara (el "cristal" que cierran tres o más aristas). Se dibuja en la pizarra un cubo con sus 8 vértices numerados — vale más que diez minutos de hablar.</p>
+        <p><strong>Object Mode vs Edit Mode:</strong> en Object Mode se mueven objetos enteros (la clase pasada entera fue eso); en Edit Mode se mueve <em>el interior</em> de un objeto. Misma tecla de baile: <strong>Tab</strong> para entrar y salir. Regla de oro que evita medio curso de confusiones: <em>mira la esquina superior izquierda del viewport — siempre dice en qué modo estás</em>.</p>
+        <p><strong>Extrusión:</strong> agarrar una cara y estirarla para crear geometría nueva conectada. Es la herramienta con la que se construye casi todo en box modeling. <strong>Loop cut:</strong> un corte que da la vuelta a la malla y añade un anillo de aristas — más cortes, más control.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Tab</span><span class="kf">Entrar y salir de Edit Mode</span><span class="kw">El interruptor entre "mover objetos" y "editar su interior".</span></div>
+          <div class="key"><span class="kbd">1</span><span class="kf">Seleccionar vértices (en Edit Mode)</span><span class="kw">Puntos individuales de la red.</span></div>
+          <div class="key"><span class="kbd">2</span><span class="kf">Seleccionar aristas (en Edit Mode)</span><span class="kw">Las líneas entre vértices.</span></div>
+          <div class="key"><span class="kbd">3</span><span class="kf">Seleccionar caras (en Edit Mode)</span><span class="kw">Los "cristales". El modo que más usaremos hoy.</span></div>
+          <div class="key"><span class="kbd">E</span><span class="kf">Extruir la selección</span><span class="kw">Estira caras nuevas desde las seleccionadas. La herramienta estrella del box modeling.</span></div>
+          <div class="key"><span class="kbd">Ctrl + R</span><span class="kf">Loop cut — corte en anillo</span><span class="kw">Scroll para más cortes antes de confirmar. Añade control donde hace falta.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">G</span><span class="kbd">S</span><span class="kbd">Ctrl + Z</span><span class="kf">Repaso de la clase 1</span><span class="kw">Dentro de Edit Mode funcionan igual — pero mueven vértices, no objetos.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–06</span><span><b>Autopsia del cubo.</b> Archivo nuevo, seleccionar el cubo, <b>Tab</b>. Recorrer los tres modos (1, 2, 3) seleccionando un vértice, una arista, una cara, moviéndolos con <b>G</b> y deshaciendo. Que "rompa" el cubo y lo repare con Ctrl+Z — perder el miedo primero.</span></div>
+          <div class="tl"><span class="t">06–14</span><span><b>Primera extrusión.</b> Cubo nuevo. En modo cara (3), seleccionar la cara superior y <b>E</b> para estirar hacia arriba: el torso empieza a crecer. Extrusiones cortas y controladas — mejor tres pequeñas que una gigante.</span></div>
+          <div class="tl"><span class="t">14–22</span><span><b>Dar forma al torso.</b> Con <b>S</b> sobre caras seleccionadas, estrechar la cintura y ensanchar el pecho. Orbitar después de cada cambio (metáfora nº 1 sigue viva).</span></div>
+          <div class="tl"><span class="t">22–30</span><span><b>Preparar la salida de las piernas.</b> <b>Ctrl+R</b> en la cara inferior del torso: un corte vertical que la divide en izquierda y derecha. Ahora hay dos caras abajo — una por pierna.</span></div>
+          <div class="tl"><span class="t">30–40</span><span><b>Extruir las piernas.</b> Seleccionar una cara inferior, <b>E</b> hacia abajo hasta el suelo; repetir con la otra. Ajustar grosor con <b>S</b>. El muñeco ya se sostiene: torso y piernas, <b>una sola malla</b>.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Guardar con versión.</b> <code>MF_c02_torso_piernas_v01.blend</code> en la carpeta del curso. Recordar: versión nueva cada clase, nunca sobreescribir la anterior.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Extrusión cancelada con Esc = vértices duplicados invisibles.</b> Esc cancela el movimiento pero la geometría nueva ya se creó, pegada en el mismo sitio. Detección: la malla se comporta raro al mover. Corrección hoy: Ctrl+Z. (La solución de fondo — Merge by Distance — llega en el módulo 2.)</li>
+          <li><b>Editar en el modo equivocado</b> — quiere mover un vértice y arrastra el objeto entero, o al revés. Ritual: mirar la esquina del viewport antes de tocar nada.</li>
+          <li><b>Loop cut que corta en la dirección equivocada</b> — el corte sigue al ratón: acercarse a la arista correcta hasta que la línea amarilla gire.</li>
+          <li><b>Extruir con la cara equivocada seleccionada</b> — sale un brazo del ombligo. Orbitar y comprobar la selección antes de cada E.</li>
+          <li><b>Piernas torcidas por mover "a pantalla"</b> — el mismo error de la clase 1 reaparece dentro de la malla: extrusiones y movimientos siempre con eje (E ya extruye por la normal; G+Z para ajustar).</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El torso y las dos piernas son <b>una sola malla</b> nacida de un cubo — el Outliner muestra un solo objeto.</li>
+          <li>El estudiante entra y sale de Edit Mode <b>sin pensarlo</b> y cambia entre vértice/arista/cara cuando se le pide.</li>
+          <li>Hizo al menos <b>una extrusión y un loop cut sin ayuda</b>.</li>
+          <li>Archivo guardado como <b><code>MF_c02_torso_piernas_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Quedarse en el torso: la victoria de hoy es <strong>entender Edit Mode y hacer extrusiones</strong>, no terminar las piernas. Se cierra la clase con un torso con forma y las piernas salen del checkpoint del profesor la próxima semana.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Extruir <strong>pies</strong> al final de las piernas (E hacia adelante desde la cara frontal inferior) y marcar la <strong>cintura</strong> con un loop cut horizontal extra + S. Todo con las herramientas de hoy.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c02_torso_piernas_v01.blend</code></div>
+          <small>Torso y piernas del muñeco en una sola malla limpia, con nombres correctos en el Outliner. La clase 3 puede arrancar desde aquí.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 02 · Dentro de la malla · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🦿</span>Qué construimos hoy</h3>
+        <p>El cuerpo del <strong>muñeco de bloques</strong> empieza en serio: torso y piernas, salidos de <strong>un solo cubo</strong> que estiramos desde dentro. Hoy descubres el secreto de los modelos 3D: por dentro son una red de puntos — y tú aprendes a moverla.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Tab</span><span class="kf">Entrar/salir de Edit Mode</span></div>
+          <div class="key"><span class="kbd">1</span><span class="kf">Modo vértices</span></div>
+          <div class="key"><span class="kbd">2</span><span class="kf">Modo aristas</span></div>
+          <div class="key"><span class="kbd">3</span><span class="kf">Modo caras</span></div>
+          <div class="key"><span class="kbd">E</span><span class="kf">Extruir (estirar caras nuevas)</span></div>
+          <div class="key"><span class="kbd">Ctrl + R</span><span class="kf">Loop cut (corte en anillo)</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Pista: la esquina de arriba a la izquierda del viewport siempre dice en qué modo estás. Míralo antes de tocar nada.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Entré en <b>Edit Mode</b> con Tab y volví a salir.</li>
+          <li>Seleccioné un vértice, una arista y una cara (teclas 1, 2, 3).</li>
+          <li>Rompí un cubo moviendo sus puntos… y lo arreglé con Ctrl+Z. 😎</li>
+          <li>Extruí la cara de arriba con <b>E</b> para crear el torso.</li>
+          <li>Le di forma con <b>S</b>: cintura más estrecha, pecho más ancho.</li>
+          <li>Corté la base en dos con <b>Ctrl+R</b>.</li>
+          <li>Extruí las <b>dos piernas</b> hasta el suelo.</li>
+          <li>Guardé como <b>MF_c02_torso_piernas_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Cuerpos imposibles</div>
+          <p>Con un cubo nuevo y solo <strong>E, S y Ctrl+R</strong>, construye el torso más raro que puedas: tres piernas, cintura de avispa, hombros gigantes. Vale todo — es un experimento, no el muñeco oficial.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Modela una <strong>mesa</strong> partiendo de un solo cubo: aplasta el tablero con S, corta la base con dos loop cuts en cruz (Ctrl+R) y extruye las <strong>cuatro patas</strong>. Es el mismo truco de las piernas, dos veces.</p>
+          <span class="time">≈ 15–20 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja un cubo y marca con colores sus vértices, aristas y caras — el mapa de la red que hoy aprendiste a estirar.</p>
+        <div class="draw-box"><span>Vértices · aristas · caras</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-01.html"><small>Anterior · Clase 01</small><b>← El taller 3D</b></a>
+      <a class="next" href="clase-03.html"><small>Siguiente · Clase 03</small><b>Formas con carácter →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 02 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

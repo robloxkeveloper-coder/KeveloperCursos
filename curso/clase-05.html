@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 05 · ¡A Roblox! — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 5 del curso Mago Fantástico: materiales básicos, color por parte y export FBX de Blender 5.2 a Roblox Studio. El muñeco de bloques entra a Roblox como MeshPart.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html" class="active" aria-current="page"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m1">🟦 M1 · El muñeco de bloques · Clase 05</span>
+      <h1>¡A <span class="g2">Roblox</span>!</h1>
+      <p class="sub">La clase que cierra el círculo: el muñeco recibe <strong>color por partes</strong>, se exporta como FBX y aparece <strong>dentro de Roblox Studio</strong>. Cinco semanas después de abrir Blender por primera vez, algo hecho por el estudiante vive en Roblox. Ese momento es el motor del resto del curso.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 0</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c05_muneco_final_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Cerrar la rebanada vertical del módulo 1: <strong>materiales básicos → export FBX → import en Studio → el muñeco en una experiencia</strong>. El estudiante vive el pipeline completo de punta a punta con un modelo pequeño — el mismo camino que el mago recorrerá en grande durante los módulos 2–5.</p>
+        <div class="warn hard">
+          <span class="wi" aria-hidden="true">⚠</span>
+          <p><strong>Decirlo hoy, claro y por adelantado: el muñeco entra a Roblox como <em>MeshPart</em> — un objeto 3D en la escena — NO como avatar.</strong> No tiene cuello distinto, ni los 5 componentes de cabeza, ni proporciones de humanoide: no pasa (ni intentamos que pase) Avatar Setup. El avatar de verdad es el mago, y llega en el módulo 5 cumpliendo los <a href="pipeline.html#requisitos">requisitos del pipeline</a>. Si esto no se dice hoy, el estudiante espera caminar con su muñeco — y la clase termina en decepción evitable.</p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Un artista no termina cuando modela — termina cuando su obra vive donde la gente puede verla."</p>
+          <p class="who">Metáfora nº 5 · La entrega</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: un dibujo guardado en un cajón y el mismo dibujo colgado en la pared son cosas distintas. En 3D, "colgar en la pared" se llama <em>exportar</em>: sacar la obra del taller (Blender) y llevarla al mundo (Roblox). Hoy el muñeco sale del cajón.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Material = las instrucciones de pintura de una superficie.</strong> Hoy usamos la versión más simple: un material por parte del cuerpo, cada uno con su <em>Base Color</em>. Sin texturas pintadas todavía — color plano por zonas, estilo juguete. (La pintura de verdad, con el set PBR completo, llega en el módulo 4.)</p>
+        <p><strong>Exportar = traducir.</strong> Blender habla <code>.blend</code>; Roblox entiende <strong>FBX</strong> (y GLB). Al exportar se pierde lo que Roblox no entiende (modificadores, luces) y sobrevive lo que importa: malla, UVs y materiales. Por eso el orden del <a href="pipeline.html#export">pipeline</a>: limpiar antes de traducir.</p>
+        <p><strong>MeshPart = un objeto 3D dentro de Roblox.</strong> Studio convierte el FBX importado en una MeshPart que se coloca en la escena como cualquier bloque — se escala, se ancla, se pisa. Un avatar es otra cosa: un cuerpo segmentado con esqueleto R15. Hoy: MeshPart. Módulo 5: avatar.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <p style="margin-bottom:10px"><strong>Ninguna — a propósito.</strong> Hoy se cierra el ciclo con las herramientas que ya existen. Es la primera clase "de pipeline": menos teclas, más flujo.</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">Tab</span><span class="kbd">3</span><span class="kbd">Alt + clic</span><span class="kf">Repaso</span><span class="kw">Asignar materiales se hace seleccionando caras — todo músculo de las clases 2–4.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c05_muneco_final_v01.blend</code>) y plan de la hora en voz alta: pintar por partes → exportar → importar → colocar. Hoy el muñeco viaja.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>Materiales por parte.</b> En Properties → Material: crear <code>MAT_cuerpo</code>, elegir Base Color. Añadir un segundo slot <code>MAT_cabeza</code>: en Edit Mode, seleccionar las caras de la cabeza (Alt+clic ayuda) y <b>Assign</b>. Repetir para manos o detalles. Tres o cuatro materiales bastan.</span></div>
+          <div class="tl"><span class="t">15–22</span><span><b>Limpieza pre-viaje.</b> Aplicar el Mirror (el FBX no lleva modificadores vivos), nombrar el objeto <code>Muneco</code> en el Outliner, comprobar que está centrado y sobre el suelo. Referencia rápida al <a href="pipeline.html#export">orden del pipeline</a>: esto mismo, en grande, es la clase 18.</span></div>
+          <div class="tl"><span class="t">22–30</span><span><b>Export FBX.</b> File → Export → FBX, carpeta <code>04_exports</code>, nombre <code>MF_c05_muneco.fbx</code>. Opción clave: <em>Selected Objects</em> para no llevarse cámara y luz de contrabando.</span></div>
+          <div class="tl"><span class="t">30–40</span><span><b>Import en Studio.</b> Abrir Roblox Studio (baseplate del curso) → pestaña Avatar/Model → <b>3D Importer</b> → elegir el FBX. Revisar la previsualización (malla, materiales, tamaño) e importar. El muñeco aparece en el Explorer como MeshPart — colocarlo en la escena, escalarlo, anclarlo.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>La foto de la victoria.</b> Play: el jugador camina <em>alrededor</em> del muñeco (no dentro de él — es una MeshPart, como se dijo al principio). Captura de pantalla para la carpeta <code>05_capturas</code>. Guardar el .blend y celebrar en serio: ciclo completo.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>El FBX llega gris a Studio</b> — los materiales no viajaron. Causa típica: exportar sin los materiales asignados a caras (quedaron solo creados). Volver a Blender, comprobar con Material Preview, re-exportar. Re-exportar es normal, no un desastre.</li>
+          <li><b>El muñeco llega gigante o diminuto</b> — la escala. Se ajusta en la previsualización del importador o con la herramienta Scale en Studio; la gestión fina de escala llega con el mago (clase 18).</li>
+          <li><b>Un solo brazo en Studio</b> — el Mirror no se aplicó antes de exportar. Detección inmediata en la previsualización del importador. Volver, aplicar, re-exportar.</li>
+          <li><b>Exportó la cámara y la luz</b> — olvidó <em>Selected Objects</em>. Aparecen objetos basura en el Explorer. Borrarlos o re-exportar bien.</li>
+          <li><b>"¿Y ahora cómo camino con él?"</b> — la expectativa de avatar. Si aparece, la respuesta ya se dio al abrir la clase: MeshPart hoy, avatar en el módulo 5. Reforzar sin drama: es el plan, no un fallo.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El muñeco tiene <b>al menos 3 materiales</b> asignados por caras, con colores deliberados.</li>
+          <li>Existe <b><code>MF_c05_muneco.fbx</code></b> en la carpeta <code>04_exports</code>.</li>
+          <li>El muñeco está <b>colocado en una experiencia de Studio</b> como MeshPart, con sus colores.</li>
+          <li>El estudiante puede explicar <b>por qué es MeshPart y no avatar</b> — con sus palabras.</li>
+          <li>Hay <b>captura de pantalla</b> del muñeco dentro de Roblox en <code>05_capturas</code>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>Un solo material con un buen color y directo al export: <strong>la victoria de hoy es ver el muñeco dentro de Roblox</strong>, no la paleta. Los materiales extra se añaden en 10 minutos la próxima clase desde el checkpoint del profesor.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Construirle un <strong>pedestal</strong> en Studio (Part cilíndrica + texto con su nombre) y montar una mini "sala de museo". Segundo reto: cambiar un color en Blender, re-exportar y re-importar — el ciclo de iteración completo, cronometrado.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c05_muneco_final_v01.blend</code> <span aria-hidden="true">·</span> <code>MF_c05_muneco.fbx</code></div>
+          <small>El muñeco terminado con materiales y Mirror aplicado, más su FBX exportado. Fin del arco del muñeco de bloques — el módulo 2 arranca el mago.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 05 · ¡A Roblox! · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚀</span>Qué construimos hoy</h3>
+        <p>Hoy tu muñeco <strong>viaja a Roblox</strong>. Le pintamos colores por partes, lo traducimos al idioma que Roblox entiende (FBX) y lo colocamos dentro de una experiencia de verdad. <strong>Dato importante:</strong> entra como <em>MeshPart</em> — una pieza 3D de la escena, como una estatua — no como un avatar que puedas vestir. El avatar de verdad será tu mago, más adelante, cuando cumpla todas las reglas de Roblox.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px"><strong>¡Cero teclas nuevas!</strong> Hoy se juega con todo lo que ya sabes. Repaso rápido:</p>
+        <div class="keys review">
+          <div class="key"><span class="kbd">Tab</span><span class="kf">Edit Mode</span></div>
+          <div class="key"><span class="kbd">3</span><span class="kf">Modo caras (para asignar colores)</span></div>
+          <div class="key"><span class="kbd">Alt + clic</span><span class="kf">Seleccionar anillos enteros</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c05) antes de empezar.</li>
+          <li>Creé un material para el <b>cuerpo</b> y elegí su color.</li>
+          <li>Creé más materiales (cabeza, manos…) y los <b>asigné a sus caras</b>.</li>
+          <li>Apliqué el <b>Mirror</b> y le puse nombre al objeto: <code>Muneco</code>.</li>
+          <li>Exporté el <b>FBX</b> a mi carpeta 04_exports (con <em>Selected Objects</em> ✔).</li>
+          <li>Lo importé en Studio con el <b>3D Importer</b> y revisé la previsualización.</li>
+          <li>Coloqué mi muñeco en la escena, le di <b>Play</b> y caminé a su alrededor.</li>
+          <li>Tomé la <b>captura de la victoria</b> 📸 y la guardé en 05_capturas.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Sala de museo</div>
+          <p>En Studio, constrúyele a tu muñeco un <strong>pedestal de museo</strong> con Parts: base, cartelito con su nombre y —si te animas— un foco de luz. Tu primera obra merece su sala.</p>
+          <span class="time">+10 min si hay tiempo en clase, o en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Enséñale tu muñeco dentro de Roblox a <strong>alguien de tu casa</strong> y cuéntale el viaje completo: "lo modelé, lo desplegué, lo pinté y lo exporté". Y trae para la próxima clase <strong>ideas de magos</strong>: películas, juegos, libros — empezamos a diseñar el tuyo.</p>
+          <span class="time">≈ 10 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">El módulo que viene diseñamos tu mago. Dibuja aquí tu primera idea — sombrero, túnica, varita, lo que se te ocurra. No es el definitivo: es la semilla.</p>
+        <div class="draw-box"><span>Mi primera idea del mago</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-04.html"><small>Anterior · Clase 04</small><b>← El desplegado</b></a>
+      <a class="next" href="clase-06.html"><small>Siguiente · Clase 06</small><b>El mago en papel →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 05 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

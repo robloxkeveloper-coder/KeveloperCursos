@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 15 · UVs del mago — Curso Mago Fantástico</title>
+<meta name="description" content="Clase 15 del curso Mago Fantástico: seams en superficies orgánicas, texel density y packing del mago completo en Blender 5.2. El cuerpo en un solo tile 0–1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css?v=1">
+</head>
+<body class="clase">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+<button class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🧙</div>
+      <div><b>Mago Fantástico</b><span>Blender → Roblox · 20 clases</span></div>
+    </div>
+    <a class="back-link" href="index.html">← Mapa del curso</a>
+    <nav class="nav" aria-label="Navegación del curso">
+      <div class="nav-group">
+        <div class="gt">Referencia</div>
+        <a href="pipeline.html"><span class="ic">⚙</span>Pipeline técnico</a>
+        <a href="hotkeys.html"><span class="ic">⌨</span>Tarjeta de hotkeys</a>
+        <a href="recursos.html"><span class="ic">📦</span>Recursos del curso</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M1 · El muñeco de bloques</div>
+        <a href="clase-01.html"><span class="ic">01</span>El taller 3D</a>
+        <a href="clase-02.html"><span class="ic">02</span>Dentro de la malla</a>
+        <a href="clase-03.html"><span class="ic">03</span>Formas con carácter</a>
+        <a href="clase-04.html"><span class="ic">04</span>El desplegado</a>
+        <a href="clase-05.html"><span class="ic">05</span>¡A Roblox!</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M2 · Cuerpo del mago</div>
+        <a href="clase-06.html"><span class="ic">06</span>El mago en papel</a>
+        <a href="clase-07.html"><span class="ic">07</span>Torso y piernas</a>
+        <a href="clase-08.html"><span class="ic">08</span>Brazos, manos y cuello</a>
+        <a href="clase-09.html"><span class="ic">09</span>La cabeza I</a>
+        <a href="clase-10.html"><span class="ic">10</span>La cabeza II</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M3 · Accesorios y ropa</div>
+        <a href="clase-11.html"><span class="ic">11</span>Sombrero, pelo y barba</a>
+        <a href="clase-12.html"><span class="ic">12</span>La varita</a>
+        <a href="clase-13.html"><span class="ic">13</span>La túnica</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M4 · Detalle y texturas</div>
+        <a href="clase-14.html"><span class="ic">14</span>High poly y sculpt</a>
+        <a href="clase-15.html" class="active" aria-current="page"><span class="ic">15</span>UVs del mago</a>
+        <a href="clase-16.html"><span class="ic">16</span>El bake</a>
+        <a href="clase-17.html"><span class="ic">17</span>PBR completo</a>
+      </div>
+      <div class="nav-group">
+        <div class="gt">M5 · Del taller a Roblox</div>
+        <a href="clase-18.html"><span class="ic">18</span>Optimización</a>
+        <a href="clase-19.html"><span class="ic">19</span>Avatar Setup</a>
+        <a href="clase-20.html"><span class="ic">20</span>Avatar jugable</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" id="contenido">
+    <header class="hero">
+      <span class="kicker k-m4">🟧 M4 · Detalle y texturas · Clase 15</span>
+      <h1>UVs del <span class="g2">mago</span></h1>
+      <p class="sub">Lo aprendido en la clase 4 con el muñeco de bloques, ahora en versión profesional: <strong>costuras en superficies orgánicas</strong>, todas las islas del cuerpo empacadas en <strong>un solo tile 0–1</strong>, y un concepto nuevo con nombre elegante — <strong>texel density</strong>: que cada centímetro del mago reciba su parte justa de píxeles.</p>
+      <div class="meta-row">
+        <span class="meta-chip"><span class="mono">Duración</span> 60 min</span>
+        <span class="meta-chip"><span class="mono">Hotkeys nuevas</span> 1</span>
+        <span class="meta-chip"><span class="mono">Checkpoint</span> MF_c15_mago_uv_v01.blend</span>
+      </div>
+    </header>
+
+    <!-- ================= GUÍA DEL PROFESOR ================= -->
+    <section class="guia-prof" aria-labelledby="h-prof">
+      <div class="sec-head"><span class="num">🧑‍🏫</span><h2 id="h-prof">Guía del profesor</h2><div class="line"></div></div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎯</span>Objetivo</h3>
+        <p>Desplegar <strong>el mago completo</strong>: cuerpo (con su cabeza y componentes) en un tile, accesorios y túnica en otro. Sin estiramientos (checker uniforme), sin solapes, con las islas importantes — la cara — recibiendo más espacio. La razón del tile único del cuerpo viene del <a href="pipeline.html#texturas">pipeline</a>: si hay varios mapas, Avatar Setup los combina en uno — mejor empacar bien nosotros que dejar que la máquina lo haga a ciegas.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧠</span>Mentalidad de Artista 3D · 5 min</h3>
+        <div class="mindset">
+          <p class="q">"Un buen desplegado es una maleta bien hecha: todo cabe si cada cosa tiene su sitio — y lo importante viaja arriba."</p>
+          <p class="who">Metáfora nº 15 · La maleta</p>
+        </div>
+        <p style="margin-top:12px">Conversación de arranque: en una maleta caben más cosas de las que parece — si doblas bien, aprovechas esquinas y pones lo delicado donde no se aplaste. El tile 0–1 es la maleta del mago: 1024×1024 píxeles, ni uno más. Lo que desperdicies en huecos, se lo robas a la cara de tu personaje.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">📚</span>Teoría · 8 min</h3>
+        <p><strong>Seams en orgánico:</strong> el muñeco tenía esquinas que pedían corte; el mago tiene curvas. Las reglas del sastre siguen: costuras donde no se ven (interior de piernas y brazos, nuca, axilas) y donde la superficie "cambia de material" (muñeca, tobillo, cuello de la túnica). La cabeza: un corte trasero de nuca a coronilla, y las bolsas internas se despliegan aparte — nadie las verá, pueden ser pequeñas.</p>
+        <p><strong>Texel density:</strong> el tamaño relativo de las islas decide cuántos píxeles recibe cada zona. Regla del curso: <em>la cara al doble de densidad que el resto</em> — es donde se mira. Las plantas de los pies y las bolsas internas, al mínimo. Se ve fácil con el checker: cuadrados más pequeños = más píxeles.</p>
+        <p><strong>Packing:</strong> Blender ayuda (UV → Pack Islands, con margen), pero el criterio es humano: rotar islas para encajar, agrupar lo que se pintará junto, dejar 2–4 px de margen para que la pintura no "sangre" entre islas.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Hotkeys nuevas</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + Space</span><span class="kf">Maximizar el editor bajo el cursor</span><span class="kw">El UV Editor a pantalla completa para el trabajo fino; otra vez para volver.</span></div>
+        </div>
+        <div class="keys review" style="margin-top:10px">
+          <div class="key"><span class="kbd">Ctrl + E</span><span class="kbd">U</span><span class="kbd">L</span><span class="kf">Repaso</span><span class="kw">Las teclas de la clase 4 — y L en el UV Editor selecciona la isla entera bajo el cursor.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🛠</span>Práctica guiada · 40 min</h3>
+        <div class="timeline">
+          <div class="tl"><span class="t">00–05</span><span><b>Versión nueva</b> (<code>MF_c15_mago_uv_v01.blend</code>), workspace UV Editing, checker montado en el cuerpo desde el principio — el detector encendido antes de cortar.</span></div>
+          <div class="tl"><span class="t">05–15</span><span><b>Costuras del cuerpo.</b> Modo arista, Alt+clic por los caminos escondidos: interior de piernas, bajo los brazos, contorno de muñecas y tobillos. La nuca: corte vertical hasta la coronilla. Cada seam se justifica: "¿quién la vería?".</span></div>
+          <div class="tl"><span class="t">15–24</span><span><b>Unwrap y diagnóstico.</b> U → Unwrap del cuerpo completo. En el UV Editor (a pantalla completa con <b>Ctrl+Space</b>): nombrar las islas juntos, cazar estiramientos con el checker, corregir la seam culpable y re-desplegar. Iterar es el oficio.</span></div>
+          <div class="tl"><span class="t">24–32</span><span><b>Texel density con intención.</b> Con <b>L</b> sobre la isla de la cara: escalarla ×2 (los cuadrados del checker se encogen — más píxeles). Encoger las bolsas internas y plantas de los pies. El mago ahora "gasta" sus píxeles donde importa.</span></div>
+          <div class="tl"><span class="t">32–40</span><span><b>La maleta.</b> UV → Pack Islands con margen 0.02. Revisar el resultado y mejorar a mano: rotar la isla de la túnica para aprovechar la esquina, juntar las islas de la cara y la cabeza. Repetir el proceso (rápido) para los accesorios en su propio tile compartido.</span></div>
+          <div class="tl"><span class="t">40–45</span><span><b>Checklist de cierre:</b> checker uniforme en todo, cero solapes (UV → Select Overlap: nada), cara al doble de densidad, margen entre islas. Guardar. El mago está listo para recibir pintura y fotografías de detalle.</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🚫</span>Errores comunes y cómo detectarlos</h3>
+        <ul class="blist err">
+          <li><b>Seams visibles en primer plano</b> — un corte cruzando la frente o el pecho. La textura mostrará una cicatriz ahí para siempre. Los caminos escondidos existen; usarlos.</li>
+          <li><b>Islas solapadas tras el packing manual</b> — dos zonas se pintarán a la vez. Detección oficial: UV → Select Overlap antes de guardar, siempre.</li>
+          <li><b>Toda la densidad igual</b> — la cara del mago con los mismos píxeles que la planta del pie. Técnicamente correcto, artísticamente un desperdicio.</li>
+          <li><b>Olvidar las bolsas internas</b> — sin desplegar, el bake y la pintura de ojos y dientes fallarán en silencio. Pequeñas pero presentes en el tile.</li>
+          <li><b>Packing sin margen</b> — al pintar, el color de una isla sangra a la vecina en los mipmaps. 2–4 px de margen es la vacuna.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✅</span>Criterio de "listo"</h3>
+        <ul class="eval">
+          <li>El <b>cuerpo completo</b> (cabeza y componentes incluidos) vive en <b>un solo tile 0–1</b> sin solapes.</li>
+          <li>El checker se ve <b>uniforme</b> en todas las superficies visibles.</li>
+          <li>La <b>cara tiene el doble de densidad</b> y las zonas ocultas, el mínimo.</li>
+          <li>Los accesorios + túnica están desplegados en su <b>tile compartido</b>.</li>
+          <li>Archivo guardado como <b><code>MF_c15_mago_uv_v01.blend</code></b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🔀</span>Plan B</h3>
+        <div class="loot">
+          <div class="lbox slow">
+            <div class="lh">🐢 Si va lento</div>
+            <p>El <strong>cuerpo</strong> es la prioridad — es el que Avatar Setup exige con textura. Los accesorios pueden salir con Smart UV Project (automático, decente para piezas simples) o del checkpoint del profesor. La densidad de la cara no se sacrifica.</p>
+          </div>
+          <div class="lbox mini">
+            <div class="lh">🚀 Si va rápido</div>
+            <p>Refinar como un pro: alinear las islas de las piernas en vertical (la textura de tela rayada del futuro lo agradecerá), enderezar la isla del cinturón con UV → Straighten, y auditar la maleta: ¿qué porcentaje del tile está vacío? Menos de 25 % es nota alta.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">💾</span>Checkpoint de la clase</h3>
+        <div class="checkpoint">
+          <div class="ci" aria-hidden="true">💾</div>
+          <div><b>Se entrega al cerrar:</b> <code>MF_c15_mago_uv_v01.blend</code></div>
+          <small>Mago completo desplegado: cuerpo en su tile, accesorios en el suyo, densidades con intención. Listo para el bake (16) y la pintura (17).</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOJA DEL ESTUDIANTE ================= -->
+    <section class="hoja-est" aria-labelledby="h-est">
+      <div class="hoja-head">
+        <div class="hi" aria-hidden="true">🎒</div>
+        <div>
+          <h2 id="h-est">Hoja del estudiante</h2>
+          <p class="h-sub">Clase 15 · UVs del mago · <span class="mono">Curso Mago Fantástico</span></p>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🧳</span>Qué construimos hoy</h3>
+        <p>El desplegado del proyecto grande: tu mago entero, aplanado y empacado en su "maleta" de píxeles. Aprendes dónde esconden las costuras los profesionales (interior de las piernas, la nuca…) y el truco de darle a la <strong>cara el doble de píxeles</strong> — porque es donde todos miran.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">⌨</span>Tus teclas de hoy</h3>
+        <div class="keys">
+          <div class="key"><span class="kbd">Ctrl + Space</span><span class="kf">Editor a pantalla completa</span></div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-dim)">Y una vieja conocida con oficio nuevo: <strong>L</strong> en el UV Editor selecciona una <em>isla entera</em>. Perfecta para agarrar la cara y agrandarla.</p>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">☑</span>Checklist de pasos</h3>
+        <ul class="check">
+          <li>Guardé la <b>versión nueva</b> (c15) y monté el checker de detective.</li>
+          <li>Marqué costuras <b>donde no se ven</b>: piernas por dentro, axilas, nuca.</li>
+          <li>Desplegué el cuerpo con <b>U → Unwrap</b> y nombré mis islas.</li>
+          <li>Cacé estiramientos con el checker y <b>corregí seams</b> (iterar es normal).</li>
+          <li>Agrandé la isla de la <b>cara ×2</b> — más píxeles donde más se mira.</li>
+          <li>Empaqué la maleta con <b>Pack Islands</b> y la mejoré a mano.</li>
+          <li>Pasé el detector de solapes: <b>cero</b>. ✔</li>
+          <li>Desplegué los accesorios en su propio tile y guardé <b>MF_c15_mago_uv_v01.blend</b>.</li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🎲</span>Desafío creativo</h3>
+        <div class="lbox chal">
+          <div class="lh">⭐ Tetris de islas</div>
+          <p>Mira tu tile terminado: ¿cuánto espacio vacío queda? Juega 5 minutos de Tetris real — rota y reacomoda islas para bajar el desperdicio. Cada hueco que rellenas son píxeles que regalas a tu mago.</p>
+          <span class="time">+5–10 min si hay tiempo en clase</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">🏠</span>Tarea</h3>
+        <div class="lbox home">
+          <div class="lh">📬 Para la semana</div>
+          <p>Mira una <strong>camiseta tuya del revés</strong>: encuentra todas sus costuras y fíjate dónde las escondió el fabricante. ¿Coinciden con donde tú cortaste a tu mago? Los sastres y los artistas 3D piensan igual.</p>
+          <span class="time">≈ 5 min en casa</span>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h3 class="blk-title"><span class="ic" aria-hidden="true">✏️</span>Espacio para dibujar</h3>
+        <p style="font-size:13px">Dibuja tu tile 0–1 como lo dejaste: el mapa de islas de tu mago, con la cara bien grande. Es la radiografía de tu personaje.</p>
+        <div class="draw-box"><span>La maleta de mi mago</span></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Clases anterior y siguiente">
+      <a href="clase-14.html"><small>Anterior · Clase 14</small><b>← High poly y sculpt</b></a>
+      <a class="next" href="clase-16.html"><small>Siguiente · Clase 16</small><b>El bake →</b></a>
+    </nav>
+
+    <footer class="foot">
+      <p><b>Clase 15 · Curso Mago Fantástico.</b> Los límites técnicos del curso viven en el <a href="pipeline.html">pipeline técnico</a>. Todas las teclas, en la <a href="hotkeys.html">tarjeta de hotkeys</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),sb=document.getElementById('sidebar'),sc=document.getElementById('scrim');
+  if(!btn||!sb||!sc)return;
+  function close(){sb.classList.remove('open');sc.classList.remove('show');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){
+    var open=sb.classList.toggle('open');
+    sc.classList.toggle('show',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  sc.addEventListener('click',close);
+  sb.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programa del curso · Mago Fantástico — Blender a Roblox</title>
+<meta name="description" content="El programa completo, módulo a módulo: 20 clases 1 a 1 donde tu hijo pasa de cero Blender a un avatar mago jugable dentro de Roblox. Clase de prueba gratis.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Programa del curso Mago Fantástico — de cero Blender a un avatar en Roblox">
+<meta property="og:description" content="20 clases, 5 módulos, 1 a 1. Al primer mes su creación ya vive dentro de Roblox; al final, un avatar mago completo hecho por él. Mira el programa clase a clase.">
+<meta property="og:url" content="https://robloxkeveloper-coder.github.io/KeveloperCursos/programa.html">
+<meta property="og:image" content="https://robloxkeveloper-coder.github.io/KeveloperCursos/assets/render-akari-1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   programa.html — funnel del programa del curso.
+   Lenguaje visual de index.html (tokens copiados verbatim de su :root).
+   MOBILE-FIRST: estilos base = teléfono; los @media (min-width:…) escalan.
+   ========================================================================== */
+:root{
+  --bg:#f5f5fc;
+  --card:#ffffff; --card-soft:#faf9ff;
+  --border:#e5e3f4; --border-strong:#d5d1ec;
+  --lav-100:#e7e6fd; --lav-300:#c9c5f2; --peri:#6366F1; --indigo:#5A54C9; --plum:#6D28D9;
+  --vio:#6366F1; --vio-2:#8B5CF6; --mag:#D946EF;
+  --cyanl:#38BDF8; --greenl:#34D399;
+  --navy:#16112B; --navy-2:#221B3F;
+  --ink:#1d1836; --body-c:#4a4568; --mute:#7b76a0;
+  --grad-peri:linear-gradient(135deg,#6366F1,#8B5CF6);
+  --grad-deep:linear-gradient(160deg,#221B3F,#16112B);
+  --grad-lime:linear-gradient(135deg,#38BDF8,#34D399);
+  --grad-text:linear-gradient(120deg,#6366F1,#8B5CF6);
+  --grad-iri:linear-gradient(110deg,#38BDF8,#8B5CF6,#D946EF,#34D399,#38BDF8);
+  --iri:0%;
+  --shadow:0 10px 30px -12px rgba(109,40,217,.22);
+  --radius:16px; --nav-h:60px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Noto Sans',system-ui,sans-serif;color:var(--body-c);line-height:1.45;
+  font-size:16px;min-height:100vh;overflow-x:hidden;
+  background:
+    radial-gradient(900px 520px at 88% -6%, rgba(139,92,246,.20), transparent 65%),
+    radial-gradient(700px 480px at -10% 30%, rgba(56,189,248,.12), transparent 60%),
+    var(--bg);
+}
+::selection{background:var(--vio);color:#fff}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{color:var(--ink)}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 18px;position:relative;z-index:1}
+
+/* ---------- NAV (base: móvil) ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;min-height:var(--nav-h);z-index:40;
+  display:flex;align-items:center;transition:.28s;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+}
+.nav.scrolled{box-shadow:0 4px 18px rgba(86,84,113,.14)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand .logo-img{
+  width:44px;height:44px;flex:0 0 44px;object-fit:contain;
+  filter:drop-shadow(0 4px 10px rgba(99,102,241,.5));
+}
+.brand .wordmark{
+  font-weight:800;font-size:16px;line-height:1.1;letter-spacing:1.2px;color:var(--indigo);
+  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.brand span{display:block;font-size:8.5px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+@media (min-width:768px){.brand span{font-size:9.5px;letter-spacing:1.2px}}
+.nav-burger{
+  display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;
+  border:none;background:none;cursor:pointer;color:var(--ink);border-radius:12px;transition:.18s;
+}
+.nav-burger:hover{background:#efeefb}
+.nav-burger svg{width:24px;height:24px}
+.nav-links{
+  display:none;position:absolute;top:100%;left:0;right:0;
+  flex-direction:column;gap:2px;padding:10px 18px 16px;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);box-shadow:0 14px 26px -14px rgba(34,27,63,.35);
+}
+.nav.open .nav-links{display:flex}
+.nav-links a{font-size:14px;font-weight:700;color:var(--body-c);padding:12px;border-radius:10px;transition:.15s;min-height:44px;display:flex;align-items:center}
+.nav-links a:hover{color:var(--ink);background:#efeefb}
+.nav-links a.active{color:var(--indigo);background:#efeefb}
+
+/* ---------- BOTONES ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;
+  padding:13px 20px;border-radius:100px;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s;
+  font-family:inherit;line-height:1.15;text-align:center;min-height:44px;
+}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--border-strong)}
+.btn.ghost:hover{border-color:var(--indigo);transform:translateY(-2px)}
+.btn.cta{
+  background:var(--grad-lime);color:var(--navy);font-weight:800;font-size:16px;
+  padding:17px 26px;letter-spacing:.2px;
+  box-shadow:0 12px 28px -12px rgba(56,189,248,.85);
+}
+.btn.cta:hover{transform:translateY(-3px);box-shadow:0 18px 36px -12px rgba(52,211,153,.9);filter:saturate(1.08)}
+.btn.cta:active{transform:translateY(-1px)}
+.btn.cta:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
+.btn.cta .wa-ico{width:22px;height:22px;flex:0 0 22px}
+.wa-ico{width:20px;height:20px;flex:0 0 20px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--indigo);outline-offset:2px;border-radius:8px}
+
+/* ---------- HERO ---------- */
+.hero{padding:calc(var(--nav-h) + 34px) 0 8px;overflow:hidden}
+.hero-grid{display:flex;flex-direction:column;gap:26px;padding-bottom:36px}
+.hero .kick{display:inline-block;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--indigo);background:var(--lav-100);border:1px solid var(--lav-300);padding:7px 14px;border-radius:100px;margin-bottom:16px}
+.hero h1{font-weight:500;line-height:1.14;letter-spacing:-.4px;font-size:clamp(25px,6.8vw,34px);color:var(--ink)}
+.hero h1 .g1,.hero h1 .g2{
+  font-weight:700;color:var(--indigo);
+  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p.sub{font-size:16px;color:var(--body-c);margin-top:16px;font-weight:500}
+.hero p.sub b{color:var(--ink)}
+.hero-cta{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.hero-cta .btn{width:auto;align-self:center}
+.cta-lead{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.2px;flex-basis:100%;text-align:center}
+.cta-lead .hl{font-weight:800}
+/* chips de logística del programa */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;
+  font-size:13px;font-weight:700;color:var(--ink);
+  background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:9px 16px;box-shadow:0 2px 10px rgba(86,84,113,.06);
+}
+.chip .e{font-size:16px}
+
+/* ---------- SECCIONES ---------- */
+section{padding:44px 0}
+section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sec-tag{
+  display:block;font-size:clamp(19px,5.2vw,25px);font-weight:800;text-transform:uppercase;
+  letter-spacing:1px;line-height:1.05;color:var(--ink);margin-bottom:10px;
+}
+.sec-tag .hl{
+  color:var(--indigo);
+  background:var(--grad-iri);background-size:250% 100%;background-position:var(--iri) 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sec-h{font-size:clamp(16.5px,4.3vw,20px);font-weight:600;line-height:1.35;letter-spacing:-.1px;color:var(--ink)}
+.sec-h .hl{font-weight:800}
+.sec-intro{color:var(--body-c);margin-top:12px;font-weight:500;font-size:14.5px}
+
+/* ---------- CARDS ---------- */
+.grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.18s;box-shadow:0 2px 10px rgba(86,84,113,.06)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong)}
+.card .badge{font-size:30px;line-height:1;margin-bottom:12px}
+.card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
+.card p{font-size:14px;color:var(--body-c)}
+.card.row{display:flex;gap:13px;align-items:flex-start}
+.card.row .badge{margin-bottom:0;font-size:26px;line-height:1.3;flex:0 0 40px;width:40px;text-align:center}
+
+/* ---------- EL VIAJE EN 2 ACTOS ---------- */
+.acto{position:relative;overflow:hidden}
+.acto::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--grad-lime)}
+.acto.dos::before{background:var(--grad-peri)}
+.acto .lbl{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--indigo);margin-bottom:8px}
+.acto h3{font-size:18px}
+.acto .win{
+  margin-top:14px;display:flex;gap:10px;align-items:flex-start;
+  background:var(--card-soft);border:1px solid var(--border);border-radius:12px;padding:12px 14px;
+  font-size:13.5px;color:var(--body-c);
+}
+.acto .win b{color:var(--ink)}
+.acto .win .e{font-size:18px;flex:0 0 auto;line-height:1.4}
+
+/* ---------- MÓDULOS ---------- */
+.modcard{position:relative;overflow:hidden;padding-left:24px}
+.modcard::before{content:"";position:absolute;inset:0 auto 0 0;width:5px}
+.modcard.m1::before{background:linear-gradient(#38BDF8,#34D399)}
+.modcard.m2::before{background:linear-gradient(#6366F1,#8B5CF6)}
+.modcard.m3::before{background:linear-gradient(#D946EF,#8B5CF6)}
+.modcard.m4::before{background:linear-gradient(#F59E0B,#D946EF)}
+.modcard.m5::before{background:linear-gradient(#34D399,#6366F1)}
+.modcard .mnum{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--mute)}
+.modcard .mnum b{color:var(--indigo)}
+.modcard h3{margin-top:4px}
+.modcard ul{list-style:none;display:grid;gap:7px;margin-top:12px}
+.modcard ul li{position:relative;padding-left:20px;font-size:13.5px;color:var(--body-c)}
+.modcard ul li::before{content:"◆";position:absolute;left:0;top:4px;font-size:9px;color:var(--vio-2)}
+.modcard .fruto{
+  margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:800;color:var(--ink);
+  background:var(--lav-100);border:1px solid var(--lav-300);border-radius:100px;padding:7px 14px;
+}
+
+/* ---------- CHECKLIST (lo que se lleva) ---------- */
+.check{list-style:none;display:grid;gap:11px;margin-top:20px}
+.check li{display:block;position:relative;padding-left:33px;font-size:14.5px;color:var(--body-c)}
+.check li::before{content:"✓";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--grad-peri);color:#fff}
+.check li b{color:var(--ink)}
+.sec-dark{background:var(--grad-deep)}
+.sec-dark .sec-tag,.sec-dark .sec-h,.sec-dark .sec-h .hl{color:#fff}
+.sec-dark .sec-intro,.sec-dark .check li{color:var(--lav-300)}
+.sec-dark .check li b{color:#fff}
+.sec-dark .fine-note{margin-top:18px;font-size:12.5px;color:#9a96b8;font-weight:600}
+
+/* ---------- FAQ ---------- */
+.faq-list{display:grid;gap:12px;margin-top:26px}
+.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s}
+.qa[open]{border-color:var(--peri);box-shadow:0 6px 18px rgba(132,136,181,.2)}
+.qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .plus{flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:16px;font-weight:800;background:var(--grad-peri);color:#fff;transition:.2s}
+.qa[open] summary .plus{transform:rotate(45deg)}
+.qa .a{padding:0 18px 18px;color:var(--body-c);font-size:14px}
+.qa .a b{color:var(--ink)}
+
+/* ---------- CTA FINAL ---------- */
+.cta-final{
+  position:relative;text-align:center;border-radius:24px;padding:38px 22px;overflow:hidden;
+  background:var(--grad-deep);
+  box-shadow:0 24px 50px -18px rgba(30,27,46,.55);
+}
+.cta-final::before{
+  content:"";position:absolute;inset:auto -20% -60% -20%;height:120%;pointer-events:none;
+  background:radial-gradient(closest-side, rgba(132,136,181,.45), transparent 70%);
+}
+.cta-final > *{position:relative}
+.cta-final h2{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.4px;color:#fff}
+.cta-final p{color:#c9c6dd;margin:14px auto 26px;font-weight:600;font-size:16px;max-width:520px}
+.cta-final .btn{width:100%;max-width:420px;margin:0 auto}
+.cta-final .fine{margin-top:16px;font-size:12.5px;color:#9a96b8;font-weight:600}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--navy);padding:28px 0 40px;color:#b5b2c9;font-size:13px}
+.foot .wrap{display:flex;flex-direction:column;gap:14px;text-align:center}
+.foot a{color:#dcdaec;font-weight:600}
+.foot a:hover{color:var(--greenl)}
+.foot .flinks{display:flex;gap:20px;justify-content:center}
+
+/* ---------- FLOATING WA ---------- */
+.wa-float{
+  position:fixed;bottom:18px;right:14px;z-index:50;width:56px;height:56px;border-radius:50%;
+  background:var(--grad-lime);display:grid;place-items:center;
+  box-shadow:0 14px 30px -8px rgba(56,189,248,.65);animation:pulse 2.6s infinite;transition:transform .2s;
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:28px;height:28px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 15px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+
+/* ---------- ONDA (patrón de index: anillo en ::after, crece por spread) ---------- */
+@keyframes wave{
+  0%  {box-shadow:0 0 0 0                  var(--wave)}
+  70% {box-shadow:0 0 0 var(--wave-r,14px) transparent}
+  100%{box-shadow:0 0 0 0                  transparent}
+}
+.btn.cta,.qa summary .plus{position:relative}
+.btn.cta::after,.qa summary .plus::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+}
+.btn.cta{--wave:rgba(52,211,153,.5)}
+.qa summary .plus{--wave:rgba(99,102,241,.45);--wave-r:8px}
+.btn.cta::after{animation:wave 2.6s infinite}
+.qa summary:hover .plus::after,
+.qa summary:focus-visible .plus::after{animation:wave 2.6s infinite}
+
+/* ---------- SCROLL REVEAL (solo bajo html.js) ---------- */
+html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+html.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- TABLET 768+ ---------- */
+@media (min-width:768px){
+  .wrap{padding:0 32px}
+  :root{--nav-h:66px}
+  .hero p.sub{font-size:17.5px;max-width:600px}
+  .hero-cta{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+  .hero-cta .btn{align-self:auto}
+  .cta-lead{text-align:left}
+  .grid.g2{grid-template-columns:repeat(2,1fr)}
+  .grid.g3{grid-template-columns:repeat(2,1fr)}
+  .cta-final{padding:52px 40px}
+  .foot .wrap{flex-direction:row;justify-content:space-between;text-align:left}
+}
+
+/* ---------- ESCRITORIO 1024+ ---------- */
+@media (min-width:1024px){
+  .wrap{padding:0 40px}
+  .nav-burger{display:none}
+  .nav-links{
+    display:flex;position:static;flex-direction:row;gap:4px;padding:0;
+    background:none;border:none;box-shadow:none;backdrop-filter:none;
+  }
+  .nav-links a{font-size:13.5px;padding:9px 12px;white-space:nowrap}
+  .wa-float{bottom:18px;right:18px}
+  .hero{padding:calc(var(--nav-h) + 54px) 0 8px}
+  .hero h1{font-size:clamp(32px,3.4vw,44px);letter-spacing:-.7px}
+  .sec-h{font-size:clamp(18px,1.7vw,21px);max-width:760px}
+  .sec-intro{max-width:640px}
+  section{padding:64px 0}
+  .grid.g3{grid-template-columns:repeat(3,1fr)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  /* los pseudo-elementos hacen falta explícitos: `*` no los alcanza, y la onda vive en ::after */
+  *,*::before,*::after{scroll-behavior:auto !important;animation:none !important}
+  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+}
+</style>
+<script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img class="logo-img" src="assets/logo-keveloper.png" alt="Logo Keveloper" width="44" height="44">
+      <div><b class="wordmark">KEVELOPER ACADEMY</b><span>Programa del curso · Mago Fantástico</span></div>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Secciones de la página">
+      <a href="#top" class="active">Programa</a>
+      <a href="#viaje">El viaje</a>
+      <a href="#modulos">Los 5 módulos</a>
+      <a href="#metodo-clase">Cada clase</a>
+      <a href="#final">El resultado</a>
+      <a href="index.html">← Página principal</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="kick">🧙 El programa, clase por clase</span>
+        <h1>De cero <span class="g1">Blender</span> a su propio <span class="g2">avatar en Roblox</span> — en 20 clases</h1>
+        <p class="sub">Este es el mapa completo del curso <b>Mago Fantástico</b>: qué construye tu hijo cada semana, con qué método y qué se lleva al final. <b>1 a 1, una hora semanal, cinco meses</b> — y su primera creación vive dentro de Roblox al terminar el primer mes.</p>
+        <div class="chips">
+          <span class="chip"><span class="e" aria-hidden="true">📅</span>20 clases · 1 h semanal</span>
+          <span class="chip"><span class="e" aria-hidden="true">🧒</span>10–14 años · sin experiencia</span>
+          <span class="chip"><span class="e" aria-hidden="true">👨‍🏫</span>Atención 1 a 1</span>
+          <span class="chip"><span class="e" aria-hidden="true">💻</span>PC de gama media · Blender es gratis</span>
+        </div>
+        <div class="hero-cta">
+          <div class="cta-lead">Pruébalo antes de decidir: <span class="hl">la primera clase es gratis</span></div>
+          <a href="#" class="btn cta js-wa">
+            <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+            Agendar la clase de prueba
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL VIAJE EN 2 ACTOS ============ -->
+<section id="viaje" class="alt">
+  <div class="wrap">
+    <h2 class="sec-tag reveal">Un curso, <span class="hl">dos victorias</span></h2>
+    <p class="sec-h reveal">El programa está diseñado para que el resultado llegue <span class="hl">pronto</span> — no al final de cinco meses.</p>
+    <div class="grid g2">
+      <div class="card acto reveal">
+        <div class="lbl">Acto 1 · Mes 1</div>
+        <h3>El muñeco de bloques 🤖</h3>
+        <p>En las primeras 5 clases tu hijo recorre el ciclo completo de un artista 3D con un proyecto pequeño: modela una figura articulada, la despliega, la pinta y la exporta. Aprende las bases sin enterarse de que son "las bases".</p>
+        <div class="win"><span class="e" aria-hidden="true">🏆</span><div><b>Victoria al primer mes:</b> su creación aparece dentro de Roblox Studio, hecha por él de principio a fin. Ese momento cambia cómo ve el resto del curso.</div></div>
+      </div>
+      <div class="card acto dos reveal">
+        <div class="lbl">Acto 2 · Meses 2–5</div>
+        <h3>El mago fantástico 🧙</h3>
+        <p>El proyecto grande: un personaje mago diseñado por él en papel y construido pieza a pieza — cuerpo, sombrero, barba, varita con gemas, túnica y texturas — cumpliendo las reglas oficiales que Roblox exige a los avatares de verdad.</p>
+        <div class="win"><span class="e" aria-hidden="true">🏆</span><div><b>Victoria final:</b> el mago se convierte en un <b>avatar jugable</b>: camina, salta y brilla dentro de su propia experiencia de Roblox.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOS 5 MÓDULOS ============ -->
+<section id="modulos">
+  <div class="wrap">
+    <h2 class="sec-tag reveal">Los <span class="hl">5 módulos</span>, sin letra pequeña</h2>
+    <p class="sec-h reveal">Cada módulo termina con algo <span class="hl">terminado</span> que se puede enseñar — no con "vamos por la mitad".</p>
+    <div class="grid g2">
+
+      <div class="card modcard m1 reveal">
+        <div class="mnum"><b>Módulo 1</b> · Clases 1–5</div>
+        <h3>El muñeco de bloques</h3>
+        <ul>
+          <li>Moverse en el espacio 3D como un artista: orbitar, encuadrar, transformar.</li>
+          <li>Box modeling: esculpir la malla desde dentro con extrusiones y cortes.</li>
+          <li>El "desplegado": preparar el modelo para pintarlo, como una caja de cartón.</li>
+          <li>Colores, export e importación a Roblox Studio.</li>
+        </ul>
+        <span class="fruto">🎁 Entrega: su primera creación dentro de Roblox</span>
+      </div>
+
+      <div class="card modcard m2 reveal">
+        <div class="mnum"><b>Módulo 2</b> · Clases 6–10</div>
+        <h3>El cuerpo del mago</h3>
+        <ul>
+          <li>Concept art en papel: su mago, diseñado por él antes de tocar el teclado.</li>
+          <li>Torso, piernas, brazos y manos con proporción cartoon.</li>
+          <li>La cabeza sobre plantilla profesional — como trabajan los estudios.</li>
+          <li>Primera inspección técnica seria: el cuerpo cumple las reglas de Roblox.</li>
+        </ul>
+        <span class="fruto">🎁 Entrega: cuerpo del mago aprobado técnicamente</span>
+      </div>
+
+      <div class="card modcard m3 reveal">
+        <div class="mnum"><b>Módulo 3</b> · Clases 11–13</div>
+        <h3>Accesorios y ropa</h3>
+        <ul>
+          <li>Sombrero, pelo y barba — las piezas que convierten un cuerpo en personaje.</li>
+          <li>La varita con gemas mágicas (y un truco de duplicación profesional).</li>
+          <li>La túnica, ajustada al cuerpo como un sastre digital.</li>
+        </ul>
+        <span class="fruto">🎁 Entrega: el mago completo y vestido</span>
+      </div>
+
+      <div class="card modcard m4 reveal">
+        <div class="mnum"><b>Módulo 4</b> · Clases 14–17</div>
+        <h3>Detalle y texturas</h3>
+        <ul>
+          <li>Escultura digital: pliegues de tela, madera nudosa, marcas con historia.</li>
+          <li>El truco de los videojuegos AAA: detalle infinito que no pesa (el "bake").</li>
+          <li>Pintura de texturas profesionales: color, materiales y metal.</li>
+          <li>El brillo mágico: las gemas y runas que se encienden en la oscuridad.</li>
+        </ul>
+        <span class="fruto">🎁 Entrega: el mago pintado, con su magia lista</span>
+      </div>
+
+      <div class="card modcard m5 reveal">
+        <div class="mnum"><b>Módulo 5</b> · Clases 18–20</div>
+        <h3>Del taller a Roblox</h3>
+        <ul>
+          <li>Optimización y control de calidad como en un estudio de verdad.</li>
+          <li>El gran salto: la herramienta oficial de Roblox convierte su modelo en avatar.</li>
+          <li>Presentación final: el avatar caminando y la historia de cómo lo hizo.</li>
+        </ul>
+        <span class="fruto">🎁 Entrega: avatar jugable + presentación "yo hice esto"</span>
+      </div>
+
+      <div class="card modcard reveal" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px">
+        <div class="mnum"><b>¿Quieres verlo en acción?</b></div>
+        <p style="font-size:14.5px">En la clase de prueba gratuita tu hijo hace su primer modelo 3D y tú ves el método en vivo. Sin compromiso.</p>
+        <a href="#" class="btn ghost js-wa" style="align-self:stretch">Hablemos por WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CADA CLASE POR DENTRO ============ -->
+<section id="metodo-clase" class="alt">
+  <div class="wrap">
+    <h2 class="sec-tag reveal">Así es <span class="hl">cada clase</span> por dentro</h2>
+    <p class="sec-h reveal">Lo que se contrata no es una lista de videos: es un <span class="hl">método</span> preparado clase a clase.</p>
+    <div class="grid g3">
+      <div class="card row reveal"><div class="badge" aria-hidden="true">⏱</div><div><h3>Guía minutada</h3><p>Cada hora está planificada minuto a minuto por el instructor: teoría corta, práctica larga, cierre con logro.</p></div></div>
+      <div class="card row reveal"><div class="badge" aria-hidden="true">📄</div><div><h3>Hoja del estudiante</h3><p>Una hoja imprimible por clase: sus teclas nuevas, su checklist, su desafío creativo y espacio para dibujar.</p></div></div>
+      <div class="card row reveal"><div class="badge" aria-hidden="true">💾</div><div><h3>Nadie se queda varado</h3><p>Cada clase termina con un archivo de respaldo. Si una semana va lenta, la siguiente arranca desde el punto correcto — nunca desde cero.</p></div></div>
+      <div class="card row reveal"><div class="badge" aria-hidden="true">🔀</div><div><h3>Plan B en cada clase</h3><p>¿Va rápido? Hay retos extra preparados. ¿Va lento? Hay una versión corta que protege lo esencial. El ritmo lo pone el niño.</p></div></div>
+      <div class="card row reveal"><div class="badge" aria-hidden="true">🧠</div><div><h3>Mentalidad de artista</h3><p>Cada clase abre con una metáfora de 5 minutos — 20 en total, sin repetir — que enseña a pensar como piensa un artista 3D.</p></div></div>
+      <div class="card row reveal"><div class="badge" aria-hidden="true">📐</div><div><h3>Estándares reales</h3><p>El mago cumple los requisitos oficiales de los avatares de Roblox — los mismos que usan los creadores profesionales.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LO QUE SE LLEVA ============ -->
+<section id="final" class="sec-dark">
+  <div class="wrap">
+    <h2 class="sec-tag reveal">Lo que tu hijo <span class="hl">se lleva</span></h2>
+    <p class="sec-h reveal">Al terminar las 20 clases, esto existe y es suyo:</p>
+    <ul class="check reveal">
+      <li><b>Un avatar mago jugable</b> dentro de su propia experiencia de Roblox — camina, salta y su gema brilla del color que él eligió.</li>
+      <li><b>Un portafolio completo de artista 3D:</b> sus 20 archivos de proyecto versionados, sus texturas, sus exports y el diario visual de capturas de todo el proceso.</li>
+      <li><b>El pipeline profesional entero</b>, vivido de punta a punta: modelar → desplegar → texturizar → optimizar → publicar en el motor.</li>
+      <li><b>Unas 40 herramientas de Blender</b> dominadas con las manos, no memorizadas — de la primera tecla a la última.</li>
+      <li><b>La presentación "yo hice esto":</b> contar su obra con orgullo, incluyendo qué salió mal y cómo lo arregló.</li>
+    </ul>
+    <p class="fine-note">Honestidad por delante: el avatar es para jugar en sus propias experiencias. Vender en el Marketplace de Roblox exige verificación de identidad de un adulto — este curso enseña a crear, no promete dinero.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ CORTA ============ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="sec-tag reveal">Tres preguntas <span class="hl">rápidas</span></h2>
+    <div class="faq-list reveal">
+      <details class="qa"><summary>¿Cuánto cuesta y cuándo puede empezar? <span class="plus">+</span></summary><div class="a">Escríbeme por WhatsApp y te cuento <b>precios y horarios disponibles</b> — y agendamos la <b>clase de prueba gratis</b> para que tu hijo lo viva antes de decidir nada.</div></details>
+      <details class="qa"><summary>¿Necesita saber algo de 3D o programación? <span class="plus">+</span></summary><div class="a"><b>No.</b> El curso empieza desde el primer clic en Blender. Solo necesita conocer Roblox como jugador — la motivación ya la trae él.</div></details>
+      <details class="qa"><summary>¿Qué equipo hace falta? <span class="plus">+</span></summary><div class="a">Un computador de <b>gama media</b> con internet y, de preferencia, un ratón con rueda. Blender es <b>gratis y legal</b>; no hay que comprar ningún programa.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <h2>El programa ya está listo. Solo falta tu mago.</h2>
+      <p>Agenda la clase de prueba gratis: tu hijo construye su primer modelo 3D y tú ves el método en vivo. Sin compromiso.</p>
+      <a href="#" class="btn cta js-wa">
+        <svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+        Agendar la clase de prueba gratis
+      </a>
+      <div class="fine">Cupos limitados · Sin tarjeta de crédito · Atención 1 a 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div>© <span id="year">2026</span> · Keveloper Academy · Programa del curso Mago Fantástico</div>
+    <div class="flinks"><a href="index.html">Página principal</a><a href="#" class="js-wa">Contacto</a></div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="#" class="wa-float js-wa" aria-label="Escríbeme por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#16112B"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+</a>
+
+<script>
+/* ==========================================================
+   CONFIGURACIÓN — edita solo estas 2 líneas
+   ========================================================== */
+const WA_NUMBER = "573128406957";   // ← número con código de país, solo dígitos
+const WA_MSG    = "¡Hola! Vi el programa del curso Mago Fantástico (Blender + Roblox) y quiero agendar la clase de prueba gratis para mi hijo/a.";
+/* ========================================================== */
+
+(function(){
+  const href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_MSG);
+  document.querySelectorAll('.js-wa').forEach(function(a){ a.href = href; a.target = "_blank"; a.rel = "noopener"; });
+})();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+var nav = document.getElementById('nav');
+function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 30); }
+onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+var burger = document.getElementById('navBurger');
+burger.addEventListener('click', function(){
+  var open = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('navLinks').addEventListener('click', function(e){
+  if(e.target.closest('a')){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+});
+
+// Scroll reveal con IntersectionObserver + red de seguridad (patrón de index)
+var revealEls = document.querySelectorAll('.reveal');
+function show(el){ var d = parseInt(el.dataset.delay || 0, 10); setTimeout(function(){ el.classList.add('in'); }, d); }
+function inView(el){ var r = el.getBoundingClientRect(); return r.top < (window.innerHeight || 800) && r.bottom > 0; }
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ show(e.target); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -8% 0px', threshold:0.12});
+  revealEls.forEach(function(el){ if(inView(el)){ show(el); } else { io.observe(el); } });
+  setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in'); }); }, 3000);
+} else {
+  revealEls.forEach(function(el){ el.classList.add('in'); });
+}
+</script>
+</body>
+</html>

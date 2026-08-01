@@ -7,43 +7,55 @@
    ============================================================ */
 
 :root{
-  /* Tema claro estilo centro de ayuda (heredado de guia.html) */
-  --bg-0:#ffffff;
-  --bg-1:#f6f6f6;
-  --bg-2:#eef0fe;
-  --card:#ffffff;
-  --card-solid:#f6f6f7;
-  --stroke:#e3e5e8;
-  --stroke-2:#d4d7dc;
+  /* Tema oscuro «Discord slate». El acento blurple se hereda del centro de
+     ayuda; lo que cambia es la superficie y los acentos, re-derivados a sus
+     gemelos claros — los del tema claro estaban oscurecidos A PROPÓSITO para
+     fondo blanco (--cyan era #0e7490) y sobre negro no se leían.
+     La versión clara de estos tokens sigue viva dentro de @media print:
+     la hoja del estudiante se imprime en tinta oscura sobre papel blanco. */
+  color-scheme:dark;
+
+  --bg-0:#1a1b1e;
+  --bg-1:#202226;
+  --bg-2:#26282e;
+  --card:#232428;
+  --card-solid:#2b2d31;
+  --stroke:#35373c;
+  /* más claro que --stroke porque dibuja las casillas de .check y el borde de
+     las teclas .kbd, que se leen como controles y piden 3:1 (da 3.46:1) */
+  --stroke-2:#6b7079;
 
   --blurple:#5865F2;
-  --blurple-dark:#4752C4;
-  --blurple-soft:#eef0fe;
+  /* «dark» aquí significa «el blurple legible sobre el fondo», que en tema
+     oscuro es el claro. Se conserva el nombre: renombrarlo toca sus 9 usos. */
+  --blurple-dark:#a9b2ff;
+  --blurple-soft:#2a2e4a;
   --violet:#5865F2;
-  --violet-bright:#4752C4;
-  --cyan:#0e7490;
-  --teal:#0d9488;
-  --magenta:#d84a8a;
-  --pink:#c2417c;
-  --gold:#a16207;
-  --green:#248046;
-  --red:#c03537;
+  --violet-bright:#a9b2ff;
+  --cyan:#4fd1e5;
+  --teal:#2dd4bf;
+  --magenta:#f472b6;
+  --pink:#f08fbe;
+  --gold:#fbbf24;
+  --green:#4ade80;
+  --red:#f87171;
 
-  --text:#23272a;
-  --text-dim:#4e5058;
-  /* más oscuro que en guia.html: #80848e no pasa AA en texto pequeño */
-  --text-mute:#5f646d;
+  --text:#f2f3f5;
+  --text-dim:#c5c8ce;
+  --text-mute:#9aa0a8;
 
-  --shadow:0 8px 24px rgba(0,0,0,.08);
+  /* más profunda que en claro: una sombra al 8 % desaparece sobre fondo oscuro */
+  --shadow:0 8px 24px rgba(0,0,0,.4);
   --radius:18px;
   --nav-w:280px;
 
-  /* acentos por módulo */
-  --m1:#0e7490; --m1-soft:#e5f6fa; --m1-line:#c4e8f1;
-  --m2:#4752C4; --m2-soft:#eef0fe; --m2-line:#d5dafc;
-  --m3:#c2417c; --m3-soft:#fce8f0; --m3-line:#f3cede;
-  --m4:#a16207; --m4-soft:#fdf3dc; --m4-line:#f3e2b3;
-  --m5:#248046; --m5-soft:#e6f4ea; --m5-line:#bfe3cb;
+  /* acentos por módulo: el tint pasa de lavado pálido a tinte oscuro, y el
+     texto que va encima pasa de oscuro a claro — se invierte la relación */
+  --m1:#4fd1e5; --m1-soft:#16323a; --m1-line:#1f4d59;
+  --m2:#a9b2ff; --m2-soft:#2a2e4a; --m2-line:#3b4170;
+  --m3:#f472b6; --m3-soft:#3a1f2e; --m3-line:#5a2f46;
+  --m4:#fbbf24; --m4-soft:#3a2e14; --m4-line:#5a4720;
+  --m5:#4ade80; --m5-soft:#16321f; --m5-line:#215034;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -84,7 +96,10 @@ code,.kbd,.mono{font-family:'JetBrains Mono',monospace}
 }
 .scrim{
   display:none;position:fixed;inset:0;z-index:45;
-  background:rgba(20,22,28,.4);border:none;cursor:pointer;
+  /* negro y más opaco que en claro: un velo #14161c al 40 % sobre un fondo
+     #1a1b1e daba rgb(24,25,29) — invisible, y el scrim tiene que leerse como
+     «lo de detrás está inactivo» */
+  background:rgba(0,0,0,.65);border:none;cursor:pointer;
 }
 .scrim.show{display:block}
 
@@ -97,7 +112,7 @@ code,.kbd,.mono{font-family:'JetBrains Mono',monospace}
   visibility:hidden;
   padding:26px 18px 40px;
   border-right:1px solid var(--stroke);
-  background:#fff;box-shadow:0 0 60px rgba(0,0,0,.25);
+  background:var(--bg-1);box-shadow:0 0 60px rgba(0,0,0,.5);
 }
 .sidebar.open{transform:none;visibility:visible}
 
@@ -117,7 +132,7 @@ code,.kbd,.mono{font-family:'JetBrains Mono',monospace}
   font-size:12.5px;font-weight:700;color:var(--blurple-dark);
   background:var(--blurple-soft);border:1px solid var(--m2-line);transition:background .15s;
 }
-.back-link:hover{background:#e0e3fd}
+.back-link:hover{background:var(--m2-line)}
 
 .nav-group{margin-top:16px}
 .nav-group>.gt{font-size:10.5px;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-mute);font-weight:700;padding:0 10px;margin-bottom:6px}
@@ -203,7 +218,7 @@ h3.blk-title .ic{width:32px;height:32px;border-radius:9px;display:grid;place-ite
 .warn .wi{font-size:18px;flex:0 0 auto;line-height:1.3}
 .warn p{font-size:13.8px;color:var(--text-dim);margin:0;overflow-wrap:anywhere}
 .warn b,.warn strong{color:var(--text)}
-.warn.hard{background:linear-gradient(120deg,#fdeaea,transparent);border-color:#f2c4c4;border-left-color:var(--red)}
+.warn.hard{background:linear-gradient(120deg,#3a1c1c,transparent);border-color:#5a2b2b;border-left-color:var(--red)}
 
 .remember{
   margin-top:28px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
@@ -219,11 +234,12 @@ h3.blk-title .ic{width:32px;height:32px;border-radius:9px;display:grid;place-ite
 .keys{display:grid;gap:9px}
 .key{display:flex;gap:10px 13px;align-items:center;background:var(--card-solid);border:1px solid var(--stroke);border-radius:11px;padding:10px 14px;flex-wrap:wrap;min-width:0}
 .kbd{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
-  background:linear-gradient(180deg,#ffffff,#f0f1f3);border:1px solid var(--stroke-2);
-  border-bottom-width:3px;padding:6px 11px;border-radius:8px;color:var(--blurple-dark);white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+  /* la tecla sigue iluminada desde arriba: claro arriba, oscuro abajo */
+  background:linear-gradient(180deg,#3f434b,#2b2d31);border:1px solid var(--stroke-2);
+  border-bottom-width:3px;padding:6px 11px;border-radius:8px;color:var(--blurple-dark);white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.5)}
 .key .kf{font-weight:700;font-size:13.5px;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
 .key .kw{color:var(--text-mute);font-size:12.5px;font-style:italic;flex-basis:100%;overflow-wrap:anywhere}
-.keys.review .kbd{color:var(--text-mute);background:#f0f1f3;border-bottom-width:1px}
+.keys.review .kbd{color:var(--text-mute);background:var(--card-solid);border-bottom-width:1px}
 
 /* ---------- PRÁCTICA MINUTADA ---------- */
 .timeline{display:grid;gap:8px}
@@ -262,7 +278,7 @@ h3.blk-title .ic{width:32px;height:32px;border-radius:9px;display:grid;place-ite
 /* checklist imprimible (hoja del estudiante) */
 .check{list-style:none;display:grid;gap:9px}
 .check li{display:block;position:relative;padding-left:30px;font-size:14px;color:var(--text-dim);overflow-wrap:anywhere}
-.check li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:5px;border:2px solid var(--stroke-2);background:#fff}
+.check li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:5px;border:2px solid var(--stroke-2);background:var(--bg-0)}
 .check b{color:var(--text)}
 
 /* ---------- CAJAS DE RETO / TAREA / PLAN B ---------- */
@@ -288,7 +304,7 @@ h3.blk-title .ic{width:32px;height:32px;border-radius:9px;display:grid;place-ite
 }
 .checkpoint .ci{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:19px;background:var(--m5-soft);flex:0 0 40px}
 .checkpoint b{font-size:13.5px}
-.checkpoint code{display:inline-block;background:#fff;border:1px solid var(--stroke-2);border-radius:7px;padding:3px 9px;font-size:12.5px;font-weight:700;color:var(--blurple-dark);overflow-wrap:anywhere}
+.checkpoint code{display:inline-block;background:var(--bg-0);border:1px solid var(--stroke-2);border-radius:7px;padding:3px 9px;font-size:12.5px;font-weight:700;color:var(--blurple-dark);overflow-wrap:anywhere}
 .checkpoint small{flex-basis:100%;color:var(--text-mute);font-size:12px}
 
 /* ---------- TABLAS ---------- */
@@ -308,11 +324,11 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
 /* ---------- HOJA DEL ESTUDIANTE ---------- */
 .hoja-est{
   margin-top:52px;border:2px solid var(--m2-line);border-radius:22px;
-  background:linear-gradient(180deg,var(--blurple-soft),#fff 140px);
+  background:linear-gradient(180deg,var(--blurple-soft),var(--bg-0) 140px);
   padding:22px 16px 26px;
 }
 .hoja-head{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
-.hoja-head .hi{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;background:#fff;border:1px solid var(--m2-line);flex:0 0 48px}
+.hoja-head .hi{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;background:var(--card-solid);border:1px solid var(--m2-line);flex:0 0 48px}
 .hoja-head h2{font-size:clamp(19px,3vw,26px);font-weight:800;text-transform:uppercase;letter-spacing:.5px;line-height:1.15}
 .hoja-head .h-sub{font-size:12.5px;color:var(--text-dim);font-weight:700}
 .hoja-head .h-sub .mono{color:var(--blurple-dark)}
@@ -320,7 +336,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
 
 .draw-box{
   margin-top:10px;border:2px dashed var(--stroke-2);border-radius:14px;
-  min-height:230px;background:#fff;position:relative;
+  min-height:230px;background:var(--bg-1);position:relative;
 }
 .draw-box span{
   position:absolute;top:10px;left:14px;font-size:11px;font-weight:700;
@@ -356,7 +372,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
 .tcard .badge{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex:0 0 40px}
 .tcard h3{font-size:15px;font-weight:800;margin-bottom:4px}
 .tcard p{font-size:13px;color:var(--text-dim);overflow-wrap:anywhere}
-.b-violet{background:var(--blurple-soft);color:var(--blurple)}
+.b-violet{background:var(--blurple-soft);color:var(--blurple-dark)}
 .b-cyan{background:var(--m1-soft);color:var(--cyan)}
 .b-magenta{background:var(--m3-soft);color:var(--pink)}
 .b-gold{background:var(--m4-soft);color:var(--gold)}
@@ -405,6 +421,28 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
    En una página de clase (body.clase) se imprime SOLO la hoja del
    estudiante: 1–2 páginas A4, tinta negra, sin chrome de pantalla. */
 @media print{
+  /* La pantalla es oscura; el papel no. Sin esto, cada hijo seguiría pintando
+     var(--text-dim) = #c5c8ce y la hoja del estudiante saldría gris clarísimo
+     sobre blanco — es decir, en blanco. Se re-declaran los tokens en versión
+     tinta: escala de grises, superficies blancas, cero sombra. Misma
+     especificidad que el :root de arriba, pero gana por orden de origen. */
+  :root{
+    color-scheme:light;
+    --bg-0:#fff; --bg-1:#fff; --bg-2:#fff;
+    --card:#fff; --card-solid:#fff;
+    --stroke:#999; --stroke-2:#666;
+    --text:#000; --text-dim:#222; --text-mute:#444;
+    --blurple:#000; --blurple-dark:#000; --blurple-soft:#fff;
+    --violet:#000; --violet-bright:#000;
+    --cyan:#333; --teal:#333; --magenta:#333; --pink:#333;
+    --gold:#333; --green:#333; --red:#333;
+    --shadow:none;
+    --m1:#333; --m1-soft:#fff; --m1-line:#999;
+    --m2:#333; --m2-soft:#fff; --m2-line:#999;
+    --m3:#333; --m3-soft:#fff; --m3-line:#999;
+    --m4:#333; --m4-soft:#fff; --m4-line:#999;
+    --m5:#333; --m5-soft:#fff; --m5-line:#999;
+  }
   .menu-btn,.scrim,.sidebar,.pager,.foot,.skip{display:none !important}
   body{background:#fff;color:#000}
   .layout{display:block}
@@ -418,6 +456,10 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
   .panel,.lbox,.key,.checkpoint,.mindset,.warn,.tbl-wrap{
     box-shadow:none;border:1px solid #999;break-inside:avoid;background:#fff;
   }
+  /* .warn.hard (0,2,0) le gana al reset de .warn (0,1,0) de arriba, así que su
+     degradado rojo oscuro llegaría al papel — en pipeline.html, que no es
+     body.clase, se imprimen los tres. */
+  .warn.hard{background:#fff;border-color:#999;border-left-color:#333}
   .kbd{box-shadow:none;background:#fff;border:1px solid #666;color:#000}
   .check li::before{border-color:#666}
   .blk{break-inside:avoid}

@@ -466,7 +466,8 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 .pbr{background:var(--grad-deep);border:1px solid var(--navy-2);border-radius:18px;padding:18px 16px;box-shadow:var(--shadow)}
 .pbr-h{font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;color:#fff}
 .pbr-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-.pbr-tab{flex:1 1 auto;min-width:64px;font-family:inherit;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid rgba(201,197,242,.45);background:rgba(255,255,255,.06);color:var(--lav-300);cursor:pointer;transition:.15s}
+/* min-height 44: eran 35px de target táctil — deuda preexistente (barra 6), saldada al añadir el 6º tab */
+.pbr-tab{flex:1 1 auto;min-width:64px;min-height:44px;font-family:inherit;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid rgba(201,197,242,.45);background:rgba(255,255,255,.06);color:var(--lav-300);cursor:pointer;transition:.15s}
 .pbr-tab:hover{color:#fff;border-color:rgba(201,197,242,.7)}
 .pbr-tab:focus-visible{outline:2px solid var(--lav-300);outline-offset:2px}
 /* indigo→plum en vez de --grad-peri: mismo linaje, pero el blanco 11.5px da ≥5.9:1 (AA) */
@@ -696,9 +697,10 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
 
       <!-- Desglose PBR con los mapas reales del personaje -->
       <div class="pbr reveal-r">
-        <div class="pbr-h">Las 5 capas de textura de Akari (reales)</div>
+        <div class="pbr-h">La malla y las 5 capas de textura de Akari (todo real)</div>
         <div class="pbr-tabs" id="pbrTabs">
           <button class="pbr-tab active" data-layer="color">Color</button>
+          <button class="pbr-tab" data-layer="topo">Malla</button>
           <button class="pbr-tab" data-layer="normal">Normales</button>
           <button class="pbr-tab" data-layer="rough">Rugosidad</button>
           <button class="pbr-tab" data-layer="metal">Metal</button>
@@ -706,6 +708,7 @@ html.js .reveal.in,html.js .reveal-l.in,html.js .reveal-r.in{opacity:1;transform
         </div>
         <div class="pbr-stage" id="pbrStage">
           <div class="pbr-layer active" data-layer="color"><img src="assets/map-color.jpg" alt="Mapa de color real del personaje Akari" loading="lazy"></div>
+          <div class="pbr-layer" data-layer="topo"><img src="assets/map-uv.jpg" alt="Desplegado UV real del personaje Akari" loading="lazy"></div>
           <div class="pbr-layer" data-layer="normal"><img src="assets/map-normal.jpg" alt="Mapa de normales real del personaje Akari" loading="lazy"></div>
           <div class="pbr-layer" data-layer="rough"><img src="assets/map-roughness.jpg" alt="Mapa de rugosidad real del personaje Akari" loading="lazy"></div>
           <div class="pbr-layer" data-layer="metal"><img src="assets/map-metalness.jpg" alt="Mapa de metalicidad real del personaje Akari" loading="lazy"></div>
@@ -1033,20 +1036,26 @@ document.querySelectorAll('.fcard b[data-count]').forEach(function(el){ countIO.
   var mv = embed && embed.querySelector('model-viewer');
   var texts = {
     color:    '<b>Color base:</b> la "pintura" pura de cada superficie del personaje, sin luces ni sombras. Este es el mapa real de Akari.',
+    // misma metáfora que la clase 3 del temario, a propósito: el padre que lea ambos la reconoce
+    topo:     '<b>La malla:</b> los polígonos que forman al personaje — su esqueleto de superficie. En el cuadro, el desplegado UV: la malla abierta en plano para poder pintarla, como una caja de cartón desarmada.',
     normal:   '<b>Mapa de normales:</b> finge relieve y micro-detalle sin añadir polígonos. Los colores le dicen a la luz cómo rebotar.',
     rough:    '<b>Rugosidad:</b> decide qué tan brillante o mate es cada zona — metal pulido, cuero gastado o tela suave.',
     metal:    '<b>Metalicidad:</b> marca qué partes son metal de verdad (claro) y cuáles no (oscuro), para que reflejen la luz como tal.',
     emissive: '<b>Emisivo:</b> las zonas que emiten luz propia. Son los detalles del personaje que brillan incluso en la oscuridad.'
   };
   var maps = {
+    // el wireframe UV como textura: la rama genérica de mapas ya produce "mesh gris con el
+    // mapa encima" (metallic 0, roughness 1, emisivo apagado), así que la vista de topología
+    // no necesita lógica propia — las líneas del modelo y las del panel son las mismas líneas
+    topo:     'assets/map-uv.jpg',
     normal:   'assets/map-normal.jpg',
     rough:    'assets/map-roughness.jpg',
     metal:    'assets/map-metalness.jpg',
     emissive: 'assets/map-emissive.jpg'
   };
-  var order = ['color','normal','rough','metal','emissive'];
+  var order = ['color','topo','normal','rough','metal','emissive'];   // Malla, 2ª parada del ciclo
   // luz por capa: Color brillante (el rostro se lee), mapas neutros, Emisivo oscuro
-  var exposures = {color:1.6, normal:1.2, rough:1.2, metal:1.2, emissive:0.7};
+  var exposures = {color:1.6, topo:1.2, normal:1.2, rough:1.2, metal:1.2, emissive:0.7};
   var idx = 0, timer = null;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

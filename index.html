@@ -36,11 +36,15 @@
   --grad-iri-vio:linear-gradient(110deg,#8B5CF6,#38BDF8,#6366F1,#38BDF8,#8B5CF6);
   /* Chapa de tarjeta: blanco puro donde caen el icono y el titular, derivando a un gris
      que lleva el peri de la marca dentro — por eso lee plateado y no gris sucio.
-     152° porque una diagonal lee como luz y una vertical lee como degradado; el blanco
-     aguanta hasta el 38% para que el brillo sea luz de canto y no un lavado uniforme;
-     y el matiz deriva al azul-violeta (#eeecf8 tiene B 10 por encima de R, mismo linaje
-     que --lav-100) en vez de a gris neutro, que sobre este fondo lavanda se vería sucio. */
-  --grad-card:linear-gradient(152deg,#ffffff 0%,#fdfdff 38%,#f5f4fb 72%,#eeecf8 100%);
+     152° porque una diagonal lee como luz y una vertical lee como degradado; el matiz
+     deriva al azul-violeta (B por encima de R, mismo linaje que --lav-100) en vez de a
+     gris neutro, que sobre este fondo lavanda se vería sucio.
+     v2: la parada final era #eeecf8 — 1.09:1 contra el blanco, un 4%, invisible en las
+     tarjetas anchas y bajas (.info mide 513×97, el tramo oscuro cabía en una esquina) y
+     sobre navy, donde el ojo se va al contraste tarjeta/fondo. Ahora #e3e0f2 y el gris
+     arranca antes; el blanco se sostiene hasta el 30%, que es lo que mantiene esto como
+     luz de canto y no como tarjeta desactivada. */
+  --grad-card:linear-gradient(152deg,#ffffff 0%,#fbfaff 30%,#efedf9 62%,#e3e0f2 100%);
   /* la parada del 68% mantiene ≥.86 de alfa detrás de TODO el texto (el titular llega
      al 66% de la altura del bloque); el degradado muere por encima del texto, no en él */
   --scrim-deep:linear-gradient(to top, rgba(59,30,134,.95), rgba(59,30,134,.86) 68%, rgba(59,30,134,0));
@@ -298,7 +302,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .faq{display:grid;gap:11px}
 /* estaba a box-shadow:none, así que la fila solo cobraba cuerpo al abrirla — era el caso
    que delataba que la profundidad solo aparecía al interactuar */
-.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
+.qa{background:var(--grad-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
 .qa[open]{border-color:var(--peri);box-shadow:var(--shadow)}   /* --shadow y no el .2 de antes: con el reposo subido, ese valor ya no se distinguía */
 .qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
 .qa summary::-webkit-details-marker{display:none}
@@ -311,7 +315,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 .instructor-wrap{margin-top:26px}
 .instructor{
   display:flex;flex-direction:column;gap:22px;align-items:center;text-align:center;
-  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  background:var(--grad-card);border:1px solid var(--border);border-radius:20px;
   padding:30px 22px;box-shadow:var(--shadow);
 }
 .instructor .photo{

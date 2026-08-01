@@ -36,8 +36,9 @@
   --grad-iri:linear-gradient(110deg,#38BDF8,#8B5CF6,#D946EF,#34D399,#38BDF8);
   /* Chapa de tarjeta — mismo valor que en index.html (los dos :root están duplicados
      mientras no exista base.css). Blanco puro donde caen el icono y el titular, y deriva
-     a un gris con el peri de la marca dentro para que lea plateado y no gris sucio. */
-  --grad-card:linear-gradient(152deg,#ffffff 0%,#fdfdff 38%,#f5f4fb 72%,#eeecf8 100%);
+     a un gris con el peri de la marca dentro para que lea plateado y no gris sucio.
+     v2: parada final de #eeecf8 a #e3e0f2 — el 4% anterior no se percibía. */
+  --grad-card:linear-gradient(152deg,#ffffff 0%,#fbfaff 30%,#efedf9 62%,#e3e0f2 100%);
   --iri:0%;
   --shadow:0 10px 30px -12px rgba(109,40,217,.22);
   /* el nivel intermedio que faltaba: en reposo solo había .06 de alfa, así que la tarjeta
@@ -139,8 +140,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .chip{
   display:inline-flex;align-items:center;gap:7px;min-height:44px;
   font-size:13px;font-weight:700;color:var(--ink);
-  background:var(--card);border:1px solid var(--border);border-radius:100px;
-  padding:9px 16px;box-shadow:0 2px 10px rgba(86,84,113,.06);
+  background:var(--grad-card);border:1px solid var(--border);border-radius:100px;
+  /* --shadow-rest: era lo único de esta página con el nivel de sombra viejo (.06) */
+  padding:9px 16px;box-shadow:var(--shadow-rest);
 }
 .chip .e{font-size:16px}
 
@@ -226,7 +228,7 @@ section.alt{background:#fff;border-top:1px solid var(--border);border-bottom:1px
 /* ---------- FAQ ---------- */
 .faq-list{display:grid;gap:12px;margin-top:26px}
 /* estaba a box-shadow:none: la fila solo cobraba cuerpo al abrirla */
-.qa{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
+.qa{background:var(--grad-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow-rest)}
 .qa[open]{border-color:var(--peri);box-shadow:var(--shadow)}   /* con el reposo subido, el .2 de antes ya no se distinguía */
 .qa summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
 .qa summary::-webkit-details-marker{display:none}
